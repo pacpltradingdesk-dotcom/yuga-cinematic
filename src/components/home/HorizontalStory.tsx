@@ -70,6 +70,7 @@ export function HorizontalStory() {
                 <Media
                   name={p.img}
                   overlay="full"
+                  loading="eager"
                   sizes="(max-width:768px) 78vw, 42vw"
                   className="absolute inset-0 -z-10 h-full w-full opacity-30"
                 />

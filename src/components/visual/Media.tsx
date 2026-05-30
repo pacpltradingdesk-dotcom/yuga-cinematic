@@ -20,6 +20,7 @@ export function Media({
   className,
   overlay = "bottom",
   priority = false,
+  loading,
   sizes = "100vw",
   grayscale = false,
 }: {
@@ -29,6 +30,8 @@ export function Media({
   className?: string;
   overlay?: "bottom" | "full" | "side" | "none";
   priority?: boolean;
+  /** Force eager loading (e.g. inside transformed/horizontal-scroll sections where the lazy observer is unreliable). */
+  loading?: "eager" | "lazy";
   sizes?: string;
   grayscale?: boolean;
 }) {
@@ -50,6 +53,7 @@ export function Media({
           fill
           sizes={sizes}
           priority={priority}
+          {...(!priority && loading ? { loading } : {})}
           className={cn("object-cover transition-transform duration-700 ease-[var(--ease-expo)]", grayscale && "grayscale")}
           onError={() => setFailed(true)}
         />
