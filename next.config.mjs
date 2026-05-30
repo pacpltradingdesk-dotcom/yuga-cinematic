@@ -16,6 +16,9 @@ const nextConfig = {
     basePath: `/${repo}`,
     trailingSlash: true,
     images: { unoptimized: true },
+    // next/image does not auto-prefix basePath onto public-folder src under
+    // `output: export` + `unoptimized`, so expose it for manual prefixing.
+    env: { NEXT_PUBLIC_BASE_PATH: `/${repo}` },
   }),
 };
 

@@ -34,7 +34,11 @@ export function Media({
 }) {
   const [failed, setFailed] = useState(false);
   const item = name ? img[name] : undefined;
-  const finalSrc = src ?? item?.src;
+  const rawSrc = src ?? item?.src;
+  // Manually prefix basePath for static export (next/image skips it for
+  // public-folder assets under output:export + unoptimized). Empty in dev.
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const finalSrc = rawSrc?.startsWith("/") ? `${base}${rawSrc}` : rawSrc;
   const finalAlt = alt ?? item?.alt ?? "";
 
   return (
