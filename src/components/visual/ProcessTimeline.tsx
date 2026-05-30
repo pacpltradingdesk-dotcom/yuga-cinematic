@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 type Step = { step?: string; n?: string; title?: string; t?: string; desc?: string; d?: string };
 
@@ -13,6 +13,7 @@ export function ProcessTimeline({ steps }: { steps: readonly Step[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
   const fill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <div ref={ref} className="relative pl-10 sm:pl-16">
@@ -32,9 +33,8 @@ export function ProcessTimeline({ steps }: { steps: readonly Step[] }) {
             <motion.div
               key={i}
               initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
               className="relative"
             >
               <span className="absolute -left-10 top-0 grid h-7 w-7 place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] text-[10px] font-display text-[var(--color-amber)] sm:-left-16 sm:h-11 sm:w-11 sm:text-xs ring-glow">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Factory, Cpu, LineChart as LineIcon, Leaf } from "lucide-react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Media } from "@/components/visual/Media";
@@ -47,6 +47,8 @@ export function HorizontalStory() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], ["2%", "-76%"]);
+  const mobileRef = useRef<HTMLDivElement>(null);
+  const mobileInView = useInView(mobileRef, { once: true, margin: "-60px" });
 
   return (
     <section className="relative bg-[var(--color-surface)]">
@@ -93,14 +95,13 @@ export function HorizontalStory() {
       </div>
 
       {/* Mobile / tablet: vertical stack */}
-      <div className="maxw container-x grid gap-6 pb-[var(--space-section)] lg:hidden">
+      <div ref={mobileRef} className="maxw container-x grid gap-6 pb-[var(--space-section)] lg:hidden">
         {panels.map((p, i) => (
           <motion.article
             key={i}
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
+            animate={mobileInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: i * 0.08 }}
             className="glass relative isolate overflow-hidden rounded-3xl p-8"
           >
             <Media name={p.img} overlay="full" sizes="100vw" className="absolute inset-0 -z-10 h-full w-full opacity-25" />

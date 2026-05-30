@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -19,6 +20,8 @@ export function AnimatedText({
   as?: "h1" | "h2" | "h3" | "p";
 }) {
   const words = text.split(" ");
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   const container: Variants = {
     hidden: {},
@@ -32,11 +35,11 @@ export function AnimatedText({
   return (
     <Tag className={cn("flex flex-wrap", className)}>
       <motion.span
+        ref={ref}
         className="inline-flex flex-wrap"
         variants={container}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
+        animate={inView ? "show" : "hidden"}
         aria-label={text}
       >
         {words.map((w, i) => (

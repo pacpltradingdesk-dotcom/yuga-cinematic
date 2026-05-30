@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
 
 const variants: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -11,29 +12,32 @@ const variants: Variants = {
   }),
 };
 
-/** Scroll-triggered fade/slide reveal. `index` staggers siblings. */
+/**
+ * Scroll-triggered fade/slide reveal. `index` staggers siblings.
+ * Uses the `useInView` hook (reliable under Lenis smooth-scroll) rather than
+ * the `whileInView` prop, which can fail to fire and leave content hidden.
+ */
 export function Reveal({
   children,
   index = 0,
   className,
-  as = "div",
 }: {
   children: React.ReactNode;
   index?: number;
   className?: string;
-  as?: "div" | "section" | "li" | "span";
 }) {
-  const MotionTag = motion[as];
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <MotionTag
+    <motion.div
+      ref={ref}
       className={className}
       custom={index}
       variants={variants}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      animate={inView ? "show" : "hidden"}
     >
       {children}
-    </MotionTag>
+    </motion.div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { useId } from "react";
-import { motion } from "framer-motion";
+import { useId, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 /** Deterministic pseudo-random so SSR and client match (no hydration drift). */
 function seeded(seed: number) {
@@ -27,6 +27,8 @@ export function LineChart({
   height?: number;
 }) {
   const id = useId();
+  const ref = useRef<SVGSVGElement>(null);
+  const inView = useInView(ref, { once: true });
   const rand = seeded(seed);
   const W = 600;
   const H = height;
@@ -42,7 +44,7 @@ export function LineChart({
   const stroke = accent === "amber" ? "var(--color-amber)" : "var(--color-cyan)";
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={className} preserveAspectRatio="none" aria-hidden>
+    <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={className} preserveAspectRatio="none" aria-hidden>
       <defs>
         <linearGradient id={`fill-${id}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={stroke} stopOpacity="0.28" />
@@ -56,8 +58,7 @@ export function LineChart({
         d={area}
         fill={`url(#fill-${id})`}
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 1, delay: 0.6 }}
       />
       <motion.path
@@ -67,8 +68,7 @@ export function LineChart({
         strokeWidth="2"
         strokeLinecap="round"
         initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
+        animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
       />
     </svg>
@@ -87,6 +87,8 @@ export function Candlestick({
   className?: string;
   height?: number;
 }) {
+  const ref = useRef<SVGSVGElement>(null);
+  const inView = useInView(ref, { once: true });
   const rand = seeded(seed);
   const W = 600;
   const H = height;
@@ -105,15 +107,14 @@ export function Candlestick({
   });
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={className} preserveAspectRatio="none" aria-hidden>
+    <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className={className} preserveAspectRatio="none" aria-hidden>
       {candles.map((c, i) => {
         const col = c.up ? "var(--color-cyan)" : "var(--color-amber-deep)";
         return (
           <motion.g
             key={i}
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.4, delay: i * 0.025 }}
           >
             <line x1={c.x} y1={c.hi} x2={c.x} y2={c.lo} stroke={col} strokeWidth="1" />
