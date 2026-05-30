@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: company.oneLiner,
     type: "website",
     siteName: company.brand,
-    images: ["/yuga-logo.jpg"],
+    images: [`${siteUrl}/yuga-logo.jpg`],
   },
   robots: { index: true, follow: true },
 };
