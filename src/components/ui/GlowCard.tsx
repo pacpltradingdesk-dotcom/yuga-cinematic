@@ -36,7 +36,7 @@ export function GlowCard({
       ref={ref}
       onMouseMove={onMove}
       className={cn(
-        "group relative overflow-hidden rounded-3xl border border-[var(--color-line)] bg-[var(--color-base)] p-px transition-colors hover:border-[color-mix(in_oklch,var(--color-ink)_18%,transparent)]",
+        "group relative overflow-hidden rounded-3xl border border-[var(--color-line)] bg-[var(--color-surface)] p-px transition-colors hover:border-[color-mix(in_oklch,var(--color-ink)_18%,transparent)]",
         className,
       )}
     >
@@ -46,7 +46,7 @@ export function GlowCard({
           background: `radial-gradient(420px circle at var(--mx) var(--my), ${glow}, transparent 60%)`,
         }}
       />
-      <div className="relative h-full rounded-[calc(1.5rem-1px)] bg-[var(--color-base)]">{children}</div>
+      <div className="relative h-full rounded-[calc(1.5rem-1px)] bg-[var(--color-surface)]">{children}</div>
     </div>
   );
 }
