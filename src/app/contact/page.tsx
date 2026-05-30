@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Globe, MonitorSmartphone, MessageCircle } from "lucide-react";
+import { Phone, Mail, Globe, MonitorSmartphone, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/page/ContactForm";
@@ -74,24 +74,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </Reveal>
-
-            <div className="grid gap-5 sm:grid-cols-2">
-              {company.offices.map((o, i) => (
-                <Reveal key={o.label} index={i}>
-                  <div className="h-full rounded-3xl border border-[var(--color-line)] p-7">
-                    <MapPin size={18} className="text-[var(--color-cyan)]" />
-                    <h4 className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">{o.label}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">
-                      {o.lines.map((l) => (
-                        <span key={l} className="block">
-                          {l}
-                        </span>
-                      ))}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
 
             <Reveal index={2}>
               <div className="rounded-3xl border border-[var(--color-line)] p-7">

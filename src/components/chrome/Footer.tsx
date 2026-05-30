@@ -63,7 +63,6 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            <li className="pt-2 text-[var(--color-faint)]">{company.offices[0].lines.join(", ")}</li>
           </ul>
         </div>
       </div>
