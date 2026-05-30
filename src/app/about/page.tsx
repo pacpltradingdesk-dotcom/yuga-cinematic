@@ -54,10 +54,10 @@ export default function AboutPage() {
                 <div className="grid h-24 w-24 shrink-0 place-items-center rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] font-display text-2xl font-bold text-gradient-warm ring-glow">
                   PPS
                 </div>
-                <span className="text-xs leading-relaxed text-[var(--color-faint)]">
-                  Portrait slot - drop a real photo of
+                <span className="text-xs uppercase leading-relaxed tracking-[0.2em] text-[var(--color-faint)]">
+                  PPS Anantams
                   <br />
-                  {company.founder} at <code className="text-[var(--color-muted)]">/assets/img/founder.jpg</code>
+                  Corporation
                 </span>
               </div>
               <Badge accent="amber">The Founder</Badge>

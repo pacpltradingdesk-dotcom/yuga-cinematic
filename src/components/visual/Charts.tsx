@@ -35,7 +35,7 @@ export function LineChart({
   let y = H * 0.55;
   const coords: [number, number][] = [];
   for (let i = 0; i < points; i++) {
-    y += (rand() - 0.46) * (H * 0.12);
+    y += (rand() - 0.54) * (H * 0.12); // slight upward bias (SVG y-down) → reads as growth
     y = Math.max(H * 0.12, Math.min(H * 0.85, y));
     coords.push([(i / (points - 1)) * W, y]);
   }
