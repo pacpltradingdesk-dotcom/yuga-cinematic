@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, BadgeCheck, MapPin, Check } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, MapPin, Check, FileDown } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -86,6 +86,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           <div className="mt-9 flex flex-wrap gap-4">
             <MagneticButton href={waLink(`Hi YUGA, I'd like a DPR for a ${p.title} plant.`)} variant="glow">
               Request a DPR <ArrowUpRight size={16} />
+            </MagneticButton>
+            <MagneticButton href={waLink(`Hi YUGA, please send me the brochure for ${p.title}.`)} variant="ghost">
+              <FileDown size={15} /> Get the brochure
             </MagneticButton>
             <MagneticButton href="/contact" variant="ghost">
               Book a feasibility call
