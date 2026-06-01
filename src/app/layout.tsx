@@ -8,6 +8,7 @@ import { Cursor } from "@/components/chrome/Cursor";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
 import { Navbar } from "@/components/chrome/Navbar";
 import { Footer } from "@/components/chrome/Footer";
+import { ConsentBanner } from "@/components/chrome/ConsentBanner";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
         </SmoothScroll>
+        <ConsentBanner />
       </body>
     </html>
   );

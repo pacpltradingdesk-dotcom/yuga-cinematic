@@ -5,6 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 import { company, nav } from "@/lib/site";
 import { Marquee } from "@/components/ui/Marquee";
 import { YugaMark } from "@/components/ui/YugaMark";
+import { legalDocs, GRIEVANCE_OFFICER } from "@/lib/legal";
+import { CookiePrefsButton } from "@/components/chrome/CookiePrefsButton";
 
 export function Footer() {
   return (
@@ -65,6 +67,22 @@ export function Footer() {
             ))}
           </ul>
         </div>
+      </div>
+
+      {/* Legal / compliance */}
+      <div className="maxw container-x border-t border-[var(--color-line)] py-6">
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--color-faint)]">
+          {legalDocs.map((d) => (
+            <Link key={d.slug} href={`/legal/${d.slug}`} data-cursor="hover" className="transition-colors hover:text-[var(--color-ink)]">
+              {d.title}
+            </Link>
+          ))}
+          <CookiePrefsButton className="transition-colors hover:text-[var(--color-ink)]" />
+        </nav>
+        <p className="mt-3 text-xs leading-relaxed text-[var(--color-faint)]">
+          Grievance Officer: {GRIEVANCE_OFFICER} ·{" "}
+          <a href={`mailto:${company.emails[1]}`} className="hover:text-[var(--color-ink)]">{company.emails[1]}</a>
+        </p>
       </div>
 
       <div className="maxw container-x flex flex-col gap-2 border-t border-[var(--color-line)] py-6 text-xs text-[var(--color-faint)] sm:flex-row sm:items-center sm:justify-between">
