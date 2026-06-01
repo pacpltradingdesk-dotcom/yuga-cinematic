@@ -50,10 +50,49 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/** Organization + WebSite structured data — helps Google understand the brand. */
+const orgLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#org`,
+      name: company.legal,
+      alternateName: company.brand,
+      url: siteUrl,
+      logo: `${siteUrl}/yuga-logo.jpg`,
+      description: company.oneLiner,
+      email: company.emails[0],
+      telephone: company.phones[0],
+      areaServed: "IN",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: company.phones[0],
+        contactType: "sales",
+        areaServed: "IN",
+        availableLanguage: ["en", "hi"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: company.brand,
+      description: `${company.brand} — ${company.tagline}`,
+      publisher: { "@id": `${siteUrl}/#org` },
+      inLanguage: "en-IN",
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd).replace(/</g, "\\u003c") }}
+        />
         <Preloader />
         <ScrollProgress />
         <SmoothScroll>
