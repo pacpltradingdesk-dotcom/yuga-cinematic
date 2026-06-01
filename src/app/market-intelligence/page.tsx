@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { LineChart, Candlestick } from "@/components/visual/Charts";
 import { FAQ } from "@/components/page/FAQ";
+import { NewsletterSignup } from "@/components/page/NewsletterSignup";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { marketOpportunity, impact, statesCovered, faqs } from "@/lib/site";
 
@@ -67,6 +68,9 @@ export default function MarketIntelligencePage() {
               <Candlestick seed={44} height={200} className="h-52 w-full" />
             </div>
           </Reveal>
+          <div className="lg:col-span-2">
+            <NewsletterSignup />
+          </div>
         </div>
       </section>
 
