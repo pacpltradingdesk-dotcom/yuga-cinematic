@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { InstantTools } from "@/components/tools/InstantTools";
 import { sevenPhases, products, clientTypes, fees } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -98,8 +99,22 @@ export default function IndustrialConsultingPage() {
         </div>
       </section>
 
-      {/* Fees */}
+      {/* Instant tools */}
       <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Plan it yourself"
+            title="Size the investment before you commit."
+            intro="Pick a budget and state — see which plant fits, the output and payback, and the subsidy you can claim."
+          />
+          <div className="mt-12">
+            <InstantTools />
+          </div>
+        </div>
+      </section>
+
+      {/* Fees */}
+      <section className="py-[var(--space-section)]">
         <div className="maxw container-x grid items-start gap-10 lg:grid-cols-[1fr_1.2fr]">
           <SectionHeading eyebrow="Consulting Fees" title="Transparent, scope-based pricing." />
           <div className="overflow-hidden rounded-3xl border border-[var(--color-line)]">

@@ -51,3 +51,20 @@ export const img = {
 } as const;
 
 export type ImgKey = keyof typeof img;
+
+/**
+ * Product slug → image slot. Reuses the existing topic-related stock so each
+ * of the 9 catalog products gets a fitting visual (swap the underlying file in
+ * /public/assets/img to upgrade any of them — see lib/media notes above).
+ */
+export const productImg: Record<string, ImgKey> = {
+  "bio-bitumen": "bio1",
+  "plastic-to-fuel": "bio2",
+  "rubber-to-fuel": "bio3",
+  "pmb-polymer-modified-bitumen": "prod1",
+  "crmb-crumb-rubber-modified-bitumen": "prod2",
+  "bitumen-decanter": "prod4",
+  "bitumen-emulsion": "prod0",
+  "micro-surfacing-emulsion": "bio0",
+  "blown-oxidised-bitumen": "prod3",
+};

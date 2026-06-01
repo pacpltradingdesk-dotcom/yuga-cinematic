@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Marquee } from "@/components/ui/Marquee";
 import { Candlestick } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { CapitalTools } from "@/components/tools/CapitalTools";
 import { fundStages, loans, finPrep } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -84,8 +85,22 @@ export default function CapitalMarketPage() {
         </div>
       </section>
 
-      {/* Loans table */}
+      {/* Capital tools */}
       <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Value It Yourself"
+            title="Indicative valuation & readiness, instantly."
+            intro="Estimate enterprise value, self-check IPO/funding readiness, and size debt — before the first call."
+          />
+          <div className="mt-12">
+            <CapitalTools />
+          </div>
+        </div>
+      </section>
+
+      {/* Loans table */}
+      <section className="py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Debt & Government Funding"
