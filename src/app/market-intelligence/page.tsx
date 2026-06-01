@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { LineChart, Candlestick } from "@/components/visual/Charts";
 import { FAQ } from "@/components/page/FAQ";
 import { NewsletterSignup } from "@/components/page/NewsletterSignup";
+import { MarketTicker } from "@/components/visual/MarketTicker";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { marketOpportunity, impact, statesCovered, faqs } from "@/lib/site";
 
@@ -27,6 +28,9 @@ export default function MarketIntelligencePage() {
         accent="cyan"
         image="miHero"
       />
+
+      {/* Live market ticker (TradingView, free embed) */}
+      <MarketTicker />
 
       {/* Opportunity grid */}
       <section className="py-[var(--space-section)]">

@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
-import { Marquee } from "@/components/ui/Marquee";
+import { MarketTicker } from "@/components/visual/MarketTicker";
 import { Candlestick } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { CapitalTools } from "@/components/tools/CapitalTools";
@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   description:
     "From seed to IPO - fundraising, valuation, bank DPRs, subsidies and financial preparation, backed by first-hand BSE listing experience.",
 };
-
-const ticker = [
-  "NIFTY 22,478 ▲0.6%", "BANKNIFTY 48,120 ▲0.8%", "BRENT $82.4 ▼0.3%",
-  "USD-INR 83.2", "VG-30 ₹48,250", "FII +1,240 Cr", "DII +890 Cr",
-];
 
 export default function CapitalMarketPage() {
   return (
@@ -35,16 +30,8 @@ export default function CapitalMarketPage() {
         image="capHero"
       />
 
-      {/* Ticker */}
-      <div className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-3">
-        <Marquee duration={26} className="text-sm font-display tracking-wide text-[var(--color-muted)]">
-          {ticker.map((t) => (
-            <span key={t} className="px-6">
-              {t}
-            </span>
-          ))}
-        </Marquee>
-      </div>
+      {/* Live market ticker (TradingView, free embed) */}
+      <MarketTicker />
 
       {/* Terminal + stages */}
       <section className="py-[var(--space-section)]">
