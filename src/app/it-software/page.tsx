@@ -8,12 +8,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { LineChart } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
-import { software } from "@/lib/site";
+import { softwareProducts } from "@/lib/software";
 
 export const metadata: Metadata = {
   title: "AI Software Services",
   description:
-    "AI software for the bitumen and sales industry - sales dashboard, CRM, Excel automation, WhatsApp bulk, call analytics and automated market reports.",
+    "Seven in-house AI products for the bitumen and sales industry - AI sales dashboard, WhatsApp CRM, Excel lead cleaner, bulk messaging, call analytics, automated market reports and a voice agent.",
 };
 
 export default function ITSoftwarePage() {
@@ -79,24 +79,33 @@ export default function ITSoftwarePage() {
         </div>
       </section>
 
-      {/* Product grid */}
+      {/* Product suite */}
       <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="The Product Suite"
-            title="Six tools. Built for bitumen, sales and intelligence."
+            title="Seven products. Built for bitumen, sales and intelligence."
+            intro="Each one runs our own operations first — then we license it. Available on subscription with four feature tiers; prices on request."
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {software.map((s, i) => (
-              <Reveal key={s.name} index={i % 2}>
-                <GlowCard accent={i % 2 ? "amber" : "cyan"} className="h-full">
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {softwareProducts.map((s, i) => (
+              <Reveal key={s.slug} index={i % 2}>
+                <GlowCard accent={s.accent} className="h-full">
                   <div className="flex h-full flex-col p-8">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-display text-xl font-semibold tracking-tight">{s.name}</h3>
-                      <span className="shrink-0 text-xs text-[var(--color-cyan)]">{s.tag}</span>
+                      <div>
+                        <h3 className="font-display text-xl font-semibold tracking-tight">{s.name}</h3>
+                        <span className="mt-1 block text-xs text-[var(--color-faint)]">{s.tag}</span>
+                      </div>
+                      {s.status && (
+                        <Badge accent={s.status === "Experimental" ? "neutral" : s.accent} className="shrink-0">
+                          {s.status}
+                        </Badge>
+                      )}
                     </div>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-                    <ul className="mt-6 grid grid-cols-2 gap-2.5 border-t border-[var(--color-line)] pt-6">
+                    <p className="mt-4 font-display text-sm font-medium leading-snug text-[var(--color-ink)]">{s.oneLiner}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{s.what}</p>
+                    <ul className="mt-6 grid gap-2.5 border-t border-[var(--color-line)] pt-6 sm:grid-cols-2">
                       {s.features.map((f) => (
                         <li key={f} className="flex items-start gap-1.5 text-xs text-[var(--color-muted)]">
                           <Check size={13} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />
@@ -104,7 +113,14 @@ export default function ITSoftwarePage() {
                         </li>
                       ))}
                     </ul>
-                    <div className="mt-6 text-xs uppercase tracking-wider text-[var(--color-faint)]">{s.metric}</div>
+                    <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 border-t border-[var(--color-line)] pt-6">
+                      {s.stats.map((st) => (
+                        <div key={st.label}>
+                          <div className="font-display text-lg font-bold tracking-tight text-gradient-warm">{st.value}</div>
+                          <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{st.label}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </GlowCard>
               </Reveal>
