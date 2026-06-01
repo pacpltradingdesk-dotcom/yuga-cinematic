@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://yuga-pmc.in/sitemap.xml
