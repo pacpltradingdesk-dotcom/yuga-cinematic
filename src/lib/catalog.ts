@@ -118,6 +118,21 @@ export interface TrustBlock {
   readonly points: readonly string[];
 }
 
+/* ---------- io (raw material → output) + standards (per product) ---------- */
+export type IoRow = readonly [string, string];
+
+export interface IoEntry {
+  readonly basis: string;
+  readonly input: readonly IoRow[];
+  readonly output: readonly IoRow[];
+}
+
+export interface Standards {
+  readonly is: string;
+  readonly astm: string;
+  readonly msds: string;
+}
+
 /* ---------- full catalog shape ---------- */
 export interface Catalog {
   readonly products: readonly Product[];
@@ -128,12 +143,12 @@ export interface Catalog {
   readonly trust: Readonly<Record<string, TrustBlock>>;
   readonly addons: readonly Addon[];
   readonly finance: Finance;
-  // Narrowed in later phases (Software / Fundraising / Market / Standards):
+  readonly standards: Readonly<Record<string, Standards>>;
+  readonly io: Readonly<Record<string, IoEntry>>;
+  // Narrowed as features land (Software / Fundraising / Market / VerticalQA):
   readonly funding: unknown;
-  readonly standards: unknown;
   readonly market: unknown;
   readonly software: unknown;
-  readonly io: unknown;
   readonly verticalQA: unknown;
   readonly social: unknown;
   readonly fundraising: unknown;
@@ -159,6 +174,14 @@ export function getCalc(slug: string): CalcEntry | undefined {
 
 export function getFeasibility(slug: string): Feasibility | undefined {
   return catalog.feasibility.find((f) => f.slug === slug);
+}
+
+export function getIo(slug: string): IoEntry | undefined {
+  return catalog.io[slug];
+}
+
+export function getStandards(slug: string): Standards | undefined {
+  return catalog.standards[slug];
 }
 
 /** All product slugs — drives `generateStaticParams` for /products/[slug]. */

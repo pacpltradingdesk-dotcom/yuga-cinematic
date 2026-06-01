@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, BadgeCheck, MapPin, Check, FileDown } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, MapPin, Check, FileDown, ArrowRight, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -13,7 +13,7 @@ import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { Media } from "@/components/visual/Media";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
-import { products, getProduct, getFeasibility, productSlugs, type LabelValue } from "@/lib/catalog";
+import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
 import { productImg } from "@/lib/media";
 import { waLink } from "@/lib/site";
 
@@ -59,6 +59,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
   if (!p) notFound();
 
   const feas = getFeasibility(slug);
+  const io = getIo(slug);
+  const standards = getStandards(slug);
   const related = products.filter((x) => x.slug !== slug).slice(0, 3);
 
   // FAQ rich-result schema (SEO) built from the product Q&A.
@@ -166,6 +168,58 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           </Reveal>
         </div>
       </section>
+
+      {/* Feedstock & output (io) + Quality standards */}
+      {(io || standards) && (
+        <section className="py-[var(--space-section)]">
+          <div className="maxw container-x grid gap-12 lg:grid-cols-2">
+            {io && (
+              <Reveal>
+                <SectionHeading eyebrow="Feedstock & Output" title="What goes in, what comes out." />
+                <p className="mt-4 text-sm text-[var(--color-faint)]">{io.basis}</p>
+                <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                  {[
+                    { label: "Input", rows: io.input, icon: ArrowRight, accent: "var(--color-amber)" },
+                    { label: "Output", rows: io.output, icon: ArrowRight, accent: "var(--color-cyan)" },
+                  ].map((col) => (
+                    <div key={col.label}>
+                      <div className="text-xs uppercase tracking-[0.2em]" style={{ color: col.accent }}>{col.label}</div>
+                      <div className="mt-3 grid gap-2">
+                        {col.rows.map(([k, v]) => (
+                          <div key={k} className="rounded-xl border border-[var(--color-line)] p-3">
+                            <div className="text-sm font-medium text-[var(--color-ink)]">{k}</div>
+                            <div className="text-xs text-[var(--color-muted)]">{v}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
+            {standards && (
+              <Reveal index={1}>
+                <SectionHeading eyebrow="Quality & Compliance" title="Standards & testing." />
+                <div className="mt-6 grid gap-3">
+                  {[
+                    { label: "IS (BIS)", value: standards.is },
+                    { label: "ASTM", value: standards.astm },
+                    { label: "MSDS / SDS", value: standards.msds },
+                  ].map((s) => (
+                    <div key={s.label} className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] p-4">
+                      <ShieldCheck size={17} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />
+                      <div>
+                        <div className="text-sm font-medium text-[var(--color-ink)]">{s.label}</div>
+                        <div className="text-sm leading-relaxed text-[var(--color-muted)]">{s.value}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Cost & ROI */}
       <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
