@@ -9,6 +9,7 @@ import { FAQ } from "@/components/page/FAQ";
 import { NewsletterSignup } from "@/components/page/NewsletterSignup";
 import { MarketTicker } from "@/components/visual/MarketTicker";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { market } from "@/lib/catalog";
 import { marketOpportunity, impact, statesCovered, faqs } from "@/lib/site";
 
@@ -53,7 +54,8 @@ export default function MarketIntelligencePage() {
       </section>
 
       {/* India bitumen market (sourced national figures) */}
-      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+      <section className="relative isolate border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <SectionBackdrop name="miHero" />
         <div className="maxw container-x">
           <SectionHeading eyebrow="India Bitumen Market" title="The demand the imports can't meet." />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

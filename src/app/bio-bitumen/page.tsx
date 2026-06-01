@@ -10,6 +10,7 @@ import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { FinanceTools } from "@/components/tools/FinanceTools";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { plantTypes, bioProcess, capacities, marketOpportunity } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -134,7 +135,8 @@ export default function BioBitumenPage() {
       </section>
 
       {/* Finance & valuation tools */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <SectionBackdrop name="bioHero" />
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Size & Finance It"

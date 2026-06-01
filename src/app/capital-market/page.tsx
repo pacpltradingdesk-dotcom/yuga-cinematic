@@ -10,6 +10,7 @@ import { MarketTicker } from "@/components/visual/MarketTicker";
 import { Candlestick } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { CapitalTools } from "@/components/tools/CapitalTools";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { funding, fundraising } from "@/lib/catalog";
 import { fundStages, loans, finPrep } from "@/lib/site";
@@ -121,7 +122,8 @@ export default function CapitalMarketPage() {
       </section>
 
       {/* Who funds what */}
-      <section className="py-[var(--space-section)]">
+      <section className="relative isolate py-[var(--space-section)]">
+        <SectionBackdrop name="capHero" />
         <div className="maxw container-x">
           <SectionHeading eyebrow="Who Funds What" title="Promoter money vs funder money." intro={funding.intro} />
           <div className="mt-12 overflow-x-auto">

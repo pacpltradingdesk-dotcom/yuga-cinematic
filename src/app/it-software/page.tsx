@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { LineChart } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { softwareProducts } from "@/lib/software";
 import { softwareMeta } from "@/lib/catalog";
@@ -143,7 +144,8 @@ export default function ITSoftwarePage() {
       </section>
 
       {/* Subscription tiers */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <SectionBackdrop name="softHero" />
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Subscription"

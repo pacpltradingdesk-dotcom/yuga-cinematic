@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { trust } from "@/lib/catalog";
 import { company, career, partnerships, keyFacts } from "@/lib/site";
 
@@ -108,7 +109,8 @@ export default function AboutPage() {
       </section>
 
       {/* Why trust YUGA */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <SectionBackdrop name="indHero" />
         <div className="maxw container-x">
           <SectionHeading eyebrow="Why Trust YUGA" title="Proof across every dimension." />
           <div className="mt-12 grid gap-6 md:grid-cols-2">

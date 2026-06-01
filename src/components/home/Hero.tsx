@@ -7,6 +7,7 @@ import { ParticleField } from "@/components/visual/ParticleField";
 import { GradientMesh, GridBackground } from "@/components/visual/Backdrop";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Marquee } from "@/components/ui/Marquee";
+import { Media } from "@/components/visual/Media";
 import { company } from "@/lib/site";
 
 const reveal = {
@@ -27,8 +28,9 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-28 grain">
-      {/* layered cinematic background */}
+      {/* layered cinematic background: photo backdrop → mesh → particles → grid */}
       <motion.div style={{ scale }} className="absolute inset-0">
+        <Media name="homeHero" overlay="none" priority sizes="100vw" className="absolute inset-0 h-full w-full opacity-[0.22]" />
         <GradientMesh />
         <ParticleField className="absolute inset-0 h-full w-full" />
         <GridBackground />

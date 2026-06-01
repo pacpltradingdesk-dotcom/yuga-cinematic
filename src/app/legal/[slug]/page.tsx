@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { Reveal } from "@/components/ui/Reveal";
 import { getLegalDoc, legalSlugs, legalDocs } from "@/lib/legal";
 
@@ -37,7 +38,8 @@ export default async function LegalPage({ params }: { params: Promise<Params> })
             <ArrowLeft size={15} /> Back to home
           </Link>
 
-          <header className="mt-8 border-b border-[var(--color-line)] pb-10">
+          <header className="relative isolate mt-8 overflow-hidden rounded-3xl border-b border-[var(--color-line)] p-8 pb-10">
+            <SectionBackdrop name="aboutHero" opacity="opacity-[0.07]" />
             <span className="text-xs uppercase tracking-[0.3em] text-[var(--color-amber)]">Legal</span>
             <h1 className="mt-4 font-display text-[length:var(--text-h2)] font-semibold leading-tight tracking-tight">
               {doc.title}

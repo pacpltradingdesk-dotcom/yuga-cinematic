@@ -7,6 +7,7 @@ import { CTASection } from "@/components/page/CTASection";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InstantTools } from "@/components/tools/InstantTools";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,8 @@ export default function HomePage() {
       <NoiseOverlay />
       <Hero />
       <Stats />
-      <section className="py-[var(--space-section)]">
+      <section className="relative isolate py-[var(--space-section)]">
+        <SectionBackdrop name="pIntel" />
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Answers in 30 seconds"
