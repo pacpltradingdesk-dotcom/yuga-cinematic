@@ -8,7 +8,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { LineChart } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { softwareProducts } from "@/lib/software";
+import { softwareMeta } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "AI Software Services",
@@ -139,6 +141,39 @@ export default function ITSoftwarePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Subscription tiers */}
+      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Subscription"
+            title="Four tiers. Enable only what you need."
+            intro={softwareMeta.intro}
+          />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {softwareMeta.tierKeys.map((t, i) => (
+              <Reveal key={t.key} index={i}>
+                <GlowCard accent={i % 2 ? "cyan" : "amber"} className="h-full">
+                  <div className="flex h-full flex-col p-7">
+                    <span className="font-display text-4xl font-bold text-gradient-warm">{t.key}</span>
+                    <h3 className="mt-3 font-display text-lg font-semibold tracking-tight">{t.name}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--color-muted)]">{t.for}</p>
+                  </div>
+                </GlowCard>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-[var(--color-faint)]">
+            <span>Billing:</span>
+            {softwareMeta.billing.map((b) => (
+              <span key={b} className="rounded-full border border-[var(--color-line)] px-4 py-1.5">{b}</span>
+            ))}
+            <span>· Prices on request</span>
+          </Reveal>
+        </div>
+      </section>
+
+      <VerticalFaq vkey="it" />
 
       <CTASection
         title="Put AI to work in your sales floor."

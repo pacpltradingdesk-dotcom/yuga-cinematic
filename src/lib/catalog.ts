@@ -133,6 +133,58 @@ export interface Standards {
   readonly msds: string;
 }
 
+/* ---------- vertical Q&A / funding / market / software tiers ---------- */
+export interface VerticalQAEntry {
+  readonly title: string;
+  readonly qa: readonly QA[];
+}
+
+export interface FundingInstrument {
+  readonly key: string;
+  readonly name: string;
+  readonly forWhat: string;
+  readonly promoter: string;
+  readonly funder: string;
+  readonly funderShare: string;
+  readonly basis: string;
+  readonly tenure: string;
+  readonly note: string;
+}
+
+export interface Funding {
+  readonly intro: string;
+  readonly instruments: readonly FundingInstrument[];
+}
+
+export interface MarketNational {
+  readonly demand: string;
+  readonly production: string;
+  readonly importGap: string;
+  readonly drivers: string;
+  readonly src: string;
+}
+
+export interface MarketData {
+  readonly national: MarketNational;
+  readonly note: string;
+}
+
+export interface SoftwareTier {
+  readonly key: string;
+  readonly name: string;
+  readonly for: string;
+}
+
+export interface SoftwareMeta {
+  readonly intro: string;
+  readonly billing: readonly string[];
+  readonly tierKeys: readonly SoftwareTier[];
+}
+
+export interface Fundraising {
+  readonly pipeline: readonly string[];
+}
+
 /* ---------- full catalog shape ---------- */
 export interface Catalog {
   readonly products: readonly Product[];
@@ -145,13 +197,13 @@ export interface Catalog {
   readonly finance: Finance;
   readonly standards: Readonly<Record<string, Standards>>;
   readonly io: Readonly<Record<string, IoEntry>>;
-  // Narrowed as features land (Software / Fundraising / Market / VerticalQA):
-  readonly funding: unknown;
-  readonly market: unknown;
-  readonly software: unknown;
-  readonly verticalQA: unknown;
+  readonly funding: Funding;
+  readonly market: MarketData;
+  readonly software: SoftwareMeta;
+  readonly verticalQA: Readonly<Record<string, VerticalQAEntry>>;
+  readonly fundraising: Fundraising;
+  /** Social links — mostly placeholder URLs in source; not surfaced yet. */
   readonly social: unknown;
-  readonly fundraising: unknown;
 }
 
 export const catalog = catalogJson as unknown as Catalog;
@@ -189,3 +241,12 @@ export const productSlugs: readonly string[] = products.map((p) => p.slug);
 
 export const { finance, addons } = catalog;
 export const subsidy: Subsidy = catalog.subsidy;
+export const funding: Funding = catalog.funding;
+export const market: MarketData = catalog.market;
+export const softwareMeta: SoftwareMeta = catalog.software;
+export const fundraising: Fundraising = catalog.fundraising;
+export const trust: Readonly<Record<string, TrustBlock>> = catalog.trust;
+
+export function getVerticalQA(key: string): VerticalQAEntry | undefined {
+  return catalog.verticalQA[key];
+}

@@ -8,7 +8,14 @@ import { Badge } from "@/components/ui/Badge";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { trust } from "@/lib/catalog";
 import { company, career, partnerships, keyFacts } from "@/lib/site";
+
+/** Address mentions are filtered out site-wide per project decision. */
+const trustBlocks = Object.values(trust).map((b) => ({
+  ...b,
+  points: b.points.filter((p) => !/address/i.test(p)),
+}));
 
 export const metadata: Metadata = {
   title: "About YUGA",
@@ -97,6 +104,33 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Why trust YUGA */}
+      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="Why Trust YUGA" title="Proof across every dimension." />
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {trustBlocks.map((b, i) => (
+              <Reveal key={b.title} index={i % 2}>
+                <div className="h-full rounded-3xl border border-[var(--color-line)] p-8">
+                  <h3 className="font-display text-lg font-semibold tracking-tight">{b.title}</h3>
+                  <ul className="mt-5 grid gap-2.5">
+                    {b.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-sm text-[var(--color-muted)]">
+                        <BadgeCheck size={16} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-[var(--color-faint)]">
+            Track-record figures and the founder/IPO line are client claims, shown pending documentary verification.
+          </p>
         </div>
       </section>
 

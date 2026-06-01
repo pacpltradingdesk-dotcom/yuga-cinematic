@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { InstantTools } from "@/components/tools/InstantTools";
+import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { sevenPhases, products, clientTypes, fees } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -130,6 +131,8 @@ export default function IndustrialConsultingPage() {
           </div>
         </div>
       </section>
+
+      <VerticalFaq vkey="pmc" eyebrow="Why a PMC" />
 
       <CTASection title="Build your plant the right way." />
     </>

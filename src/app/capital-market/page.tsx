@@ -10,6 +10,8 @@ import { MarketTicker } from "@/components/visual/MarketTicker";
 import { Candlestick } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { CapitalTools } from "@/components/tools/CapitalTools";
+import { VerticalFaq } from "@/components/page/VerticalFaq";
+import { funding, fundraising } from "@/lib/catalog";
 import { fundStages, loans, finPrep } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -118,6 +120,53 @@ export default function CapitalMarketPage() {
         </div>
       </section>
 
+      {/* Who funds what */}
+      <section className="py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="Who Funds What" title="Promoter money vs funder money." intro={funding.intro} />
+          <div className="mt-12 overflow-x-auto">
+            <div className="min-w-[760px] overflow-hidden rounded-3xl border border-[var(--color-line)]">
+              <div className="grid grid-cols-[1.4fr_1.6fr_0.8fr_0.8fr_0.9fr] bg-[var(--color-raised)] px-6 py-4 text-xs uppercase tracking-wider text-[var(--color-faint)]">
+                <span>Instrument</span>
+                <span>For what</span>
+                <span>Promoter</span>
+                <span>Funder</span>
+                <span>Tenure</span>
+              </div>
+              {funding.instruments.map((f) => (
+                <div
+                  key={f.key}
+                  className="grid grid-cols-[1.4fr_1.6fr_0.8fr_0.8fr_0.9fr] items-center border-t border-[var(--color-line)] px-6 py-4 text-sm transition-colors hover:bg-[var(--color-raised)]/50"
+                >
+                  <span className="font-medium">{f.name}</span>
+                  <span className="text-[var(--color-muted)]">{f.forWhat}</span>
+                  <span className="text-gradient-warm font-display font-medium">{f.promoter}</span>
+                  <span className="text-[var(--color-cyan)]">{f.funderShare}</span>
+                  <span className="text-[var(--color-muted)]">{f.tenure}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fundraising process pipeline */}
+      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="How We Raise" title="A clear path from check to closure." />
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {fundraising.pipeline.map((step, i) => (
+              <Reveal key={step} index={i % 3}>
+                <div className="flex items-start gap-3 rounded-2xl border border-[var(--color-line)] p-5">
+                  <span className="font-display text-sm font-bold text-[var(--color-amber)]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-sm text-[var(--color-muted)]">{step}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Financial prep */}
       <section className="py-[var(--space-section)]">
         <div className="maxw container-x grid gap-10 lg:grid-cols-[1fr_1.3fr]">
@@ -143,6 +192,8 @@ export default function CapitalMarketPage() {
           </p>
         </div>
       </section>
+
+      <VerticalFaq vkey="fundraising" eyebrow="Fundraising Q&A" />
 
       <CTASection
         title="Raise capital with someone who's done it."
