@@ -268,6 +268,7 @@ export const caseStudies = [
     scope: "Full PMC lifecycle - DPR → engineering → procurement → commissioning → 12-month hand-holding.",
     detail: "PMB-40 (IS 15462:2019), 1,250 MT/yr; CGTMSE-backed with Haryana PADMA / CLCSS subsidies.",
     tag: "Live · YUGA PMC",
+    productSlug: "bio-bitumen",
   },
   {
     title: "5 TPD Bio-Bitumen Plant",
@@ -275,6 +276,7 @@ export const caseStudies = [
     scope: "Second plant in the same client's planned pan-India rollout.",
     detail: "Structured under Odisha IPR 2022 Zone-A incentives.",
     tag: "Live · YUGA PMC",
+    productSlug: "bio-bitumen",
   },
   {
     title: "Bio-Bitumen + Plastic-to-Fuel",
@@ -282,6 +284,7 @@ export const caseStudies = [
     scope: "Combined bio-modified bitumen and plastic-to-fuel project.",
     detail: "Dual-grade output design.",
     tag: "Live · Dual-grade",
+    productSlug: "plastic-to-fuel",
   },
   {
     title: "Carbon-Credit Structuring",
@@ -289,6 +292,7 @@ export const caseStudies = [
     scope: "Puro.earth MRV carbon-credit pathway and full project business research.",
     detail: "Additional revenue stream design.",
     tag: "Research",
+    productSlug: "",
   },
 ] as const;
 
