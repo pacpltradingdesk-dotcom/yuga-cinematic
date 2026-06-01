@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 
-// GitHub Pages project site lives under /<repo>. The deploy workflow sets
-// GITHUB_PAGES=true so local dev/build stay at the root with no basePath.
+// Production deploy is a static export served at the ROOT of the custom domain
+// (yuga-pmc.in) via GitHub Pages, so there is no basePath. The deploy workflow
+// sets GITHUB_PAGES=true; local dev/build stay a normal Next.js app.
 const isPages = process.env.GITHUB_PAGES === "true";
-const repo = "yuga-cinematic";
 
 const nextConfig = {
   reactStrictMode: true,
@@ -13,12 +13,11 @@ const nextConfig = {
   },
   ...(isPages && {
     output: "export",
-    basePath: `/${repo}`,
     trailingSlash: true,
     images: { unoptimized: true },
-    // next/image does not auto-prefix basePath onto public-folder src under
-    // `output: export` + `unoptimized`, so expose it for manual prefixing.
-    env: { NEXT_PUBLIC_BASE_PATH: `/${repo}` },
+    // Custom domain serves at root, so no path prefix. Media.tsx reads this
+    // (empty → no prefix), which is correct for an apex-domain deploy.
+    env: { NEXT_PUBLIC_BASE_PATH: "" },
   }),
 };
 
