@@ -4,7 +4,6 @@ import "./globals.css";
 import { company, siteUrl } from "@/lib/site";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Preloader } from "@/components/chrome/Preloader";
-import { Cursor } from "@/components/chrome/Cursor";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
 import { Navbar } from "@/components/chrome/Navbar";
 import { Footer } from "@/components/chrome/Footer";
@@ -54,9 +53,8 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="cursor-none-fine antialiased">
+      <body className="antialiased">
         <Preloader />
-        <Cursor />
         <ScrollProgress />
         <SmoothScroll>
           <Navbar />

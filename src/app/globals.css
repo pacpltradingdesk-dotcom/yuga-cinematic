@@ -142,11 +142,6 @@ html.lenis, html.lenis body { height: auto; }
   .hairline { border-top: 1px solid var(--color-line); }
 }
 
-/* Hide default cursor on devices with a fine pointer (custom cursor active) */
-@media (pointer: fine) {
-  .cursor-none-fine, .cursor-none-fine * { cursor: none; }
-}
-
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
