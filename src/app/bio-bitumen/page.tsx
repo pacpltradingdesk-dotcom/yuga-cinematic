@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { FinanceTools } from "@/components/tools/FinanceTools";
 import { plantTypes, bioProcess, capacities, marketOpportunity } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -132,8 +133,22 @@ export default function BioBitumenPage() {
         </div>
       </section>
 
+      {/* Finance & valuation tools */}
+      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Size & Finance It"
+            title="Configure your plant, then size the loan."
+            intro="Build a CAPEX with add-ons, then see the term-loan split, EMI and CGTMSE eligibility — all indicative, instant."
+          />
+          <div className="mt-12">
+            <FinanceTools />
+          </div>
+        </div>
+      </section>
+
       {/* Opportunity strip */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-20">
+      <section className="border-t border-[var(--color-line)] py-20">
         <div className="maxw container-x">
           <SectionHeading eyebrow="Why Now" title="A market created in January 2026." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

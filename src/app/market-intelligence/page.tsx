@@ -6,7 +6,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { LineChart, Candlestick } from "@/components/visual/Charts";
 import { FAQ } from "@/components/page/FAQ";
+import { NewsletterSignup } from "@/components/page/NewsletterSignup";
+import { MarketTicker } from "@/components/visual/MarketTicker";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { market } from "@/lib/catalog";
 import { marketOpportunity, impact, statesCovered, faqs } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,6 +30,9 @@ export default function MarketIntelligencePage() {
         image="miHero"
       />
 
+      {/* Live market ticker (TradingView, free embed) */}
+      <MarketTicker />
+
       {/* Opportunity grid */}
       <section className="py-[var(--space-section)]">
         <div className="maxw container-x">
@@ -43,6 +49,29 @@ export default function MarketIntelligencePage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* India bitumen market (sourced national figures) */}
+      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="India Bitumen Market" title="The demand the imports can't meet." />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Annual demand", value: market.national.demand },
+              { label: "Met domestically", value: market.national.production },
+              { label: "Imported", value: market.national.importGap },
+              { label: "Demand drivers", value: market.national.drivers },
+            ].map((m, i) => (
+              <Reveal key={m.label} index={i}>
+                <div className="h-full rounded-3xl border border-[var(--color-line)] p-7">
+                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">{m.label}</div>
+                  <div className="mt-3 text-sm leading-relaxed text-[var(--color-ink)]">{m.value}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 text-xs leading-relaxed text-[var(--color-faint)]">{market.national.src}</p>
         </div>
       </section>
 
@@ -67,6 +96,9 @@ export default function MarketIntelligencePage() {
               <Candlestick seed={44} height={200} className="h-52 w-full" />
             </div>
           </Reveal>
+          <div className="lg:col-span-2">
+            <NewsletterSignup />
+          </div>
         </div>
       </section>
 

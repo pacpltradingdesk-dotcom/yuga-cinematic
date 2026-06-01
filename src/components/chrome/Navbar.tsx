@@ -48,7 +48,7 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
-            {nav.slice(0, 7).map((item) => {
+            {nav.slice(0, 8).map((item) => {
               const active = pathname === item.href;
               return (
                 <Link

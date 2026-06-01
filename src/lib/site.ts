@@ -20,7 +20,7 @@ export const company = {
   web: "www.princeshah.com",
   linkedin: "linkedin.com/in/prince-shah-b781921b/",
   phones: ["+91 77952 42424", "+91 94482 81224", "+91 75069 41655"],
-  emails: ["sales@princeshah.com", "sales.ppsanantams@gmail.com"],
+  emails: ["sales@princeshah.com", "sales.ppsanatams@gmail.com"],
   offices: [
     {
       label: "Registered Office",
@@ -55,6 +55,7 @@ export function waLink(text: string): string {
 }
 
 export const nav = [
+  { label: "Products", href: "/products" },
   { label: "Bio-Bitumen", href: "/bio-bitumen" },
   { label: "Industrial Consulting", href: "/industrial-consulting" },
   { label: "Software", href: "/it-software" },
@@ -214,51 +215,7 @@ export const fees = [
   { service: "Bank DPR + Financial Model", fee: "₹1-2 Lakh" },
 ] as const;
 
-/* ----------------------------- Software ----------------------------- */
-export const software = [
-  {
-    name: "AI Bitumen Sales Dashboard",
-    tag: "PMC / Enterprise",
-    desc: "Enterprise bitumen trading & intelligence platform - pricing, CRM, market signals and logistics in one interface.",
-    features: ["24-month AI price forecast", "10-signal market composite", "Vessel & port tracking", "Instant PDF quotes"],
-    metric: "80+ pages · 60+ engines · 25 APIs",
-  },
-  {
-    name: "PPS Bitumen CRM",
-    tag: "crm.ppsanatams.online",
-    desc: "WhatsApp-integrated CRM built for bitumen: two-way chat, AI lead scoring, Kanban pipeline and bulk campaigns.",
-    features: ["AI HOT/WARM/COLD scoring", "6-stage Kanban pipeline", "English/Hindi AI assistant", "Live price board"],
-    metric: "Tested to 4,000+ contacts",
-  },
-  {
-    name: "Master Excel Maker AI",
-    tag: "Data Engine",
-    desc: "Turns messy Excel/CSV into clean, deduplicated, AI-scored contact lists with natural-language filtering.",
-    features: ["E.164 phone standardisation", "3-pass dedup", "AI lead scoring 0-100", "11-sheet pro output"],
-    metric: "Batch folder processing",
-  },
-  {
-    name: "WhatsApp Bulk Messaging",
-    tag: "whatsapp.ppsanatams.cloud",
-    desc: "Multi-account bulk messaging to thousands of groups with media, anti-ban protection and resume/dedup.",
-    features: ["Multi-account management", "Anti-ban delays", "Stop / resume / dedup", "AI group categorisation"],
-    metric: "Tested 1,000+ groups",
-  },
-  {
-    name: "DialSync",
-    tag: "Call Analytics",
-    desc: "Auto-captures agent calls, runs AI transcripts & insight extraction, and surfaces a live manager dashboard.",
-    features: ["Auto call capture", "AI transcripts & objections", "Agent health alerts", "OTA app updates"],
-    metric: "n8n + Gemini pipeline",
-  },
-  {
-    name: "PACPL Market Report",
-    tag: "Automated Research",
-    desc: "Automated daily Nifty/BankNifty pre-market & closing PDF + image reports delivered to WhatsApp groups.",
-    features: ["8:45 AM pre-market", "4:00 PM closing", "FII/DII + sector flows", "NSE-holiday aware"],
-    metric: "Self-monitoring",
-  },
-] as const;
+/* Software vertical content now lives in src/lib/software.ts (7 products). */
 
 /* ----------------------------- Capital Markets ----------------------------- */
 export const fundStages = [
@@ -311,6 +268,7 @@ export const caseStudies = [
     scope: "Full PMC lifecycle - DPR → engineering → procurement → commissioning → 12-month hand-holding.",
     detail: "PMB-40 (IS 15462:2019), 1,250 MT/yr; CGTMSE-backed with Haryana PADMA / CLCSS subsidies.",
     tag: "Live · YUGA PMC",
+    productSlug: "bio-bitumen",
   },
   {
     title: "5 TPD Bio-Bitumen Plant",
@@ -318,6 +276,7 @@ export const caseStudies = [
     scope: "Second plant in the same client's planned pan-India rollout.",
     detail: "Structured under Odisha IPR 2022 Zone-A incentives.",
     tag: "Live · YUGA PMC",
+    productSlug: "bio-bitumen",
   },
   {
     title: "Bio-Bitumen + Plastic-to-Fuel",
@@ -325,6 +284,7 @@ export const caseStudies = [
     scope: "Combined bio-modified bitumen and plastic-to-fuel project.",
     detail: "Dual-grade output design.",
     tag: "Live · Dual-grade",
+    productSlug: "plastic-to-fuel",
   },
   {
     title: "Carbon-Credit Structuring",
@@ -332,6 +292,7 @@ export const caseStudies = [
     scope: "Puro.earth MRV carbon-credit pathway and full project business research.",
     detail: "Additional revenue stream design.",
     tag: "Research",
+    productSlug: "",
   },
 ] as const;
 

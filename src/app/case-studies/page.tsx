@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MapPin, FileText } from "lucide-react";
+import Link from "next/link";
+import { MapPin, FileText, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -84,6 +85,16 @@ export default function CaseStudiesPage() {
                       <p className="mt-auto border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-faint)]">
                         {c.detail}
                       </p>
+                      {c.productSlug && (
+                        <Link
+                          href={`/products/${c.productSlug}`}
+                          data-cursor="hover"
+                          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-amber)]"
+                        >
+                          Start a plant like this
+                          <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </GlowCard>
