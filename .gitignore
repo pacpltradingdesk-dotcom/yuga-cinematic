@@ -33,3 +33,6 @@ yarn-error.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# source package (large upgrade kit — content lives in src/, not committed raw)
+YUGA_Website_Package.zip
