@@ -17,11 +17,12 @@ import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
 import { LicensesPermits } from "@/components/page/LicensesPermits";
 import { Deliverables } from "@/components/page/Deliverables";
 import { CarbonStats } from "@/components/page/CarbonCredit";
+import { LeadGate } from "@/components/page/LeadGate";
 import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
 import { productPlantCounts } from "@/lib/plants";
 import { getLandRequirement, landNote } from "@/lib/land";
 import { productImg, img } from "@/lib/media";
-import { waLink, siteUrl, company } from "@/lib/site";
+import { siteUrl, company } from "@/lib/site";
 
 type Params = { slug: string };
 
@@ -129,12 +130,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       <PageHero eyebrow="Product · YUGA PMC" title={p.title} intro={p.subtitle} accent="amber" image={productImg[slug]}>
         <Reveal index={3}>
           <div className="mt-9 flex flex-wrap gap-4">
-            <MagneticButton href={waLink(`Hi YUGA, I'd like a DPR for a ${p.title} plant.`)} variant="glow">
-              Request a DPR <ArrowUpRight size={16} />
-            </MagneticButton>
-            <MagneticButton href={waLink(`Hi YUGA, please send me the brochure for ${p.title}.`)} variant="ghost">
-              <FileDown size={15} /> Get the brochure
-            </MagneticButton>
+            <LeadGate
+              label="Request a DPR"
+              interest={`DPR — ${p.title} Plant`}
+              source={`product:${slug}`}
+              variant="glow"
+              title="Get your DPR pack"
+              subtitle={`Tell us where to send the ${p.title} DPR + cost model. We reply within a business day.`}
+            />
+            <LeadGate
+              label="Get the brochure"
+              interest={`Brochure — ${p.title} Plant`}
+              source={`product:${slug}`}
+              variant="ghost"
+              icon={<FileDown size={15} />}
+              title="Get the brochure"
+              subtitle={`We'll send the ${p.title} brochure to your WhatsApp.`}
+            />
             <MagneticButton href="/contact" variant="ghost">
               Book a feasibility call
             </MagneticButton>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Leaf } from "lucide-react";
+import { Leaf, FileSearch, Check } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -7,11 +7,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { LineChart, Candlestick } from "@/components/visual/Charts";
 import { FAQ } from "@/components/page/FAQ";
 import { NewsletterSignup } from "@/components/page/NewsletterSignup";
+import { LeadGate } from "@/components/page/LeadGate";
 import { MarketTicker } from "@/components/visual/MarketTicker";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { market } from "@/lib/catalog";
-import { marketOpportunity, impact, statesCovered, faqs } from "@/lib/site";
+import { marketOpportunity, impact, statesCovered, faqs, reportLibrary } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Market Intelligence",
@@ -137,6 +138,46 @@ export default function MarketIntelligencePage() {
                 </span>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Research report — gated lead magnet (₹5 Lakh onwards, part of PMC) */}
+      <section className="relative isolate border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <SectionBackdrop name="pCap" />
+        <div className="maxw container-x">
+          <div className="glass grid gap-10 rounded-[2rem] p-8 ring-glow sm:p-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] px-3 py-1 text-xs uppercase tracking-[0.2em] text-[var(--color-amber)]">
+                <FileSearch size={14} /> Research & Feasibility Report
+              </div>
+              <h2 className="mt-5 font-display text-[length:var(--text-h2)] font-semibold leading-[1.05] tracking-tight">
+                Any product. PAN-India. Bankable.
+              </h2>
+              <p className="mt-4 max-w-xl leading-relaxed text-[var(--color-muted)]">
+                A deep research & feasibility report for any product, anywhere in India — the same
+                analysis we run before every PMC engagement. <span className="text-[var(--color-ink)]">₹5 Lakh onwards · part of PMC.</span>
+              </p>
+              <div className="mt-7">
+                <LeadGate
+                  label="Request the report"
+                  interest="Industry Research & Feasibility Report (₹5 Lakh onwards)"
+                  source="market-intelligence:research-report"
+                  variant="glow"
+                  icon={<FileSearch size={15} />}
+                  title="Request the research report"
+                  subtitle="Share your details and the product/region you're after — we'll scope the report and revert within a business day."
+                />
+              </div>
+            </div>
+            <ul className="grid gap-3 self-center">
+              {reportLibrary.map((r) => (
+                <li key={r} className="flex items-start gap-2.5 text-sm leading-relaxed text-[var(--color-muted)]">
+                  <Check size={16} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />
+                  {r}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
