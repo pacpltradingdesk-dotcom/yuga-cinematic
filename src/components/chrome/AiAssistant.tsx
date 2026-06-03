@@ -48,6 +48,13 @@ const ANSWER_INDEX: readonly Answer[] = [
 
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
 
+/** Greetings / small talk get a friendly reply instead of a "no match" in static mode. */
+const GREETINGS = new Set(["hi", "hii", "hiya", "hey", "helo", "hello", "yo", "namaste", "namaskar", "hola", "hlo", "salaam"]);
+function isSmallTalk(raw: string): boolean {
+  const w = raw.toLowerCase().replace(/[^a-z]/g, "");
+  return GREETINGS.has(w) || /^(hi|hello|hey|namaste)\b/.test(raw.toLowerCase().trim());
+}
+
 export function AiAssistant() {
   const chatMode = hasAiChat();
   const [open, setOpen] = useState(false);
@@ -188,15 +195,47 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {/* STATIC MODE — catalog search results */}
-              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && (
-                <p className="text-sm text-[var(--color-muted)]">
-                  No direct match. Try the{" "}
-                  <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
-                    contact page
-                  </Link>{" "}
-                  — our team replies on WhatsApp fast.
-                </p>
+              {/* STATIC MODE — greeting / small talk gets a warm reply + topics */}
+              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && isSmallTalk(query) && (
+                <div className="grid gap-2">
+                  <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
+                    Hi! 👋 I&apos;m the YUGA assistant. Ask me about <strong className="text-[var(--color-ink)]">plant costs,
+                    subsidy, carbon credits, licences, land or funding</strong> — or pick a topic:
+                  </div>
+                  {SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => onSuggestion(s)}
+                      data-cursor="hover"
+                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* STATIC MODE — genuine no-match: help, don't dead-end */}
+              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && !isSmallTalk(query) && (
+                <div className="grid gap-2">
+                  <p className="text-sm text-[var(--color-muted)]">
+                    I couldn&apos;t find that in the catalog yet. Try a topic below, or{" "}
+                    <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
+                      message us on WhatsApp
+                    </Link>{" "}
+                    — we reply fast.
+                  </p>
+                  {SUGGESTIONS.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => onSuggestion(s)}
+                      data-cursor="hover"
+                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               )}
 
               {!chatMode &&
