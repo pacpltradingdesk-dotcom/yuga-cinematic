@@ -67,6 +67,15 @@ endpoint — no key hardcoded (security rule), graceful fallback when unset.
 - [x] F4. README + env table document `NEXT_PUBLIC_AI_ENDPOINT` and the proxy contract
 - [ ] F5. CLIENT later: deploy a serverless proxy (holds the LLM key), set the env var
 
+## PHASE G — Lead generation (user picked "lead-gen / downloads")
+Capture the lead BEFORE redirecting to WhatsApp, so a partial enquiry isn't lost.
+- [x] G1. `src/lib/leads.ts` — submitLead (Web3Forms email) + leadWaLink fallback
+- [x] G2. `src/components/page/LeadGate.tsx` — reusable modal (name+phone+email, DPDP consent)
+- [x] G3. Product pages: DPR + brochure CTAs now capture-first via LeadGate
+- [x] G4. Market-intelligence: gated "Industry Research Report (₹5L onwards)" section
+- [ ] G5. CLIENT later: set `NEXT_PUBLIC_WEB3FORMS_KEY` so leads arrive by email
+        (until then LeadGate still works — it routes the lead through WhatsApp)
+
 ---
 
 ## Open data the CLIENT must finalise later (tracked, not blocking)
