@@ -48,11 +48,53 @@ const ANSWER_INDEX: readonly Answer[] = [
 
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
 
-/** Greetings / small talk get a friendly reply instead of a "no match" in static mode. */
-const GREETINGS = new Set(["hi", "hii", "hiya", "hey", "helo", "hello", "yo", "namaste", "namaskar", "hola", "hlo", "salaam"]);
-function isSmallTalk(raw: string): boolean {
-  const w = raw.toLowerCase().replace(/[^a-z]/g, "");
-  return GREETINGS.has(w) || /^(hi|hello|hey|namaste)\b/.test(raw.toLowerCase().trim());
+/**
+ * Conversational (non-catalog) intents in English + Hindi/Hinglish, matched in
+ * priority order. Each returns a friendly canned reply so the static assistant
+ * never dead-ends on small talk like "kaise ho" or "thanks".
+ */
+const SMALL_TALK: ReadonlyArray<{ re: RegExp; reply: string }> = [
+  { re: /\b(thanks|thank you|thankyou|thx|dhanyavad|dhanyawad|shukriya)\b/i, reply: "You're welcome! 😊 Anything else — plant costs, subsidy, land, licences or funding?" },
+  { re: /\b(bye|goodbye|alvida|tata)\b/i, reply: "Bye! 👋 Ping us anytime on WhatsApp for a quick reply." },
+  { re: /(who are you|aap kaun|tum kaun|kaun ho|your name|tumhara naam)/i, reply: "I'm the YUGA Assistant — I help you explore our bitumen / bio-bitumen plants, costs, subsidy, licences, land and funding. Ask away!" },
+  { re: /(kaise ho|kaisे|kaise hain|kese ho|kaisा|kya haal|kya hal|kaisa hai|how are you|how r u|sab badhiya|whats up|what's up|kya chal)/i, reply: "I'm doing great, thanks for asking! 😊 I can help with plant costs, subsidy, land, licences, funding or carbon credits — what would you like to know?" },
+  { re: /\b(help|madad|kya kar sakte|what can you do|kya bata sakte)\b/i, reply: "Sure! Ask me about any plant (bio-bitumen, plastic-to-fuel, PMB, CRMB…), its cost & ROI, subsidy, land needed, licences, or funding options. Pick a topic below 👇" },
+  { re: /^\s*(hi+|hey+|hello+|helo|yo|hola|hlo|namaste|namaskar|namaskaar|salaam|ram ram|jai)\b/i, reply: "Hi! 👋 I'm the YUGA assistant. Ask me about plant costs, subsidy, carbon credits, licences, land or funding — or pick a topic:" },
+];
+
+function smallTalkReply(raw: string): string | null {
+  const q = raw.trim();
+  if (!q) return null;
+  for (const { re, reply } of SMALL_TALK) if (re.test(q)) return reply;
+  return null;
+}
+
+/**
+ * Hindi/Hinglish → catalog-term expansion so keyword search hits even when the
+ * user types in Hindi (e.g. "kitna paisa" → cost, "zameen" → land).
+ */
+const SYNONYMS: Readonly<Record<string, string>> = {
+  kitna: "cost investment", kitne: "cost investment", lagat: "cost", kharch: "cost", kharcha: "cost",
+  paisa: "cost investment", paise: "cost investment", daam: "cost price", rupaye: "cost", rupees: "cost",
+  invest: "investment cost", lagana: "investment", lagao: "investment",
+  kamai: "profit income", munafa: "profit", profit: "profit return", return: "profit return",
+  karz: "loan", karza: "loan", loan: "loan finance", bank: "loan bank finance", finance: "loan finance",
+  fund: "funding finance", funding: "funding finance", paisa_kaha: "funding",
+  subsidy: "subsidy", sabsidi: "subsidy", sabsidy: "subsidy", anudaan: "subsidy", chhoot: "subsidy",
+  zameen: "land area", zameer: "land", jagah: "land area", land: "land area", plot: "land area plot",
+  licence: "licence permission", license: "licence permission", anumati: "licence permission",
+  permission: "licence permission", permit: "licence permission",
+  carbon: "carbon credit", credit: "carbon credit",
+  document: "documents dpr report", dastavej: "documents", drawing: "documents drawing", dpr: "dpr report documents",
+  plant: "plant", machine: "plant machinery", machinery: "plant machinery",
+  bio: "bio-bitumen", bitumen: "bitumen", plastic: "plastic-to-fuel", rubber: "rubber-to-fuel tyre", tyre: "rubber-to-fuel tyre",
+  emulsion: "emulsion", pmb: "pmb", crmb: "crmb",
+};
+
+function expandQuery(raw: string): string {
+  const words = raw.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/);
+  const extra = words.map((w) => SYNONYMS[w]).filter(Boolean);
+  return [raw, ...extra].join(" ");
 }
 
 export function AiAssistant() {
@@ -66,8 +108,10 @@ export function AiAssistant() {
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const talk = !chatMode ? smallTalkReply(query) : null;
+
   const { answers, productHits } = useMemo(() => {
-    const qt = tokens(query);
+    const qt = tokens(expandQuery(query));
     if (qt.length === 0) return { answers: [] as Answer[], productHits: [] as ProductHit[] };
 
     const score = (text: string): number => {
@@ -195,28 +239,28 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {/* STATIC MODE — greeting / small talk gets a warm reply + topics */}
-              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && isSmallTalk(query) && (
+              {/* STATIC MODE — conversational reply (greetings, "kaise ho", thanks…) */}
+              {!chatMode && hasQuery && talk && (
                 <div className="grid gap-2">
                   <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
-                    Hi! 👋 I&apos;m the YUGA assistant. Ask me about <strong className="text-[var(--color-ink)]">plant costs,
-                    subsidy, carbon credits, licences, land or funding</strong> — or pick a topic:
+                    {talk}
                   </div>
-                  {SUGGESTIONS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => onSuggestion(s)}
-                      data-cursor="hover"
-                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-                    >
-                      {s}
-                    </button>
-                  ))}
+                  {answers.length === 0 && productHits.length === 0 &&
+                    SUGGESTIONS.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => onSuggestion(s)}
+                        data-cursor="hover"
+                        className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                      >
+                        {s}
+                      </button>
+                    ))}
                 </div>
               )}
 
               {/* STATIC MODE — genuine no-match: help, don't dead-end */}
-              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && !isSmallTalk(query) && (
+              {!chatMode && hasQuery && !talk && answers.length === 0 && productHits.length === 0 && (
                 <div className="grid gap-2">
                   <p className="text-sm text-[var(--color-muted)]">
                     I couldn&apos;t find that in the catalog yet. Try a topic below, or{" "}
