@@ -1,17 +1,23 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sparkles, X, ArrowUpRight, Send } from "lucide-react";
+import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
 import { products } from "@/lib/catalog";
 import { faqs } from "@/lib/site";
+import { hasAiChat } from "@/lib/config";
+import { askAi, type ChatMessage } from "@/lib/ai";
 import { cn } from "@/lib/utils";
 
 /**
- * AI Assistance (client note) — a static, browser-side catalog search that
- * answers from the product Q&A + FAQs and links to the right page. No server,
- * so it ships on the static export today; a full LLM/RAG bot is Phase 5.
+ * AI Assistance (client note). Default mode is a static, browser-side catalog
+ * search that answers from the product Q&A + FAQs and links to the right page —
+ * so it ships on the static export with no server.
+ *
+ * When the client sets `NEXT_PUBLIC_AI_ENDPOINT` (their serverless proxy that
+ * holds the model key), the widget upgrades to a real chat that POSTs the query
+ * + grounded catalog context there. No key ever touches the browser.
  */
 interface Answer {
   readonly q: string;
@@ -43,8 +49,15 @@ const ANSWER_INDEX: readonly Answer[] = [
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
 
 export function AiAssistant() {
+  const chatMode = hasAiChat();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+
+  // Chat-mode state (only used when an AI endpoint is configured).
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const { answers, productHits } = useMemo(() => {
     const qt = tokens(query);
@@ -72,6 +85,36 @@ export function AiAssistant() {
   }, [query]);
 
   const hasQuery = tokens(query).length > 0;
+
+  async function sendToAi(text: string): Promise<void> {
+    const trimmed = text.trim();
+    if (!trimmed || busy) return;
+    const history = messages;
+    setMessages((m) => [...m, { role: "user", content: trimmed }]);
+    setQuery("");
+    setError(null);
+    setBusy(true);
+    try {
+      const answer = await askAi(trimmed, history);
+      setMessages((m) => [...m, { role: "assistant", content: answer }]);
+    } catch {
+      setError("Couldn't reach the assistant just now. Please try again, or message us on WhatsApp.");
+    } finally {
+      setBusy(false);
+      requestAnimationFrame(() => scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }));
+    }
+  }
+
+  function onSubmit(e: React.FormEvent): void {
+    e.preventDefault();
+    if (chatMode) void sendToAi(query);
+    // Static mode filters live via the memo — nothing to submit.
+  }
+
+  function onSuggestion(s: string): void {
+    if (chatMode) void sendToAi(s);
+    else setQuery(s);
+  }
 
   return (
     <>
@@ -102,14 +145,15 @@ export function AiAssistant() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-5 py-4">
-              {!hasQuery && (
+            <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4">
+              {/* Suggestions (both modes, shown until the user engages) */}
+              {((chatMode && messages.length === 0) || (!chatMode && !hasQuery)) && (
                 <div className="grid gap-2">
                   <p className="text-sm text-[var(--color-muted)]">Try asking:</p>
                   {SUGGESTIONS.map((s) => (
                     <button
                       key={s}
-                      onClick={() => setQuery(s)}
+                      onClick={() => onSuggestion(s)}
                       data-cursor="hover"
                       className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
                     >
@@ -119,7 +163,33 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {hasQuery && answers.length === 0 && productHits.length === 0 && (
+              {/* CHAT MODE — conversation transcript */}
+              {chatMode && (
+                <div className="grid gap-3">
+                  {messages.map((m, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "max-w-[88%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
+                        m.role === "user"
+                          ? "ml-auto bg-[var(--color-amber)] text-[var(--color-void)]"
+                          : "mr-auto border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
+                      )}
+                    >
+                      {m.content}
+                    </div>
+                  ))}
+                  {busy && (
+                    <div className="mr-auto flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-faint)]">
+                      <Loader2 size={14} className="animate-spin" /> Thinking…
+                    </div>
+                  )}
+                  {error && <p className="text-sm text-[var(--color-muted)]">{error}</p>}
+                </div>
+              )}
+
+              {/* STATIC MODE — catalog search results */}
+              {!chatMode && hasQuery && answers.length === 0 && productHits.length === 0 && (
                 <p className="text-sm text-[var(--color-muted)]">
                   No direct match. Try the{" "}
                   <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
@@ -129,24 +199,25 @@ export function AiAssistant() {
                 </p>
               )}
 
-              {answers.map((a) => (
-                <div key={a.q} className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
-                  <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
-                  <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
-                  {a.href && (
-                    <Link
-                      href={a.href}
-                      onClick={() => setOpen(false)}
-                      className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)]"
-                    >
-                      Open page <ArrowUpRight size={12} />
-                    </Link>
-                  )}
-                </div>
-              ))}
+              {!chatMode &&
+                answers.map((a) => (
+                  <div key={a.q} className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
+                    <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
+                    <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
+                    {a.href && (
+                      <Link
+                        href={a.href}
+                        onClick={() => setOpen(false)}
+                        className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)]"
+                      >
+                        Open page <ArrowUpRight size={12} />
+                      </Link>
+                    )}
+                  </div>
+                ))}
 
-              {productHits.length > 0 && (
+              {!chatMode && productHits.length > 0 && (
                 <div className="mt-1">
                   <div className="mb-2 text-[11px] uppercase tracking-wider text-[var(--color-faint)]">Related plants</div>
                   <div className="grid gap-2">
@@ -167,20 +238,27 @@ export function AiAssistant() {
               )}
             </div>
 
-            <div className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-3">
+            <form onSubmit={onSubmit} className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-3">
               <div className="flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2">
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Ask a question…"
-                  className="flex-1 bg-transparent text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
+                  placeholder={chatMode ? "Ask the assistant…" : "Ask a question…"}
+                  disabled={busy}
+                  className="flex-1 bg-transparent text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)] disabled:opacity-60"
                 />
-                <Send size={15} className={cn("shrink-0", hasQuery ? "text-[var(--color-amber)]" : "text-[var(--color-faint)]")} />
+                <button type="submit" aria-label="Send" disabled={busy || !hasQuery} data-cursor="hover">
+                  {busy ? (
+                    <Loader2 size={15} className="animate-spin text-[var(--color-amber)]" />
+                  ) : (
+                    <Send size={15} className={cn("shrink-0", hasQuery ? "text-[var(--color-amber)]" : "text-[var(--color-faint)]")} />
+                  )}
+                </button>
               </div>
               <p className="mt-2 text-center text-[10px] text-[var(--color-faint)]">
-                Catalog-powered search · full AI chat coming soon
+                {chatMode ? "AI assistant · grounded in the YUGA catalog" : "Catalog-powered search · full AI chat coming soon"}
               </p>
-            </div>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
