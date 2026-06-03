@@ -1,12 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { company, nav } from "@/lib/site";
+import { ArrowUpRight, Linkedin, Youtube, Instagram, Facebook, Twitter, MessageCircle, type LucideIcon } from "lucide-react";
+import { company, nav, socials } from "@/lib/site";
 import { Marquee } from "@/components/ui/Marquee";
 import { YugaMark } from "@/components/ui/YugaMark";
 import { legalDocs, GRIEVANCE_OFFICER } from "@/lib/legal";
 import { CookiePrefsButton } from "@/components/chrome/CookiePrefsButton";
+
+const SOCIAL_ICON: Record<string, LucideIcon> = {
+  whatsapp: MessageCircle,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  instagram: Instagram,
+  facebook: Facebook,
+  x: Twitter,
+};
 
 export function Footer() {
   return (
@@ -66,6 +75,30 @@ export function Footer() {
               </li>
             ))}
           </ul>
+
+          {/* Social / messaging */}
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {socials.map((s) => {
+              const Icon = SOCIAL_ICON[s.icon] ?? ArrowUpRight;
+              const disabled = s.href === "#";
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  data-cursor="hover"
+                  target={disabled ? undefined : "_blank"}
+                  rel={disabled ? undefined : "noopener noreferrer"}
+                  aria-disabled={disabled}
+                  className={`grid h-9 w-9 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] hover:text-[var(--color-amber)] ${
+                    disabled ? "pointer-events-none opacity-40" : ""
+                  }`}
+                >
+                  <Icon size={15} />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
 

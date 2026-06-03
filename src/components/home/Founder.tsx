@@ -23,9 +23,9 @@ export function Founder() {
           </Reveal>
           <Reveal index={2}>
             <p className="mt-6 max-w-xl leading-relaxed text-[var(--color-muted)]">
-              A 25-year bitumen-industry veteran and 17+ year company director. Founder of Omnipotent Industries
-              Limited - India&apos;s BSE-listed bitumen company (IPO 2020) - which operated 3 plants, 11 joint
-              ventures and reached 1.2 Lakh MT annual trading. Rare first-hand listing and fundraising experience.
+              A 25-year bitumen-industry veteran and company director. Founder of a BSE-listed bitumen company
+              (IPO 2020) which operated 3 plants, 11 joint ventures and reached 1.2 Lakh MT annual trading.
+              Rare first-hand listing and fundraising experience.
             </p>
           </Reveal>
           <Reveal index={3}>
