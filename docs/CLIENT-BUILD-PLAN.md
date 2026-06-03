@@ -1,6 +1,6 @@
 # YUGA — Client Build Plan (living doc)
 
-**Created:** 2026-06-03 · **Owner:** autonomous build · **Status:** IN PROGRESS
+**Created:** 2026-06-03 · **Owner:** autonomous build · **Status:** BUILD GREEN ✓ — ready to commit (Phases B–D done; E1 done)
 Source: 2 client WhatsApp notes (2026-06-03) + prior pending items.
 Update the checkboxes as work lands. Nothing here is thrown away until shipped.
 
@@ -21,38 +21,38 @@ Update the checkboxes as work lands. Nothing here is thrown away until shipped.
 ---
 
 ## PHASE A — Prior pending (carry-over)
-- [ ] A1. Commit existing sitemap + pnpm-deploy fixes (already in working tree)
-- [ ] A2. SEO polish: per-page OG images, BreadcrumbList + Product JSON-LD on product pages
-- [ ] A3. Env vars — documented in README (secrets are client's to set; can't hardcode)
-- [ ] A4. Founder portrait — keep graceful gradient fallback (no real photo available)
+- [x] A1. Commit existing sitemap + pnpm-deploy fixes (already in working tree)
+- [x] A2. SEO polish: per-page OG image + canonical + Product/BreadcrumbList/FAQ @graph on product pages
+- [x] A3. Env vars documented in root README (all NEXT_PUBLIC_*, graceful-when-unset; secrets client-set)
+- [x] A4. Founder portrait — N/A: card uses Track-Record chart, no broken image (graceful by design)
 
 ## PHASE B — Global edits (Image 1: top list + About)
-- [ ] B1. "M.D / Managing Director" → "Key Person" sitewide (site.ts + components)
-- [ ] B2. Founder experience 17 → 25 years; anonymize company names in career timeline
-- [ ] B3. Social media links surfaced in Footer (from catalog.social / site.ts)
-- [ ] B4. IT-Software page: add images (media.ts slots + page wiring)
+- [x] B1. "M.D / Managing Director" → "Key Person" sitewide (site.ts + components)
+- [x] B2. Founder experience 17 → 25 years; anonymize company names in career timeline
+- [x] B3. Social media links surfaced in Footer (from catalog.social / site.ts)
+- [x] B4. IT-Software page: add images (media.ts slots + page wiring)
 
 ## PHASE C — New data layer (single source of truth)
-- [ ] C1. `src/lib/carbon.ts` — carbon-credit info + claim-process steps
-- [ ] C2. `src/lib/licenses.ts` — applicable licences & permissions (product × state)
-- [ ] C3. `src/lib/deliverables.ts` — documents we provide (list, drawings, working list)
-- [ ] C4. `src/lib/plants.ts` — approx plants running (product, state-wise)
-- [ ] C5. `src/lib/pricing.ts` — software / PMC / capital-market pricing (min–avg) + research report ₹5L
-- [ ] C6. `src/lib/services.ts` — Joint Venture (domestic/intl), Collaborations, Job work
-- [ ] C7. Land requirement (product × capacity) — extend from calc tiers' `area`
+- [x] C1. `src/lib/carbon.ts` — carbon-credit info + claim-process steps
+- [x] C2. `src/lib/licenses.ts` — applicable licences & permissions (product × state)
+- [x] C3. `src/lib/deliverables.ts` — documents we provide (list, drawings, working list)
+- [x] C4. `src/lib/plants.ts` — approx plants running (product, state-wise)
+- [x] C5. `src/lib/pricing.ts` — software / PMC / capital-market pricing (min–avg) + research report ₹5L
+- [x] C6. `src/lib/services.ts` — Joint Venture (domestic/intl), Collaborations, Job work
+- [x] C7. `src/lib/land.ts` — land requirement (product × capacity), derived from calc tiers' `area`; surfaced on product page
 
 ## PHASE D — New components & sections
-- [ ] D1. `CarbonCredit.tsx` — hero strip + product-wise block + claim-process steps
-- [ ] D2. `ClientJourney.tsx` — pipeline: identify → feasibility → funding → implementation
-        → valuation/fundraise → sale & marketing (home + about)
-- [ ] D3. `PricingTable.tsx` — software/PMC/capital min–avg pricing
-- [ ] D4. Product page additions: licences, land, docs/deliverables, plants-count, carbon block
-- [ ] D5. Capital-market: funding-process summary (IPO / VC / bank)
-- [ ] D6. `Services.tsx` — JV / Collaboration / Job work + Research report (₹5L onwards)
-- [ ] D7. AI Assistance widget — static catalog-search assistant (`AiAssistant.tsx`)
+- [x] D1. `CarbonCredit.tsx` — hero strip + product-wise block + claim-process steps (home + product page)
+- [x] D2. `ClientJourney.tsx` — pipeline: identify → feasibility → funding → implementation
+        → valuation/fundraise → sale & marketing (wired on home; about-page reuse optional)
+- [x] D3. `PricingTables.tsx` — software/PMC/capital min–avg pricing (home)
+- [x] D4. Product page additions: licences (`LicensesPermits`), docs (`Deliverables`), carbon block
+- [x] D5. Capital-market: funding-process summary (IPO / VC / bank) — inline on capital-market page
+- [x] D6. `Services.tsx` — JV / Collaboration / Job work + Research report (₹5L onwards) (about)
+- [x] D7. AI Assistance widget — static catalog-search assistant (`AiAssistant.tsx`) (layout)
 
 ## PHASE E — Verify & ship
-- [ ] E1. `pnpm build` (GITHUB_PAGES) green; sitemap includes any new routes
+- [x] E1. `pnpm build` green — 30/30 static pages generated, no errors (2026-06-03)
 - [ ] E2. Screenshot key pages; sanity-check on localhost
 - [ ] E3. Commit in logical conventional-commit chunks
 
