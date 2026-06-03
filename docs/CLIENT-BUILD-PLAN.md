@@ -1,6 +1,6 @@
 # YUGA — Client Build Plan (living doc)
 
-**Created:** 2026-06-03 · **Owner:** autonomous build · **Status:** BUILD GREEN ✓ — ready to commit (Phases B–D done; E1 done)
+**Created:** 2026-06-03 · **Owner:** autonomous build · **Status:** BUILD GREEN ✓ · ALL note-page items shipped & committed (Phases A2–A4, B, C, D, E1, E3, F1–F4). Pending: E2 localhost screenshots, push, and client's real data (incl. AI proxy URL).
 Source: 2 client WhatsApp notes (2026-06-03) + prior pending items.
 Update the checkboxes as work lands. Nothing here is thrown away until shipped.
 
