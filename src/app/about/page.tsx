@@ -9,6 +9,7 @@ import { GlowCard } from "@/components/ui/GlowCard";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
+import { Services } from "@/components/page/Services";
 import { trust } from "@/lib/catalog";
 import { company, career, partnerships, keyFacts } from "@/lib/site";
 
@@ -76,9 +77,8 @@ export default function AboutPage() {
                 {company.founderTitle}
               </p>
               <p className="mt-6 leading-relaxed text-[var(--color-muted)]">
-                Founder of Omnipotent Industries Limited - India&apos;s BSE-listed bitumen company (IPO 2020) - which
-                operated 3 plants, 11 joint ventures and reached 1.2 Lakh MT annual trading. MBA (Marketing &amp;
-                Finance); Pride of India Icon 2021.
+                Founder of a BSE-listed bitumen company (IPO 2020) which operated 3 plants, 11 joint ventures and
+                reached 1.2 Lakh MT annual trading. MBA (Marketing &amp; Finance); Pride of India Icon 2021.
               </p>
             </div>
             <div className="lg:pt-10">
@@ -133,6 +133,20 @@ export default function AboutPage() {
           <p className="mt-6 text-xs text-[var(--color-faint)]">
             Track-record figures and the founder/IPO line are client claims, shown pending documentary verification.
           </p>
+        </div>
+      </section>
+
+      {/* Ways to work with us */}
+      <section className="py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Ways to Work With Us"
+            title="Joint venture, collaboration or job work."
+            intro="Beyond consulting — co-invest, partner across the value chain, use our network for contract production, or start with a research & feasibility report."
+          />
+          <div className="mt-12">
+            <Services />
+          </div>
         </div>
       </section>
 

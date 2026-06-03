@@ -8,6 +8,7 @@ import { ScrollProgress } from "@/components/chrome/ScrollProgress";
 import { Navbar } from "@/components/chrome/Navbar";
 import { Footer } from "@/components/chrome/Footer";
 import { ConsentBanner } from "@/components/chrome/ConsentBanner";
+import { AiAssistant } from "@/components/chrome/AiAssistant";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -101,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </SmoothScroll>
         <ConsentBanner />
+        <AiAssistant />
       </body>
     </html>
   );

@@ -9,8 +9,10 @@ import { Badge } from "@/components/ui/Badge";
 import { LineChart } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
+import { Media } from "@/components/visual/Media";
 import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { softwareProducts } from "@/lib/software";
+import { softwareImg } from "@/lib/media";
 import { softwareMeta } from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -94,6 +96,12 @@ export default function ITSoftwarePage() {
             {softwareProducts.map((s, i) => (
               <Reveal key={s.slug} index={i % 2}>
                 <GlowCard accent={s.accent} className="h-full">
+                  <Media
+                    name={softwareImg[s.slug]}
+                    overlay="bottom"
+                    sizes="(max-width:1024px) 100vw, 50vw"
+                    className="h-36 w-full rounded-t-[calc(1.5rem-1px)]"
+                  />
                   <div className="flex h-full flex-col p-8">
                     <div className="flex items-start justify-between gap-4">
                       <div>

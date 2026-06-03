@@ -8,6 +8,9 @@ import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InstantTools } from "@/components/tools/InstantTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
+import { ClientJourney } from "@/components/page/ClientJourney";
+import { CarbonStats, CarbonClaim } from "@/components/page/CarbonCredit";
+import { PricingTables } from "@/components/page/PricingTables";
 
 export default function HomePage() {
   return (
@@ -30,6 +33,53 @@ export default function HomePage() {
       </section>
       <HorizontalStory />
       <Verticals />
+
+      {/* Journey with clients */}
+      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Journey with Clients"
+            title="One pipeline, from idea to income."
+            intro="Every engagement runs the same disciplined path — we de-risk each stage before the next."
+          />
+          <div className="mt-12">
+            <ClientJourney />
+          </div>
+        </div>
+      </section>
+
+      {/* Carbon credits */}
+      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <SectionBackdrop name="pImpact" />
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Carbon Credits"
+            title="An extra revenue stream, certified."
+          />
+          <div className="mt-10">
+            <CarbonStats showIntro />
+          </div>
+          <div className="mt-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <SectionHeading eyebrow="Claim Process" title="How carbon credits are earned." />
+            <CarbonClaim />
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Transparent Pricing"
+            title="Indicative pricing, up front."
+            intro="PMC, AI software and capital-markets — minimum to typical. Real numbers depend on scope; here's the range to plan with."
+          />
+          <div className="mt-12">
+            <PricingTables />
+          </div>
+        </div>
+      </section>
+
       <Founder />
       <CTASection
         title="Industrial intelligence, end to end."

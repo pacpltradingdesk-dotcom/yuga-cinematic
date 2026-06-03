@@ -28,7 +28,7 @@ export default function CapitalMarketPage() {
       <PageHero
         eyebrow="Vertical C · Capital Markets"
         title="From First Seed Cheque to Public Listing"
-        intro="Full-spectrum fundraising and finance advisory - backed by a real, first-hand BSE IPO (Omnipotent Industries, 2020, fully subscribed)."
+        intro="Full-spectrum fundraising and finance advisory - backed by a real, first-hand BSE IPO (bitumen company, 2020, fully subscribed)."
         accent="amber"
         image="capHero"
       />
@@ -166,6 +166,60 @@ export default function CapitalMarketPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Funding routes at a glance (IPO / VC / Bank) */}
+      <section className="py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Funding Routes"
+            title="Every route, summarised."
+            intro="Three broad paths to capital — here's the approximate process for each, so you know what the journey looks like before you start."
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {[
+              {
+                t: "IPO / Listing",
+                best: "Scale-ups with ₹25 Cr+ revenue",
+                steps: ["Eligibility & SME vs main-board", "Restructuring + audited financials", "Merchant banker & DRHP", "Marketing, subscription & listing"],
+                accent: "amber" as const,
+              },
+              {
+                t: "VC / Private equity",
+                best: "High-growth, fundable story",
+                steps: ["Valuation + pitch deck & PIM", "Investor outreach & data room", "Term sheet & due diligence", "SHA, closing & cap-table"],
+                accent: "cyan" as const,
+              },
+              {
+                t: "Bank / Institutional debt",
+                best: "Asset-backed plant projects",
+                steps: ["Bankable DPR + CMA data", "Scheme match (CGTMSE/MSME/SIDBI)", "Appraisal & sanction", "Disbursement & compliance"],
+                accent: "amber" as const,
+              },
+            ].map((r, i) => (
+              <Reveal key={r.t} index={i}>
+                <GlowCard accent={r.accent} className="h-full">
+                  <div className="flex h-full flex-col p-7">
+                    <Badge accent={r.accent}>{r.t}</Badge>
+                    <p className="mt-4 text-xs uppercase tracking-wider text-[var(--color-faint)]">Best for</p>
+                    <p className="text-sm text-[var(--color-muted)]">{r.best}</p>
+                    <ol className="mt-5 grid gap-2.5 border-t border-[var(--color-line)] pt-5">
+                      {r.steps.map((s, j) => (
+                        <li key={s} className="flex items-start gap-2.5 text-sm text-[var(--color-muted)]">
+                          <span className="font-display text-xs font-bold text-[var(--color-amber)]">{String(j + 1).padStart(2, "0")}</span>
+                          {s}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </GlowCard>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-[var(--color-faint)]">
+            Indicative process summaries — actual steps, timelines and eligibility depend on the company and the funder.
+          </p>
         </div>
       </section>
 

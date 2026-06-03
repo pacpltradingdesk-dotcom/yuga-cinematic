@@ -10,12 +10,18 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { FAQ } from "@/components/page/FAQ";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
+import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { Media } from "@/components/visual/Media";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
+import { LicensesPermits } from "@/components/page/LicensesPermits";
+import { Deliverables } from "@/components/page/Deliverables";
+import { CarbonStats } from "@/components/page/CarbonCredit";
 import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
-import { productImg } from "@/lib/media";
-import { waLink } from "@/lib/site";
+import { productPlantCounts } from "@/lib/plants";
+import { getLandRequirement, landNote } from "@/lib/land";
+import { productImg, img } from "@/lib/media";
+import { waLink, siteUrl, company } from "@/lib/site";
 
 type Params = { slug: string };
 
@@ -28,9 +34,20 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const p = getProduct(slug);
   if (!p) return { title: "Product" };
+  const ogImage = `${siteUrl}${img[productImg[slug]].src}`;
+  const canonical = `${siteUrl}/products/${slug}`;
   return {
     title: `${p.title} Plant — PMC India`,
     description: p.subtitle,
+    alternates: { canonical },
+    openGraph: {
+      title: `${p.title} Plant — PMC India`,
+      description: p.subtitle,
+      url: canonical,
+      type: "article",
+      siteName: company.brand,
+      images: [{ url: ogImage, alt: img[productImg[slug]].alt }],
+    },
   };
 }
 
@@ -61,17 +78,43 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
   const feas = getFeasibility(slug);
   const io = getIo(slug);
   const standards = getStandards(slug);
+  const plantCount = productPlantCounts.find((x) => x.slug === slug);
+  const land = getLandRequirement(slug);
   const related = products.filter((x) => x.slug !== slug).slice(0, 3);
 
-  // FAQ rich-result schema (SEO) built from the product Q&A.
-  const faqSchema = {
+  // Rich-result schemas (SEO). One @graph keeps FAQ + Product + Breadcrumb
+  // in a single JSON-LD block so crawlers parse them together.
+  const canonical = `${siteUrl}/products/${slug}`;
+  const ldGraph = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: p.qa.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: { "@type": "Answer", text: item.a },
-    })),
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${canonical}#product`,
+        name: p.title,
+        description: p.subtitle,
+        image: `${siteUrl}${img[productImg[slug]].src}`,
+        category: "Industrial plant / equipment",
+        brand: { "@type": "Brand", name: company.brand },
+        manufacturer: { "@id": `${siteUrl}/#org` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "Products", item: `${siteUrl}/products` },
+          { "@type": "ListItem", position: 3, name: p.title, item: canonical },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: p.qa.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      },
+    ],
   };
 
   return (
@@ -80,7 +123,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       {/* JSON-LD from our own static catalog; escape `<` so a stray `</script>` in data can't break out. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldGraph).replace(/</g, "\\u003c") }}
       />
 
       <PageHero eyebrow="Product · YUGA PMC" title={p.title} intro={p.subtitle} accent="amber" image={productImg[slug]}>
@@ -255,6 +298,94 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           </div>
         </section>
       )}
+
+      {/* Land requirement (product × capacity) — derived from calc tiers */}
+      {land.length > 0 && (
+        <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+          <div className="maxw container-x">
+            <SectionHeading
+              eyebrow="Site & Footprint"
+              title="How much land you'll need."
+              intro="Indicative plot size by capacity — we lock the exact figure to your layout and feedstock plan during feasibility."
+            />
+            <Reveal className="mt-10">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {land.map((t) => (
+                  <div key={t.cap} className="glass rounded-3xl p-7">
+                    <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Capacity</div>
+                    <div className="mt-1 font-display text-xl font-semibold tracking-tight">{t.cap}</div>
+                    <div className="mt-5 flex items-center gap-2 text-[var(--color-muted)]">
+                      <MapPin size={16} className="shrink-0 text-[var(--color-amber)]" />
+                      <span className="font-display text-lg font-semibold text-gradient-warm">{t.area}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            <p className="mt-6 max-w-3xl text-sm text-[var(--color-faint)]">{landNote}</p>
+          </div>
+        </section>
+      )}
+
+      {/* Licences & permissions (product × state) */}
+      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Regulatory"
+            title="Licences & permissions you'll need."
+            intro="Core approvals plus the extras specific to this plant — pick your state to see the nodal authority. We handle the full filing as part of PMC."
+          />
+          <Reveal className="mt-10">
+            <LicensesPermits slug={slug} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Carbon credits + plants running */}
+      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <SectionBackdrop name="pImpact" />
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="Carbon & Market" title="Extra revenue, and where it's running." />
+          <div className="mt-10">
+            <CarbonStats />
+          </div>
+          {plantCount && (
+            <Reveal className="mt-8">
+              <div className="glass flex flex-col gap-4 rounded-3xl p-7 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Approx plants running (India)</div>
+                  <div className="mt-1 font-display text-3xl font-bold tracking-tight text-gradient-warm">
+                    ~{plantCount.running}
+                    {plantCount.potential && (
+                      <span className="ml-3 text-base font-medium text-[var(--color-cyan)]">
+                        · ~{plantCount.potential} needed in 5–7 yr
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="text-sm text-[var(--color-muted)] sm:text-right">
+                  <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Top states</div>
+                  <div className="mt-1">{plantCount.topStates}</div>
+                </div>
+              </div>
+            </Reveal>
+          )}
+        </div>
+      </section>
+
+      {/* Documents & deliverables */}
+      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="What You Get"
+            title="Documents & deliverables we provide."
+            intro="Reports, drawings, working procedures and compliance docs — the full pack that takes the plant from paper to production."
+          />
+          <div className="mt-10">
+            <Deliverables />
+          </div>
+        </div>
+      </section>
 
       {/* FAQ */}
       <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
