@@ -47,7 +47,7 @@ export const img = {
   cs3: { src: "/assets/img/cs-3.jpg", alt: "Forest / green - carbon-credit structuring" },
 
   // Founder portrait slot (no file yet → graceful gradient fallback)
-  founder: { src: "/assets/img/founder.jpg", alt: "Prince Pratap Shah - Founder & Managing Director" },
+  founder: { src: "/assets/img/founder.jpg", alt: "Prince Pratap Shah - Founder & Key Person" },
 } as const;
 
 export type ImgKey = keyof typeof img;
@@ -57,6 +57,21 @@ export type ImgKey = keyof typeof img;
  * of the 9 catalog products gets a fitting visual (swap the underlying file in
  * /public/assets/img to upgrade any of them — see lib/media notes above).
  */
+/**
+ * Software product slug → image slot. Reuses the existing tech/infra stock so
+ * each of the 7 software products gets a fitting visual (client note: "Software
+ * — all images"). Swap the underlying file in /public/assets/img to upgrade.
+ */
+export const softwareImg: Record<string, ImgKey> = {
+  "ai-sales-dashboard": "pIntel",
+  "bitumen-crm": "vSoft",
+  "whatsapp-campaign": "softHero",
+  "excel-lead-cleaner": "pIntel",
+  "dialsync": "vSoft",
+  "market-report": "pCap",
+  "voice-agent": "softHero",
+};
+
 export const productImg: Record<string, ImgKey> = {
   "bio-bitumen": "bio1",
   "plastic-to-fuel": "bio2",

@@ -10,7 +10,7 @@ export const company = {
   short: "PACPL",
   promise: "Vision · Strategy · Execution",
   founder: "Prince Pratap Shah",
-  founderTitle: "Founder & Managing Director",
+  founderTitle: "Founder & Key Person",
   tagline: "Industrial Intelligence for the Future",
   oneLiner:
     "India's full-service Project Management Consultancy for Bio-Modified Bitumen - engineered with AI software and funded by real capital-markets expertise.",
@@ -54,6 +54,21 @@ export function waLink(text: string): string {
   return `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(text)}`;
 }
 
+/**
+ * Social / messaging links. `icon` keys map to lucide icons in the Footer.
+ * Replace "#" placeholders with real account URLs once they exist (one edit here).
+ */
+export const socials = [
+  { label: "WhatsApp", href: waLink("Hi YUGA, I have an enquiry."), icon: "whatsapp" },
+  { label: "LinkedIn", href: `https://${company.linkedin}`, icon: "linkedin" },
+  { label: "YouTube", href: "#", icon: "youtube" },
+  { label: "Instagram", href: "#", icon: "instagram" },
+  { label: "Facebook", href: "#", icon: "facebook" },
+  { label: "X", href: "#", icon: "x" },
+] as const;
+
+export type Social = (typeof socials)[number];
+
 export const nav = [
   { label: "Products", href: "/products" },
   { label: "Bio-Bitumen", href: "/bio-bitumen" },
@@ -77,8 +92,8 @@ export const stats = [
 export const keyFacts = [
   "25+ years in the bitumen industry (since 2001)",
   "9 bitumen plants commissioned across India",
-  "17 years as MCA-registered Company Director",
-  "Founder - Omnipotent Industries Ltd (BSE-Listed, IPO 2020)",
+  "25 years as MCA-registered Company Director",
+  "Founder of a BSE-listed bitumen company (IPO 2020)",
   "150,000-contact pan-India industry database, 18 states",
   "Pride of India Icon 2021 - Best Fast-Growing Business",
 ] as const;
@@ -222,7 +237,7 @@ export const fundStages = [
   { t: "Seed Funding", d: "Early capital to start and prove the venture; founder/angel structuring." },
   { t: "Series A / B / C", d: "Scaling capital from angels, VCs and PE; cap-table design and dilution planning." },
   { t: "Strategic / JV", d: "Corporate and joint-venture funding structures." },
-  { t: "IPO & Listing", d: "SME & Main-Board readiness - done before (Omnipotent, BSE 2020, fully subscribed)." },
+  { t: "IPO & Listing", d: "SME & Main-Board readiness - done before (BSE-listed bitumen company, 2020, fully subscribed)." },
 ] as const;
 
 export const loans = [
@@ -244,20 +259,20 @@ export const finPrep = [
 
 /* ----------------------------- About / Founder ----------------------------- */
 export const career = [
-  { yr: "2001-06", t: "Southern Asphalt, Mangalore", d: "Production Manager → General Manager" },
-  { yr: "2006-12", t: "Tiki Tar Industries, Baroda", d: "GM, South India Regional Head" },
-  { yr: "2013-14", t: "Krush Tar Industries", d: "CEO; 1st fully-automatic Emulsion plant in Karnataka" },
-  { yr: "2016", t: "Omnipotent - Panvel", d: "1st Decanter plant in Panvel, Maharashtra" },
-  { yr: "2018-19", t: "Omnipotent - Kandla & Karjan", d: "Gujarat & Vadodara plants" },
-  { yr: "2020", t: "Omnipotent Industries - BSE IPO", d: "Fully subscribed; 11 JVs; 1.2 Lakh MT/yr" },
-  { yr: "2024", t: "PPS Anantams operational", d: "CSIR-CRRI bio-bitumen consulting launched" },
-  { yr: "2025-26", t: "Teknobit - Mathura & Hubli", d: "Decanter + Emulsion · PMB plant (ongoing)" },
+  { yr: "2001-06", t: "Bitumen producer · Mangalore", d: "Production Manager → General Manager" },
+  { yr: "2006-12", t: "Bitumen manufacturer · Baroda", d: "GM, South India Regional Head" },
+  { yr: "2013-14", t: "Emulsion plant · Karnataka", d: "CEO; 1st fully-automatic Emulsion plant in the state" },
+  { yr: "2016", t: "Decanter plant · Panvel", d: "1st Decanter plant in Panvel, Maharashtra" },
+  { yr: "2018-19", t: "Plants · Kandla & Karjan", d: "Gujarat & Vadodara plant builds" },
+  { yr: "2020", t: "BSE IPO · bitumen company", d: "Fully subscribed; 11 JVs; 1.2 Lakh MT/yr" },
+  { yr: "2024", t: "PACPL / YUGA operational", d: "CSIR-CRRI bio-bitumen consulting launched" },
+  { yr: "2025-26", t: "Decanter + Emulsion plant · Mathura & Hubli", d: "Decanter + Emulsion · PMB plant (ongoing)" },
 ] as const;
 
 export const partnerships = [
-  { p: "Getka Energy Trading LLC (USA)", d: "VG-30 supply up to 2.4 Lakh MT/year (2024)" },
-  { p: "UK Bitumen Supply Contract", d: "1.2 Lakh MT (2023, via PS Enterprises)" },
-  { p: "Petromina / Bepco / Hyundai Korea", d: "20,000 MT bulk purchase (2020)" },
+  { p: "US energy-trading partner", d: "VG-30 supply up to 2.4 Lakh MT/year (2024)" },
+  { p: "UK bitumen supply contract", d: "1.2 Lakh MT (2023)" },
+  { p: "Korea / SE-Asia bulk buyers", d: "20,000 MT bulk purchase (2020)" },
 ] as const;
 
 /* ----------------------------- Case Studies ----------------------------- */
