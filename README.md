@@ -69,9 +69,29 @@ Everything is optional — the site degrades gracefully when a var is unset.
 | `NEXT_PUBLIC_GA4_ID` | Google Analytics 4 measurement ID | Analytics never loads |
 | `NEXT_PUBLIC_CLARITY_ID` | Microsoft Clarity project ID | Clarity never loads |
 | `NEXT_PUBLIC_TURNSTILE_KEY` | Cloudflare Turnstile site key (spam protection) | Turnstile widget skipped |
+| `NEXT_PUBLIC_AI_ENDPOINT` | AI chat proxy URL (see below) | AI assistant stays in static catalog-search mode |
 
 Analytics (GA4 / Clarity) load **only after the user grants consent** via the
 consent banner — see `src/components/chrome/ConsentBanner.tsx`.
+
+### AI assistant (optional upgrade)
+
+The floating assistant ships as a **static catalog search** (works on the static
+export, no server). To upgrade it to a real LLM chat, deploy a small **serverless
+proxy** that holds the model API key server-side and set `NEXT_PUBLIC_AI_ENDPOINT`
+to its URL. The browser never sees the key.
+
+Proxy contract (implement on Vercel / Cloudflare Workers / Lambda):
+
+```
+POST <NEXT_PUBLIC_AI_ENDPOINT>
+  body: { query: string, context: string, history: {role,content}[] }
+  200 : { answer: string }
+```
+
+`context` is YUGA's catalog grounding, built client-side in `src/lib/ai.ts`. The
+proxy should pass it to the model as system/context so answers stay factual. Any
+non-200 or unexpected shape makes the widget fall back gracefully.
 
 Create a `.env.local` (git-ignored) for local overrides:
 
@@ -81,6 +101,7 @@ NEXT_PUBLIC_WEB3FORMS_KEY=
 NEXT_PUBLIC_GA4_ID=
 NEXT_PUBLIC_CLARITY_ID=
 NEXT_PUBLIC_TURNSTILE_KEY=
+NEXT_PUBLIC_AI_ENDPOINT=
 ```
 
 > Secrets are the client's to set — none are hardcoded. For production, set these

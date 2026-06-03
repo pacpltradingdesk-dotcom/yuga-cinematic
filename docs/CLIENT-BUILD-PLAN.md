@@ -54,7 +54,18 @@ Update the checkboxes as work lands. Nothing here is thrown away until shipped.
 ## PHASE E — Verify & ship
 - [x] E1. `pnpm build` green — 30/30 static pages generated, no errors (2026-06-03)
 - [ ] E2. Screenshot key pages; sanity-check on localhost
-- [ ] E3. Commit in logical conventional-commit chunks
+- [x] E3. Commit in logical conventional-commit chunks (4 commits on feature branch; not pushed)
+
+## PHASE F — AI Assistance full build (user: "sab banado, baad me update")
+Static export can't host a server LLM, so we keep the static catalog-search as the
+default and add an OPTIONAL LLM upgrade that activates when the client provides an
+endpoint — no key hardcoded (security rule), graceful fallback when unset.
+- [x] F1. `config.ts` — add `aiEndpoint` (`NEXT_PUBLIC_AI_ENDPOINT`) + `hasAiChat()`
+- [x] F2. `AiAssistant.tsx` — conversation UI; when endpoint set, POST {query, context}
+        to the client's serverless proxy and render the AI reply; else static search
+- [x] F3. Build catalog context (products + FAQs) sent to the endpoint as grounding
+- [x] F4. README + env table document `NEXT_PUBLIC_AI_ENDPOINT` and the proxy contract
+- [ ] F5. CLIENT later: deploy a serverless proxy (holds the LLM key), set the env var
 
 ---
 
