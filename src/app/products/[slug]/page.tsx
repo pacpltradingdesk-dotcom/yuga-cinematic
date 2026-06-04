@@ -16,6 +16,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
 import { LicensesPermits } from "@/components/page/LicensesPermits";
 import { Deliverables } from "@/components/page/Deliverables";
+import { OnThisPage } from "@/components/page/OnThisPage";
 import { CarbonStats } from "@/components/page/CarbonCredit";
 import { LeadGate } from "@/components/page/LeadGate";
 import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
@@ -161,8 +162,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
         </Reveal>
       </PageHero>
 
+      <OnThisPage
+        items={[
+          { id: "overview", label: "Overview" },
+          { id: "cost", label: "Cost & ROI" },
+          { id: "licences", label: "Licences" },
+          { id: "docs", label: "Documents" },
+          { id: "faq", label: "FAQ" },
+        ]}
+      />
+
       {/* Overview */}
-      <section className="py-[var(--space-section)]">
+      <section id="overview" className="scroll-mt-28 py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading eyebrow="Overview" title={`What is ${p.title}?`} />
           <div className="mt-8 grid max-w-3xl gap-5">
@@ -284,7 +295,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       )}
 
       {/* Cost & ROI */}
-      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section id="cost" className="scroll-mt-28 border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Investment & Returns"
@@ -347,7 +358,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       )}
 
       {/* Licences & permissions (product × state) */}
-      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+      <section id="licences" className="scroll-mt-28 border-t border-[var(--color-line)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Regulatory"
@@ -393,7 +404,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       </section>
 
       {/* Documents & deliverables */}
-      <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+      <section id="docs" className="scroll-mt-28 border-t border-[var(--color-line)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="What You Get"
@@ -407,7 +418,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       </section>
 
       {/* FAQ */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section id="faq" className="scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading eyebrow="Questions" title="Top questions, answered." />
           <div className="mt-10">

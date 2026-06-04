@@ -49,13 +49,15 @@ same business, "Bio-Bitumen" living in 3 places, label mismatch vs the homepage,
 - [x] 3.2 `/explore` "Start Here" page — "by goal" router (plant / fund / software) + a
       full grouped site-map (reuses `navGroups`) + glossary teaser. Linked from nav (Company)
       + footer. Live-tested; "Company" nav highlights as active on it.
-- [ ] 3.3 "On this page" jump-nav (anchor chips) on long product pages — STILL TO DO (polish).
+- [x] 3.3 "On this page" jump-nav (`OnThisPage.tsx`) on product pages — sticky chip bar
+      (Overview · Cost & ROI · Licences · Documents · FAQ), targets `scroll-mt-28`. Live-tested.
 - [x] 3.4 `/explore` + `/glossary` enter `sitemap.ts` automatically (added to site.ts `nav`).
 
-## PHASE 4 — Plain-language orientation
-- [ ] 4.1 Audit every `PageHero` intro: rewrite to plainly say *what's on this page and who
-      it's for* (most exist; tighten + de-jargon). Data already lives in the page files.
-- [ ] 4.2 Short "what you'll find here" line at the top of each vertical landing.
+## PHASE 4 — Plain-language orientation  *(largely covered; optional polish remaining)*
+- [~] 4.1 Most `PageHero` intros already state what's on the page; the new `/explore` page +
+      breadcrumbs + jump-nav now carry the orientation load. A dedicated de-jargon rewrite
+      pass per page is still available if wanted (low risk, subjective).
+- [~] 4.2 Covered by `/explore` "by goal" router; per-vertical intro lines optional.
 
 ## PHASE 5 — Jargon glossary ✅ DONE
 - [x] 5.1 `src/lib/glossary.ts` — 21 typed terms + plain definitions.
