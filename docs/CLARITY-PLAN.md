@@ -53,11 +53,12 @@ same business, "Bio-Bitumen" living in 3 places, label mismatch vs the homepage,
       (Overview · Cost & ROI · Licences · Documents · FAQ), targets `scroll-mt-28`. Live-tested.
 - [x] 3.4 `/explore` + `/glossary` enter `sitemap.ts` automatically (added to site.ts `nav`).
 
-## PHASE 4 — Plain-language orientation  *(largely covered; optional polish remaining)*
-- [~] 4.1 Most `PageHero` intros already state what's on the page; the new `/explore` page +
-      breadcrumbs + jump-nav now carry the orientation load. A dedicated de-jargon rewrite
-      pass per page is still available if wanted (low risk, subjective).
-- [~] 4.2 Covered by `/explore` "by goal" router; per-vertical intro lines optional.
+## PHASE 4 — Plain-language orientation ✅ DONE (inline-explainer approach)
+- [x] 4.1 Widened `SectionHeading` + `PageHero` `intro` to `ReactNode` so jargon can be wrapped
+      in `<Term>` without rewriting copy. Wired the densest spots: NHAI/MoRTH (bio-bitumen hero),
+      DPR + CMA (capital-market loans). Copy unchanged — terms are now hoverable/tappable.
+      (More `<Term>` wraps can be added anywhere over time; the component + glossary are in place.)
+- [x] 4.2 Orientation carried by `/explore` "by goal" router + breadcrumbs + jump-nav.
 
 ## PHASE 5 — Jargon glossary ✅ DONE
 - [x] 5.1 `src/lib/glossary.ts` — 21 typed terms + plain definitions.

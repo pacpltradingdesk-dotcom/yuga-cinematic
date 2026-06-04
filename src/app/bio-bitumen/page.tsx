@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Term } from "@/components/ui/Term";
 import { FinanceTools } from "@/components/tools/FinanceTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { plantTypes, bioProcess, capacities, marketOpportunity } from "@/lib/site";
@@ -30,7 +31,7 @@ export default function BioBitumenPage() {
       <PageHero
         eyebrow="Vertical A · YUGA PMC"
         title="Bio-Bitumen & Pyrolysis Plant Consultancy"
-        intro="Agro-waste becomes road. We design and plan bio-bitumen, plastic-to-fuel and tyre-to-oil plants end to end - CSIR-CRRI (KrishiBind) aligned and NHAI/MoRTH compliant."
+        intro={<>Agro-waste becomes road. We design and plan bio-bitumen, plastic-to-fuel and tyre-to-oil plants end to end — CSIR-CRRI (KrishiBind) aligned and <Term id="nhai-morth">NHAI/MoRTH</Term> compliant.</>}
         accent="amber"
         image="bioHero"
       >

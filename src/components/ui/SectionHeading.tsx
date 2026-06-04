@@ -12,7 +12,7 @@ export function SectionHeading({
 }: {
   eyebrow?: string;
   title: string;
-  intro?: string;
+  intro?: React.ReactNode;
   align?: "left" | "center";
   className?: string;
 }) {

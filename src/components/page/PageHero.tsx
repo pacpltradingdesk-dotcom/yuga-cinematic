@@ -19,7 +19,7 @@ export function PageHero({
 }: {
   eyebrow: string;
   title: string;
-  intro?: string;
+  intro?: React.ReactNode;
   accent?: "amber" | "cyan";
   image?: ImgKey;
   /** Optional breadcrumb trail rendered above the eyebrow. */

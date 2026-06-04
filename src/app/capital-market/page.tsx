@@ -10,6 +10,7 @@ import { MarketTicker } from "@/components/visual/MarketTicker";
 import { Candlestick } from "@/components/visual/Charts";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { CapitalTools } from "@/components/tools/CapitalTools";
+import { Term } from "@/components/ui/Term";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { funding, fundraising } from "@/lib/catalog";
@@ -95,7 +96,7 @@ export default function CapitalMarketPage() {
           <SectionHeading
             eyebrow="Debt & Government Funding"
             title="Bankable from day one."
-            intro="We prepare DPR + CMA data in bank format to maximise approval across these schemes."
+            intro={<>We prepare <Term id="dpr">DPR</Term> + <Term id="cma">CMA</Term> data in bank format to maximise approval across these schemes.</>}
           />
           <div className="mt-12 overflow-x-auto">
             <div className="min-w-[640px] overflow-hidden rounded-3xl border border-[var(--color-line)]">
