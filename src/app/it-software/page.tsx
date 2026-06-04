@@ -85,7 +85,7 @@ export default function ITSoftwarePage() {
       </section>
 
       {/* Product suite */}
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section id="suite" className="scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="The Product Suite"
@@ -152,7 +152,7 @@ export default function ITSoftwarePage() {
       </section>
 
       {/* Subscription tiers */}
-      <section className="relative isolate border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+      <section id="pricing" className="relative isolate scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <SectionBackdrop name="softHero" />
         <div className="maxw container-x">
           <SectionHeading

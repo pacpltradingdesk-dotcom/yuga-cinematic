@@ -90,7 +90,7 @@ export default function CapitalMarketPage() {
       </section>
 
       {/* Loans table */}
-      <section className="py-[var(--space-section)]">
+      <section id="loans" className="scroll-mt-28 py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Debt & Government Funding"
@@ -170,7 +170,7 @@ export default function CapitalMarketPage() {
       </section>
 
       {/* Funding routes at a glance (IPO / VC / Bank) */}
-      <section className="py-[var(--space-section)]">
+      <section id="routes" className="scroll-mt-28 py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Funding Routes"
@@ -224,7 +224,7 @@ export default function CapitalMarketPage() {
       </section>
 
       {/* Financial prep */}
-      <section className="py-[var(--space-section)]">
+      <section id="valuation" className="scroll-mt-28 py-[var(--space-section)]">
         <div className="maxw container-x grid gap-10 lg:grid-cols-[1fr_1.3fr]">
           <SectionHeading
             eyebrow="Valuation & Financial Prep"

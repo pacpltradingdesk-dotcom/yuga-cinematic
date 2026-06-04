@@ -77,7 +77,7 @@ export const nav = [
   { label: "Capital Markets", href: "/capital-market" },
   { label: "About", href: "/about" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Market Intel", href: "/market-intelligence" },
+  { label: "Market & Research", href: "/market-intelligence" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
