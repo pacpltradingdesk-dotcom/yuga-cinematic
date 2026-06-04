@@ -65,6 +65,14 @@ endpoint — no key hardcoded (security rule), graceful fallback when unset.
         to the client's serverless proxy and render the AI reply; else static search
 - [x] F3. Build catalog context (products + FAQs) sent to the endpoint as grounding
 - [x] F4. README + env table document `NEXT_PUBLIC_AI_ENDPOINT` and the proxy contract
+- [x] F6. Static assistant made genuinely smart (2026-06-04): added `src/lib/knowledge.ts`
+        (36-topic bitumen domain KB — VG grades, every product, pyrolysis, cost ladder,
+        subsidy, loans/IPO, carbon, market, how-to-start, timelines…) + `src/lib/assistant.ts`
+        search engine with fuzzy/typo tolerance, Hinglish synonyms, answer de-dupe and a
+        domain-aware fallback that NEVER dead-ends. `AiAssistant.tsx` now layout-only.
+        KB also folded into `buildAiContext()` so LLM mode is better grounded too.
+        Live-tested via chrome-devtools (typos, Hinglish, gibberish, greetings all handled;
+        zero console errors). Fixed a duplicate-React-key bug surfaced during testing.
 - [ ] F5. CLIENT later: deploy a serverless proxy (holds the LLM key), set the env var
 
 ## PHASE G — Lead generation (user picked "lead-gen / downloads")

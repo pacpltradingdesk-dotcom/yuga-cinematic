@@ -16,6 +16,7 @@
 import { products } from "@/lib/catalog";
 import { faqs, company } from "@/lib/site";
 import { config } from "@/lib/config";
+import { KNOWLEDGE } from "@/lib/knowledge";
 
 export interface ChatMessage {
   readonly role: "user" | "assistant";
@@ -43,6 +44,9 @@ export function buildAiContext(): string {
     ...products.map(
       (p) => `- ${p.title} (/products/${p.slug}): ${p.subtitle}`,
     ),
+    "",
+    "DOMAIN KNOWLEDGE (bitumen / bio-bitumen / plant business):",
+    ...KNOWLEDGE.map((k) => `- ${k.title}: ${k.answer}`),
     "",
     "FAQs:",
     ...faqs.map((f) => `- Q: ${f.q}\n  A: ${f.a}`),

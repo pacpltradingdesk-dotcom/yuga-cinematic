@@ -4,98 +4,22 @@ import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
-import { products } from "@/lib/catalog";
-import { faqs } from "@/lib/site";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
+import { searchAssistant } from "@/lib/assistant";
 import { cn } from "@/lib/utils";
 
 /**
- * AI Assistance (client note). Default mode is a static, browser-side catalog
- * search that answers from the product Q&A + FAQs and links to the right page —
- * so it ships on the static export with no server.
+ * AI Assistance (client note). Default mode is a static, browser-side engine
+ * (`searchAssistant`) that answers from a bitumen knowledge base + the product
+ * Q&A + FAQs, tolerates typos and Hinglish, and never dead-ends — so it ships
+ * on the static export with no server.
  *
  * When the client sets `NEXT_PUBLIC_AI_ENDPOINT` (their serverless proxy that
  * holds the model key), the widget upgrades to a real chat that POSTs the query
  * + grounded catalog context there. No key ever touches the browser.
  */
-interface Answer {
-  readonly q: string;
-  readonly a: string;
-  readonly href?: string;
-  readonly tag: string;
-}
-
-interface ProductHit {
-  readonly title: string;
-  readonly href: string;
-  readonly subtitle: string;
-}
-
-const STOP = new Set(["the", "a", "an", "is", "of", "for", "to", "and", "what", "how", "much", "do", "you", "can", "i", "my", "in", "on"]);
-
-function tokens(s: string): string[] {
-  return s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((t) => t.length > 1 && !STOP.has(t));
-}
-
-/** Flatten the catalog Q&A + site FAQs into one searchable answer index. */
-const ANSWER_INDEX: readonly Answer[] = [
-  ...faqs.map((f) => ({ q: f.q, a: f.a, tag: "FAQ" as const })),
-  ...products.flatMap((p) =>
-    p.qa.map((qa) => ({ q: qa.q, a: qa.a, href: `/products/${p.slug}`, tag: p.title })),
-  ),
-];
-
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
-
-/**
- * Conversational (non-catalog) intents in English + Hindi/Hinglish, matched in
- * priority order. Each returns a friendly canned reply so the static assistant
- * never dead-ends on small talk like "kaise ho" or "thanks".
- */
-const SMALL_TALK: ReadonlyArray<{ re: RegExp; reply: string }> = [
-  { re: /\b(thanks|thank you|thankyou|thx|dhanyavad|dhanyawad|shukriya)\b/i, reply: "You're welcome! 😊 Anything else — plant costs, subsidy, land, licences or funding?" },
-  { re: /\b(bye|goodbye|alvida|tata)\b/i, reply: "Bye! 👋 Ping us anytime on WhatsApp for a quick reply." },
-  { re: /(who are you|aap kaun|tum kaun|kaun ho|your name|tumhara naam)/i, reply: "I'm the YUGA Assistant — I help you explore our bitumen / bio-bitumen plants, costs, subsidy, licences, land and funding. Ask away!" },
-  { re: /(kaise ho|kaisे|kaise hain|kese ho|kaisा|kya haal|kya hal|kaisa hai|how are you|how r u|sab badhiya|whats up|what's up|kya chal)/i, reply: "I'm doing great, thanks for asking! 😊 I can help with plant costs, subsidy, land, licences, funding or carbon credits — what would you like to know?" },
-  { re: /\b(help|madad|kya kar sakte|what can you do|kya bata sakte)\b/i, reply: "Sure! Ask me about any plant (bio-bitumen, plastic-to-fuel, PMB, CRMB…), its cost & ROI, subsidy, land needed, licences, or funding options. Pick a topic below 👇" },
-  { re: /^\s*(hi+|hey+|hello+|helo|yo|hola|hlo|namaste|namaskar|namaskaar|salaam|ram ram|jai)\b/i, reply: "Hi! 👋 I'm the YUGA assistant. Ask me about plant costs, subsidy, carbon credits, licences, land or funding — or pick a topic:" },
-];
-
-function smallTalkReply(raw: string): string | null {
-  const q = raw.trim();
-  if (!q) return null;
-  for (const { re, reply } of SMALL_TALK) if (re.test(q)) return reply;
-  return null;
-}
-
-/**
- * Hindi/Hinglish → catalog-term expansion so keyword search hits even when the
- * user types in Hindi (e.g. "kitna paisa" → cost, "zameen" → land).
- */
-const SYNONYMS: Readonly<Record<string, string>> = {
-  kitna: "cost investment", kitne: "cost investment", lagat: "cost", kharch: "cost", kharcha: "cost",
-  paisa: "cost investment", paise: "cost investment", daam: "cost price", rupaye: "cost", rupees: "cost",
-  invest: "investment cost", lagana: "investment", lagao: "investment",
-  kamai: "profit income", munafa: "profit", profit: "profit return", return: "profit return",
-  karz: "loan", karza: "loan", loan: "loan finance", bank: "loan bank finance", finance: "loan finance",
-  fund: "funding finance", funding: "funding finance", paisa_kaha: "funding",
-  subsidy: "subsidy", sabsidi: "subsidy", sabsidy: "subsidy", anudaan: "subsidy", chhoot: "subsidy",
-  zameen: "land area", zameer: "land", jagah: "land area", land: "land area", plot: "land area plot",
-  licence: "licence permission", license: "licence permission", anumati: "licence permission",
-  permission: "licence permission", permit: "licence permission",
-  carbon: "carbon credit", credit: "carbon credit",
-  document: "documents dpr report", dastavej: "documents", drawing: "documents drawing", dpr: "dpr report documents",
-  plant: "plant", machine: "plant machinery", machinery: "plant machinery",
-  bio: "bio-bitumen", bitumen: "bitumen", plastic: "plastic-to-fuel", rubber: "rubber-to-fuel tyre", tyre: "rubber-to-fuel tyre",
-  emulsion: "emulsion", pmb: "pmb", crmb: "crmb",
-};
-
-function expandQuery(raw: string): string {
-  const words = raw.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/);
-  const extra = words.map((w) => SYNONYMS[w]).filter(Boolean);
-  return [raw, ...extra].join(" ");
-}
 
 export function AiAssistant() {
   const chatMode = hasAiChat();
@@ -108,34 +32,11 @@ export function AiAssistant() {
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const talk = !chatMode ? smallTalkReply(query) : null;
+  const hasQuery = query.trim().length > 0;
 
-  const { answers, productHits } = useMemo(() => {
-    const qt = tokens(expandQuery(query));
-    if (qt.length === 0) return { answers: [] as Answer[], productHits: [] as ProductHit[] };
-
-    const score = (text: string): number => {
-      const tt = tokens(text);
-      return qt.reduce((acc, t) => acc + (tt.includes(t) ? 1 : 0), 0);
-    };
-
-    const answers = ANSWER_INDEX.map((item) => ({ item, s: score(`${item.q} ${item.a}`) }))
-      .filter((x) => x.s > 0)
-      .sort((a, b) => b.s - a.s)
-      .slice(0, 3)
-      .map((x) => x.item);
-
-    const productHits = products
-      .map((p) => ({ p, s: score(`${p.title} ${p.subtitle} ${p.benefits.join(" ")} ${p.applications.join(" ")}`) }))
-      .filter((x) => x.s > 0)
-      .sort((a, b) => b.s - a.s)
-      .slice(0, 3)
-      .map((x) => ({ title: x.p.title, href: `/products/${x.p.slug}`, subtitle: x.p.subtitle }));
-
-    return { answers, productHits };
-  }, [query]);
-
-  const hasQuery = tokens(query).length > 0;
+  /** Static-mode result — recomputed as the user types. */
+  const result = useMemo(() => searchAssistant(query), [query]);
+  const showFallback = hasQuery && result.cards.length === 0 && result.productHits.length === 0;
 
   async function sendToAi(text: string): Promise<void> {
     const trimmed = text.trim();
@@ -240,51 +141,16 @@ export function AiAssistant() {
               )}
 
               {/* STATIC MODE — conversational reply (greetings, "kaise ho", thanks…) */}
-              {!chatMode && hasQuery && talk && (
-                <div className="grid gap-2">
-                  <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
-                    {talk}
-                  </div>
-                  {answers.length === 0 && productHits.length === 0 &&
-                    SUGGESTIONS.map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => onSuggestion(s)}
-                        data-cursor="hover"
-                        className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-                      >
-                        {s}
-                      </button>
-                    ))}
+              {!chatMode && hasQuery && result.smallTalk && (
+                <div className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
+                  {result.smallTalk}
                 </div>
               )}
 
-              {/* STATIC MODE — genuine no-match: help, don't dead-end */}
-              {!chatMode && hasQuery && !talk && answers.length === 0 && productHits.length === 0 && (
-                <div className="grid gap-2">
-                  <p className="text-sm text-[var(--color-muted)]">
-                    I couldn&apos;t find that in the catalog yet. Try a topic below, or{" "}
-                    <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
-                      message us on WhatsApp
-                    </Link>{" "}
-                    — we reply fast.
-                  </p>
-                  {SUGGESTIONS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => onSuggestion(s)}
-                      data-cursor="hover"
-                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
-
+              {/* STATIC MODE — knowledge / FAQ / catalog answers */}
               {!chatMode &&
-                answers.map((a) => (
-                  <div key={a.q} className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
+                result.cards.map((a, i) => (
+                  <div key={`${a.tag}:${a.q}:${i}`} className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
                     <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
                     <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
                     <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
@@ -300,11 +166,12 @@ export function AiAssistant() {
                   </div>
                 ))}
 
-              {!chatMode && productHits.length > 0 && (
+              {/* STATIC MODE — related plants */}
+              {!chatMode && result.productHits.length > 0 && (
                 <div className="mt-1">
                   <div className="mb-2 text-[11px] uppercase tracking-wider text-[var(--color-faint)]">Related plants</div>
                   <div className="grid gap-2">
-                    {productHits.map((p) => (
+                    {result.productHits.map((p) => (
                       <Link
                         key={p.href}
                         href={p.href}
@@ -317,6 +184,31 @@ export function AiAssistant() {
                       </Link>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* STATIC MODE — no direct answer: help with closest topics (never dead-end) */}
+              {!chatMode && showFallback && (
+                <div className="grid gap-2">
+                  {!result.smallTalk && (
+                    <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+                      {result.fallback.split("message us on WhatsApp")[0]}
+                      <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
+                        message us on WhatsApp
+                      </Link>
+                      {result.fallback.split("message us on WhatsApp")[1] ?? ""}
+                    </p>
+                  )}
+                  {result.suggestions.map((s, i) => (
+                    <button
+                      key={`${s}:${i}`}
+                      onClick={() => onSuggestion(s)}
+                      data-cursor="hover"
+                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                    >
+                      {s}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
