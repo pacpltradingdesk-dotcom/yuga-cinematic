@@ -7,10 +7,16 @@ import { useInView } from "framer-motion";
 export function StatCounter({
   value,
   suffix = "",
+  prefix = "",
+  decimals = 0,
   duration = 1600,
 }: {
   value: number;
   suffix?: string;
+  /** Static text rendered before the number, e.g. a "₹" currency mark. */
+  prefix?: string;
+  /** Decimal places to keep — e.g. 1 for "10.8". Defaults to whole numbers. */
+  decimals?: number;
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -24,7 +30,7 @@ export function StatCounter({
     const loop = (now: number) => {
       const p = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(eased * value));
+      setN(eased * value);
       if (p < 1) raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
@@ -33,7 +39,8 @@ export function StatCounter({
 
   return (
     <span ref={ref} className="tabular-nums">
-      {n}
+      {prefix}
+      {n.toFixed(decimals)}
       {suffix}
     </span>
   );

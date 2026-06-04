@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     "Live YUGA PMC engagements - bio-bitumen plants in Haryana and Odisha - plus a ready library of bankable project reports. Client identities kept confidential.",
 };
 
-const metrics = [
+const metrics: { v: number; s: string; l: string; p?: string; d?: number }[] = [
   { v: 9, s: "", l: "Plants commissioned" },
   { v: 5, s: "+", l: "Live PMC engagements" },
-  { v: 1250, s: " MT", l: "Annual output (lead plant)" },
+  { v: 10.8, p: "₹", d: 1, s: " Cr", l: "Lead project size" },
   { v: 12, s: " mo", l: "Post-COD hand-holding" },
 ];
 
@@ -46,7 +46,7 @@ export default function CaseStudiesPage() {
           {metrics.map((m, i) => (
             <Reveal key={m.l} index={i} className="text-center lg:text-left">
               <div className="font-display text-[clamp(2.2rem,5vw,3.6rem)] font-bold tracking-tight text-gradient">
-                <StatCounter value={m.v} suffix={m.s} />
+                <StatCounter value={m.v} suffix={m.s} prefix={m.p} decimals={m.d} />
               </div>
               <div className="mt-2 text-sm text-[var(--color-muted)]">{m.l}</div>
             </Reveal>
