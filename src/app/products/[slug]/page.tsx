@@ -127,7 +127,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ldGraph).replace(/</g, "\\u003c") }}
       />
 
-      <PageHero eyebrow="Product · YUGA PMC" title={p.title} intro={p.subtitle} accent="amber" image={productImg[slug]}>
+      <PageHero
+        eyebrow="Product · YUGA PMC"
+        title={p.title}
+        intro={p.subtitle}
+        accent="amber"
+        image={productImg[slug]}
+        crumbs={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: p.title }]}
+      >
         <Reveal index={3}>
           <div className="mt-9 flex flex-wrap gap-4">
             <LeadGate

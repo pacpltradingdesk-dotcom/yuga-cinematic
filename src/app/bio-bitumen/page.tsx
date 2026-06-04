@@ -42,6 +42,9 @@ export default function BioBitumenPage() {
             <MagneticButton href="/industrial-consulting" variant="ghost">
               See full PMC scope
             </MagneticButton>
+            <MagneticButton href="/products/bio-bitumen" variant="ghost">
+              Bio-Bitumen plant: specs &amp; cost
+            </MagneticButton>
           </div>
         </Reveal>
       </PageHero>

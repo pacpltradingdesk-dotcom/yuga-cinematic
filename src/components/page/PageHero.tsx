@@ -1,6 +1,7 @@
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Reveal } from "@/components/ui/Reveal";
 import { Badge } from "@/components/ui/Badge";
+import { Breadcrumbs, type Crumb } from "@/components/page/Breadcrumbs";
 import { GradientMesh, GridBackground } from "@/components/visual/Backdrop";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -13,6 +14,7 @@ export function PageHero({
   intro,
   accent = "amber",
   image,
+  crumbs,
   children,
 }: {
   eyebrow: string;
@@ -20,6 +22,8 @@ export function PageHero({
   intro?: string;
   accent?: "amber" | "cyan";
   image?: ImgKey;
+  /** Optional breadcrumb trail rendered above the eyebrow. */
+  crumbs?: readonly Crumb[];
   children?: React.ReactNode;
 }) {
   return (
@@ -36,6 +40,11 @@ export function PageHero({
       <GradientMesh />
       <GridBackground />
       <div className="maxw container-x relative">
+        {crumbs && (
+          <Reveal>
+            <Breadcrumbs trail={crumbs} className="mb-5" />
+          </Reveal>
+        )}
         <Reveal>
           <Badge accent={accent}>{eyebrow}</Badge>
         </Reveal>

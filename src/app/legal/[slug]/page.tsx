@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { Reveal } from "@/components/ui/Reveal";
+import { Breadcrumbs } from "@/components/page/Breadcrumbs";
 import { getLegalDoc, legalSlugs, legalDocs } from "@/lib/legal";
 
 type Params = { slug: string };
@@ -30,13 +30,7 @@ export default async function LegalPage({ params }: { params: Promise<Params> })
       <NoiseOverlay />
       <article className="pb-[var(--space-section)] pt-36 sm:pt-44">
         <div className="maxw container-x max-w-3xl">
-          <Link
-            href="/"
-            data-cursor="hover"
-            className="inline-flex items-center gap-1.5 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-          >
-            <ArrowLeft size={15} /> Back to home
-          </Link>
+          <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Legal" }, { label: doc.title }]} />
 
           <header className="relative isolate mt-8 overflow-hidden rounded-3xl border-b border-[var(--color-line)] p-8 pb-10">
             <SectionBackdrop name="aboutHero" opacity="opacity-[0.07]" />

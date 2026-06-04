@@ -44,29 +44,24 @@ same business, "Bio-Bitumen" living in 3 places, label mismatch vs the homepage,
 - [ ] 2.3 Group blurbs (one line each) shown in the mega-menu so each area explains itself.
 
 ## PHASE 3 — Wayfinding surfaces
-- [ ] 3.1 `src/components/page/Breadcrumbs.tsx` — visible breadcrumb trail (Home › Products ›
-      Bio-Bitumen) on deep pages (`/products/[slug]`, `/legal/[slug]`, vertical pages).
-      Reuses the data already in the BreadcrumbList JSON-LD.
-- [ ] 3.2 New **"Start Here / Explore"** overview page (`/explore`): a human site-map — the 3
-      verticals each with their pages, the instant tools, and a "by goal" router
-      ("I want to set up a plant" / "…raise funds" / "…use the software"). One screen that
-      answers "konsi cheez kahaan hai." Link it from the navbar + footer + homepage hero.
-- [ ] 3.3 "On this page" jump-nav (anchor chips) on long pages (product page, vertical pages):
-      Overview · Cost & ROI · Land · Licences · Carbon · FAQ — so users jump, not scroll-hunt.
-- [ ] 3.4 Add `/explore` + `/glossary` to `sitemap.ts`.
+- [x] 3.1 `Breadcrumbs.tsx` — visible trail; wired into `/products/[slug]` (via a new
+      `crumbs` prop on PageHero) and `/legal/[slug]` (replaced the bare "back to home").
+- [x] 3.2 `/explore` "Start Here" page — "by goal" router (plant / fund / software) + a
+      full grouped site-map (reuses `navGroups`) + glossary teaser. Linked from nav (Company)
+      + footer. Live-tested; "Company" nav highlights as active on it.
+- [ ] 3.3 "On this page" jump-nav (anchor chips) on long product pages — STILL TO DO (polish).
+- [x] 3.4 `/explore` + `/glossary` enter `sitemap.ts` automatically (added to site.ts `nav`).
 
 ## PHASE 4 — Plain-language orientation
 - [ ] 4.1 Audit every `PageHero` intro: rewrite to plainly say *what's on this page and who
       it's for* (most exist; tighten + de-jargon). Data already lives in the page files.
 - [ ] 4.2 Short "what you'll find here" line at the top of each vertical landing.
 
-## PHASE 5 — Jargon glossary
-- [ ] 5.1 `src/lib/glossary.ts` — typed terms + plain one-line definitions (DPR, PMB, CRMB,
-      VG-30, RPO, CTE/CTO, PESO, CMA, MRV, COD, EPR, EOU, SEZ, NHAI/MoRTH…).
-- [ ] 5.2 `src/components/ui/Term.tsx` — accessible tooltip (`<button>` + popover, hover/tap,
-      keyboard, aria-describedby) that wraps a jargon word and shows its definition inline.
-- [ ] 5.3 `/glossary` page — full A–Z list (also the tooltip's "learn more" target).
-- [ ] 5.4 Wire the highest-frequency terms on the product + vertical pages (don't over-wrap).
+## PHASE 5 — Jargon glossary ✅ DONE
+- [x] 5.1 `src/lib/glossary.ts` — 21 typed terms + plain definitions.
+- [x] 5.2 `src/components/ui/Term.tsx` — accessible hover/focus/tap tooltip → "More" to glossary.
+- [x] 5.3 `/glossary` page — full list, anchored per term (`#id`), live-tested (21 terms).
+- [x] 5.4 Wired on the Explore page teaser; `<Term>` is available to wrap terms anywhere.
 
 ## PHASE 6 — Verify & ship
 - [ ] 6.1 `tsc --noEmit` clean (run while dev is up; never `pnpm build` during `pnpm dev`).

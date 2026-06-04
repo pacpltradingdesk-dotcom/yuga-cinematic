@@ -54,9 +54,11 @@ export const navGroups: readonly NavGroup[] = [
     label: "Company",
     blurb: "Who we are, and the proof on the ground.",
     items: [
+      { label: "Explore the site", href: "/explore", desc: "A map of everything, by goal" },
       { label: "About", href: "/about", desc: "Founder & 25-year track record" },
       { label: "Case Studies", href: "/case-studies", desc: "Live projects & report library" },
       { label: "Market & Research", href: "/market-intelligence", desc: "Market data & ₹5L research report" },
+      { label: "Glossary", href: "/glossary", desc: "Bitumen & finance terms, explained" },
       { label: "Contact", href: "/contact", desc: "Talk to the team" },
     ],
   },
