@@ -48,7 +48,8 @@ export const img = {
 
   // Software cards — one unique image per product (dark, on-theme)
   swData: { src: "/assets/img/sw-data.jpg", alt: "Dark analytics dashboard - data cleaning & lead scoring" },
-  swWhatsapp: { src: "/assets/img/sw-whatsapp.jpg", alt: "Phone showing WhatsApp chats - bulk messaging campaigns" },
+  swWhatsapp: { src: "/assets/img/sw-whatsapp.jpg", alt: "WA Automation dashboard - WhatsApp bulk-messaging tool" },
+  appCrm: { src: "/assets/img/app-crm.jpg", alt: "PPS CRM login - bitumen sales intelligence dashboard" },
   swCall: { src: "/assets/img/sw-call.jpg", alt: "Call-centre agent wearing a headset on a call - call capture & analytics" },
   swVoice: { src: "/assets/img/sw-voice.jpg", alt: "Person on a live phone call - AI voice agent" },
 
@@ -70,7 +71,7 @@ export type ImgKey = keyof typeof img;
  */
 export const softwareImg: Record<string, ImgKey> = {
   "ai-sales-dashboard": "pIntel",
-  "bitumen-crm": "vSoft",
+  "bitumen-crm": "appCrm",
   "whatsapp-campaign": "swWhatsapp",
   "excel-lead-cleaner": "swData",
   "dialsync": "swCall",
