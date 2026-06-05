@@ -49,8 +49,8 @@ export const img = {
   // Software cards — one unique image per product (dark, on-theme)
   swData: { src: "/assets/img/sw-data.jpg", alt: "Dark analytics dashboard - data cleaning & lead scoring" },
   swWhatsapp: { src: "/assets/img/sw-whatsapp.jpg", alt: "Phone showing WhatsApp chats - bulk messaging campaigns" },
-  swCall: { src: "/assets/img/sw-call.jpg", alt: "Studio microphone under stage light - call capture & analytics" },
-  swVoice: { src: "/assets/img/sw-voice.jpg", alt: "Condenser studio microphone on black - AI voice agent" },
+  swCall: { src: "/assets/img/sw-call.jpg", alt: "Call-centre agent wearing a headset on a call - call capture & analytics" },
+  swVoice: { src: "/assets/img/sw-voice.jpg", alt: "Person on a live phone call - AI voice agent" },
 
   // Founder portrait slot (no file yet → graceful gradient fallback)
   founder: { src: "/assets/img/founder.jpg", alt: "Prince Pratap Shah - Founder & Key Person" },
