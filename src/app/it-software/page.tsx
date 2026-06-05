@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Check, ArrowUpRight } from "lucide-react";
+import { Fragment } from "react";
+import { Check, ArrowUpRight, Code2, Users, Boxes, Workflow, Sparkles, Globe, Smartphone, Plug, ArrowRight, type LucideIcon } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,9 +12,20 @@ import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { Media } from "@/components/visual/Media";
 import { VerticalFaq } from "@/components/page/VerticalFaq";
-import { softwareProducts } from "@/lib/software";
+import { softwareProducts, itServices, apiCapability, integrationLoop } from "@/lib/software";
 import { softwareImg } from "@/lib/media";
 import { softwareMeta } from "@/lib/catalog";
+
+/** Map IT-service keys to icons (keeps lib/software text-only). */
+const serviceIcon: Record<string, LucideIcon> = {
+  code: Code2,
+  crm: Users,
+  erp: Boxes,
+  automation: Workflow,
+  ai: Sparkles,
+  web: Globe,
+  mobile: Smartphone,
+};
 
 export const metadata: Metadata = {
   title: "AI Software Services",
@@ -84,6 +96,33 @@ export default function ITSoftwarePage() {
         </div>
       </section>
 
+      {/* What we build for clients (IT services) */}
+      <section id="services" className="scroll-mt-28 border-t border-[var(--color-line)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="IT Company · Services"
+            title="What we build for you."
+            intro="Beyond our own products, we build software end-to-end — the same team and stack, pointed at your operation."
+          />
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {itServices.map((s, i) => {
+              const Icon = serviceIcon[s.key];
+              return (
+                <Reveal key={s.key} index={i % 3}>
+                  <div className="group flex h-full flex-col rounded-3xl border border-[var(--color-line)] p-7 transition-colors hover:border-[color-mix(in_oklch,var(--color-cyan)_30%,transparent)]">
+                    <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[var(--color-line)] text-[var(--color-cyan)]">
+                      {Icon ? <Icon size={19} /> : null}
+                    </span>
+                    <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">{s.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Product suite */}
       <section id="suite" className="scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
@@ -148,6 +187,48 @@ export default function ITSoftwarePage() {
               Visit the live CRM <ArrowUpRight size={15} />
             </a>
           </Reveal>
+        </div>
+      </section>
+
+      {/* API & integration capability */}
+      <section id="api" className="scroll-mt-28 py-[var(--space-section)]">
+        <div className="maxw container-x grid gap-10 lg:grid-cols-[1fr_1.3fr]">
+          <SectionHeading eyebrow="Integration" title={apiCapability.title} intro={apiCapability.intro} />
+          <GlowCard accent="cyan" className="h-full">
+            <ul className="grid gap-4 p-8 sm:grid-cols-2">
+              {apiCapability.points.map((p) => (
+                <li key={p} className="flex items-start gap-2.5 text-sm text-[var(--color-muted)]">
+                  <Plug size={15} className="mt-0.5 shrink-0 text-[var(--color-cyan)]" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </GlowCard>
+        </div>
+      </section>
+
+      {/* PMC × Software × Capital — one engine */}
+      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading eyebrow="How It Connects" title={integrationLoop.title} intro={integrationLoop.intro} />
+          <div className="mt-12 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr]">
+            {integrationLoop.nodes.map((n, i) => (
+              <Fragment key={n.k}>
+                <div className="flex h-full flex-col rounded-3xl border border-[var(--color-line)] bg-[var(--color-raised)]/40 p-7">
+                  <Badge accent={i === 1 ? "cyan" : "amber"}>{n.k}</Badge>
+                  <h3 className="mt-4 font-display text-lg font-semibold tracking-tight">{n.t}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{n.d}</p>
+                </div>
+                {i < integrationLoop.nodes.length - 1 && (
+                  <div className="grid place-items-center text-[var(--color-faint)]">
+                    <ArrowRight size={22} className="hidden lg:block" />
+                    <ArrowRight size={20} className="rotate-90 lg:hidden" />
+                  </div>
+                )}
+              </Fragment>
+            ))}
+          </div>
+          <p className="mt-8 text-center font-display text-lg font-medium text-gradient-warm">{integrationLoop.outcome}</p>
         </div>
       </section>
 

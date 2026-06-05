@@ -23,6 +23,57 @@ export interface SoftwareProduct {
   readonly accent: "amber" | "cyan";
 }
 
+/**
+ * IT services we build for clients (client note: "IT company section — Software
+ * Development, CRM, ERP, Automation, AI, Web, Mobile apps"). The `key` maps to a
+ * lucide icon in the layout component; this lib stays text-only.
+ */
+export interface ITService {
+  readonly key: "code" | "crm" | "erp" | "automation" | "ai" | "web" | "mobile";
+  readonly title: string;
+  readonly desc: string;
+}
+
+export const itServices: readonly ITService[] = [
+  { key: "code", title: "Software Development", desc: "Custom web & backend systems built around your workflow — internal tools to customer-facing platforms." },
+  { key: "crm", title: "CRM Solutions", desc: "Sales pipelines, AI lead scoring and WhatsApp-integrated CRMs tuned to how your industry actually sells." },
+  { key: "erp", title: "ERP & Integration", desc: "Connect inventory, accounts, dispatch and plant data into one system — with clean migration from existing tools." },
+  { key: "automation", title: "Automation & Workflows", desc: "API / n8n-driven automation for reporting, messaging, data clean-up and repetitive back-office work." },
+  { key: "ai", title: "AI Solutions", desc: "Forecasting, document AI, lead scoring, chat and voice agents — practical AI wired into real operations." },
+  { key: "web", title: "Web Applications", desc: "Fast, SEO-ready marketing sites and web apps (like this one) — Next.js, static or full-stack." },
+  { key: "mobile", title: "Mobile Applications", desc: "Android / cross-platform field apps — call capture, on-site data collection and live dashboards." },
+] as const;
+
+/** API & integration capability (client note: "API integration can be added"). */
+export const apiCapability = {
+  title: "API & integration ready",
+  intro:
+    "Every YUGA product exposes APIs and can plug into your existing stack — no rip-and-replace. We also build the connector when one doesn't exist.",
+  points: [
+    "REST & webhook APIs on the CRM, dashboard and data tools",
+    "WhatsApp Business, SMS, email & payment-gateway integrations",
+    "ERP / Tally / accounting & inventory sync",
+    "Market-data, maritime-tracking and logistics feeds",
+    "Custom integrations on request — we build the connector",
+  ],
+} as const;
+
+/**
+ * The cross-vertical engine (client note: "demonstrate how PMC connects with
+ * capital market & fund-raising"). Shows PMC × Software × Capital compounding.
+ */
+export const integrationLoop = {
+  title: "PMC × Software × Capital — one engine",
+  intro:
+    "The three verticals aren't separate line items — they compound. The same AI stack that runs our bitumen business runs the plants we set up, and the capital desk funds them.",
+  nodes: [
+    { k: "PMC", t: "We set up the plant", d: "Feasibility, DPR, licences, build & commissioning." },
+    { k: "Software", t: "AI runs it", d: "Pricing intelligence, CRM, market signals, automation." },
+    { k: "Capital", t: "We fund the growth", d: "Bank DPRs, subsidies, valuation, VC & IPO." },
+  ],
+  outcome: "Set up → run on AI → fund & scale → list. One partner across the entire journey.",
+} as const;
+
 export const softwareProducts: readonly SoftwareProduct[] = [
   {
     slug: "ai-sales-dashboard",
