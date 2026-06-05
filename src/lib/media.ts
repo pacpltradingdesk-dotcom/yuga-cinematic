@@ -46,6 +46,12 @@ export const img = {
   cs2: { src: "/assets/img/cs-2.jpg", alt: "Recycling plant - plastic-to-fuel project" },
   cs3: { src: "/assets/img/cs-3.jpg", alt: "Forest / green - carbon-credit structuring" },
 
+  // Software cards — one unique image per product (dark, on-theme)
+  swData: { src: "/assets/img/sw-data.jpg", alt: "Dark analytics dashboard - data cleaning & lead scoring" },
+  swWhatsapp: { src: "/assets/img/sw-whatsapp.jpg", alt: "Phone showing WhatsApp chats - bulk messaging campaigns" },
+  swCall: { src: "/assets/img/sw-call.jpg", alt: "Studio microphone under stage light - call capture & analytics" },
+  swVoice: { src: "/assets/img/sw-voice.jpg", alt: "Condenser studio microphone on black - AI voice agent" },
+
   // Founder portrait slot (no file yet → graceful gradient fallback)
   founder: { src: "/assets/img/founder.jpg", alt: "Prince Pratap Shah - Founder & Key Person" },
 } as const;
@@ -65,11 +71,11 @@ export type ImgKey = keyof typeof img;
 export const softwareImg: Record<string, ImgKey> = {
   "ai-sales-dashboard": "pIntel",
   "bitumen-crm": "vSoft",
-  "whatsapp-campaign": "softHero",
-  "excel-lead-cleaner": "pIntel",
-  "dialsync": "vSoft",
+  "whatsapp-campaign": "swWhatsapp",
+  "excel-lead-cleaner": "swData",
+  "dialsync": "swCall",
   "market-report": "pCap",
-  "voice-agent": "softHero",
+  "voice-agent": "swVoice",
 };
 
 export const productImg: Record<string, ImgKey> = {
