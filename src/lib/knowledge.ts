@@ -161,7 +161,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Plant cost / investment",
     keywords: ["cost", "investment", "price", "kitna", "kitne", "paisa", "budget", "capex", "how much", "lagat", "kharcha"],
     answer:
-      "Indicative bio-bitumen plant cost by capacity: 5 MT/day ≈ ₹1.5 Cr, 10 MT ≈ ₹3 Cr, 15 MT ≈ ₹4.5 Cr, 20 MT ≈ ₹8 Cr, 25 MT ≈ ₹10 Cr, 30–50 MT ≈ ₹12–16 Cr. The final number depends on capacity, land, product mix and how many stages you build — and a 25% capital subsidy can offset a big chunk. Use the cost & ROI calculator on any product page for live figures.",
+      "Indicative bio-bitumen plant cost by capacity: 5 MT/day ≈ ₹1.5 Cr, 10 MT ≈ ₹3 Cr, 15 MT ≈ ₹4.5 Cr, 20 MT ≈ ₹8 Cr, 25 MT ≈ ₹10 Cr, 30–50 MT ≈ ₹12–16 Cr. The final number depends on capacity, land, product mix and how many stages you build — and MSME financing (CGTMSE/SIDBI) plus eligible state industrial incentives can ease the capex. Use the cost & ROI calculator on any product page for live figures.",
     href: "/products/bio-bitumen",
   },
   {
@@ -211,7 +211,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Subsidy & grants",
     keywords: ["subsidy", "sabsidi", "anudaan", "chhoot", "grant", "government scheme", "mnre", "central state", "incentive"],
     answer:
-      "A 25% capital subsidy is available under the MNRE Waste-to-Wealth Mission, on top of state industrial incentives that vary by location (capital subsidy, SGST refund, power/interest support). Picking the right state can materially change your project economics — we identify and file for every scheme you qualify for.",
+      "Funding is mostly MSME-based — CGTMSE collateral-free guarantee (up to ₹5 Cr), plus SIDBI and bank term loans — alongside state industrial incentives that vary by location (capital subsidy, SGST refund, power/interest support). Subsidy eligibility depends on current scheme rules, so we identify and file for every scheme you actually qualify for. Verify rates and windows on the official portal before relying on them.",
     href: "/capital-market",
   },
   {
@@ -287,7 +287,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Carbon credits",
     keywords: ["carbon", "credit", "carbon credit", "co2", "emission", "puro", "mrv", "green revenue", "offset", "environment"],
     answer:
-      "Bio-bitumen earns carbon credits — roughly 0.35 tonnes of CO₂ saved per MT, which can add ₹2,500+ per MT of extra revenue on top of the product margin. We structure the MRV pathway (e.g. Puro.earth) so the credits are certified and saleable, turning your environmental benefit into a real income stream.",
+      "Bio-bitumen may qualify to earn carbon credits — illustratively around 0.35 t CO₂ saved per MT — via voluntary mechanisms (e.g. Puro.earth MRV or India's BEE offset route). Eligibility, methodology approval, volume and price are not guaranteed and prices vary, so treat any figure as illustrative, not assured revenue. We help structure the MRV pathway.",
     href: "/market-intelligence",
   },
   {
@@ -295,7 +295,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Market size & opportunity",
     keywords: ["market", "opportunity", "demand", "import", "size", "how big market", "scope", "future", "growth"],
     answer:
-      "India imports ~49% of its bitumen — about ₹25,000 Cr a year — and a 15–30% bio-replacement could save ₹4,500 Cr+ annually. NHAI has mandated bio-bitumen in all national-highway projects by 2030, which means 130–216 new plants are needed in 5–7 years. Early movers capture that gap.",
+      "India imports ~40% of its bitumen (≈60% met domestically), against annual consumption of ~87 lakh tonnes — a large import-substitution gap. India became the first country to commercially produce bio-bitumen (CSIR-CRRI / CSIR-IIP, Jan 2026), with ~1,000 km of pilot roads planned by 2027. Early movers capture that gap.",
     href: "/market-intelligence",
   },
   {
@@ -303,7 +303,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "NHAI / MoRTH mandate",
     keywords: ["nhai", "morth", "mandate", "government", "highway", "policy", "2030", "15 percent", "regulation"],
     answer:
-      "NHAI/MoRTH back bio-bitumen: it's spec-compliant for national highways, and the mandate targets bio-bitumen in all NH projects by 2030. That regulatory pull, plus the import-substitution economics, is what makes this a now-or-never window for new plants.",
+      "NHAI/MoRTH back bio-bitumen: MoRTH's bitumen circular governs grade/spec on national highways, and CSIR-CRRI/CSIR-IIP's bio-bitumen is being piloted on NH stretches (~1,000 km of pilot roads planned by 2027). That regulatory pull, plus import-substitution economics, is what opens the window for new plants.",
     href: "/market-intelligence",
   },
   {

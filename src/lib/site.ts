@@ -167,8 +167,8 @@ export const plantTypes = [
   {
     name: "Pyrolysis Bio-Bitumen Plant",
     code: "A2",
-    desc: "Agro-waste → pyrolysis → bio-oil blended 15-30% with VG-30 to CSIR-CRRI (KrishiBind) spec. NHAI/MoRTH compliant.",
-    items: ["CSIR-CRRI KrishiBind aligned", "15-30% bio-replacement", "NHAI / MoRTH certified"],
+    desc: "Agro-waste → pyrolysis → bio-oil blended with VG-30 toward CSIR-CRRI (KrishiBind) spec; ~20-30% replacement in lab trials. Aligned to NHAI/MoRTH specifications.",
+    items: ["CSIR-CRRI KrishiBind aligned", "~20-30% bio-replacement (lab)", "To NHAI / MoRTH spec"],
   },
   {
     name: "Plastic-to-Fuel Plant",
@@ -198,12 +198,12 @@ export const bioProcess = [
   {
     step: "03",
     title: "Refining & Blending",
-    desc: "Oxidation at 230-250°C, then blended 15-30% with VG-30 per CSIR-CRRI specification.",
+    desc: "Oxidation at 230-250°C, then blended ~20-30% with VG-30 toward CSIR-CRRI specification.",
   },
   {
     step: "04",
     title: "Testing, Certification & Market",
-    desc: "Penetration, softening, ductility and rutting tests; NHAI/MoRTH certification; supply to contractors, PWD & NHAI.",
+    desc: "Penetration, softening, ductility and rutting tests toward NHAI/MoRTH specifications; supply to contractors, PWD & NHAI.",
   },
 ] as const;
 
@@ -342,17 +342,16 @@ export const reportLibrary = [
 
 /* ----------------------------- Market Intelligence ----------------------------- */
 export const marketOpportunity = [
-  { stat: "1st", label: "India = first country to commercially produce Bio-Bitumen (Jan 2026)" },
-  { stat: "49%", label: "of India's bitumen is imported - ~₹25,000 Cr / year" },
-  { stat: "₹4,500 Cr+", label: "potential annual saving from 15-30% bio-replacement" },
-  { stat: "130-216", label: "new bio-bitumen plants needed in 5-7 years" },
-  { stat: "15%", label: "NHAI mandate: bio-bitumen in all NH projects by 2030" },
-  { stat: "25%", label: "capital subsidy under MNRE Waste-to-Wealth Mission" },
+  { stat: "1st", label: "India = first country to commercially produce bio-bitumen (CSIR-CRRI / CSIR-IIP, Jan 2026)" },
+  { stat: "~40%", label: "of India's bitumen is imported (≈60% met domestically, FY2025)" },
+  { stat: "~87 L MT", label: "India's annual bitumen consumption (PPAC, 2025)" },
+  { stat: "~1,000 km", label: "bio-bitumen pilot roads planned by 2027 (CSIR-CRRI / CSIR-IIP)" },
+  { stat: "~20-30%", label: "bio-replacement of conventional bitumen in CSIR lab trials (~20% in field)" },
 ] as const;
 
 export const impact = [
   "Reduces stubble burning - ~2.5 MT crop residue used per MT of bio-bitumen",
-  "Carbon credits - ~0.35 t CO₂ saved per MT (≈ ₹2,500+/MT extra revenue)",
+  "Carbon credits - illustrative ~0.35 t CO₂/MT; credit prices vary and are not assured revenue",
   "Cuts import dependency - saves ~₹38,000+ per MT in bitumen imports",
   "Creates 30-50+ rural jobs per plant; direct farmer income for agro-waste",
 ] as const;
@@ -366,15 +365,15 @@ export const statesCovered = [
 export const faqs = [
   {
     q: "What is Bio-Bitumen?",
-    a: "Road-grade bitumen where 15-30% of conventional VG-30 is replaced with bio-oil from agro-waste via pyrolysis (450-550°C). Meets NHAI/MoRTH specs with equal or better road performance.",
+    a: "Road-grade bitumen where ~20-30% of conventional VG-30 is replaced with bio-oil from agro-waste via pyrolysis (450-550°C), designed to meet NHAI/MoRTH specs. CSIR lab trials show no performance loss at this blend.",
   },
   {
     q: "Is the technology proven?",
-    a: "Yes. CSIR-CRRI completed 3-year field trials on NH-44 showing ~22% less rutting and ~18% better fatigue life vs conventional VG-30. India commercially launched bio-bitumen in January 2026.",
+    a: "Yes. CSIR-CRRI & CSIR-IIP developed the bio-bitumen pyrolysis process, with a pilot stretch laid on NH-40 (Jorabat-Shillong); lab trials show up to ~20-30% replacement of conventional bitumen without performance loss. India commercially launched bio-bitumen in January 2026.",
   },
   {
     q: "How much investment is needed?",
-    a: "A 10 MT/Day plant ≈ ₹3 Crore; 25 MT/Day ≈ ₹10 Crore. Varies with capacity, land and stages. 25% capital subsidy available under MNRE.",
+    a: "A 10 MT/Day plant ≈ ₹3 Crore; 25 MT/Day ≈ ₹10 Crore (indicative - varies with capacity, land and stages). MSME financing routes such as CGTMSE and SIDBI may apply; subsidy eligibility depends on current scheme rules - verify on the official portal.",
   },
   {
     q: "Can I get a bank loan?",

@@ -12,7 +12,7 @@
         "India became the first country to commercially produce bio-bitumen, with CSIR-CRRI and CSIR-IIP developing the indigenous technology and the first bio-bitumen National Highway stretch laid on NH-44 near Nagpur."
       ],
       "benefits": [
-        "Reduces import dependence — India imports ~50% of its bitumen; bio-bitumen cuts this and saves foreign exchange",
+        "Reduces import dependence — India imports ~40% of its bitumen; bio-bitumen cuts this and saves foreign exchange",
         "Lower emissions — up to ~70% lower greenhouse-gas footprint than fossil bitumen",
         "Circular economy — uses crop residue, helping reduce stubble burning",
         "Comparable performance — field trials show good monsoon durability and binding strength",
@@ -2014,7 +2014,7 @@
       {
         "scheme": "CGTMSE",
         "benefit": "Collateral-free loan guarantee (75–85% cover)",
-        "cap": "Up to ₹2 crore"
+        "cap": "Up to ₹5 crore"
       },
       {
         "scheme": "PM MUDRA",
@@ -2027,9 +2027,9 @@
         "cap": "₹10 lakh – ₹1 crore"
       },
       {
-        "scheme": "MNRE Waste-to-Energy",
-        "benefit": "Central Financial Assistance (CFA)",
-        "cap": "As per MNRE norms / capacity"
+        "scheme": "Agriculture Infrastructure Fund (AIF)",
+        "benefit": "3% interest subvention (agro-waste feedstock / post-harvest side)",
+        "cap": "On loans up to ₹2 crore"
       },
       {
         "scheme": "EPR credits",
@@ -2690,10 +2690,10 @@
   "market": {
     "national": {
       "demand": "~88 lakh tonnes/yr (8.8 MMT) bitumen consumption in India",
-      "production": "~50% met by domestic refineries",
-      "importGap": "~40–50 lakh tonnes/yr imported (~50% of demand)",
+      "production": "~60% met by domestic refineries",
+      "importGap": "~30–35 lakh tonnes/yr imported (~40% of demand)",
       "drivers": "NHAI, MoRTH, Bharatmala, PMGSY road programmes",
-      "src": "India bitumen demand ~88 LT/yr; ~50% imported. Source: indianchemicalnews.com, mopng.gov.in, gminsights.com, imarcgroup.com"
+      "src": "India bitumen demand ~87–88 LT/yr; ~40% imported (~60% domestic). Source: PPAC, Argus 2025, indianchemicalnews.com, mopng.gov.in"
     },
     "note": "National figures are from public industry/government sources (see source line). Reliable PRODUCT-WISE and STATE-WISE demand-vs-production-vs-import tonnage is NOT published openly for most of these products — so state demand is shown as DIRECTIONAL (high/medium) based on road activity & feedstock, not exact tonnage. Do not publish exact state tonnage without an official source.",
     "states": [

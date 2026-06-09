@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Market Intelligence",
   alternates: { canonical: "/market-intelligence" },
   description:
-    "Bio-bitumen market opportunity for 2026 - India's import gap, NHAI mandates, MNRE subsidies, environmental impact and the pan-India network behind YUGA.",
+    "Bio-bitumen market opportunity for 2026 - India's ~40% bitumen import gap, CSIR-CRRI technology, environmental impact and the pan-India network behind YUGA.",
 };
 
 export default function MarketIntelligencePage() {
@@ -86,7 +86,7 @@ export default function MarketIntelligencePage() {
             <div className="glass rounded-3xl p-8">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Import substitution</span>
-                <span className="text-xs text-[var(--color-amber)]">₹25,000 Cr/yr</span>
+                <span className="text-xs text-[var(--color-amber)]">~40% imported</span>
               </div>
               <LineChart seed={31} accent="amber" height={200} className="h-52 w-full" />
             </div>
@@ -194,8 +194,8 @@ export default function MarketIntelligencePage() {
       </section>
 
       <CTASection
-        title="Move before the other 200 plants do."
-        sub="130-216 bio-bitumen plants are needed in 5-7 years. Position early."
+        title="Move before the rest of the market does."
+        sub="India is the first country to commercially produce bio-bitumen, with ~1,000 km of pilot roads planned by 2027. Position early."
       />
     </>
   );
