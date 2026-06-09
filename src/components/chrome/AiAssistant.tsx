@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -64,9 +64,11 @@ export function AiAssistant() {
 
   const lastTurn = turns.length > 0 ? turns[turns.length - 1] : null;
 
-  function scrollToEnd(): void {
-    requestAnimationFrame(() => scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }));
-  }
+  // Scroll to the newest turn AFTER it paints (single rAF fires too early).
+  useEffect(() => {
+    const c = scrollRef.current;
+    if (c) c.scrollTo({ top: c.scrollHeight, behavior: "smooth" });
+  }, [turns.length, messages.length, busy]);
 
   /** Static-mode turn: compute the answer, remember the topic, append to thread. */
   function askStatic(text: string): void {
@@ -78,7 +80,6 @@ export function AiAssistant() {
     turnIdRef.current += 1;
     setTurns((prev) => [...prev, { id: turnIdRef.current, query: q, result }]);
     setQuery("");
-    scrollToEnd();
   }
 
   async function sendToAi(text: string): Promise<void> {
@@ -96,7 +97,6 @@ export function AiAssistant() {
       setError("Couldn't reach the assistant just now. Please try again, or message us on WhatsApp.");
     } finally {
       setBusy(false);
-      scrollToEnd();
     }
   }
 
@@ -138,8 +138,8 @@ export function AiAssistant() {
   }
 
   /** Render the rich answer for one static turn (everything except the lead form). */
-  function renderAnswer(result: AssistantResult, q: string) {
-    const showFallback = result.cards.length === 0 && result.productHits.length === 0 && !result.smallTalk;
+  function renderAnswer(result: AssistantResult, q: string, isLatest: boolean) {
+    const showFallback = result.cards.length === 0 && !result.smallTalk;
     return (
       <div className="mr-auto max-w-[92%]">
         {result.smallTalk && (
@@ -160,7 +160,7 @@ export function AiAssistant() {
           </a>
         )}
 
-        {result.cards.map((a, i) => (
+        {result.cards.slice(0, 1).map((a, i) => (
           <div key={`${a.tag}:${a.q}:${i}`} className="mb-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
             <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
             <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
@@ -173,27 +173,7 @@ export function AiAssistant() {
           </div>
         ))}
 
-        {result.productHits.length > 0 && (
-          <div className="mt-1">
-            <div className="mb-2 text-[11px] uppercase tracking-wider text-[var(--color-faint)]">Related plants</div>
-            <div className="grid gap-2">
-              {result.productHits.map((p) => (
-                <Link
-                  key={p.href}
-                  href={p.href}
-                  onClick={() => setOpen(false)}
-                  data-cursor="hover"
-                  className="flex items-center justify-between gap-2 rounded-xl border border-[var(--color-line)] px-3 py-2 text-sm transition-colors hover:border-[color-mix(in_oklch,var(--color-cyan)_35%,transparent)]"
-                >
-                  <span className="font-medium text-[var(--color-ink)]">{p.title}</span>
-                  <ArrowUpRight size={13} className="shrink-0 text-[var(--color-faint)]" />
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {result.actions.length > 0 && (
+        {isLatest && result.actions.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-2">
             {result.actions.map((act) =>
               act.external ? (
@@ -334,7 +314,7 @@ export function AiAssistant() {
                     <div className="ml-auto mb-2 w-fit max-w-[88%] rounded-2xl bg-[var(--color-amber)] px-4 py-2.5 text-sm font-medium text-[var(--color-void)]">
                       {t.query}
                     </div>
-                    {renderAnswer(t.result, t.query)}
+                    {renderAnswer(t.result, t.query, t.id === lastTurn?.id)}
                   </motion.div>
                 ))}
 
