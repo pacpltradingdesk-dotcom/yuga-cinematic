@@ -4,8 +4,8 @@ import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { Badge } from "@/components/ui/Badge";
 import { GlowCard } from "@/components/ui/GlowCard";
+import { Leadership } from "@/components/page/Leadership";
 import { ProcessTimeline } from "@/components/visual/ProcessTimeline";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
@@ -55,34 +55,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Founder + career */}
+      {/* Leadership + founder journey */}
       <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
         <div className="maxw container-x">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-            <div>
-              <div className="mb-8 flex items-center gap-5">
-                <div className="grid h-24 w-24 shrink-0 place-items-center rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] font-display text-2xl font-bold text-gradient-warm ring-glow">
-                  PPS
-                </div>
-                <span className="text-xs uppercase leading-relaxed tracking-[0.2em] text-[var(--color-faint)]">
-                  PPS Anantams
-                  <br />
-                  Corporation
-                </span>
-              </div>
-              <Badge accent="amber">The Founder</Badge>
-              <h2 className="mt-5 font-display text-[length:var(--text-h2)] font-semibold leading-tight tracking-tight">
-                {company.founder}
-              </h2>
-              <p className="mt-2 text-sm uppercase tracking-[0.25em] text-[var(--color-amber)]">
-                {company.founderTitle}
-              </p>
-              <p className="mt-6 leading-relaxed text-[var(--color-muted)]">
-                Founder of a BSE-listed bitumen company (IPO 2020) which operated 3 plants, 11 joint ventures and
-                reached 1.2 Lakh MT annual trading. MBA (Marketing &amp; Finance); Pride of India Icon 2021.
-              </p>
-            </div>
-            <div className="lg:pt-10">
+          <SectionHeading
+            eyebrow="Leadership"
+            title="Who you're actually working with."
+            intro="Senior, hands-on operators who have personally commissioned plants — accountable from feasibility to commissioning, not desk consultants."
+          />
+          <div className="mt-12">
+            <Leadership />
+          </div>
+
+          <div className="mt-16 border-t border-[var(--color-line)] pt-14">
+            <SectionHeading eyebrow="Founder's Journey" title="25 years, plant by plant." />
+            <div className="mt-12">
               <ProcessTimeline steps={career.map((c) => ({ n: c.yr.slice(2, 4), t: c.t, d: `${c.yr} · ${c.d}` }))} />
             </div>
           </div>
