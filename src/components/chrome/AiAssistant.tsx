@@ -1,34 +1,46 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
-import { searchAssistant, isThinFollowUp } from "@/lib/assistant";
+import { searchAssistant, isThinFollowUp, type AssistantResult } from "@/lib/assistant";
 import { submitLead, leadWaLink } from "@/lib/leads";
 import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
- * AI Assistance (client note). Default mode is a static, browser-side engine
- * (`searchAssistant`) that answers from a bitumen knowledge base + the product
- * Q&A + FAQs, tolerates typos and Hinglish, and never dead-ends — so it ships
- * on the static export with no server.
+ * YUGA Assistant. Default mode is a static, browser-side engine
+ * (`searchAssistant`) that answers from a bitumen knowledge base + product Q&A +
+ * FAQs, does live calculator answers, tolerates typos/Hinglish, remembers the
+ * last topic and never dead-ends — all on the static export, no server.
  *
- * When the client sets `NEXT_PUBLIC_AI_ENDPOINT` (their serverless proxy that
- * holds the model key), the widget upgrades to a real chat that POSTs the query
- * + grounded catalog context there. No key ever touches the browser.
+ * Both modes are CONVERSATIONAL: typing a question and pressing Enter posts it as
+ * a chat turn (your question as a bubble, the answer below) and the thread builds
+ * up above. When `NEXT_PUBLIC_AI_ENDPOINT` is set, the static engine is replaced
+ * by a real LLM chat (key stays server-side).
  */
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
 const WA_HINDI = waLink("Namaste YUGA, mujhe Hindi mein jaankari chahiye.");
+
+/** One static-mode conversation turn: the question + its computed answer. */
+interface StaticTurn {
+  readonly id: number;
+  readonly query: string;
+  readonly result: AssistantResult;
+}
 
 export function AiAssistant() {
   const chatMode = hasAiChat();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+
+  // Static-mode conversation transcript.
+  const [turns, setTurns] = useState<StaticTurn[]>([]);
+  const turnIdRef = useRef(0);
 
   // Inline lead capture (shown on buying/contact intent).
   const [lead, setLead] = useState({ name: "", phone: "" });
@@ -46,22 +58,28 @@ export function AiAssistant() {
   const pathname = usePathname();
   const pageSlug = useMemo(() => pathname.match(/^\/products\/([^/]+)/)?.[1], [pathname]);
 
-  // Follow-up memory: remember the last substantive topic so a thin query
-  // ("20 tpd", "iska kitna?") stays in context.
+  // Follow-up memory: the last substantive topic, so a thin query ("20 tpd",
+  // "iska kitna?") stays in context across turns.
   const lastTopicRef = useRef("");
 
-  /** Static-mode result — recomputed as the user types. */
-  const result = useMemo(() => searchAssistant(query, pageSlug, lastTopicRef.current), [query, pageSlug]);
+  const lastTurn = turns.length > 0 ? turns[turns.length - 1] : null;
 
-  useEffect(() => {
-    const q = query.trim();
+  function scrollToEnd(): void {
+    requestAnimationFrame(() => scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }));
+  }
+
+  /** Static-mode turn: compute the answer, remember the topic, append to thread. */
+  function askStatic(text: string): void {
+    const q = text.trim();
+    if (!q) return;
+    const result = searchAssistant(q, pageSlug, lastTopicRef.current);
     const tokens = q.split(/\s+/).filter(Boolean);
-    // Store only real, multi-word topics — never overwrite with a thin follow-up.
-    if (q && result.cards.length > 0 && tokens.length >= 2 && !isThinFollowUp(q)) {
-      lastTopicRef.current = q;
-    }
-  }, [query, result.cards.length]);
-  const showFallback = hasQuery && result.cards.length === 0 && result.productHits.length === 0;
+    if (result.cards.length > 0 && tokens.length >= 2 && !isThinFollowUp(q)) lastTopicRef.current = q;
+    turnIdRef.current += 1;
+    setTurns((prev) => [...prev, { id: turnIdRef.current, query: q, result }]);
+    setQuery("");
+    scrollToEnd();
+  }
 
   async function sendToAi(text: string): Promise<void> {
     const trimmed = text.trim();
@@ -78,24 +96,24 @@ export function AiAssistant() {
       setError("Couldn't reach the assistant just now. Please try again, or message us on WhatsApp.");
     } finally {
       setBusy(false);
-      requestAnimationFrame(() => scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" }));
+      scrollToEnd();
     }
   }
 
   function onSubmit(e: React.FormEvent): void {
     e.preventDefault();
     if (chatMode) void sendToAi(query);
-    // Static mode filters live via the memo — nothing to submit.
+    else askStatic(query);
   }
 
   function onSuggestion(s: string): void {
     if (chatMode) void sendToAi(s);
-    else setQuery(s);
+    else askStatic(s);
   }
 
-  /** Human handoff — WhatsApp link that carries what the visitor was asking. */
-  function waWithContext(fallbackHref: string): string {
-    const topic = (query.trim() || lastTopicRef.current).slice(0, 200);
+  /** Human handoff — WhatsApp link carrying what the visitor asked. */
+  function waForQuery(q: string, fallbackHref: string): string {
+    const topic = (q || lastTopicRef.current).slice(0, 200);
     return topic ? waLink(`Hi YUGA — I was asking the assistant about: "${topic}". Can you help?`) : fallbackHref;
   }
 
@@ -105,7 +123,7 @@ export function AiAssistant() {
     const input = {
       name: lead.name.trim(),
       phone: lead.phone.trim(),
-      interest: query.trim() || lastTopicRef.current || "General enquiry (site assistant)",
+      interest: lastTurn?.query || lastTopicRef.current || "General enquiry (site assistant)",
       source: pageSlug ? `assistant:${pageSlug}` : "assistant",
     };
     setLeadState("sending");
@@ -118,6 +136,118 @@ export function AiAssistant() {
       setLeadState("done");
     }
   }
+
+  /** Render the rich answer for one static turn (everything except the lead form). */
+  function renderAnswer(result: AssistantResult, q: string) {
+    const showFallback = result.cards.length === 0 && result.productHits.length === 0 && !result.smallTalk;
+    return (
+      <div className="mr-auto max-w-[92%]">
+        {result.smallTalk && (
+          <div className="mb-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
+            {result.smallTalk}
+          </div>
+        )}
+
+        {result.hindiNote && (
+          <a
+            href={WA_HINDI}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="hover"
+            className="mb-2 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+          >
+            {result.hindiNote}
+          </a>
+        )}
+
+        {result.cards.map((a, i) => (
+          <div key={`${a.tag}:${a.q}:${i}`} className="mb-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
+            <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
+            <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
+            <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
+            {a.href && (
+              <Link href={a.href} onClick={() => setOpen(false)} className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)]">
+                Open page <ArrowUpRight size={12} />
+              </Link>
+            )}
+          </div>
+        ))}
+
+        {result.productHits.length > 0 && (
+          <div className="mt-1">
+            <div className="mb-2 text-[11px] uppercase tracking-wider text-[var(--color-faint)]">Related plants</div>
+            <div className="grid gap-2">
+              {result.productHits.map((p) => (
+                <Link
+                  key={p.href}
+                  href={p.href}
+                  onClick={() => setOpen(false)}
+                  data-cursor="hover"
+                  className="flex items-center justify-between gap-2 rounded-xl border border-[var(--color-line)] px-3 py-2 text-sm transition-colors hover:border-[color-mix(in_oklch,var(--color-cyan)_35%,transparent)]"
+                >
+                  <span className="font-medium text-[var(--color-ink)]">{p.title}</span>
+                  <ArrowUpRight size={13} className="shrink-0 text-[var(--color-faint)]" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {result.actions.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {result.actions.map((act) =>
+              act.external ? (
+                <a
+                  key={act.label}
+                  href={act.label === "WhatsApp" ? waForQuery(q, act.href) : act.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)]"
+                >
+                  {act.label}
+                </a>
+              ) : (
+                <Link
+                  key={act.label}
+                  href={act.href}
+                  onClick={() => setOpen(false)}
+                  data-cursor="hover"
+                  className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-ink)]"
+                >
+                  {act.label}
+                </Link>
+              ),
+            )}
+          </div>
+        )}
+
+        {showFallback && (
+          <div className="grid gap-2">
+            <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+              {result.fallback.split("message us on WhatsApp")[0]}
+              <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
+                message us on WhatsApp
+              </Link>
+              {result.fallback.split("message us on WhatsApp")[1] ?? ""}
+            </p>
+            {result.suggestions.map((s, i) => (
+              <button
+                key={`${s}:${i}`}
+                onClick={() => onSuggestion(s)}
+                data-cursor="hover"
+                className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const showSuggestions = chatMode ? messages.length === 0 : turns.length === 0;
 
   return (
     <>
@@ -149,8 +279,8 @@ export function AiAssistant() {
             </div>
 
             <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4">
-              {/* Suggestions (both modes, shown until the user engages) */}
-              {((chatMode && messages.length === 0) || (!chatMode && !hasQuery)) && (
+              {/* Suggestions — shown until the first question */}
+              {showSuggestions && (
                 <div className="grid gap-2">
                   <p className="text-sm text-[var(--color-muted)]">Try asking:</p>
                   {SUGGESTIONS.map((s) => (
@@ -166,7 +296,7 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {/* CHAT MODE — conversation transcript */}
+              {/* CHAT MODE — LLM conversation transcript */}
               {chatMode && (
                 <div className="grid gap-3">
                   {messages.map((m, i) => (
@@ -191,99 +321,26 @@ export function AiAssistant() {
                 </div>
               )}
 
-              {/* STATIC MODE — conversational reply (greetings, "kaise ho", thanks…) */}
-              {!chatMode && hasQuery && result.smallTalk && (
-                <div className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
-                  {result.smallTalk}
-                </div>
-              )}
-
-              {/* STATIC MODE — Hindi helper line (answers stay accurate-English) */}
-              {!chatMode && hasQuery && result.hindiNote && (
-                <a
-                  href={WA_HINDI}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  className="mb-3 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-                >
-                  {result.hindiNote}
-                </a>
-              )}
-
-              {/* STATIC MODE — knowledge / FAQ / catalog answers */}
+              {/* STATIC MODE — conversation transcript (question bubble + rich answer) */}
               {!chatMode &&
-                result.cards.map((a, i) => (
-                  <div key={`${a.tag}:${a.q}:${i}`} className="mb-3 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
-                    <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
-                    <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
-                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
-                    {a.href && (
-                      <Link
-                        href={a.href}
-                        onClick={() => setOpen(false)}
-                        className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)]"
-                      >
-                        Open page <ArrowUpRight size={12} />
-                      </Link>
-                    )}
-                  </div>
+                turns.map((t) => (
+                  <motion.div
+                    key={t.id}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="mb-4"
+                  >
+                    <div className="ml-auto mb-2 w-fit max-w-[88%] rounded-2xl bg-[var(--color-amber)] px-4 py-2.5 text-sm font-medium text-[var(--color-void)]">
+                      {t.query}
+                    </div>
+                    {renderAnswer(t.result, t.query)}
+                  </motion.div>
                 ))}
 
-              {/* STATIC MODE — related plants */}
-              {!chatMode && result.productHits.length > 0 && (
-                <div className="mt-1">
-                  <div className="mb-2 text-[11px] uppercase tracking-wider text-[var(--color-faint)]">Related plants</div>
-                  <div className="grid gap-2">
-                    {result.productHits.map((p) => (
-                      <Link
-                        key={p.href}
-                        href={p.href}
-                        onClick={() => setOpen(false)}
-                        data-cursor="hover"
-                        className="flex items-center justify-between gap-2 rounded-xl border border-[var(--color-line)] px-3 py-2 text-sm transition-colors hover:border-[color-mix(in_oklch,var(--color-cyan)_35%,transparent)]"
-                      >
-                        <span className="font-medium text-[var(--color-ink)]">{p.title}</span>
-                        <ArrowUpRight size={13} className="shrink-0 text-[var(--color-faint)]" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* STATIC MODE — contextual next-step CTAs under a substantive answer */}
-              {!chatMode && result.actions.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {result.actions.map((act) =>
-                    act.external ? (
-                      <a
-                        key={act.label}
-                        href={act.label === "WhatsApp" ? waWithContext(act.href) : act.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-cursor="hover"
-                        className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)]"
-                      >
-                        {act.label}
-                      </a>
-                    ) : (
-                      <Link
-                        key={act.label}
-                        href={act.href}
-                        onClick={() => setOpen(false)}
-                        data-cursor="hover"
-                        className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-ink)]"
-                      >
-                        {act.label}
-                      </Link>
-                    ),
-                  )}
-                </div>
-              )}
-
-              {/* STATIC MODE — inline lead capture on buying/contact intent */}
-              {!chatMode && result.leadIntent && (
-                <div className="mt-3 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_30%,transparent)] bg-[var(--color-surface)] p-4">
+              {/* STATIC MODE — inline lead form (once, when the latest turn shows buying intent) */}
+              {!chatMode && lastTurn?.result.leadIntent && (
+                <div className="mt-1 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_30%,transparent)] bg-[var(--color-surface)] p-4">
                   {leadState === "done" ? (
                     <p className="text-sm text-[var(--color-muted)]">Thanks! 🙏 The team will reach out shortly. For an instant reply, ping us on WhatsApp.</p>
                   ) : (
@@ -318,31 +375,6 @@ export function AiAssistant() {
                   )}
                 </div>
               )}
-
-              {/* STATIC MODE — no direct answer: help with closest topics (never dead-end) */}
-              {!chatMode && showFallback && (
-                <div className="grid gap-2">
-                  {!result.smallTalk && (
-                    <p className="text-sm leading-relaxed text-[var(--color-muted)]">
-                      {result.fallback.split("message us on WhatsApp")[0]}
-                      <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
-                        message us on WhatsApp
-                      </Link>
-                      {result.fallback.split("message us on WhatsApp")[1] ?? ""}
-                    </p>
-                  )}
-                  {result.suggestions.map((s, i) => (
-                    <button
-                      key={`${s}:${i}`}
-                      onClick={() => onSuggestion(s)}
-                      data-cursor="hover"
-                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
 
             <form onSubmit={onSubmit} className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-3">
@@ -363,7 +395,7 @@ export function AiAssistant() {
                 </button>
               </div>
               <p className="mt-2 text-center text-[10px] text-[var(--color-faint)]">
-                {chatMode ? "AI assistant · grounded in the YUGA catalog" : "Catalog-powered search · full AI chat coming soon"}
+                {chatMode ? "AI assistant · grounded in the YUGA catalog" : "Catalog-powered · ask follow-ups, it remembers context"}
               </p>
             </form>
           </motion.div>
