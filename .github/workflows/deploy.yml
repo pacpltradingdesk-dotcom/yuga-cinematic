@@ -15,6 +15,13 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Opt every JavaScript action into the Node.js 24 runtime ahead of GitHub's
+# 2026-06-16 forced switch, so the deploy is validated under Node 24 now
+# instead of breaking unattended on that date. Version-agnostic — no per-action
+# tag bumps to guess. Remove once all actions ship Node 24 by default.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   build:
     runs-on: ubuntu-latest
