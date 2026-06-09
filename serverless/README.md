@@ -84,9 +84,30 @@ res = await fetch("https://api.openai.com/v1/chat/completions", {
 ```
 and set `OPENAI_API_KEY` as the secret instead.
 
-## Security / hygiene
+## Security (this proxy spends your paid API budget — read this)
 
-- CORS is locked to the site origin(s) in `ALLOWED_ORIGINS`.
-- Query length is capped (`MAX_QUERY_CHARS`) and history clamped (`MAX_HISTORY`).
-- For heavier traffic, add Cloudflare rate-limiting / Turnstile in front of the Worker.
-- Never commit the API key. It only ever lives as a Worker secret.
+A public static site can't hold a true secret (anything in the browser bundle is
+readable), so the proxy is layered:
+
+1. **Hard Origin allow-list** — requests whose `Origin` isn't in `ALLOWED_ORIGINS`
+   get `403` before any work. (CORS alone is *not* access control — `Origin` is
+   forgeable by non-browser callers, which is why the next layer matters.)
+2. **Turnstile (recommended in production)** — the real defense against curl/bot
+   abuse. The site already integrates Cloudflare Turnstile (`NEXT_PUBLIC_TURNSTILE_KEY`).
+   Set the secret on the worker:
+   ```bash
+   wrangler secret put TURNSTILE_SECRET   # Turnstile "secret key" from Cloudflare
+   ```
+   When set, every request MUST include a valid `turnstileToken`. (Extend
+   `src/lib/ai.ts` to solve a Turnstile challenge and pass the token — until then,
+   leave `TURNSTILE_SECRET` unset and rely on Origin + rate-limit.)
+3. **Cloudflare rate-limiting** — add a per-IP rate-limit rule on the worker route
+   (dashboard → Security → WAF/Rate limiting), e.g. 20 req/min/IP.
+4. **Size caps** — query, context, per-message and total payload are all bounded
+   in the worker (amplification guard).
+5. **Prompt-injection** — the client sends `context`, so it's treated as untrusted
+   *reference data* and the prompt forbids obeying instructions inside it. A
+   visitor can only affect their own reply (the worker holds no other data). For
+   maximum isolation, build the context **inside the worker** from an embedded
+   catalog bundle and ignore the request's `context` field entirely.
+6. **Never commit the API key** — it only ever lives as a Worker secret.
