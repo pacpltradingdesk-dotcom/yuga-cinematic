@@ -40,7 +40,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Answers in 30 seconds"
             title="Find your fit before you call."
-            intro="Drag a budget, pick your state, check a subsidy — instant, indicative numbers across all nine plants. No form, no wait."
+            intro="Drag a budget, pick your state, check a subsidy — instant numbers across all nine plants. No form, no wait."
           />
           <div className="mt-12">
             <InstantTools />
@@ -87,7 +87,7 @@ export default function HomePage() {
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Transparent Pricing"
-            title="Indicative pricing, up front."
+            title="What it costs, up front."
             intro="PMC, AI software and capital-markets — minimum to typical. Real numbers depend on scope; here's the range to plan with."
           />
           <div className="mt-12">

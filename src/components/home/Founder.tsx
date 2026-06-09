@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -10,6 +11,19 @@ export function Founder() {
     <section className="relative overflow-hidden py-[var(--space-section)]">
       <div className="maxw container-x grid items-center gap-14 lg:grid-cols-2">
         <div>
+          {company.founderPhoto && (
+            <Reveal>
+              <div className="relative mb-7 h-28 w-28 overflow-hidden rounded-2xl ring-1 ring-[var(--color-line)]">
+                <Image
+                  src={company.founderPhoto}
+                  alt={`${company.founder}, ${company.founderTitle}`}
+                  fill
+                  sizes="112px"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+          )}
           <Reveal>
             <Badge accent="amber">The Founder</Badge>
           </Reveal>

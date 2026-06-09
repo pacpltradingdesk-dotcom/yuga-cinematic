@@ -302,7 +302,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Investment & Returns"
-            title="Indicative cost, output & payback."
+            title="Cost, output & payback."
             intro={p.financials.note}
           />
           <Reveal className="mt-10">

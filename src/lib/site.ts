@@ -35,6 +35,12 @@ export const company = {
     crm: "crm.ppsanatams.online",
     whatsapp: "whatsapp.ppsanatams.cloud",
   },
+  /**
+   * Founder portrait. Set to "/assets/img/founder.jpg" once the real photo is
+   * added to public/assets/img/ — it then appears automatically on the homepage.
+   * null hides it (no broken image, current track-record card is shown as-is).
+   */
+  founderPhoto: null as string | null,
 } as const;
 
 /**

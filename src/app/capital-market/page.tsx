@@ -82,7 +82,7 @@ export default function CapitalMarketPage() {
         <div className="maxw container-x">
           <SectionHeading
             eyebrow="Value It Yourself"
-            title="Indicative valuation & readiness, instantly."
+            title="Valuation & readiness, instantly."
             intro="Estimate enterprise value, self-check IPO/funding readiness, and size debt — before the first call."
           />
           <div className="mt-12">
