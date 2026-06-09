@@ -1,13 +1,13 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
-import { searchAssistant } from "@/lib/assistant";
+import { searchAssistant, isThinFollowUp } from "@/lib/assistant";
 import { cn } from "@/lib/utils";
 
 /**
@@ -39,8 +39,21 @@ export function AiAssistant() {
   const pathname = usePathname();
   const pageSlug = useMemo(() => pathname.match(/^\/products\/([^/]+)/)?.[1], [pathname]);
 
+  // Follow-up memory: remember the last substantive topic so a thin query
+  // ("20 tpd", "iska kitna?") stays in context.
+  const lastTopicRef = useRef("");
+
   /** Static-mode result — recomputed as the user types. */
-  const result = useMemo(() => searchAssistant(query, pageSlug), [query, pageSlug]);
+  const result = useMemo(() => searchAssistant(query, pageSlug, lastTopicRef.current), [query, pageSlug]);
+
+  useEffect(() => {
+    const q = query.trim();
+    const tokens = q.split(/\s+/).filter(Boolean);
+    // Store only real, multi-word topics — never overwrite with a thin follow-up.
+    if (q && result.cards.length > 0 && tokens.length >= 2 && !isThinFollowUp(q)) {
+      lastTopicRef.current = q;
+    }
+  }, [query, result.cards.length]);
   const showFallback = hasQuery && result.cards.length === 0 && result.productHits.length === 0;
 
   async function sendToAi(text: string): Promise<void> {

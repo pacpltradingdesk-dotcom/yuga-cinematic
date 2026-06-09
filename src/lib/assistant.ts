@@ -250,6 +250,18 @@ function calcAnswer(raw: string, pageSlug?: string): AssistantCard | null {
   };
 }
 
+/**
+ * A query is a "follow-up" when it names no product and is just a capacity, a
+ * pronoun or a couple of words ("20 tpd", "and that?", "iska kitna"). In that
+ * case we blend the previous topic so the answer stays in context.
+ */
+export function isThinFollowUp(raw: string): boolean {
+  if (detectProduct(raw)) return false;
+  if (CAP_RE.test(raw)) return true;
+  if (/^\s*(aur|and|what about|iska|uska|isme|usme|ye|yeh|that|this|same|inka|unka)\b/i.test(raw.trim())) return true;
+  return expandTokens(raw).length <= 1;
+}
+
 interface Scored<T> {
   readonly item: T;
   readonly score: number;
@@ -270,10 +282,13 @@ function scoreText(queryTokens: readonly string[], keywords: readonly string[], 
 
 const MIN_CARD_SCORE = 1.2;
 
-export function searchAssistant(raw: string, pageSlug?: string): AssistantResult {
+export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: string): AssistantResult {
   const smallTalk = smallTalkReply(raw);
-  const qt = expandTokens(raw);
-  const calcCard = calcAnswer(raw, pageSlug);
+  // Follow-up: blend the previous topic when the new query is thin/contextual.
+  const followUp = !!prevTopic && isThinFollowUp(raw);
+  const effective = followUp ? `${prevTopic} ${raw}` : raw;
+  const qt = expandTokens(effective);
+  const calcCard = calcAnswer(raw, pageSlug) ?? (followUp ? calcAnswer(effective, pageSlug) : null);
 
   if (qt.length === 0 && !calcCard) {
     return {
