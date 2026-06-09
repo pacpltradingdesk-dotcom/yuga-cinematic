@@ -113,7 +113,7 @@ export function Hero() {
       <div className="absolute inset-x-0 bottom-0 border-t border-[var(--color-line)] bg-[var(--color-void)]/70 py-3 backdrop-blur">
         <Marquee duration={32} className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">
           <span className="px-6">CSIR-CRRI KrishiBind aligned</span>·
-          <span className="px-6">BSE-listed founder (IPO 2020)</span>·
+          <span className="px-6">BSE SME-listed founder (Omnipotent, 2021)</span>·
           <span className="px-6">9 plants commissioned</span>·
           <span className="px-6">NHAI / MoRTH compliant</span>·
           <span className="px-6">150,000-contact network</span>·

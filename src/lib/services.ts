@@ -23,7 +23,7 @@ export const engagementModels: readonly EngagementModel[] = [
       "Domestic JV with investors, land-owners or existing plants",
       "International JV for technology transfer & supply",
       "Equity / profit-share structures with clear governance",
-      "11 JVs structured under the founder's BSE-listed venture",
+      "Joint ventures structured under the founder's BSE-listed venture",
     ],
     accent: "amber",
   },

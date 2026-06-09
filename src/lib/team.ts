@@ -28,10 +28,10 @@ export const leadership: readonly LeadershipMember[] = [
   {
     name: company.founder,
     role: company.founderTitle,
-    bio: "A 25-year bitumen-industry veteran and MCA-registered company director who has personally commissioned 9 plants. Founder of a BSE-listed bitumen company (IPO 2020) — 3 plants, 11 joint ventures and 1.2 Lakh MT annual trading — bringing rare first-hand listing and fundraising experience to every engagement.",
+    bio: "A 25-year bitumen-industry veteran and MCA-registered company director who has personally commissioned 9 plants. Founder of Omnipotent Industries, a BSE SME-listed bitumen company (2021) — bringing rare first-hand listing and fundraising experience to every engagement.",
     credentials: [
       "25+ years in bitumen, since 2001",
-      "Founder of a BSE-listed bitumen company — IPO 2020",
+      "Founder of Omnipotent Industries — BSE SME-listed bitumen company (2021)",
       "9 plants personally commissioned across India",
       "MBA, Marketing & Finance",
       "Pride of India Icon 2021 — Best Fast-Growing Business",

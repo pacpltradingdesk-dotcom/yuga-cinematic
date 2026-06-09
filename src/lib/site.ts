@@ -113,10 +113,10 @@ export const stats = [
 export const keyFacts = [
   "25+ years in the bitumen industry (since 2001)",
   "9 bitumen plants commissioned across India",
-  "25 years as MCA-registered Company Director",
-  "Founder of a BSE-listed bitumen company (IPO 2020)",
+  "MCA-registered Company Director - PPS Anantams (since 2019)",
+  "Founder of Omnipotent Industries - a BSE SME-listed bitumen company (2021)",
   "150,000-contact pan-India industry database, 18 states",
-  "Pride of India Icon 2021 - Best Fast-Growing Business",
+  "Pride of India Icon Award 2021 - Best Fast-Growing Business of the Year",
 ] as const;
 
 /** The three business verticals. */
@@ -225,7 +225,7 @@ export const sevenPhases = [
   { n: "04", t: "Machinery & Plant Setup", d: "Verified OEM vendor network, best-price negotiation, installation, commissioning, quality lab." },
   { n: "05", t: "Technology & Production", d: "4-stage bio-bitumen process; product mix Emulsion / CRMB / PMB / VG-30 / Bio-Modified VG-30." },
   { n: "06", t: "HR & Training", d: "Recruitment, operator training (pyrolysis, blending, QC), safety & environmental compliance." },
-  { n: "07", t: "Market & Sales Support", d: "Buyer network (2,758 contractors + 994 traders + 360 importers), tender tracking, 6-month hand-holding." },
+  { n: "07", t: "Market & Sales Support", d: "Multi-thousand buyer network (contractors, traders & importers), tender tracking, 6-month hand-holding." },
 ] as const;
 
 export const products = [
@@ -258,7 +258,7 @@ export const fundStages = [
   { t: "Seed Funding", d: "Early capital to start and prove the venture; founder/angel structuring." },
   { t: "Series A / B / C", d: "Scaling capital from angels, VCs and PE; cap-table design and dilution planning." },
   { t: "Strategic / JV", d: "Corporate and joint-venture funding structures." },
-  { t: "IPO & Listing", d: "SME & Main-Board readiness - done before (BSE-listed bitumen company, 2020, fully subscribed)." },
+  { t: "IPO & Listing", d: "SME & Main-Board readiness - done before (Omnipotent Industries, BSE SME listed 2021)." },
 ] as const;
 
 export const loans = [
@@ -285,7 +285,7 @@ export const career = [
   { yr: "2013-14", t: "Emulsion plant · Karnataka", d: "CEO; 1st fully-automatic Emulsion plant in the state" },
   { yr: "2016", t: "Decanter plant · Panvel", d: "1st Decanter plant in Panvel, Maharashtra" },
   { yr: "2018-19", t: "Plants · Kandla & Karjan", d: "Gujarat & Vadodara plant builds" },
-  { yr: "2020", t: "BSE IPO · bitumen company", d: "Fully subscribed; 11 JVs; 1.2 Lakh MT/yr" },
+  { yr: "2021", t: "BSE SME IPO · Omnipotent Industries", d: "Bitumen company listed on BSE SME (Nov 2021)" },
   { yr: "2024", t: "PACPL / YUGA operational", d: "CSIR-CRRI bio-bitumen consulting launched" },
   { yr: "2025-26", t: "Decanter + Emulsion plant · Mathura & Hubli", d: "Decanter + Emulsion · PMB plant (ongoing)" },
 ] as const;
@@ -381,7 +381,7 @@ export const faqs = [
   },
   {
     q: "Do you help find buyers?",
-    a: "Yes - a live database of 2,758 contractors, 994 traders and direct NHAI/PWD contacts across 18 states; active sales support for 6 months post-commissioning.",
+    a: "Yes - a multi-thousand-contact live database of contractors, traders and direct NHAI/PWD contacts across 18 states; active sales support for 6 months post-commissioning.",
   },
   {
     q: "What makes PPS Anantams different?",

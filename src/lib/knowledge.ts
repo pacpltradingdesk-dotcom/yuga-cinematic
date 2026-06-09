@@ -227,7 +227,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Equity funding & investors",
     keywords: ["funding", "investor", "equity", "venture", "vc", "angel", "series a", "raise capital", "private equity", "fundraise"],
     answer:
-      "Beyond debt, we structure equity — seed, Series A/B/C, strategic/JV, all the way to an IPO. The founder has personally taken a bitumen company to a fully-subscribed BSE listing in 2020, so the fundraising advice is first-hand, not theoretical. We build the pitch deck, valuation, data room and term sheets.",
+      "Beyond debt, we structure equity — seed, Series A/B/C, strategic/JV, all the way to an IPO. The founder took Omnipotent Industries, a bitumen company, to a BSE SME listing in 2021, so the fundraising advice is first-hand, not theoretical. We build the pitch deck, valuation, data room and term sheets.",
     href: "/capital-market",
   },
   {
@@ -235,7 +235,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "IPO & public listing",
     keywords: ["ipo", "listing", "public", "bse", "nse", "sme ipo", "go public", "stock exchange"],
     answer:
-      "We prepare companies for SME and Main-Board listings — readiness, valuation, DRHP support and investor positioning. This is lived experience: the founder listed a bitumen company on the BSE in 2020 (fully subscribed, 11 JVs, 1.2 lakh MT/yr), so we know what the journey actually demands.",
+      "We prepare companies for SME and Main-Board listings — readiness, valuation, DRHP support and investor positioning. This is lived experience: the founder listed Omnipotent Industries, a bitumen company, on the BSE SME platform in 2021, so we know what the journey actually demands.",
     href: "/capital-market",
   },
   {
@@ -311,7 +311,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Who buys it / finding buyers",
     keywords: ["buyers", "customers", "sell", "market support", "who buys", "demand", "contractors", "off take", "sales"],
     answer:
-      "Buyers are road contractors, PWD, NHAI, traders and exporters. Our edge is a live database of ~2,758 contractors, 994 traders and 360 importers across 18 states (150,000 contacts total) — so you're not setting up a plant and then wondering who to sell to. We give active sales support for ~6 months after commissioning.",
+      "Buyers are road contractors, PWD, NHAI, traders and exporters. Our edge is a multi-thousand-contact live database of contractors, traders and importers across 18 states (150,000 contacts total) — so you're not setting up a plant and then wondering who to sell to. We give active sales support for ~6 months after commissioning.",
     href: "/market-intelligence",
   },
 
@@ -321,7 +321,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "About YUGA / the founder",
     keywords: ["yuga", "who are you", "about", "company", "founder", "prince", "experience", "pacpl", "pps anantams", "background", "credentials"],
     answer:
-      "YUGA is the brand of PPS Anantams Corporation (PACPL). The founder, Prince Pratap Shah, has 25+ years in bitumen, has personally commissioned 9 plants across India, and took a bitumen company to a BSE IPO in 2020 — so this is a hands-on operator, not a desk consultant. We cover plant PMC, AI software and capital-markets fundraising.",
+      "YUGA is the brand of PPS Anantams Corporation (PACPL). The founder, Prince Pratap Shah, has 25+ years in bitumen, has personally commissioned 9 plants across India, and took Omnipotent Industries, a bitumen company, to a BSE SME listing in 2021 — so this is a hands-on operator, not a desk consultant. We cover plant PMC, AI software and capital-markets fundraising.",
     href: "/about",
   },
   {

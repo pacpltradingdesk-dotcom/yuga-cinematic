@@ -30,7 +30,7 @@ export default function CapitalMarketPage() {
       <PageHero
         eyebrow="Vertical C · Capital Markets"
         title="From First Seed Cheque to Public Listing"
-        intro="Full-spectrum fundraising and finance advisory - backed by a real, first-hand BSE IPO (bitumen company, 2020, fully subscribed)."
+        intro="Full-spectrum fundraising and finance advisory - backed by a real, first-hand BSE SME listing (Omnipotent Industries, bitumen, 2021)."
         accent="amber"
         image="capHero"
       />

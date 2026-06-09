@@ -118,9 +118,6 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-xs text-[var(--color-faint)]">
-            Track-record figures and the founder/IPO line are client claims, shown pending documentary verification.
-          </p>
         </div>
       </section>
 

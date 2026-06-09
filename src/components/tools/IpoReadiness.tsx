@@ -22,7 +22,7 @@ function verdictFor(score: number): Verdict {
   if (score <= 1) return { title: "Seed / early stage", detail: "Build traction and clean books first. Angel/seed capital and a solid DPR are the right next step.", accent: "amber" };
   if (score <= 3) return { title: "Private fundraise ready", detail: "Series A/B / strategic capital is realistic. Tighten governance and an investor data room before raising.", accent: "amber" };
   if (score === 4) return { title: "SME IPO candidate", detail: "You're close to a listing. Address the open item and prepare for SME-board readiness.", accent: "cyan" };
-  return { title: "Main-board IPO ready", detail: "Strong profile across all checks. A structured listing path (like our founder's BSE IPO, 2020) is on the table.", accent: "cyan" };
+  return { title: "Main-board IPO ready", detail: "Strong profile across all checks. A structured listing path (like our founder's BSE SME listing, 2021) is on the table.", accent: "cyan" };
 }
 
 /** Five-question funding/IPO readiness self-check → score + stage guidance. */
