@@ -32,7 +32,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "What is bitumen?",
     keywords: ["bitumen", "what is bitumen", "asphalt binder", "tar", "black material", "road material", "definition"],
     answer:
-      "Bitumen is the black, sticky, petroleum-derived binder that holds road aggregate together — about 5% of a road by weight but the part that makes it a road. India consumes ~9 million tonnes a year, and nearly half of it is imported. That import gap is exactly why bio-bitumen and local production are such a big opportunity.",
+      "Bitumen is the black, sticky, petroleum-derived binder that holds road aggregate together — about 5% of a road by weight but the part that makes it a road. India consumes ~87 lakh tonnes (≈8.7 million tonnes) a year, and ~40% of it is imported. That import gap is exactly why bio-bitumen and local production are such a big opportunity.",
     href: "/market-intelligence",
   },
   {

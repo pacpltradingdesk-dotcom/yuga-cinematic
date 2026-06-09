@@ -46,6 +46,10 @@ export interface AssistantResult {
   readonly suggestions: readonly string[];
   /** Contextual next-step CTAs shown under a substantive answer. */
   readonly actions: readonly AssistantAction[];
+  /** True when the query signals buying/contact intent → offer a quick lead form. */
+  readonly leadIntent: boolean;
+  /** Hindi/Hinglish detected → a short Hindi helper line shown above answers. */
+  readonly hindiNote: string | null;
 }
 
 const DEFAULT_SUGGESTIONS: readonly string[] = [
@@ -186,6 +190,17 @@ const COST_INTENT = /\b(cost|costs?|invest|investment|capex|price|pricing|profit
 /** Capacity like "25 tpd", "10 mt", "20 mt/day", "5 tph". */
 const CAP_RE = /(\d+(?:\.\d+)?)\s*(tpd|tph|mt|ton)/i;
 
+/** Buying / contact intent → the widget offers an inline lead form. */
+const LEAD_INTENT = /\b(contact|call ?me|call ?back|callback|talk to|baat kar|connect me|get a quote|quote me|quotation|enqu(iry|ire)|inqu(iry|ire)|interested|i want to (start|set ?up|build|open)|request (a )?dpr|dpr chahiye|book a call|consult|reach you)\b/i;
+
+/** Hindi (Devanagari) or Hinglish markers → answers stay accurate-English but we
+ * add a Hindi helper line offering a Hindi WhatsApp conversation. */
+const HINDI_MARKERS = /\b(kya|kaise|kaisa|kitna|kitne|kitni|chahiye|batao|bataye|bataiye|karna|karne|sakte|sakta|kahan|kyun|mujhe|hume|paisa|paise|lagat|kharch|zameen|jagah|anudaan|sabsidi|shuru|banana|matlab)\b/i;
+const HINDI_NOTE = "Hindi mein detail chahiye? WhatsApp par poochein — team Hindi mein jawab degi. 🙏";
+function isHindiQuery(raw: string): boolean {
+  return /[ऀ-ॿ]/.test(raw) || HINDI_MARKERS.test(raw);
+}
+
 /** Leading number in a tier capacity label ("30-50 MT/Day" → 30). */
 function tierCapNumber(cap: string): number {
   const m = cap.match(/\d+(?:\.\d+)?/);
@@ -288,7 +303,11 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
   const followUp = !!prevTopic && isThinFollowUp(raw);
   const effective = followUp ? `${prevTopic} ${raw}` : raw;
   const qt = expandTokens(effective);
-  const calcCard = calcAnswer(raw, pageSlug) ?? (followUp ? calcAnswer(effective, pageSlug) : null);
+  // On a follow-up, the blended query (prev topic + new) wins so a thin "20 tpd"
+  // keeps the previous product instead of falling back to the default.
+  const calcCard = followUp
+    ? (calcAnswer(effective, pageSlug) ?? calcAnswer(raw, pageSlug))
+    : calcAnswer(raw, pageSlug);
 
   if (qt.length === 0 && !calcCard) {
     return {
@@ -300,6 +319,8 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
         "Ask me anything about bitumen plants — costs, subsidy, land, licences, funding or carbon credits. Pick a topic to start 👇",
       suggestions: DEFAULT_SUGGESTIONS,
       actions: [],
+      leadIntent: false,
+      hindiNote: isHindiQuery(raw) ? HINDI_NOTE : null,
     };
   }
 
@@ -371,5 +392,14 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
 
   const actions = cards.length > 0 || productHits.length > 0 ? ACTIONS : [];
 
-  return { smallTalk, cards, productHits, fallback, suggestions, actions };
+  return {
+    smallTalk,
+    cards,
+    productHits,
+    fallback,
+    suggestions,
+    actions,
+    leadIntent: LEAD_INTENT.test(raw),
+    hindiNote: isHindiQuery(raw) ? HINDI_NOTE : null,
+  };
 }

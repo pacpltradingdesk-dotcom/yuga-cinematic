@@ -8,6 +8,8 @@ import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
 import { searchAssistant, isThinFollowUp } from "@/lib/assistant";
+import { submitLead, leadWaLink } from "@/lib/leads";
+import { waLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -21,11 +23,16 @@ import { cn } from "@/lib/utils";
  * + grounded catalog context there. No key ever touches the browser.
  */
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
+const WA_HINDI = waLink("Namaste YUGA, mujhe Hindi mein jaankari chahiye.");
 
 export function AiAssistant() {
   const chatMode = hasAiChat();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+
+  // Inline lead capture (shown on buying/contact intent).
+  const [lead, setLead] = useState({ name: "", phone: "" });
+  const [leadState, setLeadState] = useState<"idle" | "sending" | "done">("idle");
 
   // Chat-mode state (only used when an AI endpoint is configured).
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -84,6 +91,26 @@ export function AiAssistant() {
   function onSuggestion(s: string): void {
     if (chatMode) void sendToAi(s);
     else setQuery(s);
+  }
+
+  /** Submit the inline lead — emails via Web3Forms, else opens WhatsApp. Never loses the lead. */
+  async function submitAssistantLead(): Promise<void> {
+    if (!lead.name.trim() || !lead.phone.trim() || leadState === "sending") return;
+    const input = {
+      name: lead.name.trim(),
+      phone: lead.phone.trim(),
+      interest: query.trim() || lastTopicRef.current || "General enquiry (site assistant)",
+      source: pageSlug ? `assistant:${pageSlug}` : "assistant",
+    };
+    setLeadState("sending");
+    try {
+      const r = await submitLead(input);
+      if (r === "whatsapp") window.open(leadWaLink(input), "_blank", "noopener");
+    } catch {
+      window.open(leadWaLink(input), "_blank", "noopener");
+    } finally {
+      setLeadState("done");
+    }
   }
 
   return (
@@ -165,6 +192,19 @@ export function AiAssistant() {
                 </div>
               )}
 
+              {/* STATIC MODE — Hindi helper line (answers stay accurate-English) */}
+              {!chatMode && hasQuery && result.hindiNote && (
+                <a
+                  href={WA_HINDI}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  className="mb-3 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+                >
+                  {result.hindiNote}
+                </a>
+              )}
+
               {/* STATIC MODE — knowledge / FAQ / catalog answers */}
               {!chatMode &&
                 result.cards.map((a, i) => (
@@ -231,6 +271,44 @@ export function AiAssistant() {
                         {act.label}
                       </Link>
                     ),
+                  )}
+                </div>
+              )}
+
+              {/* STATIC MODE — inline lead capture on buying/contact intent */}
+              {!chatMode && result.leadIntent && (
+                <div className="mt-3 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_30%,transparent)] bg-[var(--color-surface)] p-4">
+                  {leadState === "done" ? (
+                    <p className="text-sm text-[var(--color-muted)]">Thanks! 🙏 The team will reach out shortly. For an instant reply, ping us on WhatsApp.</p>
+                  ) : (
+                    <>
+                      <p className="text-sm font-medium text-[var(--color-ink)]">Want a callback or a quote?</p>
+                      <p className="mt-0.5 text-xs text-[var(--color-faint)]">Leave your number — our team will reach out.</p>
+                      <div className="mt-3 grid gap-2">
+                        <input
+                          value={lead.name}
+                          onChange={(e) => setLead((l) => ({ ...l, name: e.target.value }))}
+                          placeholder="Your name"
+                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
+                        />
+                        <input
+                          value={lead.phone}
+                          onChange={(e) => setLead((l) => ({ ...l, phone: e.target.value }))}
+                          placeholder="Phone / WhatsApp"
+                          inputMode="tel"
+                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
+                        />
+                        <button
+                          onClick={() => void submitAssistantLead()}
+                          disabled={leadState === "sending" || !lead.name.trim() || !lead.phone.trim()}
+                          data-cursor="hover"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--color-amber)] px-4 py-2 text-sm font-medium text-[var(--color-void)] transition-opacity disabled:opacity-50"
+                        >
+                          {leadState === "sending" ? <Loader2 size={14} className="animate-spin" /> : null}
+                          {leadState === "sending" ? "Sending…" : "Request a callback"}
+                        </button>
+                      </div>
+                    </>
                   )}
                 </div>
               )}
