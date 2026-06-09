@@ -70,7 +70,7 @@ export function InvestmentExplorer() {
         value={budget}
         onChange={(e) => setBudget(Number(e.target.value))}
         aria-label="Investment budget in crore rupees"
-        className="mt-5 w-full accent-[var(--color-amber)]"
+        className="mt-4 w-full cursor-pointer py-2 accent-[var(--color-amber)]"
       />
       <div className="mt-1 flex justify-between text-[10px] uppercase tracking-wider text-[var(--color-faint)]">
         <span>₹{MIN} Cr</span>

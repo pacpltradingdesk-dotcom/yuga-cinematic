@@ -24,7 +24,7 @@ export function PricingTables() {
             data-cursor="hover"
             aria-pressed={i === active}
             className={cn(
-              "relative rounded-full border px-4 py-2 text-sm transition-colors",
+              "relative inline-flex min-h-11 items-center rounded-full border px-4 py-2.5 text-sm transition-colors",
               i === active
                 ? "border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] text-[var(--color-ink)]"
                 : "border-[var(--color-line)] text-[var(--color-muted)] hover:text-[var(--color-ink)]",

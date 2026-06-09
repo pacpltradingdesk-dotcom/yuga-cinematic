@@ -90,7 +90,7 @@ export default function CaseStudiesPage() {
                         <Link
                           href={`/products/${c.productSlug}`}
                           data-cursor="hover"
-                          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-amber)]"
+                          className="mt-4 inline-flex items-center gap-1 py-1.5 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-amber)]"
                         >
                           Start a plant like this
                           <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

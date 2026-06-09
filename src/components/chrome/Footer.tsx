@@ -47,7 +47,7 @@ export function Footer() {
                 <Link
                   href={item.href}
                   data-cursor="hover"
-                  className="group inline-flex items-center gap-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+                  className="group inline-flex items-center gap-1 py-1 text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
                 >
                   {item.label}
                   <ArrowUpRight size={13} className="opacity-0 transition-opacity group-hover:opacity-100" />
@@ -62,14 +62,14 @@ export function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-muted)]">
             {company.phones.map((p) => (
               <li key={p}>
-                <a href={`tel:${p.replace(/\s/g, "")}`} data-cursor="hover" className="hover:text-[var(--color-ink)]">
+                <a href={`tel:${p.replace(/\s/g, "")}`} data-cursor="hover" className="inline-flex py-1 hover:text-[var(--color-ink)]">
                   {p}
                 </a>
               </li>
             ))}
             {company.emails.map((e) => (
               <li key={e}>
-                <a href={`mailto:${e}`} data-cursor="hover" className="hover:text-[var(--color-ink)]">
+                <a href={`mailto:${e}`} data-cursor="hover" className="inline-flex py-1 hover:text-[var(--color-ink)]">
                   {e}
                 </a>
               </li>
@@ -90,7 +90,7 @@ export function Footer() {
                   target={disabled ? undefined : "_blank"}
                   rel={disabled ? undefined : "noopener noreferrer"}
                   aria-disabled={disabled}
-                  className={`grid h-9 w-9 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] hover:text-[var(--color-amber)] ${
+                  className={`grid h-11 w-11 place-items-center rounded-full border border-[var(--color-line)] text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] hover:text-[var(--color-amber)] ${
                     disabled ? "pointer-events-none opacity-40" : ""
                   }`}
                 >
@@ -106,11 +106,11 @@ export function Footer() {
       <div className="maxw container-x border-t border-[var(--color-line)] py-6">
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[var(--color-faint)]">
           {legalDocs.map((d) => (
-            <Link key={d.slug} href={`/legal/${d.slug}`} data-cursor="hover" className="transition-colors hover:text-[var(--color-ink)]">
+            <Link key={d.slug} href={`/legal/${d.slug}`} data-cursor="hover" className="inline-flex items-center py-1 transition-colors hover:text-[var(--color-ink)]">
               {d.title}
             </Link>
           ))}
-          <CookiePrefsButton className="transition-colors hover:text-[var(--color-ink)]" />
+          <CookiePrefsButton className="inline-flex items-center py-1 transition-colors hover:text-[var(--color-ink)]" />
         </nav>
         <p className="mt-3 text-xs leading-relaxed text-[var(--color-faint)]">
           Grievance Officer: {GRIEVANCE_OFFICER} ·{" "}

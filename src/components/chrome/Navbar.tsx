@@ -156,7 +156,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="relative z-10 grid h-10 w-10 place-items-center rounded-full ring-1 ring-[var(--color-line)] lg:hidden"
+              className="relative z-10 grid h-11 w-11 place-items-center rounded-full ring-1 ring-[var(--color-line)] lg:hidden"
               aria-label="Toggle menu"
               aria-expanded={open}
               data-cursor="hover"

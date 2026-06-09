@@ -102,7 +102,7 @@ export function BestFitFinder() {
           value={budget}
           onChange={(e) => setBudget(Number(e.target.value))}
           aria-label="Investment budget in crore rupees"
-          className="mt-2 w-full accent-[var(--color-amber)]"
+          className="mt-1 w-full cursor-pointer py-2 accent-[var(--color-amber)]"
         />
       </div>
 

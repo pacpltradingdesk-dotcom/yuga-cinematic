@@ -31,7 +31,7 @@ export function ToolTabs({ tabs, layoutId }: { tabs: ToolTab[]; layoutId: string
               data-cursor="hover"
               aria-pressed={on}
               className={cn(
-                "relative isolate inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm transition-colors",
+                "relative isolate inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-3 text-sm transition-colors",
                 on ? "text-[var(--color-void)]" : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
               )}
             >

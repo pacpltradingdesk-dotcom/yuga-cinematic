@@ -183,7 +183,7 @@ export default function ITSoftwarePage() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hover"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-cyan)]"
+              className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-cyan)]"
             >
               Visit the live CRM <ArrowUpRight size={15} />
             </a>
