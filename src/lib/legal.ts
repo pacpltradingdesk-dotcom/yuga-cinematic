@@ -209,6 +209,42 @@ export const legalDocs: readonly LegalDoc[] = [
           "Business claims, track-record numbers and partnerships are indicative and subject to verification. Nothing on this site is investment, legal or tax advice.",
         ],
       },
+      {
+        heading: "Subsidies, loans & funding",
+        paragraphs: [
+          "We assist with documentation and applications only. Sanction of any loan or subsidy is at the sole discretion of the lender or government. No approval, rate or amount is guaranteed, and scheme rules change — verify current eligibility on the official portal before relying on it.",
+        ],
+      },
+      {
+        heading: "Regulatory approvals",
+        paragraphs: [
+          "Setting up a plant requires statutory approvals (e.g. CPCB / State PCB consent, and factory, fire, electrical and PESO licences). These rest solely with the authorities. Tyre and plastic pyrolysis units must comply with the applicable CPCB SOP. We support the filings; we do not guarantee any clearance.",
+        ],
+      },
+      {
+        heading: "Carbon credits",
+        paragraphs: [
+          "Carbon-credit eligibility, methodology approval, volume and price are not guaranteed and depend on the registry/scheme. Any carbon figures shown are illustrative, not assured revenue.",
+        ],
+      },
+      {
+        heading: "Software & AI products",
+        paragraphs: [
+          "Our software and AI tools (including the site assistant) are provided without any uptime, performance or result guarantee except as expressly set out in a signed agreement. AI-generated answers may contain errors and should be verified with our team before you rely on them.",
+        ],
+      },
+      {
+        heading: "No securities or trading advice",
+        paragraphs: [
+          "Nothing on this site is investment advice or a solicitation of securities. Capital-markets content is general information only. Paid trading or investment advice in India requires SEBI registration.",
+        ],
+      },
+      {
+        heading: "Limitation of liability",
+        paragraphs: [
+          "To the maximum extent permitted by law, YUGA is not liable for any indirect or consequential loss, or for decisions taken on the basis of indicative information on this website.",
+        ],
+      },
     ],
   },
   {
