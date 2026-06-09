@@ -93,6 +93,12 @@ export function AiAssistant() {
     else setQuery(s);
   }
 
+  /** Human handoff — WhatsApp link that carries what the visitor was asking. */
+  function waWithContext(fallbackHref: string): string {
+    const topic = (query.trim() || lastTopicRef.current).slice(0, 200);
+    return topic ? waLink(`Hi YUGA — I was asking the assistant about: "${topic}". Can you help?`) : fallbackHref;
+  }
+
   /** Submit the inline lead — emails via Web3Forms, else opens WhatsApp. Never loses the lead. */
   async function submitAssistantLead(): Promise<void> {
     if (!lead.name.trim() || !lead.phone.trim() || leadState === "sending") return;
@@ -252,7 +258,7 @@ export function AiAssistant() {
                     act.external ? (
                       <a
                         key={act.label}
-                        href={act.href}
+                        href={act.label === "WhatsApp" ? waWithContext(act.href) : act.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         data-cursor="hover"
