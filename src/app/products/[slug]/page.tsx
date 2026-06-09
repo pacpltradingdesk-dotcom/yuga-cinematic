@@ -391,7 +391,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
                     ~{plantCount.running}
                     {plantCount.potential && (
                       <span className="ml-3 text-base font-medium text-[var(--color-cyan)]">
-                        · ~{plantCount.potential} needed in 5–7 yr
+                        · ~{plantCount.potential} needed in 5–7 yr (est.)
                       </span>
                     )}
                   </div>

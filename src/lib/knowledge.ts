@@ -47,7 +47,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "VG (viscosity) grades",
     keywords: ["vg", "vg30", "vg 30", "vg10", "vg40", "viscosity grade", "grades", "is 73", "grade"],
     answer:
-      "Indian bitumen is sold by Viscosity Grade per IS 73 — VG-10, VG-20, VG-30 and VG-40. VG-30 is the workhorse for most highways and dense traffic; VG-40 for very heavy traffic and toll roads; VG-10 for spray/emulsion work in colder regions. Our bio-bitumen blends bio-oil ~20–30% into a VG-30 base while still meeting the spec.",
+      "Indian bitumen is sold by Viscosity Grade per IS 73 — VG-10, VG-20, VG-30 and VG-40. VG-30 is the workhorse for most highways and dense traffic; VG-40 for very heavy traffic and toll roads; VG-10 for spray/emulsion work in colder regions. Our bio-bitumen blends bio-oil into a VG-30 base — ~15% in current field use, up to ~20–30% in CSIR lab trials — while still meeting the spec.",
   },
   {
     id: "penetration-grades",
@@ -120,7 +120,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "What is bio-bitumen?",
     keywords: ["bio bitumen", "biobitumen", "bio modified", "krishibind", "csir", "crri", "green bitumen", "bio oil"],
     answer:
-      "Bio-bitumen replaces ~20–30% of conventional VG-30 with bio-oil made from agro-waste via pyrolysis (450–550°C), to the CSIR-CRRI 'KrishiBind' specification. It is designed to meet NHAI/MoRTH specs, with CSIR lab trials showing no performance loss — and India became the first country to commercially produce it in January 2026.",
+      "Bio-bitumen replaces part of conventional VG-30 with bio-oil made from agro-waste via pyrolysis (450–550°C), to the CSIR-CRRI 'KrishiBind' specification — ~15% in current field use, up to ~20–30% in CSIR lab trials. It is designed to meet NHAI/MoRTH specs with no performance loss in trials — and India became the first country to commercially produce it in January 2026.",
     href: "/products/bio-bitumen",
   },
   {

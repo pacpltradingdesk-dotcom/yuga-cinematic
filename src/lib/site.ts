@@ -198,7 +198,7 @@ export const bioProcess = [
   {
     step: "03",
     title: "Refining & Blending",
-    desc: "Oxidation at 230-250°C, then blended ~20-30% with VG-30 toward CSIR-CRRI specification.",
+    desc: "Oxidation at 230-250°C, then blended ~15-30% with VG-30 toward CSIR-CRRI specification.",
   },
   {
     step: "04",
@@ -346,7 +346,7 @@ export const marketOpportunity = [
   { stat: "~40%", label: "of India's bitumen is imported (≈60% met domestically, FY2025)" },
   { stat: "~87 L MT", label: "India's annual bitumen consumption (PPAC, 2025)" },
   { stat: "~1,000 km", label: "bio-bitumen pilot roads planned by 2027 (CSIR-CRRI / CSIR-IIP)" },
-  { stat: "~20-30%", label: "bio-replacement of conventional bitumen in CSIR lab trials (~20% in field)" },
+  { stat: "~20-30%", label: "bio-replacement in CSIR lab trials (~15% in current field use)" },
 ] as const;
 
 export const impact = [
@@ -365,11 +365,11 @@ export const statesCovered = [
 export const faqs = [
   {
     q: "What is Bio-Bitumen?",
-    a: "Road-grade bitumen where ~20-30% of conventional VG-30 is replaced with bio-oil from agro-waste via pyrolysis (450-550°C), designed to meet NHAI/MoRTH specs. CSIR lab trials show no performance loss at this blend.",
+    a: "Road-grade bitumen where part of conventional VG-30 is replaced with bio-oil from agro-waste via pyrolysis (450-550°C) — ~15% in current field use, up to ~20-30% in CSIR lab trials — designed to meet NHAI/MoRTH specs with no performance loss in trials.",
   },
   {
     q: "Is the technology proven?",
-    a: "Yes. CSIR-CRRI & CSIR-IIP developed the bio-bitumen pyrolysis process, with a pilot stretch laid on NH-40 (Jorabat-Shillong); lab trials show up to ~20-30% replacement of conventional bitumen without performance loss. India commercially launched bio-bitumen in January 2026.",
+    a: "Yes. CSIR-CRRI & CSIR-IIP developed the bio-bitumen pyrolysis process, and India's first bio-bitumen National Highway stretch is laid on NH-44 (Mansar, Nagpur). Current field blends are ~15%, with CSIR lab trials showing up to ~20-30% — and India commercially launched bio-bitumen in January 2026.",
   },
   {
     q: "How much investment is needed?",
