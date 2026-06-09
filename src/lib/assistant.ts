@@ -9,8 +9,9 @@
  * Component stays layout-only; all matching logic lives here.
  */
 import { KNOWLEDGE } from "@/lib/knowledge";
-import { products } from "@/lib/catalog";
-import { faqs } from "@/lib/site";
+import { products, getCalc, type CalcTier, type Product } from "@/lib/catalog";
+import { faqs, waLink } from "@/lib/site";
+import { crRange, numRange } from "@/lib/format";
 
 export interface AssistantCard {
   readonly tag: string;
@@ -25,6 +26,13 @@ export interface ProductHit {
   readonly subtitle: string;
 }
 
+export interface AssistantAction {
+  readonly label: string;
+  readonly href: string;
+  /** External link (opens in a new tab) vs an internal route. */
+  readonly external?: boolean;
+}
+
 export interface AssistantResult {
   /** Conversational reply for greetings / small talk (shown above cards). */
   readonly smallTalk: string | null;
@@ -36,6 +44,8 @@ export interface AssistantResult {
   readonly fallback: string;
   /** Topic chips to offer (smart "did you mean" when possible). */
   readonly suggestions: readonly string[];
+  /** Contextual next-step CTAs shown under a substantive answer. */
+  readonly actions: readonly AssistantAction[];
 }
 
 const DEFAULT_SUGGESTIONS: readonly string[] = [
@@ -165,6 +175,81 @@ function smallTalkReply(raw: string): string | null {
   return null;
 }
 
+/** Standard next-step CTAs offered under any substantive answer. */
+const ACTIONS: readonly AssistantAction[] = [
+  { label: "Request a DPR", href: "/contact" },
+  { label: "Book a call", href: "/contact" },
+  { label: "WhatsApp", href: waLink("Hi YUGA, I have a question from the site assistant."), external: true },
+];
+
+const COST_INTENT = /\b(cost|costs?|invest|investment|capex|price|pricing|profit|payback|roi|revenue|returns?|budget|setup|kitna|kitne|lagat|kharch|kharcha|paisa|paise|daam|kamai|munafa)\b/i;
+/** Capacity like "25 tpd", "10 mt", "20 mt/day", "5 tph". */
+const CAP_RE = /(\d+(?:\.\d+)?)\s*(tpd|tph|mt|ton)/i;
+
+/** Leading number in a tier capacity label ("30-50 MT/Day" → 30). */
+function tierCapNumber(cap: string): number {
+  const m = cap.match(/\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : NaN;
+}
+
+/** Product whose title/slug best matches the query; null if none clearly named. */
+function detectProduct(raw: string): Product | null {
+  const q = raw.toLowerCase();
+  let best: { p: Product; score: number } | null = null;
+  for (const p of products) {
+    const words = [...tokenize(p.title), ...p.slug.split("-")];
+    let score = 0;
+    for (const w of words) if (w.length > 2 && q.includes(w)) score += 1;
+    if (score > 0 && (!best || score > best.score)) best = { p, score };
+  }
+  return best?.p ?? null;
+}
+
+/**
+ * Calculator-style direct answer for "cost of a 25 TPD bio-bitumen plant".
+ * Grounds in the product's calc tiers (same numbers as the on-page Cost & ROI
+ * tool — never invented). `pageSlug` lets a product page default to its own
+ * product when the query doesn't name one. Returns null when the query isn't a
+ * capacity/cost question we can answer from calc data.
+ */
+function calcAnswer(raw: string, pageSlug?: string): AssistantCard | null {
+  const capM = raw.match(CAP_RE);
+  if (!capM && !COST_INTENT.test(raw)) return null;
+
+  const named = detectProduct(raw);
+  const pageProduct = pageSlug ? products.find((p) => p.slug === pageSlug && getCalc(p.slug)) : undefined;
+  const product = named ?? pageProduct ?? products.find((p) => p.slug === "bio-bitumen") ?? null;
+  if (!product) return null;
+
+  const calc = getCalc(product.slug);
+  if (!calc || calc.tiers.length === 0) return null;
+
+  let tier: CalcTier;
+  if (capM) {
+    const want = Number(capM[1]);
+    tier = calc.tiers.reduce((bestT, t) => {
+      const d = Math.abs(tierCapNumber(t.cap) - want);
+      const bd = Math.abs(tierCapNumber(bestT.cap) - want);
+      return Number.isNaN(d) ? bestT : d < bd ? t : bestT;
+    }, calc.tiers[0]);
+  } else {
+    tier = calc.tiers[Math.min(1, calc.tiers.length - 1)];
+  }
+
+  const parts = [`CAPEX ${crRange(tier.invest)}`];
+  if (tier.output) parts.push(`output ${numRange(tier.output)} ${tier.outUnit}`);
+  if (tier.revenue) parts.push(`revenue ${crRange(tier.revenue)}/yr`);
+  if (tier.profit) parts.push(`profit ${crRange(tier.profit)}/yr`);
+  parts.push(`payback ${tier.payback}`);
+
+  return {
+    tag: `${product.title} · ${tier.cap}`,
+    q: `~${tier.cap} ${product.title} plant`,
+    a: `${parts.join(" · ")}. Indicative — actual figures depend on location, feedstock price and utilisation; get a DPR for exact numbers.`,
+    href: `/products/${product.slug}#cost`,
+  };
+}
+
 interface Scored<T> {
   readonly item: T;
   readonly score: number;
@@ -185,11 +270,12 @@ function scoreText(queryTokens: readonly string[], keywords: readonly string[], 
 
 const MIN_CARD_SCORE = 1.2;
 
-export function searchAssistant(raw: string): AssistantResult {
+export function searchAssistant(raw: string, pageSlug?: string): AssistantResult {
   const smallTalk = smallTalkReply(raw);
   const qt = expandTokens(raw);
+  const calcCard = calcAnswer(raw, pageSlug);
 
-  if (qt.length === 0) {
+  if (qt.length === 0 && !calcCard) {
     return {
       smallTalk,
       cards: [],
@@ -198,6 +284,7 @@ export function searchAssistant(raw: string): AssistantResult {
         smallTalk ??
         "Ask me anything about bitumen plants — costs, subsidy, land, licences, funding or carbon credits. Pick a topic to start 👇",
       suggestions: DEFAULT_SUGGESTIONS,
+      actions: [],
     };
   }
 
@@ -230,7 +317,11 @@ export function searchAssistant(raw: string): AssistantResult {
     seen.add(key);
     return true;
   });
-  const cards = ranked.filter((c) => c.score >= MIN_CARD_SCORE).slice(0, 3).map((c) => c.item);
+  const baseCards = ranked.filter((c) => c.score >= MIN_CARD_SCORE).slice(0, 3).map((c) => c.item);
+  // A calculator answer (deterministic, grounded in calc tiers) always leads.
+  const cards = calcCard
+    ? [calcCard, ...baseCards.filter((c) => c.q !== calcCard.q)].slice(0, 3)
+    : baseCards;
 
   // Related product pages.
   const productHits: ProductHit[] = products
@@ -263,5 +354,7 @@ export function searchAssistant(raw: string): AssistantResult {
       ? nearMisses
       : DEFAULT_SUGGESTIONS;
 
-  return { smallTalk, cards, productHits, fallback, suggestions };
+  const actions = cards.length > 0 || productHits.length > 0 ? ACTIONS : [];
+
+  return { smallTalk, cards, productHits, fallback, suggestions, actions };
 }

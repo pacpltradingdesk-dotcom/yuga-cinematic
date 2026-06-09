@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
@@ -34,8 +35,12 @@ export function AiAssistant() {
 
   const hasQuery = query.trim().length > 0;
 
+  // Page-aware context: on a product page, calc answers default to that product.
+  const pathname = usePathname();
+  const pageSlug = useMemo(() => pathname.match(/^\/products\/([^/]+)/)?.[1], [pathname]);
+
   /** Static-mode result — recomputed as the user types. */
-  const result = useMemo(() => searchAssistant(query), [query]);
+  const result = useMemo(() => searchAssistant(query, pageSlug), [query, pageSlug]);
   const showFallback = hasQuery && result.cards.length === 0 && result.productHits.length === 0;
 
   async function sendToAi(text: string): Promise<void> {
@@ -184,6 +189,36 @@ export function AiAssistant() {
                       </Link>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* STATIC MODE — contextual next-step CTAs under a substantive answer */}
+              {!chatMode && result.actions.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {result.actions.map((act) =>
+                    act.external ? (
+                      <a
+                        key={act.label}
+                        href={act.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="hover"
+                        className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)]"
+                      >
+                        {act.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={act.label}
+                        href={act.href}
+                        onClick={() => setOpen(false)}
+                        data-cursor="hover"
+                        className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-ink)]"
+                      >
+                        {act.label}
+                      </Link>
+                    ),
+                  )}
                 </div>
               )}
 
