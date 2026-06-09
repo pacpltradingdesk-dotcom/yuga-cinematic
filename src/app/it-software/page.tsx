@@ -29,6 +29,7 @@ const serviceIcon: Record<string, LucideIcon> = {
 
 export const metadata: Metadata = {
   title: "AI Software Services",
+  alternates: { canonical: "/it-software" },
   description:
     "Seven in-house AI products for the bitumen and sales industry - AI sales dashboard, WhatsApp CRM, Excel lead cleaner, bulk messaging, call analytics, automated market reports and a voice agent.",
 };

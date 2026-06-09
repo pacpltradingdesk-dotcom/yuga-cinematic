@@ -8,6 +8,7 @@ import { company, waLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
+  alternates: { canonical: "/contact" },
   description:
     "Talk to YUGA / PPS Anantams about bio-bitumen plants, AI software or capital. Offices in Vadodara and Mumbai.",
 };

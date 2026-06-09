@@ -17,6 +17,7 @@ const prodImg: ImgKey[] = ["prod0", "prod1", "prod2", "prod3", "prod4"];
 
 export const metadata: Metadata = {
   title: "Industrial Consulting",
+  alternates: { canonical: "/industrial-consulting" },
   description:
     "End-to-end bitumen plant consultancy - PMB, CRMB, Emulsion, Decanter and Blown bitumen - across a 7-phase A-to-Z delivery model.",
 };

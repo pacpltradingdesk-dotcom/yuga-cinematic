@@ -18,6 +18,7 @@ import { fundStages, loans, finPrep } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Capital Markets & Fundraising",
+  alternates: { canonical: "/capital-market" },
   description:
     "From seed to IPO - fundraising, valuation, bank DPRs, subsidies and financial preparation, backed by first-hand BSE listing experience.",
 };

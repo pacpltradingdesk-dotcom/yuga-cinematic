@@ -21,6 +21,7 @@ const trustBlocks = Object.values(trust).map((b) => ({
 
 export const metadata: Metadata = {
   title: "About YUGA",
+  alternates: { canonical: "/about" },
   description:
     "PPS Anantams Corporation (PACPL) - India's full-service bio-bitumen PMC, founded by 25-year industry veteran and BSE-listed entrepreneur Prince Pratap Shah.",
 };

@@ -13,6 +13,7 @@ import { productImg } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Products — Plant & Manufacturing",
+  alternates: { canonical: "/products" },
   description:
     "Nine bio-bitumen, pyrolysis and bitumen-product plants YUGA takes from DPR to commercial production — bio-bitumen, plastic/tyre-to-fuel, PMB, CRMB, decanter, emulsion, micro-surfacing and blown bitumen.",
 };

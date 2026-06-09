@@ -38,15 +38,18 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!p) return { title: "Product" };
   const ogImage = `${siteUrl}${img[productImg[slug]].src}`;
   const canonical = `${siteUrl}/products/${slug}`;
+  // Prefer the per-product SEO copy from the catalog; fall back to derived values.
+  const titleTag = p.titleTag ?? `${p.title} Plant — PMC India`;
+  const metaDesc = p.metaDesc ?? p.subtitle;
   return {
-    title: `${p.title} Plant — PMC India`,
-    description: p.subtitle,
+    title: { absolute: titleTag },
+    description: metaDesc,
     alternates: { canonical },
     openGraph: {
-      title: `${p.title} Plant — PMC India`,
-      description: p.subtitle,
+      title: titleTag,
+      description: metaDesc,
       url: canonical,
-      type: "article",
+      type: "website",
       siteName: company.brand,
       images: [{ url: ogImage, alt: img[productImg[slug]].alt }],
     },

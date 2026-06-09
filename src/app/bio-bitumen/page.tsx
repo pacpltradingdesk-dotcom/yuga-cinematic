@@ -20,6 +20,7 @@ const ptImg: ImgKey[] = ["bio0", "bio1", "bio2", "bio3"];
 
 export const metadata: Metadata = {
   title: "Bio-Bitumen PMC",
+  alternates: { canonical: "/bio-bitumen" },
   description:
     "Pyrolysis bio-bitumen, plastic-to-fuel and tyre-to-oil plant consultancy - CSIR-CRRI KrishiBind aligned, NHAI/MoRTH compliant, from DPR to commissioning.",
 };

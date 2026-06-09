@@ -16,6 +16,7 @@ import { marketOpportunity, impact, statesCovered, faqs, reportLibrary } from "@
 
 export const metadata: Metadata = {
   title: "Market Intelligence",
+  alternates: { canonical: "/market-intelligence" },
   description:
     "Bio-bitumen market opportunity for 2026 - India's import gap, NHAI mandates, MNRE subsidies, environmental impact and the pan-India network behind YUGA.",
 };

@@ -39,6 +39,10 @@ export interface Product {
   readonly slug: string;
   readonly title: string;
   readonly subtitle: string;
+  /** SEO <title> — unique, keyword-rich, ~55–60 chars. Falls back to a derived title if absent. */
+  readonly titleTag?: string;
+  /** SEO meta description — ~150–160 chars. Falls back to `subtitle` if absent. */
+  readonly metaDesc?: string;
   readonly intro: readonly string[];
   readonly benefits: readonly string[];
   readonly applications: readonly string[];

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { HorizontalStory } from "@/components/home/HorizontalStory";
 import { Verticals } from "@/components/home/Verticals";
@@ -11,6 +12,21 @@ import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { ClientJourney } from "@/components/page/ClientJourney";
 import { CarbonStats, CarbonClaim } from "@/components/page/CarbonCredit";
 import { PricingTables } from "@/components/page/PricingTables";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Bio-Bitumen Plant PMC, AI Software & Capital Markets in India | YUGA",
+  },
+  description:
+    "YUGA (PPS Anantams) is India's full-service PMC for bio-bitumen, PMB, CRMB & pyrolysis plants — feasibility to commissioning, AI software and seed-to-IPO funding.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Bio-Bitumen Plant PMC, AI Software & Capital Markets in India | YUGA",
+    description:
+      "End-to-end PMC for bio-bitumen, PMB, CRMB & pyrolysis plants — engineered with AI software and funded by real BSE-IPO capital-markets expertise.",
+    url: "/",
+  },
+};
 
 export default function HomePage() {
   return (

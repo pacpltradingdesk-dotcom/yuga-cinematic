@@ -17,6 +17,7 @@ const csImg: ImgKey[] = ["cs0", "cs1", "cs2", "cs3"];
 
 export const metadata: Metadata = {
   title: "Case Studies",
+  alternates: { canonical: "/case-studies" },
   description:
     "Live YUGA PMC engagements - bio-bitumen plants in Haryana and Odisha - plus a ready library of bankable project reports. Client identities kept confidential.",
 };

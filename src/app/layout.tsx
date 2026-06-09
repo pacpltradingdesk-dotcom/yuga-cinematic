@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
-import { company, siteUrl } from "@/lib/site";
+import { company, siteUrl, registeredAddress, socials } from "@/lib/site";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Preloader } from "@/components/chrome/Preloader";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
@@ -51,21 +51,43 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/**
+ * Verified, public social/profile URLs only — feeds schema `sameAs` so Google can
+ * connect the brand to its real profiles. Excludes "#" placeholders and the wa.me
+ * contact deep-link (a contact channel, not a profile).
+ */
+const sameAs: string[] = socials
+  .map((s) => s.href)
+  .filter((href) => href !== "#" && !href.startsWith("https://wa.me"));
+
 /** Organization + WebSite structured data — helps Google understand the brand. */
 const orgLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      // ProfessionalService is a LocalBusiness subtype — adds local-SEO signals
+      // (address, area served) on top of the base Organization identity.
+      "@type": ["Organization", "ProfessionalService"],
       "@id": `${siteUrl}/#org`,
       name: company.legal,
       alternateName: company.brand,
       url: siteUrl,
       logo: `${siteUrl}/yuga-logo.jpg`,
+      image: `${siteUrl}/yuga-logo.jpg`,
       description: company.oneLiner,
       email: company.emails[0],
       telephone: company.phones[0],
       areaServed: "IN",
+      priceRange: "₹₹₹",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: registeredAddress.street,
+        addressLocality: registeredAddress.locality,
+        addressRegion: registeredAddress.region,
+        postalCode: registeredAddress.postalCode,
+        addressCountry: registeredAddress.country,
+      },
+      ...(sameAs.length > 0 && { sameAs }),
       contactPoint: {
         "@type": "ContactPoint",
         telephone: company.phones[0],
@@ -88,7 +110,7 @@ const orgLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en-IN" className={`${display.variable} ${sans.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"

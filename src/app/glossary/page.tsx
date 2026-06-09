@@ -4,17 +4,43 @@ import { CTASection } from "@/components/page/CTASection";
 import { Reveal } from "@/components/ui/Reveal";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { glossary } from "@/lib/glossary";
+import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Glossary — bitumen & finance terms",
+  alternates: { canonical: "/glossary" },
   description:
     "Plain-language definitions of the bitumen, plant and finance jargon used across the YUGA site — DPR, VG-30, PMB, CRMB, pyrolysis, CGTMSE, IRR, MRV and more.",
+};
+
+/**
+ * DefinedTermSet structured data — lets search engines index each glossary term
+ * as a defined term (richer entity understanding, eligible for definition results).
+ */
+const glossaryLd = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "@id": `${siteUrl}/glossary#termset`,
+  name: "YUGA Bitumen & Finance Glossary",
+  url: `${siteUrl}/glossary`,
+  hasDefinedTerm: glossary.map((t) => ({
+    "@type": "DefinedTerm",
+    "@id": `${siteUrl}/glossary#${t.id}`,
+    name: t.full ? `${t.term} (${t.full})` : t.term,
+    description: t.def,
+    inDefinedTermSet: `${siteUrl}/glossary#termset`,
+  })),
 };
 
 export default function GlossaryPage() {
   return (
     <>
       <NoiseOverlay />
+      {/* Escape `<` so any stray markup in a definition can't break out of the script. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(glossaryLd).replace(/</g, "\\u003c") }}
+      />
       <PageHero
         eyebrow="Plain Language"
         title="Every term, explained."

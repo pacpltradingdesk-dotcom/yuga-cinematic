@@ -11,7 +11,8 @@ import { Term } from "@/components/ui/Term";
 import { navGroups } from "@/lib/nav";
 
 export const metadata: Metadata = {
-  title: "Explore — start here",
+  title: "Explore the YUGA Site — Plants, Software & Capital",
+  alternates: { canonical: "/explore" },
   description:
     "A map of the whole YUGA site. Find what you need by goal — set up a plant, fund a project, or run your sales on AI software — or browse every section in one place.",
 };

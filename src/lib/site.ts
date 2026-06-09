@@ -38,6 +38,19 @@ export const company = {
 } as const;
 
 /**
+ * Structured registered-office address — feeds the LocalBusiness / PostalAddress
+ * JSON-LD (and any future contact UI). Mirrors company.offices[0] in parts that
+ * schema.org needs broken out. Edit here if the registered office changes.
+ */
+export const registeredAddress = {
+  street: "04, Signet Plaza Tower-B, 3rd Floor, Kunal Cross Road, Gotri",
+  locality: "Vadodara",
+  region: "Gujarat",
+  postalCode: "390021",
+  country: "IN",
+} as const;
+
+/**
  * Canonical site URL. On Vercel this auto-resolves to the production domain;
  * set NEXT_PUBLIC_SITE_URL once a custom domain is attached.
  */
