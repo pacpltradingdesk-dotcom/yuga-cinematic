@@ -292,7 +292,7 @@ export const career = [
 
 export const partnerships = [
   { p: "US energy-trading partner", d: "VG-30 supply up to 2.4 Lakh MT/year (2024)" },
-  { p: "UK bitumen supply contract", d: "1.2 Lakh MT (2023)" },
+  { p: "GITCA (UK) — bitumen supply contract", d: "1.2 Lakh MT (2023)" },
   { p: "Korea / SE-Asia bulk buyers", d: "20,000 MT bulk purchase (2020)" },
 ] as const;
 
