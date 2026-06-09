@@ -33,7 +33,7 @@ export function LoanEmi() {
   const termLoan = cost * finance.termLoanPct;
   const promoter = cost * finance.promoterPct;
   const monthly = emi(termLoan * 1e7, finance.interestPct, finance.tenureYears);
-  const cgtmseEligible = termLoan <= 2; // collateral-free up to ₹2 Cr
+  const cgtmseEligible = termLoan <= 5; // collateral-free up to ₹5 Cr
 
   const tiles = [
     { icon: Banknote, label: `Term loan (${Math.round(finance.termLoanPct * 100)}%)`, value: cr(termLoan) },
@@ -84,8 +84,8 @@ export function LoanEmi() {
       >
         <ShieldCheck size={16} className="shrink-0" />
         {cgtmseEligible
-          ? "Likely CGTMSE collateral-free (term loan ≤ ₹2 Cr) — subject to bank appraisal."
-          : "Above ₹2 Cr term loan — typically needs collateral / fixed-asset security."}
+          ? "Likely CGTMSE collateral-free (term loan ≤ ₹5 Cr) — subject to bank appraisal."
+          : "Above ₹5 Cr term loan — typically needs collateral / fixed-asset security."}
       </div>
 
       <ul className="mt-5 grid gap-1.5 text-xs leading-relaxed text-[var(--color-faint)]">

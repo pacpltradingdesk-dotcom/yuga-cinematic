@@ -19,7 +19,7 @@ export const glossary: readonly GlossaryTerm[] = [
   { id: "vg-30", term: "VG-30", full: "Viscosity Grade 30", def: "The most common road-grade bitumen in India (IS 73), used on most highways. Bio-bitumen blends bio-oil into a VG-30 base." },
   { id: "pmb", term: "PMB", full: "Polymer Modified Bitumen", def: "Bitumen blended with polymers (IS 15462) for roads that resist rutting in heat and cracking in cold — used on highways and airports." },
   { id: "crmb", term: "CRMB", full: "Crumb Rubber Modified Bitumen", def: "Bitumen modified with crumb rubber from waste tyres — durable, cost-effective surfacing favoured by NHAI." },
-  { id: "bio-bitumen", term: "Bio-bitumen", def: "Road bitumen where 15–30% of conventional VG-30 is replaced with bio-oil from agro-waste, to the CSIR-CRRI 'KrishiBind' spec." },
+  { id: "bio-bitumen", term: "Bio-bitumen", def: "Road bitumen where ~20–30% of conventional VG-30 is replaced with bio-oil from agro-waste, to the CSIR-CRRI 'KrishiBind' spec." },
   { id: "pyrolysis", term: "Pyrolysis", def: "Heating a material (biomass, plastic or tyres) to 450–550°C without oxygen so it breaks down into oil, gas and char instead of burning." },
   { id: "rpo", term: "RPO", full: "Recovered Pyrolysis Oil", def: "The oil recovered from tyre/rubber pyrolysis, alongside carbon black and steel — a circular-economy output." },
   { id: "emulsion", term: "Bitumen emulsion", def: "Bitumen dispersed in water so it can be used cold (no site heating) — for tack coats, cold-mix and surface dressing." },
