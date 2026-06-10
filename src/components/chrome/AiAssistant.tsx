@@ -332,11 +332,16 @@ export function AiAssistant() {
           onClick={() => (open ? setOpen(false) : openPanel())}
           data-cursor="hover"
           aria-label={open ? "Close AI assistant" : "Open AI assistant"}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-amber)] to-[var(--color-amber-deep)] text-[var(--color-void)] shadow-[0_8px_40px_-8px_var(--color-amber-deep)] transition-transform hover:scale-105 active:scale-95"
+          className="group relative grid h-14 w-14 place-items-center rounded-full text-[var(--color-void)] shadow-[0_10px_44px_-8px_var(--color-amber-deep)] transition-transform duration-300 ease-[var(--ease-expo)] hover:scale-110 active:scale-95"
         >
+          {/* soft breathing aura (closed only) */}
           {!open && (
-            <span className="pointer-events-none absolute inset-0 animate-ping rounded-full border-2 border-[var(--color-amber)] opacity-30" />
+            <span className="pointer-events-none absolute -inset-3 rounded-full bg-[radial-gradient(circle,var(--color-amber),transparent_70%)] blur-md motion-safe:animate-[breathe_3s_ease-in-out_infinite]" />
           )}
+          {/* glassy amber orb + top light + inset rim */}
+          <span className="absolute inset-0 rounded-full bg-gradient-to-br from-[color-mix(in_oklch,var(--color-amber)_94%,white)] via-[var(--color-amber)] to-[var(--color-amber-deep)]" />
+          <span className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/25 [background:radial-gradient(125%_90%_at_32%_22%,rgba(255,255,255,0.55),transparent_55%)] transition-transform duration-500 group-hover:scale-105" />
+          {/* icon */}
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={open ? "x" : "spark"}
@@ -344,11 +349,18 @@ export function AiAssistant() {
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
               exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
               transition={{ duration: 0.18 }}
-              className="relative"
+              className="relative z-10 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
             >
               {open ? <X size={22} /> : <Sparkles size={22} />}
             </motion.span>
           </AnimatePresence>
+          {/* live "online" dot (closed only) — Setu is live, invite a tap */}
+          {!open && (
+            <span className="absolute right-0.5 top-0.5 z-10 flex h-3 w-3">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 motion-safe:animate-ping" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-[var(--color-void)]" />
+            </span>
+          )}
         </button>
       </div>
 

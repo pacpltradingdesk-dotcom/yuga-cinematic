@@ -157,6 +157,12 @@ html.lenis, html.lenis body { height: auto; }
   to   { transform: scale(1.12) translate3d(-2%, -1.5%, 0); }
 }
 
+/* Soft "breathing" glow for the chat launcher orb. */
+@keyframes breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.4; }
+  50%      { transform: scale(1.18); opacity: 0.7; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
