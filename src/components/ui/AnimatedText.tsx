@@ -34,13 +34,15 @@ export function AnimatedText({
 
   return (
     <Tag className={cn("flex flex-wrap", className)}>
+      {/* Full text for screen readers / crawlers; the animated split is decorative. */}
+      <span className="sr-only">{text}</span>
       <motion.span
         ref={ref}
         className="inline-flex flex-wrap"
         variants={container}
         initial="hidden"
         animate={inView ? "show" : "hidden"}
-        aria-label={text}
+        aria-hidden
       >
         {words.map((w, i) => (
           <span key={i} className="overflow-hidden pb-[0.12em] pr-[0.28em]" aria-hidden>

@@ -14,7 +14,7 @@
   /* Text */
   --color-ink: oklch(97% 0.005 260);
   --color-muted: oklch(72% 0.012 260);
-  --color-faint: oklch(56% 0.012 260);
+  --color-faint: oklch(63% 0.012 260); /* WCAG AA: ≥4.5:1 on dark surfaces */
 
   /* Accents */
   --color-amber: oklch(74% 0.17 62);

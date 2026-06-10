@@ -40,7 +40,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Explore</h4>
+          <h3 className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Explore</h3>
           <ul className="mt-4 space-y-2.5">
             {nav.map((item) => (
               <li key={item.href}>
@@ -58,7 +58,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Connect</h4>
+          <h3 className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Connect</h3>
           <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-muted)]">
             {company.phones.map((p) => (
               <li key={p}>
