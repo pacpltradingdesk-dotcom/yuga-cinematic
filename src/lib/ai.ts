@@ -84,13 +84,16 @@ const PAGE_INFO: Readonly<Record<string, string>> = {
 };
 
 export function currentPageContext(pathname: string): string {
-  const productMatch = pathname.match(/^\/products\/([^/]+)/);
+  // Static export uses trailingSlash:true, so pathname arrives as "/capital-market/".
+  // Normalise to match the keys below (keep root as "/").
+  const path = pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+  const productMatch = path.match(/^\/products\/([^/]+)/);
   if (productMatch) {
     const p = getProduct(productMatch[1]);
     if (p) return `Product detail — ${p.title}: ${p.subtitle}`;
   }
-  if (pathname.startsWith("/legal")) return "A legal / policy page (privacy, terms, disclaimer, etc.).";
-  return PAGE_INFO[pathname] ?? "A page on the YUGA site.";
+  if (path.startsWith("/legal")) return "A legal / policy page (privacy, terms, disclaimer, etc.).";
+  return PAGE_INFO[path] ?? "A page on the YUGA site.";
 }
 
 /**
