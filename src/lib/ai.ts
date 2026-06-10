@@ -14,7 +14,7 @@
  *   non-200 / bad shape                ← caller shows a graceful fallback
  */
 import { products } from "@/lib/catalog";
-import { faqs, company } from "@/lib/site";
+import { faqs, company, capacities, loans, keyFacts } from "@/lib/site";
 import { config } from "@/lib/config";
 import { KNOWLEDGE } from "@/lib/knowledge";
 
@@ -40,10 +40,19 @@ export function buildAiContext(): string {
     `Company: ${company.legal} (brand ${company.brand}). ${company.oneLiner}`,
     `Contact: ${company.phones[0]} · ${company.emails[0]}.`,
     "",
+    "KEY FACTS / CREDENTIALS (all indicative / verified per the site):",
+    ...keyFacts.map((f) => `- ${f}`),
+    "",
     "PRODUCTS / PLANTS:",
     ...products.map(
       (p) => `- ${p.title} (/products/${p.slug}): ${p.subtitle}`,
     ),
+    "",
+    "INDICATIVE PLANT CAPACITY → COST (bio-bitumen; varies with scope):",
+    ...capacities.map((c) => `- ${c.cap}: ${c.inv} (${c.best})`),
+    "",
+    "FINANCE / LOAN SCHEMES (indicative — eligibility & rates depend on current rules):",
+    ...loans.map((l) => `- ${l.scheme}: rate ${l.rate}, up to ${l.max}, collateral ${l.collateral}`),
     "",
     "DOMAIN KNOWLEDGE (bitumen / bio-bitumen / plant business):",
     ...KNOWLEDGE.map((k) => `- ${k.title}: ${k.answer}`),

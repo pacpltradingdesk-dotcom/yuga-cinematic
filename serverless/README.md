@@ -28,12 +28,9 @@ Browser (static site)  ──POST { query, context, history }──▶  Worker (
    npm i -g wrangler
    wrangler login
    ```
-2. From this `serverless/` folder, create `wrangler.toml`:
-   ```toml
-   name = "yuga-assistant"
-   main = "yuga-assistant-worker.js"
-   compatibility_date = "2026-01-01"
-   ```
+2. A ready **`wrangler.toml`** already ships in this folder — no need to create one.
+   (Optional: to test locally first, copy `.dev.vars.example` → `.dev.vars`, paste your
+   key, and run `wrangler dev`.)
 3. Add your Anthropic key as a secret (never commit it):
    ```bash
    wrangler secret put ANTHROPIC_API_KEY

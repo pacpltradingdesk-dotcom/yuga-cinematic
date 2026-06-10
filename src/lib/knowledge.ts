@@ -113,6 +113,14 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     answer:
       "Cutback bitumen is thinned with a solvent (instead of water like emulsion) so it can be used without heavy heating — graded MC/RC/SC by how fast it cures. It's used for priming and surface work; emulsion has replaced much of it for environmental reasons.",
   },
+  {
+    id: "asphalt-shingle",
+    title: "Asphalt Roofing Shingle",
+    keywords: ["shingle", "shingles", "asphalt shingle", "roofing", "roof", "fibreglass", "fiberglass", "villa roof", "sloped roof", "roofing sheet"],
+    answer:
+      "Asphalt shingles are fibreglass mats coated with oxidised bitumen and ceramic granules — the most common sloped-roof covering worldwide. For a bitumen operation it's a value-added, downstream line: you turn your own oxidised bitumen into a finished roofing product at a higher margin than bulk bitumen. Indian demand (villas, resorts, premium housing) is rising and still largely import-met. Indicative CAPEX is ₹8–25 Cr; we size capacity and economics in the DPR.",
+    href: "/products/asphalt-shingle",
+  },
 
   /* ---------------- bio-bitumen + pyrolysis ---------------- */
   {
@@ -153,6 +161,14 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     answer:
       "Tyre/rubber pyrolysis turns end-of-life tyres into Recovered Pyrolysis Oil (RPO), carbon black and steel — a circular-economy play, and a feedstock source if you also run a CRMB line.",
     href: "/products/rubber-to-fuel",
+  },
+  {
+    id: "why-bio-bitumen",
+    title: "Why switch to bio-bitumen?",
+    keywords: ["why bio", "advantage", "advantages", "benefit", "benefits", "why switch", "why bio bitumen", "better", "vs normal bitumen", "fayda", "import substitution", "why"],
+    answer:
+      "Three reasons: it cuts dependence on imported bitumen (India imports ~40%), it uses agro-waste that would otherwise be burnt (reducing stubble-burning pollution and opening carbon-credit potential), and as a green, import-substituting industry it can attract government and MSME support. In CSIR trials it meets road spec with no performance loss — so it's a sustainability story with real economics behind it.",
+    href: "/bio-bitumen",
   },
 
   /* ---------------- the business: cost, ROI, land ---------------- */
@@ -202,6 +218,30 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     keywords: ["timeline", "how long", "duration", "time", "kitna time", "months", "kab tak", "ready"],
     answer:
       "A typical small-to-mid plant runs roughly 6–12 months from go-ahead to commissioning — feasibility & funding first, then licences and civil in parallel, then machinery, installation and trial runs. The biggest swing factors are land readiness, pollution-board clearances and loan sanction; we run them in parallel to compress the timeline.",
+    href: "/industrial-consulting",
+  },
+  {
+    id: "which-plant",
+    title: "Which plant is right for me?",
+    keywords: ["which plant", "best plant", "what should i make", "which product", "recommend", "suggest", "best fit", "konsa", "kaunsa", "right for me", "where to start", "confused", "help me choose"],
+    answer:
+      "It depends on your budget, location and goals — a new investor often starts with a small bio-bitumen or emulsion line; an existing bitumen company adds PMB, CRMB or blown bitumen; feedstock owners go plastic-to-fuel or tyre-to-oil. Tell me your budget and state, or use the Best-Fit Finder on the homepage, and we'll match you to the most viable plant.",
+    href: "/products",
+  },
+  {
+    id: "machinery",
+    title: "Machinery & equipment",
+    keywords: ["machinery", "machine", "equipment", "oem", "vendor", "reactor", "supplier", "install", "installation", "commissioning", "plant equipment"],
+    answer:
+      "We work through a verified OEM vendor network — reactors, blending units, storage, control panels and lab equipment — negotiate best price, and handle installation, commissioning and a QC lab as part of the PMC. You're not left to source machinery alone or guess at quality.",
+    href: "/industrial-consulting",
+  },
+  {
+    id: "training",
+    title: "Training & manpower",
+    keywords: ["training", "manpower", "staff", "operator", "hr", "recruitment", "skill", "team", "run the plant", "who will operate", "labour", "workers"],
+    answer:
+      "We help recruit and train your operators — pyrolysis, blending and QC — plus safety and environmental compliance, so the plant runs reliably from day one. Operating know-how is part of the hand-over, not an afterthought.",
     href: "/industrial-consulting",
   },
 
@@ -338,6 +378,14 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     keywords: ["jv", "joint venture", "collaboration", "partnership", "job work", "tie up", "associate", "franchise", "collaborate"],
     answer:
       "Beyond pure consultancy we do Joint Ventures (domestic and international), collaborations and job work — useful if you want a partner with skin in the game rather than just an advisor. We also handle international supply tie-ups (US/UK/Korea buyers in the past).",
+    href: "/about",
+  },
+  {
+    id: "export-international",
+    title: "Exports & international work",
+    keywords: ["export", "exports", "international", "abroad", "foreign", "overseas", "global", "uk", "usa", "korea", "supply abroad", "import export"],
+    answer:
+      "Yes — alongside Indian plants we handle international supply tie-ups and JVs; past engagements include US, UK (GITCA) and Korea / SE-Asia bulk buyers. If you want to export bitumen / bio-bitumen or set up with an overseas partner, we can structure the supply contract and the venture.",
     href: "/about",
   },
   {
