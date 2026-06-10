@@ -367,10 +367,17 @@ export function AiAssistant() {
       <AnimatePresence>
         {open && (
           <motion.div
+            layout
             initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
-            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+            transition={{
+              type: "spring",
+              stiffness: 320,
+              damping: 30,
+              // Smoothly grow/shrink the panel as the conversation changes size.
+              layout: { type: "spring", stiffness: 420, damping: 38 },
+            }}
             role="dialog"
             aria-label="Setu — YUGA assistant"
             // Let the chat scroll natively under the mouse; Lenis keeps driving the
