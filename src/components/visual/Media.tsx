@@ -23,6 +23,7 @@ export function Media({
   loading,
   sizes = "100vw",
   grayscale = false,
+  animate = false,
 }: {
   name?: ImgKey;
   src?: string;
@@ -34,6 +35,8 @@ export function Media({
   loading?: "eager" | "lazy";
   sizes?: string;
   grayscale?: boolean;
+  /** Cinematic slow zoom/pan ("Ken Burns") so the still reads like ambient video. */
+  animate?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
   const item = name ? img[name] : undefined;
@@ -54,7 +57,11 @@ export function Media({
           sizes={sizes}
           priority={priority}
           {...(!priority && loading ? { loading } : {})}
-          className={cn("object-cover transition-transform duration-700 ease-[var(--ease-expo)]", grayscale && "grayscale")}
+          className={cn(
+            "object-cover transition-transform duration-700 ease-[var(--ease-expo)]",
+            grayscale && "grayscale",
+            animate && "ken-burns",
+          )}
           onError={() => setFailed(true)}
         />
       ) : (

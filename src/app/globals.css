@@ -140,6 +140,21 @@ html.lenis, html.lenis body { height: auto; }
   .maxw { max-width: 84rem; margin-inline: auto; }
 
   .hairline { border-top: 1px solid var(--color-line); }
+
+  /* Cinematic "living photo" — slow zoom + pan so a still reads like ambient
+     video. Compositor-only (transform), seamless (alternate), and auto-disabled
+     by the prefers-reduced-motion block below. Starts slightly overscanned so the
+     pan never reveals an edge. */
+  .ken-burns {
+    animation: ken-burns 28s var(--ease-power) infinite alternate;
+    transform-origin: center;
+    will-change: transform;
+  }
+}
+
+@keyframes ken-burns {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to   { transform: scale(1.12) translate3d(-2%, -1.5%, 0); }
 }
 
 /* Reduced motion */

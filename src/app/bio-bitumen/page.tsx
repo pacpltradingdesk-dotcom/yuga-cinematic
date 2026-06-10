@@ -67,6 +67,7 @@ export default function BioBitumenPage() {
                       <Media
                         name={ptImg[i]}
                         overlay="bottom"
+                        animate
                         sizes="(max-width:768px) 100vw, 50vw"
                         className="h-44 w-full rounded-t-[calc(1.5rem-1px)]"
                       />

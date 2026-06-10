@@ -33,6 +33,7 @@ export function PageHero({
           name={image}
           overlay="full"
           priority
+          animate
           sizes="100vw"
           className="absolute inset-0 h-full w-full opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent)]"
         />
