@@ -167,7 +167,8 @@ const SMALL_TALK: ReadonlyArray<{ re: RegExp; reply: string }> = [
   { re: /\b(thanks|thank you|thankyou|thx|dhanyavad|dhanyawad|shukriya)\b/i, reply: "You're welcome! 😊 Anything else — plant costs, subsidy, land, licences or funding?" },
   { re: /\b(bye|goodbye|alvida|tata)\b/i, reply: "Bye! 👋 Ping us anytime on WhatsApp for a quick reply." },
   { re: /(who are you|aap kaun|tum kaun|kaun ho|your name|tumhara naam)/i, reply: "I'm the YUGA Assistant — I help you explore bitumen / bio-bitumen plants, costs, subsidy, licences, land and funding. Ask me anything in this space!" },
-  { re: /(kaise ho|kaise hain|kese ho|kya haal|kya hal|kaisa hai|how are you|how r u|sab badhiya|whats up|what's up|kya chal)/i, reply: "Doing great, thanks! 😊 I can help with plant costs, subsidy, land, licences, funding or carbon credits — what would you like to know?" },
+  { re: /\b(bakwaas|bakwas|bakk|bak raha|bak rha|bakchod|bakcho|nonsense|nautanki|faltu|fuzool|fizul|useless|bekar|bekaar|ghatiya|stupid|chutiya|gandu|bsdk|nikamma)\b/i, reply: "Sorry if that missed! 😅 I'm the YUGA assistant — ask me a straight question about plant cost, subsidy, land, licences or funding and I'll get it right." },
+  { re: /(kaise ho|kaise hai|kaise hain|kaisi ho|kaisi hai|kese ho|kese hai|kya haal|kya hal|kaisa hai|how are you|how r u|how are u|how is it going|whats ?up|what'?s up|kya chal|kya scene|sab badhiya|sab badiya|sab theek|all good)/i, reply: "Doing great, thanks! 😊 I can help with plant costs, subsidy, land, licences, funding or carbon credits — what would you like to know?" },
   { re: /\b(help|madad|kya kar sakte|what can you do|kya bata sakte|options)\b/i, reply: "Sure! Ask me about any plant (bio-bitumen, plastic-to-fuel, PMB, CRMB…), its cost & ROI, subsidy, land needed, licences, funding or carbon credits. Pick a topic below 👇" },
   { re: /^\s*(hi+|hey+|hello+|helo|yo|hola|hlo|namaste|namaskar|namaskaar|salaam|ram ram|jai)\b/i, reply: "Hi! 👋 I'm the YUGA assistant. Ask me about bitumen, plant costs, subsidy, carbon credits, licences, land or funding — or pick a topic:" },
 ];
@@ -355,9 +356,13 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
   });
   const baseCards = ranked.filter((c) => c.score >= MIN_CARD_SCORE).slice(0, 3).map((c) => c.item);
   // A calculator answer (deterministic, grounded in calc tiers) always leads.
-  const cards = calcCard
+  const matchedCards = calcCard
     ? [calcCard, ...baseCards.filter((c) => c.q !== calcCard.q)].slice(0, 3)
     : baseCards;
+  // Pure greeting / chit-chat (no domain word, no cost query) → reply warmly only;
+  // never tack on a spurious catalog card ("kaise hai be" must not pull a plant answer).
+  const conversational = !!smallTalk && !calcCard && !DOMAIN_HINT.test(raw);
+  const cards = conversational ? [] : matchedCards;
 
   // Related product pages.
   const productHits: ProductHit[] = products
@@ -390,7 +395,7 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
       ? nearMisses
       : DEFAULT_SUGGESTIONS;
 
-  const actions = cards.length > 0 || productHits.length > 0 ? ACTIONS : [];
+  const actions = !conversational && (cards.length > 0 || productHits.length > 0) ? ACTIONS : [];
 
   return {
     smallTalk,
