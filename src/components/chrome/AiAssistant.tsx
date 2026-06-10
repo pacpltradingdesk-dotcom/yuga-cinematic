@@ -83,10 +83,14 @@ export function AiAssistant() {
 
   const lastTurn = turns.length > 0 ? turns[turns.length - 1] : null;
 
-  // Scroll to the newest turn AFTER it paints (single rAF fires too early).
+  // Scroll to the newest turn AFTER it paints (single rAF fires too early), and
+  // keep focus on the input after each send/reply so the user can keep typing
+  // without clicking back in (chat mode disables the input while busy → focus is
+  // lost; re-focus once the reply lands).
   useEffect(() => {
     const c = scrollRef.current;
     if (c) c.scrollTo({ top: c.scrollHeight, behavior: "smooth" });
+    if (!busy) inputRef.current?.focus();
   }, [turns.length, messages.length, busy]);
 
   // When the panel opens: focus the input and allow Escape to close.
