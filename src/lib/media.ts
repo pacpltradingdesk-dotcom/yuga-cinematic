@@ -21,7 +21,7 @@ export const img = {
   bioHero: { src: "/assets/img/bio-hero.jpg", alt: "Baled agricultural straw - bio-bitumen feedstock" },
   bio0: { src: "/assets/img/bio-0.jpg", alt: "Petroleum and bitumen product plant" },
   bio1: { src: "/assets/img/bio-1.jpg", alt: "Farm fields supplying agro-waste biomass" },
-  bio2: { src: "/assets/img/bio-2.jpg", alt: "Plastic waste for plastic-to-fuel conversion" },
+  bio2: { src: "/assets/img/bio-2.jpg", alt: "Plastic-to-fuel pyrolysis plant — waste plastic converted to oil, gas and char" },
   bio3: { src: "/assets/img/bio-3.jpg", alt: "End-of-life tyres for rubber-to-oil pyrolysis" },
 
   // Industrial Consulting
@@ -89,4 +89,6 @@ export const productImg: Record<string, ImgKey> = {
   "bitumen-emulsion": "prod0",
   "micro-surfacing-emulsion": "bio0",
   "blown-oxidised-bitumen": "prod3",
+  // Roofing/oxidised-bitumen theme — reuses the blown-grade drum image (closest fit; no roofing photo yet).
+  "asphalt-shingle": "prod3",
 };

@@ -1427,6 +1427,148 @@
           "a": "Yes — feasibility, oxidation unit, safety/emission controls, IS-compliant grades and marketing are part of our PMC service."
         }
       ]
+    },
+    {
+      "id": "10_Asphalt-Shingle",
+      "slug": "asphalt-shingle",
+      "title": "Asphalt Roofing Shingle",
+      "subtitle": "Fibreglass asphalt roofing shingles — a value-added, downstream product made from your own oxidised bitumen",
+      "titleTag": "Asphalt Roofing Shingle Plant Setup | YUGA",
+      "metaDesc": "Set up a fibreglass asphalt roofing-shingle plant with YUGA — a value-added line from oxidised bitumen. DPR, machinery, ASTM-grade output, buyers & licences.",
+      "intro": [
+        "Asphalt shingles are the world's most common sloped-roof covering: a fibreglass mat is saturated and coated with oxidised (blown) bitumen, then surfaced with ceramic-coated mineral granules for weather, UV and fire resistance. They install fast, look premium and typically last 15–30 years.",
+        "For a bitumen or blown-bitumen operation, shingles are a natural value-added, downstream line — you convert your own oxidised bitumen into a finished consumer product at a far higher margin per tonne than selling bulk bitumen. India's demand is rising with villas, resorts and premium housing, and is still largely import-met — a genuine substitution opportunity."
+      ],
+      "benefits": [
+        "Value-added — a finished roofing product at higher margin than bulk bitumen",
+        "Downstream fit — consumes your own oxidised / blown bitumen as feed",
+        "Rising demand — villas, resorts, farmhouses, prefab & premium housing",
+        "Import substitution — much of India's shingle demand is currently imported",
+        "Long product life — 15–30 yr weather, UV and (rated) fire resistance"
+      ],
+      "applications": [
+        "Sloped-roof residential — villas, bungalows, farmhouses",
+        "Resorts, clubhouses & hospitality architecture",
+        "Re-roofing & roof-repair market",
+        "Prefab / modular, gazebo and pergola structures"
+      ],
+      "specs": [
+        {
+          "label": "Standards",
+          "value": "ASTM D3462 (fibreglass shingles); ASTM D3161 / D7158 (wind); UL 790 / ASTM E108 (fire)"
+        },
+        {
+          "label": "Composition",
+          "value": "Fibreglass mat + oxidised-bitumen coating + ceramic mineral granules"
+        },
+        {
+          "label": "Types",
+          "value": "3-tab and architectural / laminated (dimensional)"
+        },
+        {
+          "label": "Coverage unit",
+          "value": "Sold by 'square' (≈100 sq ft) / bundles"
+        },
+        {
+          "label": "Process",
+          "value": "Mat saturation & coating → granules → cooling → cutting → sealing → bundling"
+        }
+      ],
+      "plant": {
+        "details": [
+          {
+            "label": "Capacity to show",
+            "value": "Indicative ~1–3 lakh squares/yr — sized in feasibility"
+          },
+          {
+            "label": "Area required",
+            "value": "Continuous coating line + granule & roll storage: ~1–2 acres (indicative)"
+          },
+          {
+            "label": "Approx. cost (without land)",
+            "value": "Broadly ₹8–25 Cr for a continuous line (indicative; semi-auto lines lower) — finalised in the DPR"
+          },
+          {
+            "label": "Utilities",
+            "value": "Power, thermic heating, compressed air, dust/granule handling, water, QC lab"
+          },
+          {
+            "label": "Approvals",
+            "value": "SPCB CTE/CTO, factory/fire, PESO (bitumen storage), product conformity (ASTM/UL via 3rd-party lab)"
+          },
+          {
+            "label": "Best-use note",
+            "value": "Strongest as a downstream add-on to an existing bitumen / blown-bitumen plant"
+          }
+        ],
+        "machinery": [
+          "Oxidised-bitumen coating & saturation tanks",
+          "Fibreglass mat unwind & accumulator",
+          "Coater / saturation section",
+          "Mineral-granule applicator & press rolls",
+          "Back-surfacing (sand/talc) station",
+          "Cooling drums & loop accumulator",
+          "Sealant / adhesive-strip applicator",
+          "Shingle cutter & laminator (architectural)",
+          "Stacking, bundling & wrapping line",
+          "QC lab (ASTM tests), dust collection & fire safety"
+        ]
+      },
+      "financials": {
+        "note": "Indicative for a fibreglass asphalt-shingle line — best as a downstream add-on to an existing bitumen plant. Shingle economics are project-specific; we size capacity, CAPEX and margins in the DPR.",
+        "rows": [
+          {
+            "label": "Project investment (CAPEX)",
+            "value": "₹8–25 Cr (continuous line; semi-auto lower) — indicative"
+          },
+          {
+            "label": "Capacity basis",
+            "value": "~1–3 lakh squares/yr (sized in DPR)"
+          },
+          {
+            "label": "Output product",
+            "value": "3-tab & architectural fibreglass shingles"
+          },
+          {
+            "label": "Margin position",
+            "value": "Higher per-tonne margin than bulk bitumen (value-added)"
+          },
+          {
+            "label": "Approx. revenue & profit",
+            "value": "Project-specific — finalised in the feasibility study / DPR"
+          },
+          {
+            "label": "Approx. payback period",
+            "value": "Set in the DPR (depends on capacity, price & utilisation)"
+          }
+        ]
+      },
+      "qa": [
+        {
+          "q": "What are asphalt shingles?",
+          "a": "A sloped-roof covering: a fibreglass mat coated with oxidised bitumen and surfaced with ceramic mineral granules for weather, UV and fire resistance."
+        },
+        {
+          "q": "How does this fit a bitumen plant?",
+          "a": "It is a downstream, value-added line — you turn your own oxidised / blown bitumen into a finished roofing product at a higher margin than selling bulk bitumen."
+        },
+        {
+          "q": "Which standards apply?",
+          "a": "Internationally, ASTM D3462 (fibreglass shingles), ASTM D3161 / D7158 (wind) and UL 790 / ASTM E108 (fire). India has no dedicated BIS shingle standard yet, so ASTM/UL norms are followed."
+        },
+        {
+          "q": "What raw materials are needed?",
+          "a": "Oxidised / blown bitumen (your own feed), fibreglass mat, ceramic-coated mineral granules, limestone filler, sealant strip and release film."
+        },
+        {
+          "q": "Is there demand in India?",
+          "a": "Yes and growing — villas, resorts, farmhouses and premium housing — and much of it is currently imported, so domestic manufacturing is a substitution opportunity."
+        },
+        {
+          "q": "Do you set up shingle plants?",
+          "a": "Yes — feasibility, line engineering, machinery sourcing, ASTM-grade QC and buyer development are part of our PMC service."
+        }
+      ]
     }
   ],
   "calc": {
@@ -2344,6 +2486,12 @@
       "slug": "blown-oxidised-bitumen",
       "states": "Gujarat, Maharashtra, UP, Tamil Nadu, Delhi-NCR",
       "why": "Industrial waterproofing & roofing demand near manufacturing hubs; add-on to existing bitumen plants."
+    },
+    {
+      "product": "Asphalt Roofing Shingle",
+      "slug": "asphalt-shingle",
+      "states": "Maharashtra, Gujarat, Delhi-NCR, Karnataka, Goa & Kerala",
+      "why": "Premium sloped-roof housing, villas & resorts near metros and ports — strong import-substitution demand."
     }
   ],
   "stateProducts": {
@@ -2685,6 +2833,11 @@
       "is": "IS 702 (Industrial/Blown Bitumen)",
       "astm": "ASTM D312 (roofing asphalt); D450",
       "msds": "MSDS/SDS for oxidised bitumen & blowing fumes"
+    },
+    "asphalt-shingle": {
+      "is": "No dedicated BIS standard yet — ASTM/UL norms followed",
+      "astm": "ASTM D3462 (fibreglass shingles); D3161 / D7158 (wind); UL 790 / ASTM E108 (fire)",
+      "msds": "SDS for asphalt coating & mineral-granule dust"
     }
   },
   "market": {
@@ -3158,6 +3311,33 @@
         [
           "Blown/oxidised bitumen (IS 702)",
           "~1 tonne (slight loss as fumes)"
+        ]
+      ]
+    },
+    "asphalt-shingle": {
+      "basis": "Per 1 square (≈100 sq ft) of roofing shingles",
+      "input": [
+        [
+          "Oxidised / blown bitumen",
+          "coating + saturant"
+        ],
+        [
+          "Fibreglass mat",
+          "reinforcement base"
+        ],
+        [
+          "Ceramic mineral granules",
+          "weather/UV/fire surface"
+        ],
+        [
+          "Limestone filler + sealant strip",
+          "fill & self-seal"
+        ]
+      ],
+      "output": [
+        [
+          "Asphalt shingles (3-tab / architectural)",
+          "~1 square (bundled)"
         ]
       ]
     }

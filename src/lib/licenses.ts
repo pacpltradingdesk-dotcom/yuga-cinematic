@@ -48,6 +48,9 @@ export const productLicences: Readonly<Record<string, readonly Licence[]>> = {
   "bitumen-emulsion": [{ name: "BIS / IS 8887 product certification", authority: "BIS", stage: "Market" }],
   "micro-surfacing-emulsion": [{ name: "IRC / MoRTH specification compliance", authority: "IRC / MoRTH", stage: "Market" }],
   "blown-oxidised-bitumen": [{ name: "BIS / IS 702 product certification", authority: "BIS", stage: "Market" }],
+  "asphalt-shingle": [
+    { name: "Product conformity — ASTM D3462 / UL 790 (fire) testing", authority: "Accredited third-party lab", stage: "Market" },
+  ],
   "bitumen-decanter": [],
 };
 
