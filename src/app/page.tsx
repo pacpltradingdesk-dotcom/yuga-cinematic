@@ -9,6 +9,7 @@ import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GoalRouter } from "@/components/page/GoalRouter";
 import { SiteMap } from "@/components/page/SiteMap";
+import { ZoomParallax } from "@/components/visual/ZoomParallax";
 import { InstantTools } from "@/components/tools/InstantTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { ClientJourney } from "@/components/page/ClientJourney";
@@ -35,6 +36,14 @@ export default function HomePage() {
     <>
       <NoiseOverlay />
       <Hero />
+
+      {/* Immersive zoom-parallax — the whole YUGA story (plants · software · capital · impact) */}
+      <section className="relative bg-[var(--color-void)]">
+        <div className="flex h-[60vh] items-center justify-center">
+          <SectionHeading eyebrow="One Company" title="Plants. Software. Capital." align="center" />
+        </div>
+        <ZoomParallax images={["homeHero", "vPmc", "vSoft", "vCap", "pImpact", "prod1", "bioHero"]} />
+      </section>
 
       {/* By-goal wayfinding — the fastest way for a visitor to self-route to the
           right vertical, right after the hero so "where is everything" is answered up front. */}

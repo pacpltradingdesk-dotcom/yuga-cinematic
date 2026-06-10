@@ -12,6 +12,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Term } from "@/components/ui/Term";
 import { FinanceTools } from "@/components/tools/FinanceTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
+import { ZoomParallax } from "@/components/visual/ZoomParallax";
 import { plantTypes, bioProcess, capacities, marketOpportunity } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -50,6 +51,18 @@ export default function BioBitumenPage() {
           </div>
         </Reveal>
       </PageHero>
+
+      {/* Immersive zoom-parallax — scroll to step into the bio-bitumen world */}
+      <section className="relative bg-[var(--color-void)]">
+        <div className="flex h-[60vh] items-center justify-center">
+          <SectionHeading
+            eyebrow="Agro-waste → Road"
+            title="Scroll into the bio-bitumen world."
+            align="center"
+          />
+        </div>
+        <ZoomParallax />
+      </section>
 
       {/* What we build */}
       <section className="py-[var(--space-section)]">
