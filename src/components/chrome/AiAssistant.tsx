@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sparkles, X, ArrowUpRight, Send, Loader2, RotateCcw, MessageCircle } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
-import { askAi, type ChatMessage } from "@/lib/ai";
+import { askAi, currentPageContext, type ChatMessage } from "@/lib/ai";
 import { searchAssistant, isThinFollowUp, type AssistantResult } from "@/lib/assistant";
 import { submitLead, leadWaLink } from "@/lib/leads";
 import { waLink } from "@/lib/site";
@@ -171,7 +171,7 @@ export function AiAssistant() {
     setError(null);
     setBusy(true);
     try {
-      const answer = await askAi(trimmed, history);
+      const answer = await askAi(trimmed, history, currentPageContext(pathname));
       setMessages((m) => [...m, { role: "assistant", content: answer }]);
     } catch {
       setError("Couldn't reach the assistant just now. Please try again, or message us on WhatsApp.");

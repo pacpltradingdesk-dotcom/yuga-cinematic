@@ -13,7 +13,7 @@
  *   200  { answer: string }            ← rendered as the assistant reply
  *   non-200 / bad shape                ← caller shows a graceful fallback
  */
-import { products } from "@/lib/catalog";
+import { products, getProduct } from "@/lib/catalog";
 import { faqs, company, capacities, loans, keyFacts } from "@/lib/site";
 import { config } from "@/lib/config";
 import { KNOWLEDGE } from "@/lib/knowledge";
@@ -64,14 +64,48 @@ export function buildAiContext(): string {
 }
 
 /**
+ * What page the visitor is on right now, so the LLM can answer "what's on this
+ * page?" specifically instead of generically. Derived from the route.
+ */
+const PAGE_INFO: Readonly<Record<string, string>> = {
+  "/": "Home — overview of YUGA's three verticals: bitumen / bio-bitumen plant PMC, AI software, and capital-markets fundraising.",
+  "/bio-bitumen": "Bio-Bitumen & Pyrolysis — how YUGA sets up bio-bitumen, plastic-to-fuel and tyre-to-oil plants (CSIR-CRRI KrishiBind aligned), capacities and the 4-stage process.",
+  "/products": "Products — all the plants YUGA sets up (bio-bitumen, PMB, CRMB, emulsion, decanter, blown, plastic-to-fuel, tyre-to-oil, asphalt shingle).",
+  "/it-software": "Software — YUGA's in-house AI tools (sales dashboard, CRM, WhatsApp automation, market reports) offered to clients.",
+  "/capital-market": "Capital Markets & Fundraising — seed to IPO: bank loans, subsidy (CGTMSE/SIDBI), equity, valuation and DPR. The founder took Omnipotent Industries to a BSE SME listing (2021).",
+  "/industrial-consulting": "Industrial Consulting — the 7-phase PMC process from feasibility to market support.",
+  "/market-intelligence": "Market & Research — bitumen market data, the bio-bitumen opportunity, and the ₹5 lakh research report.",
+  "/about": "About — YUGA / PPS Anantams and founder Prince Pratap Shah's 25-year track record.",
+  "/case-studies": "Case Studies — live YUGA plant projects and the report library.",
+  "/contact": "Contact — phone, WhatsApp, email and office cities (Vadodara, Mumbai).",
+  "/explore": "Explore — a map of the whole site by goal.",
+  "/glossary": "Glossary — bitumen and finance terms explained.",
+  "/sources": "Sources & Disclosures — official sources behind every claim on the site.",
+};
+
+export function currentPageContext(pathname: string): string {
+  const productMatch = pathname.match(/^\/products\/([^/]+)/);
+  if (productMatch) {
+    const p = getProduct(productMatch[1]);
+    if (p) return `Product detail — ${p.title}: ${p.subtitle}`;
+  }
+  if (pathname.startsWith("/legal")) return "A legal / policy page (privacy, terms, disclaimer, etc.).";
+  return PAGE_INFO[pathname] ?? "A page on the YUGA site.";
+}
+
+/**
  * Ask the client-hosted AI proxy. Throws on any failure so the caller can fall
  * back to static search and show a friendly message — never silently swallow.
+ * `pageContext` (from currentPageContext) lets the LLM answer "what's on this page?".
  */
-export async function askAi(query: string, history: readonly ChatMessage[]): Promise<string> {
+export async function askAi(query: string, history: readonly ChatMessage[], pageContext?: string): Promise<string> {
+  const context = pageContext
+    ? `CURRENT PAGE the visitor is viewing right now: ${pageContext}\n\n${buildAiContext()}`
+    : buildAiContext();
   const res = await fetch(config.aiEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query, context: buildAiContext(), history }),
+    body: JSON.stringify({ query, context, history }),
   });
   if (!res.ok) throw new Error(`AI endpoint responded ${res.status}`);
   const data: unknown = await res.json();
