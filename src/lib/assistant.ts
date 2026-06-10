@@ -180,6 +180,13 @@ function smallTalkReply(raw: string): string | null {
   return null;
 }
 
+/**
+ * Casual / second-person tone markers (Hinglish slang). Used so that ANY off-topic
+ * chit-chat — not just the phrases we hardcode — gets a warm reply instead of a
+ * forced plant answer (e.g. "tu kya kar raha be", "abe sun yaar").
+ */
+const CASUAL_RE = /\b(be|bey|bhai|bhaiya|yaar|yar|bro|dude|tu|tum|tujhe|tumhe|tera|teri|tumhara|tumhari|abe|oye|arre|arey)\b/i;
+
 /** Standard next-step CTAs offered under any substantive answer. */
 const ACTIONS: readonly AssistantAction[] = [
   { label: "Request a DPR", href: "/contact" },
@@ -359,9 +366,13 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
   const matchedCards = calcCard
     ? [calcCard, ...baseCards.filter((c) => c.q !== calcCard.q)].slice(0, 3)
     : baseCards;
-  // Pure greeting / chit-chat (no domain word, no cost query) → reply warmly only;
-  // never tack on a spurious catalog card ("kaise hai be" must not pull a plant answer).
-  const conversational = !!smallTalk && !calcCard && !DOMAIN_HINT.test(raw);
+  // Chit-chat handling — works for ALL casual messages, not just known phrases:
+  // a non-domain message that's either a known greeting OR just casual in tone gets a
+  // warm reply and NO spurious catalog card ("kaise hai be" must not pull a plant answer).
+  const conversational = !calcCard && !DOMAIN_HINT.test(raw) && (!!smallTalk || CASUAL_RE.test(raw));
+  const reply = smallTalk ?? (conversational
+    ? "I'm the YUGA assistant 🙂 — ask me about plant cost, subsidy, land, licences, funding or carbon credits and I'll help."
+    : null);
   const cards = conversational ? [] : matchedCards;
 
   // Related product pages.
@@ -398,7 +409,7 @@ export function searchAssistant(raw: string, pageSlug?: string, prevTopic?: stri
   const actions = !conversational && (cards.length > 0 || productHits.length > 0) ? ACTIONS : [];
 
   return {
-    smallTalk,
+    smallTalk: reply,
     cards,
     productHits,
     fallback,
