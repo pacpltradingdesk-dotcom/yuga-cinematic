@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("", 1),
     ...nav.map((item) => entry(item.href, NAV_PRIORITY[item.href] ?? 0.7)),
     ...productSlugs.map((slug) => entry(`/products/${slug}`, 0.8)),
+    entry("/sources", 0.4),
     ...legalSlugs.map((slug) => entry(`/legal/${slug}`, 0.3)),
   ];
 }

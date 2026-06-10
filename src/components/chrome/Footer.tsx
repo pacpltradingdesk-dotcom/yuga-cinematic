@@ -110,6 +110,9 @@ export function Footer() {
               {d.title}
             </Link>
           ))}
+          <Link href="/sources" data-cursor="hover" className="inline-flex items-center py-1 transition-colors hover:text-[var(--color-ink)]">
+            Sources &amp; Disclosures
+          </Link>
           <CookiePrefsButton className="inline-flex items-center py-1 transition-colors hover:text-[var(--color-ink)]" />
         </nav>
         <p className="mt-3 text-xs leading-relaxed text-[var(--color-faint)]">
