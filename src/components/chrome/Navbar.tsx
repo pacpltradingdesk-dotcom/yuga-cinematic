@@ -122,7 +122,7 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.16 }}
-                        className="glass absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-[var(--color-line)] p-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]"
+                        className="absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-[var(--color-line)] bg-[color-mix(in_oklch,var(--color-surface)_97%,transparent)] p-2 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)] backdrop-blur-xl"
                       >
                         <p className="px-3 pb-2 pt-2 text-xs leading-relaxed text-[var(--color-faint)]">{g.blurb}</p>
                         {g.items.map((item) => (

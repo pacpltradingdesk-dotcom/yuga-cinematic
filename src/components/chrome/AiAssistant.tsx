@@ -420,7 +420,7 @@ export function AiAssistant() {
               </button>
             </div>
 
-            <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
+            <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto bg-[var(--color-surface)] px-4 py-4">
               {/* Welcome + suggestions — shown until the first question */}
               {showSuggestions && (
                 <div className="grid gap-3">
