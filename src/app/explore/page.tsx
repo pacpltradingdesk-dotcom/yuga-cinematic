@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Factory, Landmark, Cpu, Compass } from "lucide-react";
+import { ArrowUpRight, Compass } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { GlowCard } from "@/components/ui/GlowCard";
+import { GoalRouter } from "@/components/page/GoalRouter";
 import { Reveal } from "@/components/ui/Reveal";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { Term } from "@/components/ui/Term";
@@ -16,13 +16,6 @@ export const metadata: Metadata = {
   description:
     "A map of the whole YUGA site. Find what you need by goal — set up a plant, fund a project, or run your sales on AI software — or browse every section in one place.",
 };
-
-/** "By goal" router — the fastest way for a visitor to self-route. */
-const goals = [
-  { icon: Factory, t: "I want to set up a plant", d: "Bio-bitumen, pyrolysis, PMB/CRMB, emulsion — DPR to production.", href: "/products", cta: "See the 9 plants", accent: "amber" as const },
-  { icon: Landmark, t: "I want to fund a project", d: "Bank loan, subsidy, equity or IPO — with bankable documents.", href: "/capital-market", cta: "Funding options", accent: "cyan" as const },
-  { icon: Cpu, t: "I want AI sales software", d: "The in-house stack that runs our own bitumen business.", href: "/it-software", cta: "See the software", accent: "amber" as const },
-];
 
 export default function ExplorePage() {
   return (
@@ -40,23 +33,8 @@ export default function ExplorePage() {
       <section className="py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading eyebrow="By Goal" title="What do you want to do?" />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {goals.map((g, i) => (
-              <Reveal key={g.t} index={i}>
-                <Link href={g.href} data-cursor="hover">
-                  <GlowCard accent={g.accent} className="h-full">
-                    <div className="flex h-full flex-col p-8">
-                      <g.icon size={26} className="text-[var(--color-amber)]" />
-                      <h3 className="mt-5 font-display text-xl font-semibold tracking-tight">{g.t}</h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--color-muted)]">{g.d}</p>
-                      <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-ink)]">
-                        {g.cta} <ArrowUpRight size={14} />
-                      </span>
-                    </div>
-                  </GlowCard>
-                </Link>
-              </Reveal>
-            ))}
+          <div className="mt-12">
+            <GoalRouter />
           </div>
         </div>
       </section>

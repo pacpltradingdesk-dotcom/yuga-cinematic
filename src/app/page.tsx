@@ -7,6 +7,7 @@ import { Founder } from "@/components/home/Founder";
 import { CTASection } from "@/components/page/CTASection";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GoalRouter } from "@/components/page/GoalRouter";
 import { InstantTools } from "@/components/tools/InstantTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { ClientJourney } from "@/components/page/ClientJourney";
@@ -33,6 +34,22 @@ export default function HomePage() {
     <>
       <NoiseOverlay />
       <Hero />
+
+      {/* By-goal wayfinding — the fastest way for a visitor to self-route to the
+          right vertical, right after the hero so "where is everything" is answered up front. */}
+      <section className="relative isolate py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="By Goal"
+            title="What do you want to do?"
+            intro="Three ways in — pick your goal and we'll take you straight there. Or ask Setu, our assistant, anytime."
+          />
+          <div className="mt-12">
+            <GoalRouter />
+          </div>
+        </div>
+      </section>
+
       <Stats />
       <section className="relative isolate py-[var(--space-section)]">
         <SectionBackdrop name="pIntel" />
