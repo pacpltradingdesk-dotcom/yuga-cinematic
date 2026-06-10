@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
-import { company, siteUrl, registeredAddress, socials } from "@/lib/site";
+import { company, siteUrl, registeredAddress, socials, businessHours } from "@/lib/site";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Preloader } from "@/components/chrome/Preloader";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
@@ -79,12 +79,12 @@ const orgLd = {
       telephone: company.phones[0],
       areaServed: "IN",
       priceRange: "₹₹₹",
+      // City + region only — per project decision, no exact street address is
+      // published anywhere on the site (incl. machine-readable schema).
       address: {
         "@type": "PostalAddress",
-        streetAddress: registeredAddress.street,
         addressLocality: registeredAddress.locality,
         addressRegion: registeredAddress.region,
-        postalCode: registeredAddress.postalCode,
         addressCountry: registeredAddress.country,
       },
       ...(sameAs.length > 0 && { sameAs }),
@@ -95,6 +95,14 @@ const orgLd = {
         areaServed: "IN",
         availableLanguage: ["en", "hi"],
       },
+      openingHoursSpecification: businessHours
+        .filter((h) => h.opens && h.closes)
+        .map((h) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: h.dayOfWeek,
+          opens: h.opens,
+          closes: h.closes,
+        })),
     },
     {
       "@type": "WebSite",

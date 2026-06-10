@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Phone, Mail, Globe, MonitorSmartphone, MessageCircle } from "lucide-react";
+import { Phone, Mail, Globe, MonitorSmartphone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/page/ContactForm";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
-import { company, waLink } from "@/lib/site";
+import { company, waLink, businessHours, mapsEmbedUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -95,12 +95,70 @@ export default function ContactPage() {
                 </div>
               </div>
             </Reveal>
+
+            {/* Offices + business hours */}
+            <Reveal index={3}>
+              <div className="rounded-3xl border border-[var(--color-line)] p-7">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <MapPin size={18} className="text-[var(--color-amber)]" />
+                    <h4 className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Offices</h4>
+                    <div className="mt-3 space-y-4 text-sm">
+                      {company.offices.map((o) => (
+                        <div key={o.label}>
+                          <div className="font-medium text-[var(--color-ink)]">{o.label}</div>
+                          <div className="mt-1 text-[var(--color-muted)]">{o.city}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <Clock size={18} className="text-[var(--color-cyan)]" />
+                    <h4 className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Business Hours</h4>
+                    <dl className="mt-3 space-y-2.5 text-sm">
+                      {businessHours.map((h) => (
+                        <div key={h.days} className="flex items-baseline justify-between gap-4">
+                          <dt className="text-[var(--color-muted)]">{h.days}</dt>
+                          <dd className={h.opens ? "text-[var(--color-ink)]" : "text-[var(--color-faint)]"}>{h.hours}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="mt-4 text-xs leading-relaxed text-[var(--color-faint)]">
+                      IST · we reply to enquiries within one business day.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           {/* Form */}
           <Reveal index={1}>
             <ContactForm />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Registered office map */}
+      <section className="pb-[var(--space-section)]">
+        <div className="maxw container-x">
+          <div className="mb-5 flex items-center gap-2 text-sm text-[var(--color-muted)]">
+            <MapPin size={15} className="text-[var(--color-amber)]" />
+            <span>{company.offices[0].label} — {company.offices[0].city}</span>
+          </div>
+          <div className="overflow-hidden rounded-3xl border border-[var(--color-line)]">
+            <iframe
+              src={mapsEmbedUrl}
+              title={`${company.brand} — ${company.offices[0].city}`}
+              width="100%"
+              height="420"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ border: 0, display: "block", filter: "grayscale(0.2) contrast(1.05)" }}
+              allowFullScreen
+            />
+          </div>
         </div>
       </section>
     </>

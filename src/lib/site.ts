@@ -21,15 +21,14 @@ export const company = {
   linkedin: "linkedin.com/in/prince-shah-b781921b/",
   phones: ["+91 77952 42424", "+91 94482 81224", "+91 75069 41655"],
   emails: ["sales@princeshah.com", "sales.ppsanatams@gmail.com"],
+  /**
+   * Offices. Per project decision, the full street address is NOT published
+   * anywhere on the site — only city/region. The street/pincode is deliberately
+   * kept OUT of these data files so it never ships in the JS bundle either.
+   */
   offices: [
-    {
-      label: "Registered Office",
-      lines: ["04, Signet Plaza Tower-B, 3rd Floor", "Kunal Cross Road, Gotri", "Vadodara 390021, Gujarat"],
-    },
-    {
-      label: "Mumbai Operations",
-      lines: ["1/13 Damji Nenshi Estate", "Station Road, Bhandup (West)", "Mumbai 400078"],
-    },
+    { label: "Registered Office", city: "Vadodara, Gujarat" },
+    { label: "Mumbai Operations", city: "Mumbai, Maharashtra" },
   ],
   apps: {
     crm: "crm.ppsanatams.online",
@@ -44,17 +43,35 @@ export const company = {
 } as const;
 
 /**
- * Structured registered-office address — feeds the LocalBusiness / PostalAddress
- * JSON-LD (and any future contact UI). Mirrors company.offices[0] in parts that
- * schema.org needs broken out. Edit here if the registered office changes.
+ * City/region for the LocalBusiness / PostalAddress JSON-LD and the contact map.
+ * Per project decision, the exact street address & pincode are intentionally
+ * NOT included here (or anywhere on the site / in the bundle) — city-level only.
  */
 export const registeredAddress = {
-  street: "04, Signet Plaza Tower-B, 3rd Floor, Kunal Cross Road, Gotri",
   locality: "Vadodara",
   region: "Gujarat",
-  postalCode: "390021",
   country: "IN",
 } as const;
+
+/**
+ * General office hours (IST) shown on the contact page and fed to the
+ * LocalBusiness `openingHoursSpecification` schema. `opens`/`closes` are 24-h
+ * for schema.org; `hours` is the human label. Edit one line if hours change.
+ */
+export const businessHours = [
+  { days: "Monday – Friday", hours: "10:00 AM – 7:00 PM", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "19:00" },
+  { days: "Saturday", hours: "10:00 AM – 5:00 PM", dayOfWeek: ["Saturday"], opens: "10:00", closes: "17:00" },
+  { days: "Sunday & public holidays", hours: "Closed", dayOfWeek: ["Sunday"], opens: null, closes: null },
+] as const;
+
+/**
+ * Google Maps embed — CITY-LEVEL only (per project decision: no exact street
+ * address / building pin anywhere on the site). Uses the keyless `output=embed`
+ * form so it works on the static export with no API key.
+ */
+export const mapsEmbedUrl: string = `https://www.google.com/maps?q=${encodeURIComponent(
+  `${registeredAddress.locality}, ${registeredAddress.region}, India`,
+)}&output=embed`;
 
 /**
  * Canonical site URL. On Vercel this auto-resolves to the production domain;
