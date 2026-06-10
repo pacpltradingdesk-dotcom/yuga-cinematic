@@ -32,7 +32,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "What is bitumen?",
     keywords: ["bitumen", "what is bitumen", "asphalt binder", "tar", "black material", "road material", "definition"],
     answer:
-      "Bitumen is the black, sticky, petroleum-derived binder that holds road aggregate together — about 5% of a road by weight but the part that makes it a road. India consumes ~87 lakh tonnes (≈8.7 million tonnes) a year, and ~40% of it is imported. That import gap is exactly why bio-bitumen and local production are such a big opportunity.",
+      "The black petroleum binder that holds a road together — about 5% of it by weight. India uses ~87 lakh tonnes a year and imports ~40%, which is the bio-bitumen opportunity.",
     href: "/market-intelligence",
   },
   {
@@ -47,7 +47,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "VG (viscosity) grades",
     keywords: ["vg", "vg30", "vg 30", "vg10", "vg40", "viscosity grade", "grades", "is 73", "grade"],
     answer:
-      "Indian bitumen is sold by Viscosity Grade per IS 73 — VG-10, VG-20, VG-30 and VG-40. VG-30 is the workhorse for most highways and dense traffic; VG-40 for very heavy traffic and toll roads; VG-10 for spray/emulsion work in colder regions. Our bio-bitumen blends bio-oil into a VG-30 base — ~15% in current field use, up to ~20–30% in CSIR lab trials — while still meeting the spec.",
+      "Indian bitumen is graded by viscosity (IS 73): VG-10/20/30/40. VG-30 is the workhorse for most highways, VG-40 for very heavy traffic. Our bio-bitumen blends bio-oil into a VG-30 base while meeting the spec.",
   },
   {
     id: "penetration-grades",
@@ -128,7 +128,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "What is bio-bitumen?",
     keywords: ["bio bitumen", "biobitumen", "bio modified", "krishibind", "csir", "crri", "green bitumen", "bio oil"],
     answer:
-      "Bio-bitumen replaces part of conventional VG-30 with bio-oil made from agro-waste via pyrolysis (450–550°C), to the CSIR-CRRI 'KrishiBind' specification — ~15% in current field use, up to ~20–30% in CSIR lab trials. It is designed to meet NHAI/MoRTH specs with no performance loss in trials — and India became the first country to commercially produce it in January 2026.",
+      "Part of conventional VG-30 replaced with bio-oil from agro-waste via pyrolysis, to the CSIR-CRRI 'KrishiBind' spec — ~15% in field use, up to ~20–30% in lab trials. India launched it commercially in Jan 2026.",
     href: "/products/bio-bitumen",
   },
   {
@@ -136,7 +136,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Pyrolysis process",
     keywords: ["pyrolysis", "process", "how made", "how it works", "reactor", "450", "550", "heat", "oxygen free"],
     answer:
-      "Pyrolysis heats biomass (or plastic, or tyres) to 450–550°C in an oxygen-free reactor so it breaks down into oil, gas and char instead of burning. For bio-bitumen the bio-oil yield is ~20–25%, which is then refined and blended into VG-30. The same core process drives our plastic-to-fuel and tyre-to-oil plants.",
+      "Heating biomass/plastic/tyres to 450–550°C without oxygen so they break into oil, gas and char. For bio-bitumen the bio-oil (~20–25% yield) is refined and blended into VG-30.",
     href: "/bio-bitumen",
   },
   {
@@ -144,7 +144,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Feedstock / raw material",
     keywords: ["feedstock", "raw material", "agro waste", "biomass", "rice straw", "stubble", "bagasse", "groundnut", "cotton stalk", "input"],
     answer:
-      "Bio-bitumen runs on agro-waste — rice straw, groundnut shells, cotton stalk, bagasse — ideally sourced within 50–100 km and pelletized before pyrolysis. Using stubble this way also cuts the crop-burning that chokes north India each winter, which is part of the carbon-credit and subsidy story.",
+      "Agro-waste — rice straw, groundnut shells, cotton stalk, bagasse — ideally sourced within 50–100 km. Using stubble this way also cuts crop-burning, part of the carbon-credit story.",
   },
   {
     id: "plastic-to-fuel",
@@ -177,7 +177,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Plant cost / investment",
     keywords: ["cost", "investment", "price", "kitna", "kitne", "paisa", "budget", "capex", "how much", "lagat", "kharcha"],
     answer:
-      "Indicative bio-bitumen plant cost by capacity: 5 MT/day ≈ ₹1.5 Cr, 10 MT ≈ ₹3 Cr, 15 MT ≈ ₹4.5 Cr, 20 MT ≈ ₹8 Cr, 25 MT ≈ ₹10 Cr, 30–50 MT ≈ ₹12–16 Cr. The final number depends on capacity, land, product mix and how many stages you build — and MSME financing (CGTMSE/SIDBI) plus eligible state industrial incentives can ease the capex. Use the cost & ROI calculator on any product page for live figures.",
+      "Indicative bio-bitumen cost: 5 MT/day ≈ ₹1.5 Cr, 10 MT ≈ ₹3 Cr, 25 MT ≈ ₹10 Cr, 30–50 MT ≈ ₹12–16 Cr. MSME finance (CGTMSE/SIDBI) and state incentives can ease it — use the Cost & ROI calculator for live figures.",
     href: "/products/bio-bitumen",
   },
   {
@@ -209,7 +209,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "How to set up a plant",
     keywords: ["how to start", "setup", "set up", "begin", "process to start", "steps", "kaise shuru", "start plant", "first step"],
     answer:
-      "Our pipeline runs the same disciplined path for everyone: identify the right product → location & feasibility (DPR, financial model) → funding (loan/subsidy/equity) → licences & civil → machinery & commissioning → market & sales support. We de-risk each stage before the next, and hand-hold for ~6 months after commissioning while you find buyers.",
+      "One disciplined path: product → feasibility & DPR → funding → licences & civil → machinery & commissioning → market support. We de-risk each stage, and hand-hold for ~6 months after commissioning.",
     href: "/industrial-consulting",
   },
   {
@@ -217,7 +217,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "How long to set up",
     keywords: ["timeline", "how long", "duration", "time", "kitna time", "months", "kab tak", "ready"],
     answer:
-      "A typical small-to-mid plant runs roughly 6–12 months from go-ahead to commissioning — feasibility & funding first, then licences and civil in parallel, then machinery, installation and trial runs. The biggest swing factors are land readiness, pollution-board clearances and loan sanction; we run them in parallel to compress the timeline.",
+      "Roughly 6–12 months from go-ahead to commissioning. Land readiness, pollution-board clearances and loan sanction are the big swing factors — we run them in parallel to compress the timeline.",
     href: "/industrial-consulting",
   },
   {
@@ -251,7 +251,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Subsidy & grants",
     keywords: ["subsidy", "sabsidi", "anudaan", "chhoot", "grant", "government scheme", "mnre", "central state", "incentive"],
     answer:
-      "Funding is mostly MSME-based — CGTMSE collateral-free guarantee (up to ₹5 Cr), plus SIDBI and bank term loans — alongside state industrial incentives that vary by location (capital subsidy, SGST refund, power/interest support). Subsidy eligibility depends on current scheme rules, so we identify and file for every scheme you actually qualify for. Verify rates and windows on the official portal before relying on them.",
+      "Mostly MSME-based — CGTMSE collateral-free guarantee (up to ₹5 Cr), SIDBI and bank loans — plus state incentives that vary by location. We identify and file every scheme you qualify for; verify current rules on the official portal.",
     href: "/capital-market",
   },
   {
@@ -259,7 +259,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Bank loans / finance",
     keywords: ["loan", "karz", "karza", "bank", "finance", "cgtmse", "msme loan", "credit", "term loan", "sidbi", "fund the plant"],
     answer:
-      "Most plants are bank-funded: CGTMSE gives collateral-free loans up to ₹5 Cr (~12%), and MSME term loans run up to ₹25 Cr against plant & machinery. We prepare a bankable DPR + CMA data in bank format to maximise approval — typically a 70:30 term-loan-to-promoter structure.",
+      "CGTMSE gives collateral-free loans up to ₹5 Cr; MSME term loans run up to ₹25 Cr. We prepare a bankable DPR + CMA to maximise approval, typically a 70:30 loan-to-promoter split.",
     href: "/capital-market",
   },
   {
@@ -267,7 +267,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Equity funding & investors",
     keywords: ["funding", "investor", "equity", "venture", "vc", "angel", "series a", "raise capital", "private equity", "fundraise"],
     answer:
-      "Beyond debt, we structure equity — seed, Series A/B/C, strategic/JV, all the way to an IPO. The founder took Omnipotent Industries, a bitumen company, to a BSE SME listing in 2021, so the fundraising advice is first-hand, not theoretical. We build the pitch deck, valuation, data room and term sheets.",
+      "Beyond debt we structure equity — seed to IPO. The founder took Omnipotent Industries to a BSE SME listing in 2021, so the advice is first-hand. We build the deck, valuation, data room and term sheets.",
     href: "/capital-market",
   },
   {
@@ -293,7 +293,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Licences & permissions",
     keywords: ["licence", "license", "permission", "permit", "anumati", "approval", "pcb", "peso", "factory", "cte", "cto", "compliance", "regulatory"],
     answer:
-      "A plant needs 25+ approvals — Factory/Fire/PESO, Pollution Control Board CTE/CTO, EIA where applicable, GST/Udyam, plus NHAI/MoRTH empanelment to supply roads. Each product page lets you pick your state to see the relevant nodal authorities; we handle the full filing as part of the PMC.",
+      "A plant needs 25+ approvals — Factory/Fire/PESO, PCB CTE/CTO, GST/Udyam, plus NHAI/MoRTH empanelment. Pick your state on any product page to see the authorities; we handle the full filing.",
     href: "/industrial-consulting",
   },
   {
@@ -309,7 +309,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "What is a DPR?",
     keywords: ["dpr", "detailed project report", "report", "feasibility report", "bankable"],
     answer:
-      "A DPR (Detailed Project Report) is the master document for your plant — market, technical design, costing, financials (ROI/IRR/break-even), risk and compliance — in a format banks and investors accept. We also produce a separate Bank DPR + CMA for loan sanction. A full research & feasibility report for any product, PAN-India, starts at ₹5 lakh as part of the PMC.",
+      "A Detailed Project Report — market, design, costing, financials, risk and compliance — in a format banks and investors accept. A full feasibility report for any product starts at ₹5 lakh.",
     href: "/market-intelligence",
   },
   {
@@ -327,7 +327,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Carbon credits",
     keywords: ["carbon", "credit", "carbon credit", "co2", "emission", "puro", "mrv", "green revenue", "offset", "environment"],
     answer:
-      "Bio-bitumen may qualify to earn carbon credits — illustratively around 0.35 t CO₂ saved per MT — via voluntary mechanisms (e.g. Puro.earth MRV or India's BEE offset route). Eligibility, methodology approval, volume and price are not guaranteed and prices vary, so treat any figure as illustrative, not assured revenue. We help structure the MRV pathway.",
+      "Bio-bitumen may earn carbon credits — illustratively ~0.35 t CO₂/MT — via voluntary routes (Puro.earth, BEE). Eligibility, volume and price aren't guaranteed, so treat figures as illustrative. We help structure the MRV pathway.",
     href: "/market-intelligence",
   },
   {
@@ -335,7 +335,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Market size & opportunity",
     keywords: ["market", "opportunity", "demand", "import", "size", "how big market", "scope", "future", "growth"],
     answer:
-      "India imports ~40% of its bitumen (≈60% met domestically), against annual consumption of ~87 lakh tonnes — a large import-substitution gap. India became the first country to commercially produce bio-bitumen (CSIR-CRRI / CSIR-IIP, Jan 2026), with ~1,000 km of pilot roads planned by 2027. Early movers capture that gap.",
+      "India imports ~40% of its bitumen against ~87 lakh tonnes a year — a big import-substitution gap. India became the first country to commercially produce bio-bitumen (Jan 2026), with ~1,000 km of pilot roads planned by 2027.",
     href: "/market-intelligence",
   },
   {
@@ -351,7 +351,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "Who buys it / finding buyers",
     keywords: ["buyers", "customers", "sell", "market support", "who buys", "demand", "contractors", "off take", "sales"],
     answer:
-      "Buyers are road contractors, PWD, NHAI, traders and exporters. Our edge is a multi-thousand-contact live database of contractors, traders and importers across 18 states (150,000 contacts total) — so you're not setting up a plant and then wondering who to sell to. We give active sales support for ~6 months after commissioning.",
+      "Buyers are road contractors, PWD, NHAI, traders and exporters. Our edge is a 150,000-contact live database across 18 states, plus ~6 months of active sales support after commissioning.",
     href: "/market-intelligence",
   },
 
@@ -361,7 +361,7 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     title: "About YUGA / the founder",
     keywords: ["yuga", "who are you", "about", "company", "founder", "prince", "experience", "pacpl", "pps anantams", "background", "credentials"],
     answer:
-      "YUGA is the brand of PPS Anantams Corporation (PACPL). The founder, Prince Pratap Shah, has 25+ years in bitumen, has personally commissioned 9 plants across India, and took Omnipotent Industries, a bitumen company, to a BSE SME listing in 2021 — so this is a hands-on operator, not a desk consultant. We cover plant PMC, AI software and capital-markets fundraising.",
+      "YUGA is the brand of PPS Anantams (PACPL). Founder Prince Pratap Shah has 25+ years in bitumen, commissioned 9 plants, and took Omnipotent Industries to a BSE SME listing in 2021 — a hands-on operator. We cover plant PMC, AI software and fundraising.",
     href: "/about",
   },
   {
