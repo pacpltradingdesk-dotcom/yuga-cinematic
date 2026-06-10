@@ -520,7 +520,7 @@ export function AiAssistant() {
 
             {/* quick pivots — always available once a chat has started */}
             {hasConversation && (
-              <div className="flex gap-2 overflow-x-auto border-t border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex flex-wrap gap-2 border-t border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5">
                 {QUICK_CHIPS.map((c) => (
                   <button
                     key={c}
