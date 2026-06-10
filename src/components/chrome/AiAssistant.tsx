@@ -318,7 +318,7 @@ export function AiAssistant() {
               data-cursor="hover"
               className="glass hidden items-center gap-2 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_25%,transparent)] py-2.5 pl-4 pr-3 text-sm font-medium text-[var(--color-ink)] shadow-xl shadow-black/30 sm:flex"
             >
-              Need help? Ask me anything
+              Hi, I&apos;m Setu 👋 Ask me anything
               <ArrowUpRight size={14} className="text-[var(--color-amber)]" />
             </motion.button>
           )}
@@ -356,7 +356,7 @@ export function AiAssistant() {
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 320, damping: 30 }}
             role="dialog"
-            aria-label="YUGA Assistant"
+            aria-label="Setu — YUGA assistant"
             // Let the chat scroll natively under the mouse; Lenis keeps driving the
             // page everywhere else (data-lenis-prevent excludes this subtree).
             data-lenis-prevent
@@ -367,13 +367,13 @@ export function AiAssistant() {
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color-mix(in_oklch,var(--color-amber)_50%,transparent)] to-transparent" />
               <BotAvatar size={36} icon={17} />
               <div className="min-w-0 flex-1">
-                <div className="font-display text-sm font-semibold tracking-tight">YUGA Assistant</div>
+                <div className="font-display text-sm font-semibold tracking-tight">Setu</div>
                 <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-[var(--color-faint)]">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   </span>
-                  Online · instant replies
+                  YUGA assistant · online
                 </div>
               </div>
               {hasConversation && (
@@ -404,7 +404,7 @@ export function AiAssistant() {
                   <div className="flex items-start gap-2.5">
                     <BotAvatar />
                     <div className="rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3 text-sm leading-relaxed text-[var(--color-muted)]">
-                      Namaste 👋 I&apos;m the YUGA assistant. Ask me about any plant — cost, subsidy, land, licences, funding or carbon credits.
+                      Namaste 👋 I&apos;m Setu, YUGA&apos;s assistant. Ask me about any plant — cost, subsidy, land, licences, funding or carbon credits.
                     </div>
                   </div>
                   <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[var(--color-faint)]">Try asking</p>
