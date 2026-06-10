@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sparkles, X, ArrowUpRight, Send, Loader2, RotateCcw } from "lucide-react";
+import { Sparkles, X, ArrowUpRight, Send, Loader2, RotateCcw, MessageCircle } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
 import { searchAssistant, isThinFollowUp, type AssistantResult } from "@/lib/assistant";
@@ -26,7 +26,6 @@ import { cn } from "@/lib/utils";
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
 /** Short pivots always available above the input once a chat has started. */
 const QUICK_CHIPS = ["Plant cost", "Subsidy", "Bank loan", "Land needed", "Which plant?"];
-const WA_HINDI = waLink("Namaste YUGA, mujhe Hindi mein jaankari chahiye.");
 const NUDGE_KEY = "yuga-asst-nudge";
 
 /** One static-mode conversation turn: the question + its computed answer. */
@@ -225,18 +224,6 @@ export function AiAssistant() {
             <div className="mb-2 rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
               {result.smallTalk}
             </div>
-          )}
-
-          {result.hindiNote && (
-            <a
-              href={WA_HINDI}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="hover"
-              className="mb-2 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-            >
-              {result.hindiNote}
-            </a>
           )}
 
           {result.cards.slice(0, 1).map((a, i) => (
@@ -549,7 +536,18 @@ export function AiAssistant() {
             )}
 
             <form onSubmit={onSubmit} className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-3">
-              <div className="flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-1.5 transition-colors focus-within:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)]">
+              <div className="flex items-center gap-1.5 rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] px-2 py-1.5 transition-colors focus-within:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)]">
+                <a
+                  href={waForQuery("", waLink("Hi YUGA, I'd like to connect with the team."))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  aria-label="Connect on WhatsApp"
+                  title="Chat on WhatsApp"
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-emerald-400 outline-none transition-colors hover:bg-[color-mix(in_oklch,var(--color-ink)_8%,transparent)] hover:text-emerald-300"
+                >
+                  <MessageCircle size={17} />
+                </a>
                 <input
                   ref={inputRef}
                   value={query}
