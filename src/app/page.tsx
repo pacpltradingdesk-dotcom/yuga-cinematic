@@ -8,6 +8,7 @@ import { CTASection } from "@/components/page/CTASection";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GoalRouter } from "@/components/page/GoalRouter";
+import { SiteMap } from "@/components/page/SiteMap";
 import { InstantTools } from "@/components/tools/InstantTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { ClientJourney } from "@/components/page/ClientJourney";
@@ -46,6 +47,20 @@ export default function HomePage() {
           />
           <div className="mt-12">
             <GoalRouter />
+          </div>
+        </div>
+      </section>
+
+      {/* Full site map — every page grouped by section, so everything is reachable from home */}
+      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="Everything, By Section"
+            title="The full map."
+            intro="The same four areas as the top menu — Plants, Software, Capital and Company — with every page underneath."
+          />
+          <div className="mt-12">
+            <SiteMap />
           </div>
         </div>
       </section>
