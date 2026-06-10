@@ -302,7 +302,7 @@ export function AiAssistant() {
                   key={`${s}:${i}`}
                   onClick={() => onSuggestion(s)}
                   data-cursor="hover"
-                  className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                  className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] outline-none transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)] focus-visible:border-[color-mix(in_oklch,var(--color-amber)_50%,transparent)] focus-visible:text-[var(--color-ink)]"
                 >
                   {s}
                 </button>
@@ -427,7 +427,7 @@ export function AiAssistant() {
                         key={s}
                         onClick={() => onSuggestion(s)}
                         data-cursor="hover"
-                        className="group flex items-center justify-between rounded-xl border border-[var(--color-line)] px-3.5 py-2.5 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                        className="group flex items-center justify-between rounded-xl border border-[var(--color-line)] px-3.5 py-2.5 text-left text-sm text-[var(--color-muted)] outline-none transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)] focus-visible:border-[color-mix(in_oklch,var(--color-amber)_50%,transparent)] focus-visible:text-[var(--color-ink)]"
                       >
                         {s}
                         <ArrowUpRight size={13} className="shrink-0 text-[var(--color-faint)] opacity-0 transition-opacity group-hover:opacity-100 group-hover:text-[var(--color-amber)]" />
@@ -540,7 +540,7 @@ export function AiAssistant() {
                     onClick={() => onSuggestion(c)}
                     disabled={busy}
                     data-cursor="hover"
-                    className="shrink-0 rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)] disabled:opacity-50"
+                    className="shrink-0 rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] outline-none transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)] focus-visible:border-[color-mix(in_oklch,var(--color-amber)_55%,transparent)] focus-visible:text-[var(--color-amber)] disabled:opacity-50"
                   >
                     {c}
                   </button>
