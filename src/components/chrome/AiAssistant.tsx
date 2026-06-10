@@ -370,6 +370,9 @@ export function AiAssistant() {
             transition={{ type: "spring", stiffness: 320, damping: 30 }}
             role="dialog"
             aria-label="YUGA Assistant"
+            // Let the chat scroll natively under the mouse; Lenis keeps driving the
+            // page everywhere else (data-lenis-prevent excludes this subtree).
+            data-lenis-prevent
             className="glass fixed bottom-24 right-5 z-50 flex max-h-[min(78vh,calc(100dvh-7rem))] w-[min(94vw,25rem)] flex-col overflow-hidden rounded-3xl border border-[color-mix(in_oklch,var(--color-amber)_22%,transparent)] shadow-2xl shadow-black/50 ring-glow"
           >
             {/* header */}
