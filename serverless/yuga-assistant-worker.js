@@ -26,7 +26,11 @@
  */
 
 // ---- config ----
-const MODEL = "claude-haiku-4-5-20251001"; // fast + cheap; swap to claude-sonnet-4-6 for deeper answers
+// Provider is auto-detected from whichever secret you set:
+//   wrangler secret put OPENAI_API_KEY      → uses OpenAI
+//   wrangler secret put ANTHROPIC_API_KEY   → uses Anthropic
+const ANTHROPIC_MODEL = "claude-haiku-4-5-20251001"; // fast + cheap
+const OPENAI_MODEL = "gpt-4o-mini"; // fast + cheap
 const MAX_TOKENS = 600;
 const MAX_QUERY_CHARS = 600;
 const MAX_CONTEXT_CHARS = 16_000;
@@ -102,7 +106,8 @@ export default {
 
     // Access control — hard reject before any work (CORS alone is not security).
     if (!ALLOWED_ORIGINS.has(origin)) return json({ error: "Forbidden" }, 403, origin);
-    if (!env.ANTHROPIC_API_KEY) return json({ error: "Server not configured" }, 500, origin);
+    const provider = env.OPENAI_API_KEY ? "openai" : env.ANTHROPIC_API_KEY ? "anthropic" : null;
+    if (!provider) return json({ error: "Server not configured" }, 500, origin);
 
     let payload;
     try {
@@ -138,24 +143,41 @@ export default {
 
     let res;
     try {
-      res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "x-api-key": env.ANTHROPIC_API_KEY,
-          "anthropic-version": "2023-06-01",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system, messages }),
-      });
+      res =
+        provider === "openai"
+          ? await fetch("https://api.openai.com/v1/chat/completions", {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                model: OPENAI_MODEL,
+                max_tokens: MAX_TOKENS,
+                messages: [{ role: "system", content: system }, ...messages],
+              }),
+            })
+          : await fetch("https://api.anthropic.com/v1/messages", {
+              method: "POST",
+              headers: {
+                "x-api-key": env.ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({ model: ANTHROPIC_MODEL, max_tokens: MAX_TOKENS, system, messages }),
+            });
     } catch {
       return json({ error: "Upstream unreachable" }, 502, origin);
     }
     if (!res.ok) return json({ error: `Upstream ${res.status}` }, 502, origin);
 
     const data = await res.json();
-    const answer = Array.isArray(data?.content)
-      ? data.content.filter((b) => b?.type === "text").map((b) => b.text).join("\n").trim()
-      : "";
+    const answer =
+      provider === "openai"
+        ? (data?.choices?.[0]?.message?.content ?? "").trim()
+        : Array.isArray(data?.content)
+          ? data.content.filter((b) => b?.type === "text").map((b) => b.text).join("\n").trim()
+          : "";
     if (!answer) return json({ error: "Empty answer" }, 502, origin);
 
     return json({ answer }, 200, origin);
