@@ -40,6 +40,10 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_SITE_URL: "https://yuga-pmc.in"
+          # Set this repo Variable to your deployed Worker URL to switch the
+          # assistant from static search to live LLM chat. Unset → static mode.
+          # (It's a public URL, so a Variable — not a Secret — is correct.)
+          NEXT_PUBLIC_AI_ENDPOINT: ${{ vars.NEXT_PUBLIC_AI_ENDPOINT }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
