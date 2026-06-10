@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sparkles, X, ArrowUpRight, Send, Loader2 } from "lucide-react";
+import { Sparkles, X, ArrowUpRight, Send, Loader2, RotateCcw } from "lucide-react";
 import { hasAiChat } from "@/lib/config";
 import { askAi, type ChatMessage } from "@/lib/ai";
 import { searchAssistant, isThinFollowUp, type AssistantResult } from "@/lib/assistant";
@@ -24,13 +24,28 @@ import { cn } from "@/lib/utils";
  * by a real LLM chat (key stays server-side).
  */
 const SUGGESTIONS = ["What is bio-bitumen?", "How much investment?", "Can I get a loan?", "Carbon credits?"];
+/** Short pivots always available above the input once a chat has started. */
+const QUICK_CHIPS = ["Plant cost", "Subsidy", "Bank loan", "Land needed", "Which plant?"];
 const WA_HINDI = waLink("Namaste YUGA, mujhe Hindi mein jaankari chahiye.");
+const NUDGE_KEY = "yuga-asst-nudge";
 
 /** One static-mode conversation turn: the question + its computed answer. */
 interface StaticTurn {
   readonly id: number;
   readonly query: string;
   readonly result: AssistantResult;
+}
+
+/** Small brand avatar shown beside the assistant's replies. */
+function BotAvatar({ size = 28, icon = 14 }: { size?: number; icon?: number }) {
+  return (
+    <div
+      className="grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-[var(--color-amber)] to-[var(--color-amber-deep)] text-[var(--color-void)] shadow-[0_4px_14px_-4px_var(--color-amber-deep)]"
+      style={{ height: size, width: size }}
+    >
+      <Sparkles size={icon} />
+    </div>
+  );
 }
 
 export function AiAssistant() {
@@ -51,8 +66,13 @@ export function AiAssistant() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // One-time launcher nudge (per browser session) to aid discovery.
+  const [nudge, setNudge] = useState(false);
 
   const hasQuery = query.trim().length > 0;
+  const hasConversation = chatMode ? messages.length > 0 : turns.length > 0;
 
   // Page-aware context: on a product page, calc answers default to that product.
   const pathname = usePathname();
@@ -69,6 +89,63 @@ export function AiAssistant() {
     const c = scrollRef.current;
     if (c) c.scrollTo({ top: c.scrollHeight, behavior: "smooth" });
   }, [turns.length, messages.length, busy]);
+
+  // When the panel opens: focus the input and allow Escape to close.
+  useEffect(() => {
+    if (!open) return;
+    const t = setTimeout(() => inputRef.current?.focus(), 120);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  // Gentle, once-per-session nudge — appears briefly, then retires itself.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (sessionStorage.getItem(NUDGE_KEY) === "seen") return;
+    } catch {
+      return;
+    }
+    const show = setTimeout(() => setNudge(true), 2800);
+    const hide = setTimeout(() => setNudge(false), 11000);
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
+  }, []);
+
+  function dismissNudge(): void {
+    setNudge(false);
+    try {
+      sessionStorage.setItem(NUDGE_KEY, "seen");
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function openPanel(): void {
+    setOpen(true);
+    dismissNudge();
+  }
+
+  /** Clear the whole conversation back to the welcome state. */
+  function resetChat(): void {
+    setTurns([]);
+    setMessages([]);
+    setError(null);
+    setQuery("");
+    setLead({ name: "", phone: "" });
+    setLeadState("idle");
+    lastTopicRef.current = "";
+    turnIdRef.current = 0;
+    inputRef.current?.focus();
+  }
 
   /** Static-mode turn: compute the answer, remember the topic, append to thread. */
   function askStatic(text: string): void {
@@ -141,88 +218,98 @@ export function AiAssistant() {
   function renderAnswer(result: AssistantResult, q: string, isLatest: boolean) {
     const showFallback = result.cards.length === 0 && !result.smallTalk;
     return (
-      <div className="mr-auto max-w-[92%]">
-        {result.smallTalk && (
-          <div className="mb-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
-            {result.smallTalk}
-          </div>
-        )}
+      <div className="flex max-w-[95%] items-start gap-2.5">
+        <BotAvatar />
+        <div className="min-w-0 flex-1">
+          {result.smallTalk && (
+            <div className="mb-2 rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] p-4 text-sm leading-relaxed text-[var(--color-muted)]">
+              {result.smallTalk}
+            </div>
+          )}
 
-        {result.hindiNote && (
-          <a
-            href={WA_HINDI}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor="hover"
-            className="mb-2 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-          >
-            {result.hindiNote}
-          </a>
-        )}
+          {result.hindiNote && (
+            <a
+              href={WA_HINDI}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
+              className="mb-2 block rounded-2xl border border-[color-mix(in_oklch,var(--color-cyan)_28%,transparent)] bg-[var(--color-surface)] p-3 text-sm leading-relaxed text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+            >
+              {result.hindiNote}
+            </a>
+          )}
 
-        {result.cards.slice(0, 1).map((a, i) => (
-          <div key={`${a.tag}:${a.q}:${i}`} className="mb-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4">
-            <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
-            <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
-            <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
-            {a.href && (
-              <Link href={a.href} onClick={() => setOpen(false)} className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)]">
-                Open page <ArrowUpRight size={12} />
-              </Link>
-            )}
-          </div>
-        ))}
-
-        {isLatest && result.actions.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-2">
-            {result.actions.map((act) =>
-              act.external ? (
-                <a
-                  key={act.label}
-                  href={act.label === "WhatsApp" ? waForQuery(q, act.href) : act.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-cursor="hover"
-                  className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)]"
-                >
-                  {act.label}
-                </a>
-              ) : (
+          {result.cards.slice(0, 1).map((a, i) => (
+            <div
+              key={`${a.tag}:${a.q}:${i}`}
+              className="mb-2 rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] p-4"
+            >
+              <div className="text-[11px] uppercase tracking-wider text-[var(--color-faint)]">{a.tag}</div>
+              <div className="mt-1 text-sm font-medium text-[var(--color-ink)]">{a.q}</div>
+              <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-muted)]">{a.a}</p>
+              {a.href && (
                 <Link
-                  key={act.label}
-                  href={act.href}
+                  href={a.href}
                   onClick={() => setOpen(false)}
-                  data-cursor="hover"
-                  className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-ink)]"
+                  className="mt-2.5 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-amber)] transition-opacity hover:opacity-80"
                 >
-                  {act.label}
+                  Open page <ArrowUpRight size={12} />
                 </Link>
-              ),
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          ))}
 
-        {showFallback && (
-          <div className="grid gap-2">
-            <p className="text-sm leading-relaxed text-[var(--color-muted)]">
-              {result.fallback.split("message us on WhatsApp")[0]}
-              <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
-                message us on WhatsApp
-              </Link>
-              {result.fallback.split("message us on WhatsApp")[1] ?? ""}
-            </p>
-            {result.suggestions.map((s, i) => (
-              <button
-                key={`${s}:${i}`}
-                onClick={() => onSuggestion(s)}
-                data-cursor="hover"
-                className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
+          {isLatest && result.actions.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {result.actions.map((act) =>
+                act.external ? (
+                  <a
+                    key={act.label}
+                    href={act.label === "WhatsApp" ? waForQuery(q, act.href) : act.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="hover"
+                    className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)]"
+                  >
+                    {act.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={act.label}
+                    href={act.href}
+                    onClick={() => setOpen(false)}
+                    data-cursor="hover"
+                    className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-ink)]"
+                  >
+                    {act.label}
+                  </Link>
+                ),
+              )}
+            </div>
+          )}
+
+          {showFallback && (
+            <div className="grid gap-2">
+              <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+                {result.fallback.split("message us on WhatsApp")[0]}
+                <Link href="/contact" className="text-[var(--color-amber)]" onClick={() => setOpen(false)}>
+                  message us on WhatsApp
+                </Link>
+                {result.fallback.split("message us on WhatsApp")[1] ?? ""}
+              </p>
+              {result.suggestions.map((s, i) => (
+                <button
+                  key={`${s}:${i}`}
+                  onClick={() => onSuggestion(s)}
+                  data-cursor="hover"
+                  className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -231,15 +318,48 @@ export function AiAssistant() {
 
   return (
     <>
-      {/* launcher */}
-      <button
-        onClick={() => setOpen((v) => !v)}
-        data-cursor="hover"
-        aria-label="Open AI assistant"
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-amber)] to-[var(--color-amber-deep)] text-[var(--color-void)] shadow-[0_8px_40px_-8px_var(--color-amber-deep)] transition-transform hover:scale-105"
-      >
-        {open ? <X size={22} /> : <Sparkles size={22} />}
-      </button>
+      {/* launcher + one-time nudge */}
+      <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2.5">
+        <AnimatePresence>
+          {nudge && !open && (
+            <motion.button
+              initial={{ opacity: 0, x: 16, scale: 0.92 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 16, scale: 0.92 }}
+              transition={{ type: "spring", stiffness: 340, damping: 26 }}
+              onClick={openPanel}
+              data-cursor="hover"
+              className="glass hidden items-center gap-2 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_25%,transparent)] py-2.5 pl-4 pr-3 text-sm font-medium text-[var(--color-ink)] shadow-xl shadow-black/30 sm:flex"
+            >
+              Need help? Ask me anything
+              <ArrowUpRight size={14} className="text-[var(--color-amber)]" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        <button
+          onClick={() => (open ? setOpen(false) : openPanel())}
+          data-cursor="hover"
+          aria-label={open ? "Close AI assistant" : "Open AI assistant"}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-amber)] to-[var(--color-amber-deep)] text-[var(--color-void)] shadow-[0_8px_40px_-8px_var(--color-amber-deep)] transition-transform hover:scale-105 active:scale-95"
+        >
+          {!open && (
+            <span className="pointer-events-none absolute inset-0 animate-ping rounded-full border-2 border-[var(--color-amber)] opacity-30" />
+          )}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={open ? "x" : "spark"}
+              initial={{ opacity: 0, rotate: -45, scale: 0.6 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
+              transition={{ duration: 0.18 }}
+              className="relative"
+            >
+              {open ? <X size={22} /> : <Sparkles size={22} />}
+            </motion.span>
+          </AnimatePresence>
+        </button>
+      </div>
 
       <AnimatePresence>
         {open && (
@@ -248,56 +368,107 @@ export function AiAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 320, damping: 30 }}
-            className="glass fixed bottom-24 right-5 z-50 flex max-h-[70vh] w-[min(92vw,24rem)] flex-col overflow-hidden rounded-3xl border border-[color-mix(in_oklch,var(--color-amber)_22%,transparent)] ring-glow"
+            role="dialog"
+            aria-label="YUGA Assistant"
+            className="glass fixed bottom-24 right-5 z-50 flex max-h-[min(78vh,calc(100dvh-7rem))] w-[min(94vw,25rem)] flex-col overflow-hidden rounded-3xl border border-[color-mix(in_oklch,var(--color-amber)_22%,transparent)] shadow-2xl shadow-black/50 ring-glow"
           >
-            <div className="flex items-center gap-2 border-b border-[var(--color-line)] bg-[var(--color-surface)] px-5 py-4">
-              <Sparkles size={17} className="text-[var(--color-amber)]" />
-              <div>
+            {/* header */}
+            <div className="relative flex items-center gap-3 border-b border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3.5">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color-mix(in_oklch,var(--color-amber)_50%,transparent)] to-transparent" />
+              <BotAvatar size={36} icon={17} />
+              <div className="min-w-0 flex-1">
                 <div className="font-display text-sm font-semibold tracking-tight">YUGA Assistant</div>
-                <div className="text-[11px] text-[var(--color-faint)]">Ask about plants, costs, subsidy, carbon</div>
+                <div className="mt-0.5 flex items-center gap-1.5 text-[11px] text-[var(--color-faint)]">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  Online · instant replies
+                </div>
               </div>
+              {hasConversation && (
+                <button
+                  onClick={resetChat}
+                  data-cursor="hover"
+                  aria-label="Start a new chat"
+                  title="New chat"
+                  className="grid h-8 w-8 place-items-center rounded-full text-[var(--color-faint)] transition-colors hover:bg-[var(--color-raised)] hover:text-[var(--color-ink)]"
+                >
+                  <RotateCcw size={15} />
+                </button>
+              )}
+              <button
+                onClick={() => setOpen(false)}
+                data-cursor="hover"
+                aria-label="Close assistant"
+                className="grid h-8 w-8 place-items-center rounded-full text-[var(--color-faint)] transition-colors hover:bg-[var(--color-raised)] hover:text-[var(--color-ink)]"
+              >
+                <X size={16} />
+              </button>
             </div>
 
-            <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4">
-              {/* Suggestions — shown until the first question */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
+              {/* Welcome + suggestions — shown until the first question */}
               {showSuggestions && (
-                <div className="grid gap-2">
-                  <p className="text-sm text-[var(--color-muted)]">Try asking:</p>
-                  {SUGGESTIONS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => onSuggestion(s)}
-                      data-cursor="hover"
-                      className="rounded-xl border border-[var(--color-line)] px-3 py-2 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
-                    >
-                      {s}
-                    </button>
-                  ))}
+                <div className="grid gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <BotAvatar />
+                    <div className="rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                      Namaste 👋 I&apos;m the YUGA assistant. Ask me about any plant — cost, subsidy, land, licences, funding or carbon credits.
+                    </div>
+                  </div>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[var(--color-faint)]">Try asking</p>
+                  <div className="grid gap-2">
+                    {SUGGESTIONS.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => onSuggestion(s)}
+                        data-cursor="hover"
+                        className="group flex items-center justify-between rounded-xl border border-[var(--color-line)] px-3.5 py-2.5 text-left text-sm text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] hover:text-[var(--color-ink)]"
+                      >
+                        {s}
+                        <ArrowUpRight size={13} className="shrink-0 text-[var(--color-faint)] opacity-0 transition-opacity group-hover:opacity-100 group-hover:text-[var(--color-amber)]" />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
               {/* CHAT MODE — LLM conversation transcript */}
               {chatMode && (
                 <div className="grid gap-3">
-                  {messages.map((m, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "max-w-[88%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
-                        m.role === "user"
-                          ? "ml-auto bg-[var(--color-amber)] text-[var(--color-void)]"
-                          : "mr-auto border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
-                      )}
-                    >
-                      {m.content}
-                    </div>
-                  ))}
+                  {messages.map((m, i) =>
+                    m.role === "user" ? (
+                      <div
+                        key={i}
+                        className="ml-auto max-w-[85%] rounded-2xl rounded-tr-sm bg-[var(--color-amber)] px-4 py-2.5 text-sm font-medium leading-relaxed text-[var(--color-void)]"
+                      >
+                        {m.content}
+                      </div>
+                    ) : (
+                      <div key={i} className="flex max-w-[92%] items-start gap-2.5">
+                        <BotAvatar />
+                        <div className="rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2.5 text-sm leading-relaxed text-[var(--color-muted)]">
+                          {m.content}
+                        </div>
+                      </div>
+                    ),
+                  )}
                   {busy && (
-                    <div className="mr-auto flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2.5 text-sm text-[var(--color-faint)]">
-                      <Loader2 size={14} className="animate-spin" /> Thinking…
+                    <div className="flex items-center gap-2.5">
+                      <BotAvatar />
+                      <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3">
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-faint)] [animation-delay:-0.3s]" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-faint)] [animation-delay:-0.15s]" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--color-faint)]" />
+                      </div>
                     </div>
                   )}
-                  {error && <p className="text-sm text-[var(--color-muted)]">{error}</p>}
+                  {error && (
+                    <p className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-muted)]">
+                      {error}
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -311,7 +482,7 @@ export function AiAssistant() {
                     transition={{ duration: 0.2 }}
                     className="mb-4"
                   >
-                    <div className="ml-auto mb-2 w-fit max-w-[88%] rounded-2xl bg-[var(--color-amber)] px-4 py-2.5 text-sm font-medium text-[var(--color-void)]">
+                    <div className="ml-auto mb-2.5 w-fit max-w-[85%] rounded-2xl rounded-tr-sm bg-[var(--color-amber)] px-4 py-2.5 text-sm font-medium text-[var(--color-void)]">
                       {t.query}
                     </div>
                     {renderAnswer(t.result, t.query, t.id === lastTurn?.id)}
@@ -320,7 +491,7 @@ export function AiAssistant() {
 
               {/* STATIC MODE — inline lead form (once, when the latest turn shows buying intent) */}
               {!chatMode && lastTurn?.result.leadIntent && (
-                <div className="mt-1 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_30%,transparent)] bg-[var(--color-surface)] p-4">
+                <div className="ml-[2.4rem] mt-1 rounded-2xl border border-[color-mix(in_oklch,var(--color-amber)_30%,transparent)] bg-[var(--color-surface)] p-4">
                   {leadState === "done" ? (
                     <p className="text-sm text-[var(--color-muted)]">Thanks! 🙏 The team will reach out shortly. For an instant reply, ping us on WhatsApp.</p>
                   ) : (
@@ -332,20 +503,20 @@ export function AiAssistant() {
                           value={lead.name}
                           onChange={(e) => setLead((l) => ({ ...l, name: e.target.value }))}
                           placeholder="Your name"
-                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
+                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2.5 text-sm text-[var(--color-ink)] outline-none transition-colors focus:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] placeholder:text-[var(--color-faint)]"
                         />
                         <input
                           value={lead.phone}
                           onChange={(e) => setLead((l) => ({ ...l, phone: e.target.value }))}
                           placeholder="Phone / WhatsApp"
                           inputMode="tel"
-                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)]"
+                          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2.5 text-sm text-[var(--color-ink)] outline-none transition-colors focus:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] placeholder:text-[var(--color-faint)]"
                         />
                         <button
                           onClick={() => void submitAssistantLead()}
                           disabled={leadState === "sending" || !lead.name.trim() || !lead.phone.trim()}
                           data-cursor="hover"
-                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--color-amber)] px-4 py-2 text-sm font-medium text-[var(--color-void)] transition-opacity disabled:opacity-50"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--color-amber)] px-4 py-2.5 text-sm font-semibold text-[var(--color-void)] transition-opacity hover:opacity-90 disabled:opacity-50"
                         >
                           {leadState === "sending" ? <Loader2 size={14} className="animate-spin" /> : null}
                           {leadState === "sending" ? "Sending…" : "Request a callback"}
@@ -357,21 +528,47 @@ export function AiAssistant() {
               )}
             </div>
 
+            {/* quick pivots — always available once a chat has started */}
+            {hasConversation && (
+              <div className="flex gap-2 overflow-x-auto border-t border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {QUICK_CHIPS.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => onSuggestion(c)}
+                    disabled={busy}
+                    data-cursor="hover"
+                    className="shrink-0 rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] hover:text-[var(--color-amber)] disabled:opacity-50"
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <form onSubmit={onSubmit} className="border-t border-[var(--color-line)] bg-[var(--color-surface)] p-3">
-              <div className="flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-2">
+              <div className="flex items-center gap-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)] px-3 py-1.5 transition-colors focus-within:border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)]">
                 <input
+                  ref={inputRef}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={chatMode ? "Ask the assistant…" : "Ask a question…"}
                   disabled={busy}
-                  className="flex-1 bg-transparent text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)] disabled:opacity-60"
+                  aria-label="Type your question"
+                  className="flex-1 bg-transparent py-1 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-faint)] disabled:opacity-60"
                 />
-                <button type="submit" aria-label="Send" disabled={busy || !hasQuery} data-cursor="hover">
-                  {busy ? (
-                    <Loader2 size={15} className="animate-spin text-[var(--color-amber)]" />
-                  ) : (
-                    <Send size={15} className={cn("shrink-0", hasQuery ? "text-[var(--color-amber)]" : "text-[var(--color-faint)]")} />
+                <button
+                  type="submit"
+                  aria-label="Send"
+                  disabled={busy || !hasQuery}
+                  data-cursor="hover"
+                  className={cn(
+                    "grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all",
+                    hasQuery && !busy
+                      ? "bg-[var(--color-amber)] text-[var(--color-void)] hover:scale-105"
+                      : "text-[var(--color-faint)]",
                   )}
+                >
+                  {busy ? <Loader2 size={15} className="animate-spin text-[var(--color-amber)]" /> : <Send size={15} />}
                 </button>
               </div>
               <p className="mt-2 text-center text-[10px] text-[var(--color-faint)]">
