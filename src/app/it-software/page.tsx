@@ -15,6 +15,7 @@ import { VerticalFaq } from "@/components/page/VerticalFaq";
 import { softwareProducts, itServices, apiCapability, integrationLoop } from "@/lib/software";
 import { softwareImg } from "@/lib/media";
 import { softwareMeta } from "@/lib/catalog";
+import { softwareSubscriptions, softwareSubscriptionNote } from "@/lib/pricing";
 
 /** Map IT-service keys to icons (keeps lib/software text-only). */
 const serviceIcon: Record<string, LucideIcon> = {
@@ -130,7 +131,7 @@ export default function ITSoftwarePage() {
           <SectionHeading
             eyebrow="The Product Suite"
             title="Seven products. Built for bitumen, sales and intelligence."
-            intro="Each one runs our own operations first — then we license it. Available on subscription with four feature tiers; prices on request."
+            intro="Each one runs our own operations first — then we license it. Available on subscription with four feature tiers — indicative plans in the pricing section below."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {softwareProducts.map((s, i) => (
@@ -260,7 +261,36 @@ export default function ITSoftwarePage() {
             {softwareMeta.billing.map((b) => (
               <span key={b} className="rounded-full border border-[var(--color-line)] px-4 py-1.5">{b}</span>
             ))}
-            <span>· Prices on request</span>
+            <span>· GST extra</span>
+          </Reveal>
+
+          {/* Per-product subscription plans (data: lib/pricing.ts → softwareSubscriptions) */}
+          <Reveal className="mt-12">
+            <div className="overflow-x-auto rounded-2xl border border-[var(--color-line)] bg-[var(--color-raised)]/40">
+              <table className="w-full min-w-[26rem] border-collapse text-sm">
+                <caption className="sr-only">Indicative monthly subscription pricing per software product</caption>
+                <thead>
+                  <tr className="bg-[var(--color-raised)] text-[11px] uppercase tracking-wider text-[var(--color-faint)]">
+                    <th scope="col" className="px-5 py-3 text-left font-normal sm:px-6">Product</th>
+                    <th scope="col" className="px-5 py-3 text-right font-normal sm:px-6">From · A Basic</th>
+                    <th scope="col" className="px-5 py-3 text-right font-normal sm:px-6">Typical · C Pro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {softwareSubscriptions.map((p, i) => (
+                    <tr key={p.slug} className={i > 0 ? "border-t border-[var(--color-line)]" : ""}>
+                      <td className="px-5 py-4 pr-3 sm:px-6">
+                        <span className="font-medium text-[var(--color-ink)]">{p.product}</span>
+                        {p.note && <span className="mt-0.5 block text-xs text-[var(--color-faint)]">{p.note}</span>}
+                      </td>
+                      <td className="px-5 py-4 text-right text-[var(--color-muted)] sm:px-6">{p.min}</td>
+                      <td className="px-5 py-4 text-right font-display font-medium text-gradient-warm sm:px-6">{p.avg}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-5 text-xs leading-relaxed text-[var(--color-faint)]">{softwareSubscriptionNote}</p>
           </Reveal>
         </div>
       </section>

@@ -20,6 +20,36 @@ export interface PriceTable {
   readonly rows: readonly PriceRow[];
 }
 
+/**
+ * Per-product software subscription plans (monthly, billed quarterly/yearly).
+ * INDICATIVE — benchmarked against comparable Indian SaaS (CRM suites, WhatsApp
+ * marketing platforms, call-analytics and BI tools). "min" = tier A · Basic,
+ * "avg" = tier C · Professional. Tier D · Enterprise is always custom-quoted.
+ * `slug` matches `softwareProducts` in lib/software.ts.
+ */
+export interface SoftwarePlan {
+  readonly slug: string;
+  readonly product: string;
+  /** Tier A · Basic — entry price per month. */
+  readonly min: string;
+  /** Tier C · Professional — typical price per month. */
+  readonly avg: string;
+  readonly note?: string;
+}
+
+export const softwareSubscriptions: readonly SoftwarePlan[] = [
+  { slug: "ai-sales-dashboard", product: "YUGA AI Sales Dashboard", min: "₹24,999/mo", avg: "₹49,999/mo", note: "Enterprise BI · market intelligence" },
+  { slug: "bitumen-crm", product: "YUGA Bitumen CRM", min: "₹4,999/mo", avg: "₹12,999/mo", note: "WhatsApp CRM · by seats" },
+  { slug: "whatsapp-campaign", product: "YUGA WhatsApp Campaign & Bot", min: "₹3,999/mo", avg: "₹8,999/mo", note: "Multi-account bulk messaging" },
+  { slug: "excel-lead-cleaner", product: "YUGA Excel & Lead Cleaner AI", min: "₹2,499/mo", avg: "₹5,999/mo", note: "By rows processed" },
+  { slug: "dialsync", product: "YUGA DialSync Call Analytics", min: "₹5,999/mo", avg: "₹12,999/mo", note: "Per ~10 agents" },
+  { slug: "market-report", product: "YUGA Market Report Automation", min: "₹3,499/mo", avg: "₹7,499/mo", note: "2 reports / trading day" },
+  { slug: "voice-agent", product: "YUGA AI Voice Agent", min: "Pilot", avg: "Custom", note: "Experimental · R&D engagement" },
+] as const;
+
+export const softwareSubscriptionNote =
+  "Indicative monthly pricing, billed quarterly or yearly (yearly saves ~2 months). GST extra. Tier D · Enterprise, bundles and on-prem are custom-quoted — contact us for a written quote.";
+
 export const pricingTables: readonly PriceTable[] = [
   {
     key: "pmc",
@@ -38,7 +68,7 @@ export const pricingTables: readonly PriceTable[] = [
     title: "AI Software",
     blurb: "Subscription access to the in-house AI stack — four tiers, enable only what you need.",
     rows: [
-      { service: "Starter (single tool)", min: "₹9,999/mo", avg: "₹14,999/mo" },
+      { service: "Starter (single tool)", min: "₹2,499/mo", avg: "₹9,999/mo", note: "By tool — see per-product plans" },
       { service: "Growth (CRM + dashboard)", min: "₹24,999/mo", avg: "₹39,999/mo" },
       { service: "Pro (full suite)", min: "₹49,999/mo", avg: "₹79,999/mo" },
       { service: "Enterprise / custom build", min: "Custom", avg: "Custom", note: "Tailored stack + on-prem" },

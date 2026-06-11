@@ -2926,7 +2926,7 @@
     "statesSrc": "Directional ratings by road-network length, vehicle/tyre base & crop-residue availability (MoRTH road statistics, state PWD/PMGSY programmes). Exact per-state tonnage is not published per product — ratings are indicative, not official tonnage."
   },
   "software": {
-    "intro": "Every YUGA software is available on subscription — billed quarterly or yearly — with four feature tiers (A Basic · B Standard · C Professional · D Enterprise). You enable only the features you need; upgrade anytime. Yearly billing is more economical than quarterly. Prices on request.",
+    "intro": "Every YUGA software is available on subscription — billed quarterly or yearly — with four feature tiers (A Basic · B Standard · C Professional · D Enterprise). You enable only the features you need; upgrade anytime. Yearly billing is more economical than quarterly — indicative per-product plans below.",
     "billing": [
       "Quarterly",
       "Yearly (best value)"
@@ -3426,7 +3426,7 @@
         },
         {
           "q": "How does subscription work?",
-          "a": "Quarterly or Yearly billing (yearly = best value), with four feature tiers A/B/C/D — you enable only the features you need and upgrade anytime. Prices on request."
+          "a": "Quarterly or Yearly billing (yearly = best value), with four feature tiers A/B/C/D — you enable only the features you need and upgrade anytime. Indicative per-product plans are published in the pricing section."
         },
         {
           "q": "Can I message 2,400 customers at once?",

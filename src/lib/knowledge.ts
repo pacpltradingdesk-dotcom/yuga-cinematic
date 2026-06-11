@@ -373,6 +373,14 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
     href: "/it-software",
   },
   {
+    id: "software-pricing",
+    title: "Software subscription pricing",
+    keywords: ["software price", "software cost", "subscription", "crm price", "dashboard price", "saas", "monthly", "license", "software kitna", "crm kitna"],
+    answer:
+      "All YUGA software is subscription-based, billed quarterly or yearly (yearly saves ~2 months), with four tiers — A Basic to D Enterprise. Indicative monthly plans: CRM from ₹4,999, WhatsApp Campaign from ₹3,999, Excel/Lead Cleaner from ₹2,499, DialSync from ₹5,999, Market Reports from ₹3,499, AI Sales Dashboard from ₹24,999. Full-suite bundles from ₹49,999/mo; Enterprise is custom-quoted. GST extra.",
+    href: "/it-software#pricing",
+  },
+  {
     id: "jv-collaboration",
     title: "JV, collaboration & job work",
     keywords: ["jv", "joint venture", "collaboration", "partnership", "job work", "tie up", "associate", "franchise", "collaborate"],
