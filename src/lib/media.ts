@@ -29,8 +29,8 @@ export const img = {
   prod0: { src: "/assets/img/prod-0.jpg", alt: "Colloid-mill skid and brown emulsion tanks - YUGA bitumen emulsion plant" },
   prod1: { src: "/assets/img/prod-1.jpg", alt: "Vertical PMB blend tank with top agitator - YUGA polymer modified bitumen unit" },
   prod2: { src: "/assets/img/prod-2.jpg", alt: "Crumb rubber being charged into the CRMB blend skid - YUGA plant" },
-  prod3: { src: "/assets/img/prod-3.jpg", alt: "Bitumen drums - blown / oxidised grades" },
-  prod4: { src: "/assets/img/prod-4.jpg", alt: "Process piping and decanter systems" },
+  prod3: { src: "/assets/img/prod-3.jpg", alt: "Tall blowing column and tanks - YUGA blown/oxidised bitumen unit" },
+  prod4: { src: "/assets/img/prod-4.jpg", alt: "Drum-melting decanter oven at a YUGA bitumen plant" },
 
   // Other page heroes
   softHero: { src: "/assets/img/soft-hero.jpg", alt: "Data centre - AI software platform" },

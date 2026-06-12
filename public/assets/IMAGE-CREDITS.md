@@ -27,3 +27,5 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - prod-2.jpg     — B8.2 CRMB crumb-rubber charging
 - prod-0.jpg     — B6.2 emulsion colloid mill
 - prod-1.jpg     — B7.2 PMB blend tank
+- prod-4.jpg     — B9.2 decanter melting oven
+- prod-3.jpg     — B11.2 blowing column
