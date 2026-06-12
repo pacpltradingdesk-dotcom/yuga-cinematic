@@ -26,8 +26,8 @@ export const img = {
 
   // Industrial Consulting
   indHero: { src: "/assets/img/ind-hero.jpg", alt: "Walkway between silvery tank rows inside a YUGA plant" },
-  prod0: { src: "/assets/img/prod-0.jpg", alt: "Asphalt surfacing - emulsion application" },
-  prod1: { src: "/assets/img/prod-1.jpg", alt: "Highway built with polymer modified bitumen" },
+  prod0: { src: "/assets/img/prod-0.jpg", alt: "Colloid-mill skid and brown emulsion tanks - YUGA bitumen emulsion plant" },
+  prod1: { src: "/assets/img/prod-1.jpg", alt: "Vertical PMB blend tank with top agitator - YUGA polymer modified bitumen unit" },
   prod2: { src: "/assets/img/prod-2.jpg", alt: "Crumb rubber being charged into the CRMB blend skid - YUGA plant" },
   prod3: { src: "/assets/img/prod-3.jpg", alt: "Bitumen drums - blown / oxidised grades" },
   prod4: { src: "/assets/img/prod-4.jpg", alt: "Process piping and decanter systems" },

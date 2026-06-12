@@ -25,3 +25,5 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - bio-3.jpg      — B5.1 tyre pyrolysis establishing
 - cs-0.jpg       — B7.1 PMB plant wide
 - prod-2.jpg     — B8.2 CRMB crumb-rubber charging
+- prod-0.jpg     — B6.2 emulsion colloid mill
+- prod-1.jpg     — B7.2 PMB blend tank
