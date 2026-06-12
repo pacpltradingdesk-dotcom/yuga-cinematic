@@ -4,19 +4,14 @@ export type GalleryImage = { src: string; alt: string };
 
 export const plantGallery: Record<string, GalleryImage[]> = {
   "bio-bitumen": [
-    { src: "/assets/img/gen/b3_1.jpg", alt: "Bio-bitumen plant - establishing wide view" },
-    { src: "/assets/img/gen/b3_2.jpg", alt: "Bio-bitumen plant - core process machinery" },
-    { src: "/assets/img/gen/b3_3.jpg", alt: "Bio-bitumen plant - process detail with engineer" },
     { src: "/assets/img/gen/b3_4.jpg", alt: "Bio-bitumen plant - hero product moment" },
     { src: "/assets/img/gen/b3_5.jpg", alt: "Bio-bitumen plant - plant inauguration ceremony" },
-    { src: "/assets/img/gen/a3-q1.jpg", alt: "Bio-bitumen plant - front view" },
     { src: "/assets/img/gen/a3-q2.jpg", alt: "Bio-bitumen plant - left-side view" },
     { src: "/assets/img/gen/a3-q3.jpg", alt: "Bio-bitumen plant - right-side view" },
     { src: "/assets/img/gen/a3-q4.jpg", alt: "Bio-bitumen plant - interior view" },
   ],
   "bitumen-decanter": [
     { src: "/assets/img/gen/b9_1.jpg", alt: "Bitumen decanter plant - establishing wide view" },
-    { src: "/assets/img/gen/b9_2.jpg", alt: "Bitumen decanter plant - core process machinery" },
     { src: "/assets/img/gen/b9_3.jpg", alt: "Bitumen decanter plant - process detail with engineer" },
     { src: "/assets/img/gen/b9_4.jpg", alt: "Bitumen decanter plant - hero product moment" },
     { src: "/assets/img/gen/b9_5.jpg", alt: "Bitumen decanter plant - plant inauguration ceremony" },
@@ -27,7 +22,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
   ],
   "bitumen-emulsion": [
     { src: "/assets/img/gen/b6_1.jpg", alt: "Bitumen emulsion plant - establishing wide view" },
-    { src: "/assets/img/gen/b6_2.jpg", alt: "Bitumen emulsion plant - core process machinery" },
     { src: "/assets/img/gen/b6_3.jpg", alt: "Bitumen emulsion plant - process detail with engineer" },
     { src: "/assets/img/gen/b6_4.jpg", alt: "Bitumen emulsion plant - hero product moment" },
     { src: "/assets/img/gen/b6_5.jpg", alt: "Bitumen emulsion plant - plant inauguration ceremony" },
@@ -38,7 +32,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
   ],
   "blown-oxidised-bitumen": [
     { src: "/assets/img/gen/b11_1.jpg", alt: "Blown / oxidised bitumen plant - establishing wide view" },
-    { src: "/assets/img/gen/b11_2.jpg", alt: "Blown / oxidised bitumen plant - core process machinery" },
     { src: "/assets/img/gen/b11_3.jpg", alt: "Blown / oxidised bitumen plant - process detail with engineer" },
     { src: "/assets/img/gen/b11_4.jpg", alt: "Blown / oxidised bitumen plant - hero product moment" },
     { src: "/assets/img/gen/b11_5.jpg", alt: "Blown / oxidised bitumen plant - plant inauguration ceremony" },
@@ -48,26 +41,18 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a11-q4.jpg", alt: "Blown / oxidised bitumen plant - interior view" },
   ],
   "capital": [
-    { src: "/assets/img/gen/b14_1.jpg", alt: "Fundraising & capital advisory - establishing wide view" },
     { src: "/assets/img/gen/b14_2.jpg", alt: "Fundraising & capital advisory - core process machinery" },
     { src: "/assets/img/gen/b14_3.jpg", alt: "Fundraising & capital advisory - process detail with engineer" },
-    { src: "/assets/img/gen/b14_4.jpg", alt: "Fundraising & capital advisory - hero product moment" },
     { src: "/assets/img/gen/b14_5.jpg", alt: "Fundraising & capital advisory - plant inauguration ceremony" },
   ],
   "company": [
-    { src: "/assets/img/gen/b1_1.jpg", alt: "YUGA company overview - establishing wide view" },
-    { src: "/assets/img/gen/b1_2.jpg", alt: "YUGA company overview - core process machinery" },
     { src: "/assets/img/gen/b1_3.jpg", alt: "YUGA company overview - process detail with engineer" },
-    { src: "/assets/img/gen/b1_4.jpg", alt: "YUGA company overview - hero product moment" },
-    { src: "/assets/img/gen/b1_5.jpg", alt: "YUGA company overview - plant inauguration ceremony" },
     { src: "/assets/img/gen/a1-q1.jpg", alt: "YUGA company overview - front view" },
     { src: "/assets/img/gen/a1-q2.jpg", alt: "YUGA company overview - left-side view" },
     { src: "/assets/img/gen/a1-q3.jpg", alt: "YUGA company overview - right-side view" },
     { src: "/assets/img/gen/a1-q4.jpg", alt: "YUGA company overview - interior view" },
   ],
   "complete": [
-    { src: "/assets/img/gen/b12_1.jpg", alt: "Complete plant setup - establishing wide view" },
-    { src: "/assets/img/gen/b12_2.jpg", alt: "Complete plant setup - core process machinery" },
     { src: "/assets/img/gen/b12_3.jpg", alt: "Complete plant setup - process detail with engineer" },
     { src: "/assets/img/gen/b12_4.jpg", alt: "Complete plant setup - hero product moment" },
     { src: "/assets/img/gen/b12_5.jpg", alt: "Complete plant setup - plant inauguration ceremony" },
@@ -78,7 +63,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
   ],
   "crmb-crumb-rubber-modified-bitumen": [
     { src: "/assets/img/gen/b8_1.jpg", alt: "CRMB plant - establishing wide view" },
-    { src: "/assets/img/gen/b8_2.jpg", alt: "CRMB plant - core process machinery" },
     { src: "/assets/img/gen/b8_3.jpg", alt: "CRMB plant - process detail with engineer" },
     { src: "/assets/img/gen/b8_4.jpg", alt: "CRMB plant - hero product moment" },
     { src: "/assets/img/gen/b8_5.jpg", alt: "CRMB plant - plant inauguration ceremony" },
@@ -88,22 +72,17 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a8-q4.jpg", alt: "CRMB plant - interior view" },
   ],
   "journey": [
-    { src: "/assets/img/gen/b2_1.jpg", alt: "Client journey - idea to income - establishing wide view" },
     { src: "/assets/img/gen/b2_2.jpg", alt: "Client journey - idea to income - core process machinery" },
     { src: "/assets/img/gen/b2_3.jpg", alt: "Client journey - idea to income - process detail with engineer" },
-    { src: "/assets/img/gen/b2_4.jpg", alt: "Client journey - idea to income - hero product moment" },
     { src: "/assets/img/gen/b2_5.jpg", alt: "Client journey - idea to income - plant inauguration ceremony" },
   ],
   "micro-surfacing-emulsion": [
     { src: "/assets/img/gen/b10_1.jpg", alt: "Micro-surfacing plant - establishing wide view" },
-    { src: "/assets/img/gen/b10_2.jpg", alt: "Micro-surfacing plant - core process machinery" },
     { src: "/assets/img/gen/b10_3.jpg", alt: "Micro-surfacing plant - process detail with engineer" },
     { src: "/assets/img/gen/b10_4.jpg", alt: "Micro-surfacing plant - hero product moment" },
     { src: "/assets/img/gen/b10_5.jpg", alt: "Micro-surfacing plant - plant inauguration ceremony" },
   ],
   "plastic-to-fuel": [
-    { src: "/assets/img/gen/b4_1.jpg", alt: "Plastic-to-fuel pyrolysis plant - establishing wide view" },
-    { src: "/assets/img/gen/b4_2.jpg", alt: "Plastic-to-fuel pyrolysis plant - core process machinery" },
     { src: "/assets/img/gen/b4_3.jpg", alt: "Plastic-to-fuel pyrolysis plant - process detail with engineer" },
     { src: "/assets/img/gen/b4_4.jpg", alt: "Plastic-to-fuel pyrolysis plant - hero product moment" },
     { src: "/assets/img/gen/b4_5.jpg", alt: "Plastic-to-fuel pyrolysis plant - plant inauguration ceremony" },
@@ -113,8 +92,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a4-q4.jpg", alt: "Plastic-to-fuel pyrolysis plant - interior view" },
   ],
   "pmb-polymer-modified-bitumen": [
-    { src: "/assets/img/gen/b7_1.jpg", alt: "PMB plant - establishing wide view" },
-    { src: "/assets/img/gen/b7_2.jpg", alt: "PMB plant - core process machinery" },
     { src: "/assets/img/gen/b7_3.jpg", alt: "PMB plant - process detail with engineer" },
     { src: "/assets/img/gen/b7_4.jpg", alt: "PMB plant - hero product moment" },
     { src: "/assets/img/gen/b7_5.jpg", alt: "PMB plant - plant inauguration ceremony" },
@@ -124,7 +101,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a7-q4.jpg", alt: "PMB plant - interior view" },
   ],
   "rubber-to-fuel": [
-    { src: "/assets/img/gen/b5_1.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - establishing wide view" },
     { src: "/assets/img/gen/b5_2.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - core process machinery" },
     { src: "/assets/img/gen/b5_3.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - process detail with engineer" },
     { src: "/assets/img/gen/b5_4.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - hero product moment" },
@@ -135,10 +111,7 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a5-q4.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - interior view" },
   ],
   "software": [
-    { src: "/assets/img/gen/b13_1.jpg", alt: "AI software in action - establishing wide view" },
-    { src: "/assets/img/gen/b13_2.jpg", alt: "AI software in action - core process machinery" },
     { src: "/assets/img/gen/b13_3.jpg", alt: "AI software in action - process detail with engineer" },
-    { src: "/assets/img/gen/b13_4.jpg", alt: "AI software in action - hero product moment" },
     { src: "/assets/img/gen/b13_5.jpg", alt: "AI software in action - plant inauguration ceremony" },
   ],
 };

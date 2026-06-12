@@ -17,7 +17,8 @@ import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
 import { LicensesPermits } from "@/components/page/LicensesPermits";
 import { Deliverables } from "@/components/page/Deliverables";
 import { OnThisPage } from "@/components/page/OnThisPage";
-import { PlantGallery } from "@/components/page/PlantGallery";
+import { QuadStrip, AmbientBanner, BlueprintPanel, SideImage } from "@/components/visual/ImageWeave";
+import { productImagery } from "@/lib/pageImagery";
 import { CarbonStats } from "@/components/page/CarbonCredit";
 import { LeadGate } from "@/components/page/LeadGate";
 import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
@@ -84,6 +85,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
   const feas = getFeasibility(slug);
   const io = getIo(slug);
   const standards = getStandards(slug);
+  const imagery = productImagery[slug];
   const plantCount = productPlantCounts.find((x) => x.slug === slug);
   const land = getLandRequirement(slug);
   const related = products.filter((x) => x.slug !== slug).slice(0, 3);
@@ -177,17 +179,27 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
         ]}
       />
 
-      {/* Overview */}
+      {/* Overview — text + interior view side-by-side */}
       <section id="overview" className="scroll-mt-28 py-[var(--space-section)]">
         <div className="maxw container-x">
           <SectionHeading eyebrow="Overview" title={`What is ${p.title}?`} />
-          <div className="mt-8 grid max-w-3xl gap-5">
-            {p.intro.map((para, i) => (
-              <Reveal key={i} index={i}>
-                <p className="text-lg leading-relaxed text-[var(--color-muted)]">{para}</p>
-              </Reveal>
-            ))}
+          <div className={`mt-8 grid gap-10 ${imagery?.overviewSide ? "lg:grid-cols-[3fr_2fr]" : ""}`}>
+            <div className="grid max-w-3xl content-start gap-5">
+              {p.intro.map((para, i) => (
+                <Reveal key={i} index={i}>
+                  <p className="text-lg leading-relaxed text-[var(--color-muted)]">{para}</p>
+                </Reveal>
+              ))}
+            </div>
+            {imagery?.overviewSide && (
+              <SideImage img={imagery.overviewSide} className="aspect-square self-start lg:sticky lg:top-28" />
+            )}
           </div>
+          {imagery && imagery.strip.length > 0 && (
+            <div id="gallery" className="mt-12 scroll-mt-28">
+              <QuadStrip imgs={imagery.strip} />
+            </div>
+          )}
         </div>
       </section>
 
@@ -242,10 +254,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
                   </span>
                 ))}
               </div>
+              {imagery?.machineSide && (
+                <SideImage img={imagery.machineSide} className="mt-6 aspect-video" />
+              )}
             </div>
           </Reveal>
         </div>
       </section>
+
+      {/* Ambient full-width parallax banner */}
+      {imagery?.ambient && <AmbientBanner img={imagery.ambient} caption={imagery.ambient.alt} />}
 
       {/* Feedstock & output (io) + Quality standards */}
       {(io || standards) && (
@@ -416,14 +434,31 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
             title="Documents & deliverables we provide."
             intro="Reports, drawings, working procedures and compliance docs — the full pack that takes the plant from paper to production."
           />
-          <div className="mt-10">
+          <div className={`mt-10 ${imagery?.ceremony ? "grid gap-10 lg:grid-cols-[3fr_2fr]" : ""}`}>
             <Deliverables />
+            {imagery?.ceremony && (
+              <SideImage img={imagery.ceremony} className="aspect-[4/3] self-center" />
+            )}
           </div>
         </div>
       </section>
 
-      {/* Plant gallery (AI-rendered views; hidden when a product has no set) */}
-      <PlantGallery slug={slug} title={`Inside a ${p.title} plant.`} />
+      {/* 4-angle blueprint panel */}
+      {imagery?.blueprint && (
+        <section className="border-t border-[var(--color-line)] py-[var(--space-section)]">
+          <div className="maxw container-x">
+            <SectionHeading
+              eyebrow="Plant Views"
+              title="One plant, four angles."
+              intro="Front, both sides and the working floor — the same facility from every angle."
+              align="center"
+            />
+            <div className="mt-10">
+              <BlueprintPanel img={imagery.blueprint} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       <section id="faq" className="scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
