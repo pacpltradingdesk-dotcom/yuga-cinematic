@@ -20,3 +20,6 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - cs-1.jpg       — B3.3 bio-binder sample detail
 - v-pmc.jpg      — B12.1 complete-plant wide
 - ind-hero.jpg   — B12.2 complete-plant walkway
+- bio-2.jpg      — B4.1 plastic-to-fuel intake (truck + reactors)
+- cs-2.jpg       — B4.2 pyrolysis reactor + condensers
+- bio-3.jpg      — B5.1 tyre pyrolysis establishing
