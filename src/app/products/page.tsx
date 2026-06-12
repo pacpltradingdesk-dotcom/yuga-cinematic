@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -70,6 +71,8 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      <PlantGallery slug="company" title="One YUGA plant, every angle." />
 
       <CTASection title="Not sure which plant fits your budget?" sub="Tell us your capital and state — we'll map the best-fit product, subsidy and payback." />
     </>
