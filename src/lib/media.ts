@@ -9,7 +9,7 @@
 export const img = {
   // Home
   homeHero: { src: "/assets/img/home-hero.jpg", alt: "YUGA 60 TPD bitumen & pyrolysis plant - wide view with dispatch bay and road tanker" },
-  vPmc: { src: "/assets/img/v-pmc.jpg", alt: "Oil & bitumen processing facility" },
+  vPmc: { src: "/assets/img/v-pmc.jpg", alt: "YUGA complete plant setup - tank farm, dispatch bay and drum stacks" },
   vSoft: { src: "/assets/img/v-soft.jpg", alt: "Server infrastructure powering AI software" },
   vCap: { src: "/assets/img/v-cap.jpg", alt: "Stock exchange and capital markets" },
   pEng: { src: "/assets/img/p-eng.jpg", alt: "Insulated process pipework and racks inside a YUGA plant" },
@@ -25,7 +25,7 @@ export const img = {
   bio3: { src: "/assets/img/bio-3.jpg", alt: "End-of-life tyres for rubber-to-oil pyrolysis" },
 
   // Industrial Consulting
-  indHero: { src: "/assets/img/ind-hero.jpg", alt: "Bitumen plant interior and machinery" },
+  indHero: { src: "/assets/img/ind-hero.jpg", alt: "Walkway between silvery tank rows inside a YUGA plant" },
   prod0: { src: "/assets/img/prod-0.jpg", alt: "Asphalt surfacing - emulsion application" },
   prod1: { src: "/assets/img/prod-1.jpg", alt: "Highway built with polymer modified bitumen" },
   prod2: { src: "/assets/img/prod-2.jpg", alt: "Road pavement - crumb rubber modified bitumen" },
