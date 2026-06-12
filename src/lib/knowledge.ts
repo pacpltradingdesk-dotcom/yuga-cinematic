@@ -404,4 +404,28 @@ export const KNOWLEDGE: readonly KnowledgeEntry[] = [
       "Happy to connect you with the team — a quick call usually answers more than any page. Use the Contact page to book a feasibility call, or message us on WhatsApp for a fast reply. Tell us the product and state you're thinking about and we'll come prepared.",
     href: "/contact",
   },
+  {
+    id: "lpg-peso-licensing",
+    title: "LPG / PESO licensing & regulatory approvals",
+    keywords: ["lpg", "peso", "licence lpg", "import licence", "propane", "butane", "gas import", "parallel marketeer", "mopng", "regulatory approval", "petroleum licence", "gas licence"],
+    answer:
+      "Licensing & regulatory approvals are a full YUGA service pillar — PESO licences, LPG import (propane/butane) eligibility under ITC(HS)/FDI policy, parallel-marketeer rating, MoPNG and state clearances. A recent engagement took a foreign-owned energy-trading company to import-ready in a mapped 10-14 week roadmap with every statutory fee and procedural step documented.",
+    href: "/case-studies",
+  },
+  {
+    id: "portfolio-track-record",
+    title: "YUGA's project track record",
+    keywords: ["track record", "past projects", "portfolio", "experience", "completed projects", "case studies", "kitne projects", "kaam kiya hai", "proof", "clients"],
+    answer:
+      "The portfolio spans 10 product lines with 35+ project deliverables on file and ₹65 Cr+ of CAPEX modelled, across 5-60 TPD plant capacities — bio-bitumen plants in Haryana/Odisha, a 20 TPD plastic-to-fuel DPR (₹45.68 Cr, 22-26% IRR), a 60 TPD multi-feedstock pyrolysis feasibility, an export-oriented asphalt-shingle EOU in Kandla SEZ (₹10.8 Cr, 38-45% IRR), LPG/PESO licensing, subsidy structuring and VC-to-IPO fundraising advisory.",
+    href: "/case-studies",
+  },
+  {
+    id: "sez-eou-export-plant",
+    title: "SEZ / EOU export plants",
+    keywords: ["sez", "eou", "export oriented", "kandla", "kasez", "export plant", "shingle export", "special economic zone"],
+    answer:
+      "Yes — we structure export-oriented (EOU/SEZ) plants end-to-end. The flagship example is an asphalt-shingle multi-product EOU in Kandla SEZ: a ten-module DPR covering SEZ approval strategy, Gujarat subsidy map, a country-by-country export feasibility matrix and full cash-flow structuring (₹10.8 Cr, 38-45% IRR, 5→10 TPD scale-up).",
+    href: "/products/asphalt-shingle",
+  },
 ];

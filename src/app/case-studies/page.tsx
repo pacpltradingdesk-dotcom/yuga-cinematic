@@ -19,14 +19,14 @@ export const metadata: Metadata = {
   title: "Case Studies",
   alternates: { canonical: "/case-studies" },
   description:
-    "Live YUGA PMC engagements - bio-bitumen plants in Haryana and Odisha - plus a ready library of bankable project reports. Client identities kept confidential.",
+    "YUGA PMC engagements - bio-bitumen plants, pyrolysis DPRs, LPG/PESO licensing, SEZ export projects, subsidy structuring and VC-to-IPO advisory. Client identities kept confidential.",
 };
 
 const metrics: { v: number; s: string; l: string; p?: string; d?: number }[] = [
   { v: 9, s: "", l: "Plants commissioned" },
-  { v: 5, s: "+", l: "Live PMC engagements" },
-  { v: 10.8, p: "₹", d: 1, s: " Cr", l: "Lead project size" },
-  { v: 12, s: " mo", l: "Post-COD hand-holding" },
+  { v: 10, s: "", l: "Product lines covered" },
+  { v: 35, s: "+", l: "Project deliverables on file" },
+  { v: 65, p: "₹", s: " Cr+", l: "CAPEX modelled (5-60 TPD range)" },
 ];
 
 export default function CaseStudiesPage() {
@@ -66,7 +66,7 @@ export default function CaseStudiesPage() {
                   <div className="flex h-full flex-col">
                     <div className="relative">
                       <Media
-                        name={csImg[i]}
+                        name={csImg[i % csImg.length]}
                         overlay="bottom"
                         sizes="(max-width:768px) 100vw, 50vw"
                         className="h-48 w-full rounded-t-[calc(1.5rem-1px)]"

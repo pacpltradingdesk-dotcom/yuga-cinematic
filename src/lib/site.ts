@@ -347,14 +347,92 @@ export const caseStudies = [
     tag: "Research",
     productSlug: "",
   },
+  {
+    title: "LPG Import Licence & PESO Advisory",
+    place: "Chennai · Visakhapatnam / Mundra terminals",
+    scope: "End-to-end regulatory advisory for a foreign-owned energy-trading company importing bulk Propane & Butane into India.",
+    detail: "ITC(HS)/FDI eligibility confirmed; PESO, parallel-marketeer rating, MoPNG, state GST & FEMA filings mapped — import-ready roadmap in 10-14 weeks.",
+    tag: "Licensing & Regulatory",
+    productSlug: "",
+  },
+  {
+    title: "Asphalt Shingle EOU Plant — Kandla SEZ",
+    place: "KASEZ, Gujarat (Technobit Industries)",
+    scope: "Ten-module export-oriented DPR — SEZ approval strategy, Gujarat subsidy map, global export feasibility matrix and full cash-flow structuring.",
+    detail: "₹10.8 Cr project modelled at 38-45% IRR with a 5→10 TPD scale-up path.",
+    tag: "Featured · Export EOU",
+    productSlug: "asphalt-shingle",
+  },
+  {
+    title: "20 TPD Plastic-to-Fuel DPR",
+    place: "India",
+    scope: "Complete DPR for a plastic-waste-to-fuel-oil plant (LDO + furnace oil) across three controlled revisions, with investor presentation.",
+    detail: "₹45.68 Cr project cost · 22-26% IRR · ₹40.5 Cr annual revenue · 1.7x average DSCR.",
+    tag: "DPR",
+    productSlug: "plastic-to-fuel",
+  },
+  {
+    title: "60 TPD Multi-Feedstock Pyrolysis Feasibility",
+    place: "India · EU municipal-waste feedstock characterisation",
+    scope: "Feasibility package from feedstock lab reports through process selection to a full financial model — five controlled revisions to decision-ready.",
+    detail: "Multi-feedstock techno-economic study for investment and financing.",
+    tag: "Feasibility",
+    productSlug: "plastic-to-fuel",
+  },
+  {
+    title: "₹25 Cr Gas Project — Subsidy & RDI Structuring",
+    place: "Panvel-Khopoli belt, Maharashtra",
+    scope: "Complete subsidy & funding structure — existing-company route vs new innovation SPV compared to maximise eligible government benefit.",
+    detail: "Validated report, RDI Scheme draft letters, master subsidy application and full funding blueprint.",
+    tag: "Funding & Subsidy",
+    productSlug: "",
+  },
+  {
+    title: "Bitumen Plant DPR & JV Scope",
+    place: "Gujarat · Dharwad JV (Technobit Industries)",
+    scope: "Detailed Project Report and consolidated project scope for a bitumen plant programme, plus joint-venture documentation.",
+    detail: "Plant layout, machinery, supplier coordination and commercial structure.",
+    tag: "DPR · Live client",
+    productSlug: "bitumen-decanter",
+  },
+  {
+    title: "Mumbai Estate Valuation & Redevelopment",
+    place: "Mumbai, Maharashtra",
+    scope: "Title-history audit, per-stakeholder allocation models and a DCPR 33-19 commercial redevelopment plan for a multi-generation family estate.",
+    detail: "A 60-year property position turned into a numbers-backed roadmap. (Client anonymised.)",
+    tag: "Property Advisory",
+    productSlug: "",
+  },
+  {
+    title: "Healthcare Venture — VC to IPO Roadmap",
+    place: "India",
+    scope: "Fundraising readiness for a growing mental-healthcare venture — valuation workbook, strategic proposal and a financial roadmap to IPO.",
+    detail: "Investor-grade documents grounded in two years of audited financials.",
+    tag: "Capital Advisory",
+    productSlug: "",
+  },
+] as const;
+
+/** Portfolio scale (PPS master report, compiled 11 Jun 2026). */
+export const portfolioStats = [
+  { stat: "10", label: "product lines covered by past work" },
+  { stat: "35+", label: "project deliverables on file" },
+  { stat: "₹65 Cr+", label: "CAPEX modelled across projects" },
+  { stat: "5-60 TPD", label: "plant capacity range engineered" },
 ] as const;
 
 export const reportLibrary = [
   "Bio-Modified Bitumen DPRs - 20 MT and 20 TPD (agro-waste pyrolysis)",
+  "Multi-capacity bio-bitumen DPR suite - bank / investor / government editions, 5-60 TPD, state-wise forms for 15+ states",
   "Tyre / Rubber Pyrolysis (RPO) Plant DPR - 20 TPD",
   "Feasibility & financial reports across all capacities (5-100 MT/day)",
+  "LPG / PESO licensing route & statutory fee notes (Gas Cylinder Rules, parallel-marketeer rating)",
+  "Asphalt Shingle EOU DPR - 24 sections incl. global export feasibility matrix (Kandla SEZ)",
+  "SBS polymer-modifier plant design & engineering pack",
+  "Compressed Bio-Gas (CBG) subsidy & funding research (SATAT)",
   "PAN-India location analysis & biomass feedstock deep-dives",
   "Investor presentations, founder business cases & payback models",
+  "Waste-to-value investor deep-search & fundraising research",
 ] as const;
 
 /* ----------------------------- Market Intelligence ----------------------------- */
