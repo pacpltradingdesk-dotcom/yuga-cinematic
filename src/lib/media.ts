@@ -18,9 +18,9 @@ export const img = {
   pImpact: { src: "/assets/img/p-impact.jpg", alt: "Solar energy and sustainable infrastructure" },
 
   // Bio-Bitumen
-  bioHero: { src: "/assets/img/bio-hero.jpg", alt: "Baled agricultural straw - bio-bitumen feedstock" },
+  bioHero: { src: "/assets/img/bio-hero.jpg", alt: "YUGA rural bio-bitumen unit amid green farmland - straw bales and kettle reactor" },
   bio0: { src: "/assets/img/bio-0.jpg", alt: "Petroleum and bitumen product plant" },
-  bio1: { src: "/assets/img/bio-1.jpg", alt: "Farm fields supplying agro-waste biomass" },
+  bio1: { src: "/assets/img/bio-1.jpg", alt: "Bio-bitumen kettle reactor and silvery tanks - YUGA rural unit" },
   bio2: { src: "/assets/img/bio-2.jpg", alt: "Plastic-to-fuel pyrolysis plant — waste plastic converted to oil, gas and char" },
   bio3: { src: "/assets/img/bio-3.jpg", alt: "End-of-life tyres for rubber-to-oil pyrolysis" },
 
@@ -42,7 +42,7 @@ export const img = {
   // Case Studies
   csHero: { src: "/assets/img/cs-hero.jpg", alt: "Engineer overlooking a commissioned YUGA plant at golden hour" },
   cs0: { src: "/assets/img/cs-0.jpg", alt: "Industrial plant - Bahadurgarh PMB project" },
-  cs1: { src: "/assets/img/cs-1.jpg", alt: "Agriculture region - Malkangiri Odisha project" },
+  cs1: { src: "/assets/img/cs-1.jpg", alt: "Dark bio-binder sample at a YUGA bio-bitumen plant - Odisha project" },
   cs2: { src: "/assets/img/cs-2.jpg", alt: "Recycling plant - plastic-to-fuel project" },
   cs3: { src: "/assets/img/cs-3.jpg", alt: "Forest / green - carbon-credit structuring" },
 

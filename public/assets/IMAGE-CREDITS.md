@@ -15,3 +15,6 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - p-eng.jpg      — B1.2 company-overview process pipework
 - cs-hero.jpg    — B1.4 company-overview hero moment
 - about-hero.jpg — B1.5 plant inauguration ceremony
+- bio-hero.jpg   — B3.1 bio-bitumen establishing (farmland)
+- bio-1.jpg      — B3.2 bio-bitumen kettle reactor
+- cs-1.jpg       — B3.3 bio-binder sample detail
