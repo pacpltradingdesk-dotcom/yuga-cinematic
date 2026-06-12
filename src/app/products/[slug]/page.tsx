@@ -17,6 +17,7 @@ import { CostRoiCalculator } from "@/components/tools/CostRoiCalculator";
 import { LicensesPermits } from "@/components/page/LicensesPermits";
 import { Deliverables } from "@/components/page/Deliverables";
 import { OnThisPage } from "@/components/page/OnThisPage";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { CarbonStats } from "@/components/page/CarbonCredit";
 import { LeadGate } from "@/components/page/LeadGate";
 import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
@@ -171,6 +172,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           { id: "cost", label: "Cost & ROI" },
           { id: "licences", label: "Licences" },
           { id: "docs", label: "Documents" },
+          { id: "gallery", label: "Gallery" },
           { id: "faq", label: "FAQ" },
         ]}
       />
@@ -419,6 +421,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           </div>
         </div>
       </section>
+
+      {/* Plant gallery (AI-rendered views; hidden when a product has no set) */}
+      <PlantGallery slug={slug} title={`Inside a ${p.title} plant.`} />
 
       {/* FAQ */}
       <section id="faq" className="scroll-mt-28 border-t border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
