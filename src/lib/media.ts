@@ -28,7 +28,7 @@ export const img = {
   indHero: { src: "/assets/img/ind-hero.jpg", alt: "Walkway between silvery tank rows inside a YUGA plant" },
   prod0: { src: "/assets/img/prod-0.jpg", alt: "Asphalt surfacing - emulsion application" },
   prod1: { src: "/assets/img/prod-1.jpg", alt: "Highway built with polymer modified bitumen" },
-  prod2: { src: "/assets/img/prod-2.jpg", alt: "Road pavement - crumb rubber modified bitumen" },
+  prod2: { src: "/assets/img/prod-2.jpg", alt: "Crumb rubber being charged into the CRMB blend skid - YUGA plant" },
   prod3: { src: "/assets/img/prod-3.jpg", alt: "Bitumen drums - blown / oxidised grades" },
   prod4: { src: "/assets/img/prod-4.jpg", alt: "Process piping and decanter systems" },
 
@@ -41,7 +41,7 @@ export const img = {
 
   // Case Studies
   csHero: { src: "/assets/img/cs-hero.jpg", alt: "Engineer overlooking a commissioned YUGA plant at golden hour" },
-  cs0: { src: "/assets/img/cs-0.jpg", alt: "Industrial plant - Bahadurgarh PMB project" },
+  cs0: { src: "/assets/img/cs-0.jpg", alt: "PMB blend tank and drum bay - YUGA Bahadurgarh project" },
   cs1: { src: "/assets/img/cs-1.jpg", alt: "Dark bio-binder sample at a YUGA bio-bitumen plant - Odisha project" },
   cs2: { src: "/assets/img/cs-2.jpg", alt: "Pyrolysis reactor and condenser bank - YUGA plastic-to-fuel project" },
   cs3: { src: "/assets/img/cs-3.jpg", alt: "Forest / green - carbon-credit structuring" },

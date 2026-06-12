@@ -23,3 +23,5 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - bio-2.jpg      — B4.1 plastic-to-fuel intake (truck + reactors)
 - cs-2.jpg       — B4.2 pyrolysis reactor + condensers
 - bio-3.jpg      — B5.1 tyre pyrolysis establishing
+- cs-0.jpg       — B7.1 PMB plant wide
+- prod-2.jpg     — B8.2 CRMB crumb-rubber charging
