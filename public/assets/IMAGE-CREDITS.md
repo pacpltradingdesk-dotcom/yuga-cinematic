@@ -29,3 +29,5 @@ Prompts: docs/prompts-extracted.json (YUGA Photo Prompts v11). Replacing stock p
 - prod-1.jpg     — B7.2 PMB blend tank
 - prod-4.jpg     — B9.2 decanter melting oven
 - prod-3.jpg     — B11.2 blowing column
+- bio-0.jpg — B10.2 · p-impact.jpg — B2.4 · soft-hero.jpg — B13.1 · mi-hero.jpg — B13.2
+- v-soft.jpg — B13.4 · contact-hero.jpg — B2.1 · v-cap.jpg — B14.4 · cs-3.jpg — A3-q1
