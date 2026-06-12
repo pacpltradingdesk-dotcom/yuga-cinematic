@@ -8,11 +8,11 @@
  */
 export const img = {
   // Home
-  homeHero: { src: "/assets/img/home-hero.jpg", alt: "Industrial refinery at dusk - distillation towers and tanks" },
+  homeHero: { src: "/assets/img/home-hero.jpg", alt: "YUGA 60 TPD bitumen & pyrolysis plant - wide view with dispatch bay and road tanker" },
   vPmc: { src: "/assets/img/v-pmc.jpg", alt: "Oil & bitumen processing facility" },
   vSoft: { src: "/assets/img/v-soft.jpg", alt: "Server infrastructure powering AI software" },
   vCap: { src: "/assets/img/v-cap.jpg", alt: "Stock exchange and capital markets" },
-  pEng: { src: "/assets/img/p-eng.jpg", alt: "Plant construction and engineering" },
+  pEng: { src: "/assets/img/p-eng.jpg", alt: "Insulated process pipework and racks inside a YUGA plant" },
   pIntel: { src: "/assets/img/p-intel.jpg", alt: "AI technology and data intelligence" },
   pCap: { src: "/assets/img/p-cap.jpg", alt: "Trading screens and market data" },
   pImpact: { src: "/assets/img/p-impact.jpg", alt: "Solar energy and sustainable infrastructure" },
@@ -35,12 +35,12 @@ export const img = {
   // Other page heroes
   softHero: { src: "/assets/img/soft-hero.jpg", alt: "Data centre - AI software platform" },
   capHero: { src: "/assets/img/cap-hero.jpg", alt: "Financial markets and fundraising" },
-  aboutHero: { src: "/assets/img/about-hero.jpg", alt: "Industrial skyline and infrastructure" },
+  aboutHero: { src: "/assets/img/about-hero.jpg", alt: "Plant inauguration ceremony - ribbon cutting with marigold garlands" },
   miHero: { src: "/assets/img/mi-hero.jpg", alt: "Market economy and analytics" },
   contactHero: { src: "/assets/img/contact-hero.jpg", alt: "Port and logistics - bitumen import" },
 
   // Case Studies
-  csHero: { src: "/assets/img/cs-hero.jpg", alt: "Operational bio-bitumen power plant" },
+  csHero: { src: "/assets/img/cs-hero.jpg", alt: "Engineer overlooking a commissioned YUGA plant at golden hour" },
   cs0: { src: "/assets/img/cs-0.jpg", alt: "Industrial plant - Bahadurgarh PMB project" },
   cs1: { src: "/assets/img/cs-1.jpg", alt: "Agriculture region - Malkangiri Odisha project" },
   cs2: { src: "/assets/img/cs-2.jpg", alt: "Recycling plant - plastic-to-fuel project" },
