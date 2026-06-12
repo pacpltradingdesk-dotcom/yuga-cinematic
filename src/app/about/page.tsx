@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BadgeCheck, Globe } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { GlowCard } from "@/components/ui/GlowCard";
@@ -134,6 +135,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <PlantGallery slug="journey" title="The client journey, in pictures." />
 
       <CTASection title="Partner with proven operators." />
     </>

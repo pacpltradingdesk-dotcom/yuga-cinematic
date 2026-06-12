@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -252,6 +253,8 @@ export default function CapitalMarketPage() {
       </section>
 
       <VerticalFaq vkey="fundraising" eyebrow="Fundraising Q&A" />
+
+      <PlantGallery slug="capital" title="From boardroom to commissioned plant." />
 
       <CTASection
         title="Raise capital with someone who's done it."

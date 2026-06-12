@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Check, ArrowUpRight, Code2, Users, Boxes, Workflow, Sparkles, Globe, Smartphone, Plug, ArrowRight, type LucideIcon } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -296,6 +297,8 @@ export default function ITSoftwarePage() {
       </section>
 
       <VerticalFaq vkey="it" />
+
+      <PlantGallery slug="software" title="Our software, in the field." />
 
       <CTASection
         title="Put AI to work in your sales floor."

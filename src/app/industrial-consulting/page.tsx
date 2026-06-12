@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
+import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -134,6 +135,8 @@ export default function IndustrialConsultingPage() {
       </section>
 
       <VerticalFaq vkey="pmc" eyebrow="Why a PMC" />
+
+      <PlantGallery slug="complete" title="Inside a complete YUGA plant setup." />
 
       <CTASection title="Build your plant the right way." />
     </>

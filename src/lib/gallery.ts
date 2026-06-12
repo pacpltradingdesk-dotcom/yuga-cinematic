@@ -47,6 +47,13 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a11-q3.jpg", alt: "Blown / oxidised bitumen plant - right-side view" },
     { src: "/assets/img/gen/a11-q4.jpg", alt: "Blown / oxidised bitumen plant - interior view" },
   ],
+  "capital": [
+    { src: "/assets/img/gen/b14_1.jpg", alt: "Fundraising & capital advisory - establishing wide view" },
+    { src: "/assets/img/gen/b14_2.jpg", alt: "Fundraising & capital advisory - core process machinery" },
+    { src: "/assets/img/gen/b14_3.jpg", alt: "Fundraising & capital advisory - process detail with engineer" },
+    { src: "/assets/img/gen/b14_4.jpg", alt: "Fundraising & capital advisory - hero product moment" },
+    { src: "/assets/img/gen/b14_5.jpg", alt: "Fundraising & capital advisory - plant inauguration ceremony" },
+  ],
   "company": [
     { src: "/assets/img/gen/b1_1.jpg", alt: "YUGA company overview - establishing wide view" },
     { src: "/assets/img/gen/b1_2.jpg", alt: "YUGA company overview - core process machinery" },
@@ -61,6 +68,7 @@ export const plantGallery: Record<string, GalleryImage[]> = {
   "complete": [
     { src: "/assets/img/gen/b12_1.jpg", alt: "Complete plant setup - establishing wide view" },
     { src: "/assets/img/gen/b12_2.jpg", alt: "Complete plant setup - core process machinery" },
+    { src: "/assets/img/gen/b12_3.jpg", alt: "Complete plant setup - process detail with engineer" },
     { src: "/assets/img/gen/b12_4.jpg", alt: "Complete plant setup - hero product moment" },
     { src: "/assets/img/gen/b12_5.jpg", alt: "Complete plant setup - plant inauguration ceremony" },
     { src: "/assets/img/gen/a12-q1.jpg", alt: "Complete plant setup - front view" },
@@ -79,9 +87,19 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a8-q3.jpg", alt: "CRMB plant - right-side view" },
     { src: "/assets/img/gen/a8-q4.jpg", alt: "CRMB plant - interior view" },
   ],
+  "journey": [
+    { src: "/assets/img/gen/b2_1.jpg", alt: "Client journey - idea to income - establishing wide view" },
+    { src: "/assets/img/gen/b2_2.jpg", alt: "Client journey - idea to income - core process machinery" },
+    { src: "/assets/img/gen/b2_3.jpg", alt: "Client journey - idea to income - process detail with engineer" },
+    { src: "/assets/img/gen/b2_4.jpg", alt: "Client journey - idea to income - hero product moment" },
+    { src: "/assets/img/gen/b2_5.jpg", alt: "Client journey - idea to income - plant inauguration ceremony" },
+  ],
   "micro-surfacing-emulsion": [
     { src: "/assets/img/gen/b10_1.jpg", alt: "Micro-surfacing plant - establishing wide view" },
     { src: "/assets/img/gen/b10_2.jpg", alt: "Micro-surfacing plant - core process machinery" },
+    { src: "/assets/img/gen/b10_3.jpg", alt: "Micro-surfacing plant - process detail with engineer" },
+    { src: "/assets/img/gen/b10_4.jpg", alt: "Micro-surfacing plant - hero product moment" },
+    { src: "/assets/img/gen/b10_5.jpg", alt: "Micro-surfacing plant - plant inauguration ceremony" },
   ],
   "plastic-to-fuel": [
     { src: "/assets/img/gen/b4_1.jpg", alt: "Plastic-to-fuel pyrolysis plant - establishing wide view" },
@@ -115,5 +133,12 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a5-q2.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - left-side view" },
     { src: "/assets/img/gen/a5-q3.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - right-side view" },
     { src: "/assets/img/gen/a5-q4.jpg", alt: "Tyre / rubber-to-fuel pyrolysis plant - interior view" },
+  ],
+  "software": [
+    { src: "/assets/img/gen/b13_1.jpg", alt: "AI software in action - establishing wide view" },
+    { src: "/assets/img/gen/b13_2.jpg", alt: "AI software in action - core process machinery" },
+    { src: "/assets/img/gen/b13_3.jpg", alt: "AI software in action - process detail with engineer" },
+    { src: "/assets/img/gen/b13_4.jpg", alt: "AI software in action - hero product moment" },
+    { src: "/assets/img/gen/b13_5.jpg", alt: "AI software in action - plant inauguration ceremony" },
   ],
 };

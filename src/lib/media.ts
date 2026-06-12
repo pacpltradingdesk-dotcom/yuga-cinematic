@@ -34,7 +34,7 @@ export const img = {
 
   // Other page heroes
   softHero: { src: "/assets/img/soft-hero.jpg", alt: "YUGA plant control room - AI dashboards on screens" },
-  capHero: { src: "/assets/img/cap-hero.jpg", alt: "Financial markets and fundraising" },
+  capHero: { src: "/assets/img/cap-hero.jpg", alt: "Founders and advisors at a funding signing - YUGA capital advisory" },
   aboutHero: { src: "/assets/img/about-hero.jpg", alt: "Plant inauguration ceremony - ribbon cutting with marigold garlands" },
   miHero: { src: "/assets/img/mi-hero.jpg", alt: "Analyst at multi-screen market dashboards - YUGA market intelligence" },
   contactHero: { src: "/assets/img/contact-hero.jpg", alt: "Consultation handshake at the YUGA office" },
