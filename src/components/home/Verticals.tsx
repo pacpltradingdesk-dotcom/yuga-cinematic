@@ -39,7 +39,7 @@ export function Verticals() {
                     <span className="absolute bottom-3 left-7 font-display text-6xl font-bold leading-none text-[var(--color-ink)] drop-shadow-lg">
                       {v.id}
                     </span>
-                    <div className="absolute right-6 top-6">
+                    <div className="absolute right-6 top-6 rounded-full bg-[var(--color-void)]/75 backdrop-blur-sm">
                       <Badge accent={v.accent as "amber" | "cyan"}>{v.sub}</Badge>
                     </div>
                   </div>

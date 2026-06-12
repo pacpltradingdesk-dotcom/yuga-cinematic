@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/Badge";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { caseStudies, reportLibrary } from "@/lib/site";
+import { caseStudyProjectLinks } from "@/lib/projects";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
 
@@ -71,7 +72,7 @@ export default function CaseStudiesPage() {
                         sizes="(max-width:768px) 100vw, 50vw"
                         className="h-48 w-full rounded-t-[calc(1.5rem-1px)]"
                       />
-                      <div className="absolute left-6 top-6">
+                      <div className="absolute left-6 top-6 rounded-full bg-[var(--color-void)]/75 backdrop-blur-sm">
                         <Badge accent={i % 2 ? "amber" : "cyan"}>{c.tag}</Badge>
                       </div>
                     </div>
@@ -86,6 +87,16 @@ export default function CaseStudiesPage() {
                       <p className="mt-auto border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-faint)]">
                         {c.detail}
                       </p>
+                      {caseStudyProjectLinks[c.title] && (
+                        <Link
+                          href={`/projects/${caseStudyProjectLinks[c.title]}`}
+                          data-cursor="hover"
+                          className="mt-4 inline-flex items-center gap-1 py-1.5 text-sm font-semibold text-[var(--color-cyan)] hover:text-[var(--color-ink)]"
+                        >
+                          Read the full case file
+                          <ArrowUpRight size={14} />
+                        </Link>
+                      )}
                       {c.productSlug && (
                         <Link
                           href={`/products/${c.productSlug}`}

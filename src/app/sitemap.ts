@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { nav, siteUrl } from "@/lib/site";
 import { productSlugs } from "@/lib/catalog";
 import { legalSlugs } from "@/lib/legal";
+import { projectIds } from "@/lib/projects";
 
 export const dynamic = "force-static";
 
@@ -28,8 +29,9 @@ const NAV_PRIORITY: Readonly<Record<string, number>> = {
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  // Trailing slash matches how GitHub Pages serves the site (non-slash URLs 301).
   const entry = (route: string, priority: number): MetadataRoute.Sitemap[number] => ({
-    url: `${siteUrl}${route}`,
+    url: `${siteUrl}${route}/`,
     lastModified,
     changeFrequency: "monthly",
     priority,
@@ -39,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("", 1),
     ...nav.map((item) => entry(item.href, NAV_PRIORITY[item.href] ?? 0.7)),
     ...productSlugs.map((slug) => entry(`/products/${slug}`, 0.8)),
+    ...projectIds.map((id) => entry(`/projects/${id}`, 0.7)),
     entry("/sources", 0.4),
     ...legalSlugs.map((slug) => entry(`/legal/${slug}`, 0.3)),
   ];

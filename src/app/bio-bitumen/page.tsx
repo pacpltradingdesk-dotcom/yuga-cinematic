@@ -84,7 +84,7 @@ export default function BioBitumenPage() {
                         sizes="(max-width:768px) 100vw, 50vw"
                         className="h-44 w-full rounded-t-[calc(1.5rem-1px)]"
                       />
-                      <div className="absolute left-6 top-6">
+                      <div className="absolute left-6 top-6 rounded-full bg-[var(--color-void)]/75 backdrop-blur-sm">
                         <Badge accent={i % 2 ? "cyan" : "amber"}>{p.code}</Badge>
                       </div>
                       <Leaf size={20} className="absolute right-6 top-6 text-[var(--color-ink)]/80" />
