@@ -27,7 +27,7 @@ export const navGroups: readonly NavGroup[] = [
     blurb: "Set up & run a bitumen / bio-bitumen plant — DPR to production.",
     items: [
       { label: "All Products", href: "/products", desc: "All nine plants we build" },
-      { label: "Bio-Bitumen", href: "/bio-bitumen", desc: "Our flagship vertical, explained" },
+      { label: "Bio-Bitumen", href: "/bio-bitumen", desc: "Agro-waste bio-bitumen plant, explained" },
       { label: "Industrial Consulting", href: "/industrial-consulting", desc: "The 7-phase PMC process" },
     ],
   },
