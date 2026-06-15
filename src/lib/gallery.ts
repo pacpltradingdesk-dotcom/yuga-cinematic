@@ -10,6 +10,7 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/b14_5.jpg", alt: "Fundraising & capital advisory - plant inauguration ceremony" },
   ],
   "company": [
+    { src: "/assets/img/gen/founder-company.jpg", alt: "YUGA founder Prince Shah at a commissioned YUGA plant" },
     { src: "/assets/img/gen/b1_3.jpg", alt: "YUGA company overview - process detail with engineer" },
     { src: "/assets/img/gen/a1-q1.jpg", alt: "YUGA company overview - front view" },
     { src: "/assets/img/gen/a1-q2.jpg", alt: "YUGA company overview - left-side view" },
