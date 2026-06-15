@@ -1,4 +1,18 @@
-# Unique-Image + Effects Plan (2026-06-12) — EXECUTE LATER (user: "baad me karo sab")
+# Unique-Image + Effects Plan (2026-06-12)
+
+> **STATUS 2026-06-15 — substantially shipped.** Phase 1 (uniqueness) done: galleries
+> exclude SLOT_USED and `gallery.ts` now emits only PlantGallery-rendered slugs
+> (company/journey/capital/complete/software); product pages own their assets via
+> `pageImagery.ts` — cross-file audit shows every gen asset appears exactly once.
+> Per-page effects (Phases 2-3) were delivered as a shared `ImageWeave` system
+> (hover-expand strip, sticky side image, parallax ambient banner, ceremony shot,
+> blueprint panel) + PlantGallery variants (3D swiper / masonry) rather than 11 bespoke
+> effects — cleaner/DRY. Phase 4: shared **GalleryLightbox** shipped (portal, keyboard,
+> reduced-motion, scroll-lock) and wired into QuadStrip + masonry + swiper; live-verified.
+> Remaining optional: dedicated Lighthouse/mobile audit pass.
+
+---
+
 
 USER RULE: **har placement pe unique image** — koi bhi image site pe 2 jagah nahi dikhni chahiye.
 Effects: 21st.dev se inspired, alag-alag per page. Stack: framer-motion + GSAP + Lenis (already in repo, NO new deps).
