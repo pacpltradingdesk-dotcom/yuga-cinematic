@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { Media } from "@/components/visual/Media";
+import { GalleryLightbox } from "@/components/ui/GalleryLightbox";
 import type { WeaveImage } from "@/lib/pageImagery";
 
 /**
@@ -15,30 +16,37 @@ import type { WeaveImage } from "@/lib/pageImagery";
 export function QuadStrip({ imgs, id }: { imgs: WeaveImage[]; id?: string }) {
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
   if (!imgs.length) return null;
   return (
-    <div id={id} className="flex h-56 gap-2 sm:h-72 md:h-80">
-      {imgs.map((im, i) => (
-        <motion.div
-          key={im.src}
-          className="relative cursor-pointer overflow-hidden rounded-md"
-          style={{ flex: 1 }}
-          animate={reduce ? undefined : { flex: hovered === null ? 1 : hovered === i ? 2.4 : 0.6 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          onMouseEnter={() => setHovered(i)}
-          onMouseLeave={() => setHovered(null)}
-        >
-          <Media src={im.src} alt={im.alt} overlay="none" className="absolute inset-0" sizes="40vw" />
-          <div
-            className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--color-void)]/80 to-transparent p-3 text-xs text-[var(--color-muted)] transition-opacity duration-300 ${
-              hovered === i ? "opacity-100" : "opacity-0"
-            }`}
+    <>
+      <div id={id} className="flex h-56 gap-2 sm:h-72 md:h-80">
+        {imgs.map((im, i) => (
+          <motion.button
+            type="button"
+            key={im.src}
+            aria-label={`View ${im.alt}`}
+            className="relative cursor-zoom-in overflow-hidden rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]"
+            style={{ flex: 1 }}
+            animate={reduce ? undefined : { flex: hovered === null ? 1 : hovered === i ? 2.4 : 0.6 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => setLightbox(i)}
           >
-            {im.alt.split(" - ")[1] ?? im.alt}
-          </div>
-        </motion.div>
-      ))}
-    </div>
+            <Media src={im.src} alt={im.alt} overlay="none" className="absolute inset-0" sizes="40vw" />
+            <div
+              className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--color-void)]/80 to-transparent p-3 text-left text-xs text-[var(--color-muted)] transition-opacity duration-300 ${
+                hovered === i ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {im.alt.split(" - ")[1] ?? im.alt}
+            </div>
+          </motion.button>
+        ))}
+      </div>
+      <GalleryLightbox images={imgs} index={lightbox} onClose={() => setLightbox(null)} onNavigate={setLightbox} />
+    </>
   );
 }
 

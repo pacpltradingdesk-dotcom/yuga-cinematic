@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { GalleryLightbox } from "@/components/ui/GalleryLightbox";
 import type { GalleryImage } from "@/lib/gallery";
 
 /**
@@ -23,9 +24,12 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
   const startX = useRef(0);
   const currentX = useRef(0);
   const animationFrameId = useRef<number | null>(null);
+  // Distinguishes a tap (open lightbox) from a drag (swipe card to back).
+  const movedRef = useRef(false);
 
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [cardOrder, setCardOrder] = useState<number[]>(() => Array.from({ length: images.length }, (_, i) => i));
+  const [lightbox, setLightbox] = useState<number | null>(null);
 
   const getDurationFromCSS = useCallback((variableName: string, element?: HTMLElement | null): number => {
     const value = getComputedStyle(element || document.documentElement)?.getPropertyValue(variableName)?.trim();
@@ -66,6 +70,7 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
     (clientX: number) => {
       if (isSwiping.current) return;
       isSwiping.current = true;
+      movedRef.current = false;
       startX.current = clientX;
       currentX.current = clientX;
       const card = getActiveCard();
@@ -113,6 +118,7 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
       animationFrameId.current = requestAnimationFrame(() => {
         currentX.current = clientX;
         const deltaX = currentX.current - startX.current;
+        if (Math.abs(deltaX) > 6) movedRef.current = true;
         applySwipeStyles(deltaX);
         if (Math.abs(deltaX) > 50) handleEnd();
       });
@@ -146,6 +152,7 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
   }, [cardOrder, updatePositions]);
 
   return (
+    <>
     <section
       className={`relative grid select-none place-content-center ${className}`}
       ref={cardStackRef}
@@ -167,6 +174,9 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
         <article
           key={`${images[originalIndex].src}-${originalIndex}`}
           className="image-card absolute cursor-grab place-self-center overflow-hidden rounded-xl border border-[var(--color-line)] shadow-lg will-change-transform active:cursor-grabbing"
+          onClick={() => {
+            if (!movedRef.current) setLightbox(originalIndex);
+          }}
           style={
             {
               "--i": (displayIndex + 1).toString(),
@@ -191,5 +201,7 @@ export function ImageSwiper({ images, cardWidth = 340, cardHeight = 240, classNa
         </article>
       ))}
     </section>
+    <GalleryLightbox images={images} index={lightbox} onClose={() => setLightbox(null)} onNavigate={setLightbox} />
+    </>
   );
 }

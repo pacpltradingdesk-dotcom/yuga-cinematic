@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { GalleryLightbox } from "@/components/ui/GalleryLightbox";
 import type { GalleryImage } from "@/lib/gallery";
 
 /**
@@ -43,19 +44,24 @@ export const MasonryGrid = React.forwardRef<HTMLDivElement, MasonryGridProps>(
 );
 MasonryGrid.displayName = "MasonryGrid";
 
-/** One plant image as a masonry card — caption from alt, hover lift. */
-export function MasonryImageCard({ img }: { img: GalleryImage }) {
+/** One plant image as a masonry card — caption from alt, hover lift, click to zoom. */
+export function MasonryImageCard({ img, onOpen }: { img: GalleryImage; onOpen?: () => void }) {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const caption = img.alt.split(" - ")[1] ?? img.alt;
   return (
-    <div className="group relative overflow-hidden rounded-2xl transition-transform duration-300 ease-out hover:scale-[1.03]">
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`View ${img.alt}`}
+      className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl transition-transform duration-300 ease-out hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-amber)]"
+    >
       {/* eslint-disable-next-line @next/next/no-img-element -- natural-height masonry needs a plain img */}
       <img src={`${base}${img.src}`} alt={img.alt} className="h-auto w-full object-cover" loading="lazy" />
       <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-void)]/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <p className="absolute bottom-3 left-4 text-sm font-medium text-white opacity-0 drop-shadow-md transition-opacity duration-300 group-hover:opacity-100">
+      <p className="absolute bottom-3 left-4 text-left text-sm font-medium text-white opacity-0 drop-shadow-md transition-opacity duration-300 group-hover:opacity-100">
         {caption}
       </p>
-    </div>
+    </button>
   );
 }
 
@@ -77,11 +83,15 @@ export function useMasonryColumns(max = 3): number {
 /** Ready-made responsive plant-image masonry (what PlantGallery renders for variant="masonry"). */
 export function PlantMasonry({ imgs }: { imgs: readonly GalleryImage[] }) {
   const columns = useMasonryColumns(3);
+  const [lightbox, setLightbox] = React.useState<number | null>(null);
   return (
-    <MasonryGrid columns={columns} gap={4}>
-      {imgs.map((im) => (
-        <MasonryImageCard key={im.src} img={im} />
-      ))}
-    </MasonryGrid>
+    <>
+      <MasonryGrid columns={columns} gap={4}>
+        {imgs.map((im, i) => (
+          <MasonryImageCard key={im.src} img={im} onOpen={() => setLightbox(i)} />
+        ))}
+      </MasonryGrid>
+      <GalleryLightbox images={imgs} index={lightbox} onClose={() => setLightbox(null)} onNavigate={setLightbox} />
+    </>
   );
 }
