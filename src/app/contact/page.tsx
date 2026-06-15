@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Phone, Mail, Globe, MonitorSmartphone, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, Globe, MonitorSmartphone, MessageCircle, MapPin, Clock, ShieldCheck, BadgeCheck } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/page/ContactForm";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
-import { company, waLink, businessHours, mapsEmbedUrl } from "@/lib/site";
+import { company, waLink, businessHours, mapsEmbedUrl, engagementPromise } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -129,6 +129,21 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </Reveal>
+            {/* How we work — risk-reversal trust signals */}
+            <Reveal index={4}>
+              <div className="rounded-3xl border border-[var(--color-line)] p-7">
+                <ShieldCheck size={18} className="text-[var(--color-amber)]" />
+                <h4 className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">How we work</h4>
+                <ul className="mt-4 grid gap-3">
+                  {engagementPromise.map((point) => (
+                    <li key={point} className="flex items-start gap-2.5 text-sm leading-relaxed text-[var(--color-muted)]">
+                      <BadgeCheck size={16} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           </div>

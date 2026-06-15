@@ -94,6 +94,11 @@ export default function ITSoftwarePage() {
                   </div>
                 </div>
               </div>
+              <p className="mt-6 text-xs leading-relaxed text-[var(--color-faint)]">
+                Note: price forecasts and market signals are software outputs generated for internal business
+                planning only. They are not investment, trading or financial advice and not a recommendation to
+                buy or sell any security or commodity. For regulated advice, consult a SEBI-registered professional.
+              </p>
             </div>
           </Reveal>
         </div>

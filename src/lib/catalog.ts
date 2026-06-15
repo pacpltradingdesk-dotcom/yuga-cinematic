@@ -243,6 +243,14 @@ export function getStandards(slug: string): Standards | undefined {
 /** All product slugs — drives `generateStaticParams` for /products/[slug]. */
 export const productSlugs: readonly string[] = products.map((p) => p.slug);
 
+/**
+ * Cost-basis clarification shown under every product's Cost & ROI table. Pre-empts
+ * the "your numbers look low" objection: figures are plant-only and reflect a
+ * batch/semi-continuous build; premium fully-continuous plants cost more.
+ */
+export const COST_BASIS_NOTE =
+  "Figures are for plant supply only — land and working capital are separate — and reflect a batch / semi-continuous build. Fully-continuous, automated, premium-spec production plants cost more (roughly ₹0.8–1.2 Cr per TPD). Your exact cost is fixed in a site-specific DPR.";
+
 export const { finance, addons } = catalog;
 export const subsidy: Subsidy = catalog.subsidy;
 export const funding: Funding = catalog.funding;

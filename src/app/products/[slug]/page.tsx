@@ -21,7 +21,7 @@ import { QuadStrip, AmbientBanner, BlueprintPanel, SideImage } from "@/component
 import { productImagery } from "@/lib/pageImagery";
 import { CarbonStats } from "@/components/page/CarbonCredit";
 import { LeadGate } from "@/components/page/LeadGate";
-import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, type LabelValue } from "@/lib/catalog";
+import { products, getProduct, getFeasibility, getIo, getStandards, productSlugs, COST_BASIS_NOTE, type LabelValue } from "@/lib/catalog";
 import { productPlantCounts } from "@/lib/plants";
 import { getLandRequirement, landNote } from "@/lib/land";
 import { productImg, img } from "@/lib/media";
@@ -330,6 +330,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           </Reveal>
           <div className="mt-8 max-w-3xl">
             <InfoTable rows={p.financials.rows} />
+            <p className="mt-5 text-xs leading-relaxed text-[var(--color-faint)]">{COST_BASIS_NOTE}</p>
           </div>
         </div>
       </section>

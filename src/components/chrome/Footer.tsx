@@ -5,7 +5,7 @@ import { ArrowUpRight, Linkedin, Youtube, Instagram, Facebook, Twitter, MessageC
 import { company, nav, socials } from "@/lib/site";
 import { Marquee } from "@/components/ui/Marquee";
 import { YugaMark } from "@/components/ui/YugaMark";
-import { legalDocs, GRIEVANCE_OFFICER } from "@/lib/legal";
+import { legalDocs, GRIEVANCE_OFFICER, FOOTER_DISCLAIMER } from "@/lib/legal";
 import { CookiePrefsButton } from "@/components/chrome/CookiePrefsButton";
 
 const SOCIAL_ICON: Record<string, LucideIcon> = {
@@ -118,6 +118,9 @@ export function Footer() {
         <p className="mt-3 text-xs leading-relaxed text-[var(--color-faint)]">
           Grievance Officer: {GRIEVANCE_OFFICER} ·{" "}
           <a href={`mailto:${company.emails[1]}`} className="hover:text-[var(--color-ink)]">{company.emails[1]}</a>
+        </p>
+        <p className="mt-3 max-w-4xl text-xs leading-relaxed text-[var(--color-faint)]">
+          {FOOTER_DISCLAIMER} © {new Date().getFullYear()} {company.legal} (YUGA) · CIN {company.cin}.
         </p>
       </div>
 

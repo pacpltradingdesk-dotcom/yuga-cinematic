@@ -9,6 +9,12 @@ import { company } from "@/lib/site";
 
 export const GRIEVANCE_OFFICER = company.founder; // Prince Pratap Shah (default per pack)
 export const EFFECTIVE_DATE = "1 June 2026";
+
+/**
+ * Short, site-wide legal line rendered as visible text in the footer (appears on
+ * every page) so the disclaimer is "clear & conspicuous", not just linked.
+ */
+export const FOOTER_DISCLAIMER = `Information on this site is indicative and for general guidance only — not investment, legal, tax or financial advice, and not a solicitation of securities. Regulated or certified work is carried out through duly authorised, licensed or certified professionals as required by law.`;
 const LEGAL_EMAIL = "sales.ppsanatams@gmail.com";
 const LEGAL_PHONE = company.phones[0];
 
@@ -199,8 +205,15 @@ export const legalDocs: readonly LegalDoc[] = [
   {
     slug: "disclaimer",
     title: "Disclaimer",
-    intro: "Please read this alongside our Terms of Use.",
+    intro: `Effective from ${EFFECTIVE_DATE}. Please read this alongside our Terms of Use.`,
     sections: [
+      {
+        heading: "Nature of our services",
+        paragraphs: [
+          `${company.legal} ("YUGA") provides project-management, engineering and business consulting and documentation services only. YUGA is not registered with SEBI as an Investment Adviser, Research Analyst or Merchant Banker, and does not provide securities, investment, trading or portfolio advice.`,
+          "Where any service requires a statutory licence, registration or professional certification — including SEBI-registered intermediaries, Chartered Accountants, registered valuers, merchant bankers, or licensed/chartered engineers — that work is performed by or through duly authorised and certified professionals engaged for that purpose. YUGA does not itself undertake activities requiring registrations it does not hold.",
+        ],
+      },
       {
         heading: "Indicative figures & no advice",
         paragraphs: [
@@ -243,6 +256,12 @@ export const legalDocs: readonly LegalDoc[] = [
         heading: "Limitation of liability",
         paragraphs: [
           "To the maximum extent permitted by law, YUGA is not liable for any indirect or consequential loss, or for decisions taken on the basis of indicative information on this website.",
+        ],
+      },
+      {
+        heading: "Governing law & jurisdiction",
+        paragraphs: [
+          "This Disclaimer is governed by the laws of India; the courts at Vadodara, Gujarat have exclusive jurisdiction.",
         ],
       },
     ],

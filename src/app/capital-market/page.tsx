@@ -31,7 +31,7 @@ export default function CapitalMarketPage() {
       <PageHero
         eyebrow="Vertical C · Capital Markets"
         title="From First Seed Cheque to Public Listing"
-        intro="Full-spectrum fundraising and finance advisory - backed by a real, first-hand BSE SME listing (Omnipotent Industries, bitumen, 2021)."
+        intro="Fundraising readiness, documentation and consulting support - backed by a real, first-hand BSE SME listing (Omnipotent Industries, bitumen, 2021)."
         accent="amber"
         image="capHero"
       />
@@ -246,8 +246,12 @@ export default function CapitalMarketPage() {
         </div>
         <div className="maxw container-x mt-8">
           <p className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-5 text-xs leading-relaxed text-[var(--color-faint)]">
-            Compliance note: paid trading advice/signals in India require SEBI (Research Analyst / Investment
-            Adviser) registration. Until registered, these are presented as research &amp; tools, not advisory.
+            Compliance note: securities and investment advice in India requires SEBI registration. We are not
+            SEBI-registered and do not provide securities or investment advice — we offer fundraising readiness,
+            documentation and consulting support only (financial models, planning valuations, DPRs, investor decks
+            and subsidy paperwork). Any regulated activity (securities advice, certified valuation, IPO/public-issue
+            management) is carried out through appropriately SEBI-registered or certified professionals. Nothing here
+            is a solicitation to buy or sell securities.
           </p>
         </div>
       </section>

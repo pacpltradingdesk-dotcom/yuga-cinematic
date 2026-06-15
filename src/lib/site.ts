@@ -136,6 +136,19 @@ export const keyFacts = [
   "Pride of India Icon Award 2021 - Best Fast-Growing Business of the Year",
 ] as const;
 
+/**
+ * Risk-reversal / trust signals (process promise, not profit promise). Shown on
+ * the contact page — milestone-based payments and a written scope build B2B trust
+ * far more than slogans, and keep the promise legally safe (we promise process).
+ */
+export const engagementPromise = [
+  "Free, no-obligation first consultation — we tell you honestly if your plan is viable.",
+  "A written, signed proposal up front — scope, fees, milestones and deliverables, no surprises.",
+  "Milestone-based payments — you pay as work is delivered, not everything upfront.",
+  "Mutual NDA on request — your data, designs and financials stay strictly confidential.",
+  "Regulated work routed to licensed experts (SEBI-registered professionals, CAs, registered valuers) — one accountable partner throughout.",
+] as const;
+
 /** The three business verticals. */
 export const verticals = [
   {

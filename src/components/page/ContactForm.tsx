@@ -169,11 +169,19 @@ export function ContactForm() {
             className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-amber)]"
           />
           <span>
-            I consent to {company.brand} ({company.legal}) contacting me about my enquiry and storing my details per the{" "}
+            I have read and agree to the{" "}
+            <Link href="/legal/terms" target="_blank" className="text-[var(--color-amber)] underline">
+              Terms of Use
+            </Link>
+            ,{" "}
             <Link href="/legal/privacy-policy" target="_blank" className="text-[var(--color-amber)] underline">
               Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link href="/legal/disclaimer" target="_blank" className="text-[var(--color-amber)] underline">
+              Disclaimer
             </Link>
-            . I understand any figures shared are indicative.
+            , and consent to {company.brand} ({company.legal}) contacting me about my enquiry. I understand any figures shared are indicative.
           </span>
         </label>
         <label className="flex cursor-pointer items-start gap-2.5 text-xs leading-relaxed text-[var(--color-muted)]">
