@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Hero } from "@/components/home/Hero";
+import { Reveal } from "@/components/ui/Reveal";
 import { HorizontalStory } from "@/components/home/HorizontalStory";
 import { Verticals } from "@/components/home/Verticals";
 import { Stats } from "@/components/home/Stats";
@@ -43,6 +45,42 @@ export default function HomePage() {
           <SectionHeading eyebrow="One Company" title="Plants. Software. Capital." align="center" />
         </div>
         <ZoomParallax images={["homeHero", "vPmc", "vSoft", "vCap", "pImpact", "prod1", "bioHero"]} />
+      </section>
+
+      {/* Pyrolysis — the focus (founder consulting at the plant) */}
+      <section className="border-y border-[var(--color-line)] bg-[var(--color-surface)] py-[var(--space-section)]">
+        <div className="maxw container-x grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]">
+          <Reveal>
+            <div className="relative aspect-video overflow-hidden rounded-3xl ring-1 ring-[var(--color-line)]">
+              <Image
+                src="/assets/img/gen/founder-pyrolysis-hero.jpg"
+                alt="YUGA founder Prince Shah consulting a client group at a pyrolysis plant"
+                fill
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal index={1}>
+            <SectionHeading
+              eyebrow="Our focus"
+              title="Pyrolysis plants, end to end."
+              intro="Waste plastic, end-of-life tyres and agro-biomass — turned into fuel, oil and bio-bitumen. We take a pyrolysis plant from feasibility to commissioning: DPR, licences, machinery, training and market support — one accountable partner on the ground."
+            />
+          </Reveal>
+        </div>
+        <div className="maxw container-x mt-6 grid gap-4 sm:grid-cols-2">
+          {[
+            { src: "/assets/img/gen/founder-pyrolysis-reactor.jpg", alt: "YUGA founder explaining the pyrolysis reactor to an engineer" },
+            { src: "/assets/img/gen/founder-pyrolysis-team.jpg", alt: "YUGA founder leading a client walkthrough of a pyrolysis plant" },
+          ].map((im, i) => (
+            <Reveal key={im.src} index={i}>
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-[var(--color-line)]">
+                <Image src={im.src} alt={im.alt} fill sizes="(max-width: 640px) 100vw, 45vw" className="object-cover" />
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* By-goal wayfinding — the fastest way for a visitor to self-route to the
