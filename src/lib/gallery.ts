@@ -4,7 +4,6 @@ export type GalleryImage = { src: string; alt: string };
 
 export const plantGallery: Record<string, GalleryImage[]> = {
   "bio-bitumen": [
-    { src: "/assets/img/gen/founder-bio-bitumen.jpg", alt: "YUGA founder Prince Shah consulting on-site at a bio-bitumen plant" },
     { src: "/assets/img/gen/b3_4.jpg", alt: "Bio-bitumen plant - hero product moment" },
     { src: "/assets/img/gen/b3_5.jpg", alt: "Bio-bitumen plant - plant inauguration ceremony" },
     { src: "/assets/img/gen/a3-q2.jpg", alt: "Bio-bitumen plant - left-side view" },
@@ -12,7 +11,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a3-q4.jpg", alt: "Bio-bitumen plant - interior view" },
   ],
   "bitumen-decanter": [
-    { src: "/assets/img/gen/founder-decanter.jpg", alt: "YUGA founder Prince Shah inspecting a bitumen decanter plant" },
     { src: "/assets/img/gen/b9_1.jpg", alt: "Bitumen decanter plant - establishing wide view" },
     { src: "/assets/img/gen/b9_3.jpg", alt: "Bitumen decanter plant - process detail with engineer" },
     { src: "/assets/img/gen/b9_4.jpg", alt: "Bitumen decanter plant - hero product moment" },
@@ -23,7 +21,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a9-q4.jpg", alt: "Bitumen decanter plant - interior view" },
   ],
   "bitumen-emulsion": [
-    { src: "/assets/img/gen/founder-emulsion.jpg", alt: "YUGA founder Prince Shah at a bitumen emulsion plant" },
     { src: "/assets/img/gen/b6_1.jpg", alt: "Bitumen emulsion plant - establishing wide view" },
     { src: "/assets/img/gen/b6_3.jpg", alt: "Bitumen emulsion plant - process detail with engineer" },
     { src: "/assets/img/gen/b6_4.jpg", alt: "Bitumen emulsion plant - hero product moment" },
@@ -89,7 +86,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/b10_5.jpg", alt: "Micro-surfacing plant - plant inauguration ceremony" },
   ],
   "plastic-to-fuel": [
-    { src: "/assets/img/gen/founder-plastic-to-fuel.jpg", alt: "YUGA founder Prince Shah at a plastic-to-fuel pyrolysis plant" },
     { src: "/assets/img/gen/b4_3.jpg", alt: "Plastic-to-fuel pyrolysis plant - process detail with engineer" },
     { src: "/assets/img/gen/b4_4.jpg", alt: "Plastic-to-fuel pyrolysis plant - hero product moment" },
     { src: "/assets/img/gen/b4_5.jpg", alt: "Plastic-to-fuel pyrolysis plant - plant inauguration ceremony" },
@@ -99,7 +95,6 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/a4-q4.jpg", alt: "Plastic-to-fuel pyrolysis plant - interior view" },
   ],
   "pmb-polymer-modified-bitumen": [
-    { src: "/assets/img/gen/founder-pmb.jpg", alt: "YUGA founder Prince Shah reviewing a PMB plant with the team" },
     { src: "/assets/img/gen/b7_3.jpg", alt: "PMB plant - process detail with engineer" },
     { src: "/assets/img/gen/b7_4.jpg", alt: "PMB plant - hero product moment" },
     { src: "/assets/img/gen/b7_5.jpg", alt: "PMB plant - plant inauguration ceremony" },
