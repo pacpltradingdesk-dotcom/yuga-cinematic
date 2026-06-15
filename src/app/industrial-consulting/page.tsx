@@ -136,7 +136,7 @@ export default function IndustrialConsultingPage() {
 
       <VerticalFaq vkey="pmc" eyebrow="Why a PMC" />
 
-      <PlantGallery slug="complete" title="Inside a complete YUGA plant setup." />
+      <PlantGallery slug="complete" title="Inside a complete YUGA plant setup." variant="masonry" />
 
       <CTASection title="Build your plant the right way." />
     </>
