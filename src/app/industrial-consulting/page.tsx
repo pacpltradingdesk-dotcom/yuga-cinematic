@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
 import { PlantGallery } from "@/components/page/PlantGallery";
@@ -29,11 +30,34 @@ export default function IndustrialConsultingPage() {
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical A · PMC / EPC"
-        title="Industrial Bitumen Consulting, A to Z"
-        intro="A 7-phase delivery model that takes a PMB, CRMB, Emulsion, Decanter or Blown bitumen plant from feasibility to commercial production - and your first buyers."
+        title="Pyrolysis & Bitumen Plant Consulting, A to Z"
+        intro="A 7-phase delivery model that takes a pyrolysis plant (plastic-to-fuel, tyre/rubber-to-oil, bio-bitumen) or a bitumen-product plant (PMB, CRMB, Emulsion, Decanter, Blown) from feasibility to commercial production - and your first buyers."
         accent="amber"
         image="indHero"
       />
+
+      {/* Founder consulting at the pyrolysis plant */}
+      <section className="py-[var(--space-section)]">
+        <div className="maxw container-x">
+          <SectionHeading
+            eyebrow="On the ground"
+            title="Consulting where it matters — at the plant."
+            intro="Not a desk report. From the pyrolysis reactor to the dispatch gate, our founder and team are on-site through every phase."
+          />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {[
+              { src: "/assets/img/gen/founder-pyrolysis-reactor.jpg", alt: "YUGA founder explaining the pyrolysis reactor to an engineer" },
+              { src: "/assets/img/gen/founder-pyrolysis-team.jpg", alt: "YUGA founder leading a client walkthrough of a pyrolysis plant" },
+            ].map((im, i) => (
+              <Reveal key={im.src} index={i}>
+                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-[var(--color-line)]">
+                  <Image src={im.src} alt={im.alt} fill sizes="(max-width: 640px) 100vw, 45vw" className="object-cover" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* 7 phases */}
       <section className="py-[var(--space-section)]">

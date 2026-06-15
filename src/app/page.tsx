@@ -69,18 +69,6 @@ export default function HomePage() {
             />
           </Reveal>
         </div>
-        <div className="maxw container-x mt-6 grid gap-4 sm:grid-cols-2">
-          {[
-            { src: "/assets/img/gen/founder-pyrolysis-reactor.jpg", alt: "YUGA founder explaining the pyrolysis reactor to an engineer" },
-            { src: "/assets/img/gen/founder-pyrolysis-team.jpg", alt: "YUGA founder leading a client walkthrough of a pyrolysis plant" },
-          ].map((im, i) => (
-            <Reveal key={im.src} index={i}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-[var(--color-line)]">
-                <Image src={im.src} alt={im.alt} fill sizes="(max-width: 640px) 100vw, 45vw" className="object-cover" />
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
       {/* By-goal wayfinding — the fastest way for a visitor to self-route to the
