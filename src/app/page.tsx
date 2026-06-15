@@ -18,15 +18,15 @@ import { PricingTables } from "@/components/page/PricingTables";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Industrial Plant PMC, AI Software & Capital Markets in India | YUGA",
+    absolute: "Pyrolysis Plant PMC, AI Software & Capital Markets in India | YUGA",
   },
   description:
-    "YUGA (PPS Anantams) is India's full-service PMC for bitumen & pyrolysis plants — plastic-to-fuel, tyre-to-oil, PMB, CRMB, emulsion & bio-bitumen — feasibility to commissioning, with AI software and seed-to-IPO funding.",
+    "YUGA (PPS Anantams) is India's full-service PMC for pyrolysis plants — plastic-to-fuel, tyre/rubber-to-oil and bio-bitumen — plus bitumen-product plants (PMB, CRMB, emulsion), feasibility to commissioning, with AI software and seed-to-IPO funding.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Industrial Plant PMC, AI Software & Capital Markets in India | YUGA",
+    title: "Pyrolysis Plant PMC, AI Software & Capital Markets in India | YUGA",
     description:
-      "End-to-end PMC for bitumen & pyrolysis plants — plastic-to-fuel, tyre-to-oil, PMB, CRMB, emulsion & bio-bitumen — engineered with AI software and funded by real BSE-IPO capital-markets expertise.",
+      "End-to-end PMC for pyrolysis plants — plastic-to-fuel, tyre/rubber-to-oil and bio-bitumen — plus bitumen-product plants, engineered with AI software and funded by real BSE-IPO capital-markets expertise.",
     url: "/",
   },
 };

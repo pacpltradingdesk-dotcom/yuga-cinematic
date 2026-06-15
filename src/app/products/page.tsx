@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Products — Plant & Manufacturing",
   alternates: { canonical: "/products" },
   description:
-    "Nine bitumen & pyrolysis plants YUGA takes from DPR to commercial production — plastic/tyre-to-fuel, PMB, CRMB, decanter, emulsion, micro-surfacing, blown bitumen and bio-bitumen.",
+    "Nine pyrolysis & bitumen plants YUGA takes from DPR to commercial production — plastic-to-fuel, tyre/rubber-to-oil, bio-bitumen, PMB, CRMB, decanter, emulsion, micro-surfacing and blown bitumen.",
 };
 
 export default function ProductsPage() {

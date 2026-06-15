@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   description: company.oneLiner,
   keywords: [
-    "Bitumen plant consultant India", "Bitumen PMC", "Pyrolysis plant consultant",
-    "Plastic to Fuel", "Tyre to Oil", "PMB", "CRMB", "Bitumen emulsion plant",
+    "Pyrolysis plant consultant India", "Pyrolysis plant PMC", "Plastic to Fuel plant",
+    "Tyre to Oil plant", "Waste to energy plant", "Bitumen plant consultant", "PMB", "CRMB",
     "Bio-Bitumen", "CSIR-CRRI KrishiBind", "Capital markets", "IPO advisory",
     "PPS Anantams", "YUGA",
   ],

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "About YUGA",
   alternates: { canonical: "/about" },
   description:
-    "PPS Anantams Corporation (PACPL) - India's full-service industrial bitumen & pyrolysis plant PMC, founded by 25-year industry veteran and BSE-listed entrepreneur Prince Pratap Shah.",
+    "PPS Anantams Corporation (PACPL) - India's full-service pyrolysis & bitumen plant PMC, founded by 25-year industry veteran and BSE-listed entrepreneur Prince Pratap Shah.",
 };
 
 export default function AboutPage() {
@@ -34,7 +34,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About · PACPL"
         title="Vision · Strategy · Execution"
-        intro={`${company.legal} is India's leading full-service PMC for industrial bitumen & pyrolysis plants - and a builder of AI software for the industry. One-point solution from feasibility to post-commissioning hand-holding.`}
+        intro={`${company.legal} is India's leading full-service PMC for pyrolysis & bitumen plants - and a builder of AI software for the industry. One-point solution from feasibility to post-commissioning hand-holding.`}
         accent="amber"
         image="aboutHero"
       />

@@ -13,7 +13,7 @@ export const company = {
   founderTitle: "Founder & Key Person",
   tagline: "Industrial Intelligence for the Future",
   oneLiner:
-    "India's full-service Project Management Consultancy for industrial bitumen & pyrolysis plants - engineered with AI software and funded by real capital-markets expertise.",
+    "India's full-service Project Management Consultancy for pyrolysis & bitumen plants - engineered with AI software and funded by real capital-markets expertise.",
   cin: "U46632GJ2019PTC110676",
   gst: "24AAHCV1611L2ZD",
   din: "06680837",
@@ -159,8 +159,8 @@ export const verticals = [
     href: "/bio-bitumen",
     accent: "amber",
     summary:
-      "End-to-end consultancy that takes a bitumen, bio-bitumen, plastic-to-fuel or tyre-to-oil plant from feasibility to commercial production.",
-    points: ["Bio-Bitumen · Plastic-to-Fuel · RPO", "Emulsion · PMB · CRMB · Decanter · Blown", "DPR → licenses → commissioning → market support"],
+      "End-to-end consultancy that takes a pyrolysis plant — plastic-to-fuel, tyre/rubber-to-oil or bio-bitumen — or a bitumen-product plant from feasibility to commercial production.",
+    points: ["Plastic-to-Fuel · Tyre/Rubber-to-Oil · Bio-Bitumen", "Emulsion · PMB · CRMB · Decanter · Blown", "DPR → licenses → commissioning → market support"],
   },
   {
     id: "B",

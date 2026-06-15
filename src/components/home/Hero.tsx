@@ -79,7 +79,7 @@ export function Hero() {
           animate="show"
           className="mt-4 max-w-xl text-base leading-relaxed text-[var(--color-ink)]/80 sm:text-lg"
         >
-          Industrial Plant PMC · AI Software · Capital Markets · Sustainable Infrastructure.
+          Pyrolysis Plant PMC · AI Software · Capital Markets · Sustainable Infrastructure.
         </motion.p>
 
         <motion.div
