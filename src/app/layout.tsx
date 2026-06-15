@@ -30,9 +30,10 @@ export const metadata: Metadata = {
   },
   description: company.oneLiner,
   keywords: [
-    "Bio-Bitumen", "Bitumen PMC", "CSIR-CRRI KrishiBind", "PMB", "CRMB",
-    "Plastic to Fuel", "Pyrolysis", "Bitumen plant consultant India",
-    "Capital markets", "IPO advisory", "PPS Anantams", "YUGA",
+    "Bitumen plant consultant India", "Bitumen PMC", "Pyrolysis plant consultant",
+    "Plastic to Fuel", "Tyre to Oil", "PMB", "CRMB", "Bitumen emulsion plant",
+    "Bio-Bitumen", "CSIR-CRRI KrishiBind", "Capital markets", "IPO advisory",
+    "PPS Anantams", "YUGA",
   ],
   authors: [{ name: company.founder }],
   openGraph: {

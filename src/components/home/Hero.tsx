@@ -79,7 +79,7 @@ export function Hero() {
           animate="show"
           className="mt-4 max-w-xl text-base leading-relaxed text-[var(--color-ink)]/80 sm:text-lg"
         >
-          Bio-Bitumen PMC · AI Software · Capital Markets · Sustainable Infrastructure.
+          Industrial Plant PMC · AI Software · Capital Markets · Sustainable Infrastructure.
         </motion.p>
 
         <motion.div

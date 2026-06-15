@@ -13,7 +13,7 @@ export const company = {
   founderTitle: "Founder & Key Person",
   tagline: "Industrial Intelligence for the Future",
   oneLiner:
-    "India's full-service Project Management Consultancy for Bio-Modified Bitumen - engineered with AI software and funded by real capital-markets expertise.",
+    "India's full-service Project Management Consultancy for industrial bitumen & pyrolysis plants - engineered with AI software and funded by real capital-markets expertise.",
   cin: "U46632GJ2019PTC110676",
   gst: "24AAHCV1611L2ZD",
   din: "06680837",
