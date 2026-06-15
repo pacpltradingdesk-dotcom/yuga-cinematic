@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Leaf, FileSearch, Check } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
 import { CTASection } from "@/components/page/CTASection";
@@ -76,6 +77,30 @@ export default function MarketIntelligencePage() {
             ))}
           </div>
           <p className="mt-6 text-xs leading-relaxed text-[var(--color-faint)]">{market.national.src}</p>
+        </div>
+      </section>
+
+      {/* Behind the research — founder */}
+      <section className="py-[var(--space-section)]">
+        <div className="maxw container-x grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]">
+          <Reveal>
+            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl ring-1 ring-[var(--color-line)]">
+              <Image
+                src="/assets/img/gen/founder-market.jpg"
+                alt="YUGA founder Prince Shah reviewing bitumen market data and price trends"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal index={1}>
+            <SectionHeading
+              eyebrow="Behind the research"
+              title="Read by people who've sold the product."
+              intro="Our market view isn't desk theory — it's built by a team that has traded bitumen, run plants and tracked this market for 25+ years. The same intelligence powers our own operations before it reaches you."
+            />
+          </Reveal>
         </div>
       </section>
 

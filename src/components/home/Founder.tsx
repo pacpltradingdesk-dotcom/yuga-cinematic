@@ -55,6 +55,15 @@ export function Founder() {
 
         <Reveal index={1}>
           <div className="glass relative overflow-hidden rounded-[2rem] p-8">
+            <div className="relative mb-6 aspect-video overflow-hidden rounded-2xl ring-1 ring-[var(--color-line)]">
+              <Image
+                src="/assets/img/gen/founder-home-process.jpg"
+                alt={`${company.founder} reviewing plant quality on-site with an engineer`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover"
+              />
+            </div>
             <div className="mb-6 flex items-center justify-between">
               <span className="text-xs uppercase tracking-[0.25em] text-[var(--color-faint)]">Track Record</span>
               <span className="text-xs text-[var(--color-cyan)]">25 years</span>

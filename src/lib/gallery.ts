@@ -33,6 +33,7 @@ export const plantGallery: Record<string, GalleryImage[]> = {
     { src: "/assets/img/gen/b2_5.jpg", alt: "Client journey - idea to income - plant inauguration ceremony" },
   ],
   "software": [
+    { src: "/assets/img/gen/founder-software.jpg", alt: "YUGA founder Prince Shah reviewing the AI software stack with the tech team" },
     { src: "/assets/img/gen/b13_3.jpg", alt: "AI software in action - process detail with engineer" },
     { src: "/assets/img/gen/b13_5.jpg", alt: "AI software in action - plant inauguration ceremony" },
   ],
