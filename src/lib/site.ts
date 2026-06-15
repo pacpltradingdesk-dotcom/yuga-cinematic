@@ -39,7 +39,7 @@ export const company = {
    * added to public/assets/img/ — it then appears automatically on the homepage.
    * null hides it (no broken image, current track-record card is shown as-is).
    */
-  founderPhoto: null as string | null,
+  founderPhoto: "/assets/img/founder.jpg" as string | null,
 } as const;
 
 /**
