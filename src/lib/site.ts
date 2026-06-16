@@ -11,7 +11,7 @@ export const company = {
   promise: "Vision · Strategy · Execution",
   founder: "Prince Pratap Shah",
   founderTitle: "Founder & Key Person",
-  tagline: "Pyrolysis plants, built bankable.",
+  tagline: "Industrial Intelligence for the Future",
   oneLiner:
     "India's full-service Project Management Consultancy for pyrolysis & bitumen plants - engineered with AI software and funded by real capital-markets expertise.",
   cin: "U46632GJ2019PTC110676",
