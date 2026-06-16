@@ -55,7 +55,7 @@ export function ZoomParallax({ images = DEFAULT_IMAGES }: { images?: readonly Im
             className="absolute top-0 flex h-full w-full items-center justify-center"
           >
             <div className={`relative ${pos}`}>
-              <Media name={images[i % images.length]} overlay="none" className="absolute inset-0 rounded-md" sizes="60vw" />
+              <Media name={images[i % images.length]} overlay="none" loading="eager" className="absolute inset-0 rounded-md" sizes="100vw" />
             </div>
           </motion.div>
         ))}

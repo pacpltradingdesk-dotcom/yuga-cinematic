@@ -64,6 +64,14 @@ body {
   color: var(--color-ink);
 }
 
+/* Keyboard focus — branded ring. :focus-visible keeps mouse/touch users
+   unaffected while giving keyboard navigators a clear, on-brand indicator. */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-void); }

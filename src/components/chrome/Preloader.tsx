@@ -15,10 +15,15 @@ export function Preloader() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    // Show the cinematic intro once per browser session — skip it on repeat
+    // loads / new tabs so returning visitors go straight to content.
+    let seen = false;
+    try { seen = sessionStorage.getItem("yuga_preloaded") === "1"; } catch { /* storage blocked */ }
+    if (reduce || seen) {
       setDone(true);
       return;
     }
+    try { sessionStorage.setItem("yuga_preloaded", "1"); } catch { /* storage blocked */ }
     let raf = 0;
     const start = performance.now();
     const DURATION = 1400;
