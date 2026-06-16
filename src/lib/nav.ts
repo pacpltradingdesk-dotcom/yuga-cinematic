@@ -24,10 +24,10 @@ export interface NavGroup {
 export const navGroups: readonly NavGroup[] = [
   {
     label: "Plants",
-    blurb: "Set up & run a bitumen / bio-bitumen plant — DPR to production.",
+    blurb: "Set up & run a pyrolysis plant — plastic/tyre-to-oil & bio-bitumen, DPR to production.",
     items: [
       { label: "All Products", href: "/products", desc: "All nine plants we build" },
-      { label: "Bio-Bitumen", href: "/bio-bitumen", desc: "Agro-waste bio-bitumen plant, explained" },
+      { label: "Pyrolysis Plants", href: "/bio-bitumen", desc: "Plastic/tyre-to-oil & bio-bitumen — the pyrolysis vertical" },
       { label: "Industrial Consulting", href: "/industrial-consulting", desc: "The 7-phase PMC process" },
     ],
   },

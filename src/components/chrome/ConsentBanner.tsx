@@ -107,7 +107,7 @@ export function ConsentBanner() {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-label="Cookie consent"
-            className="glass fixed inset-x-3 bottom-3 z-[160] mx-auto max-w-2xl rounded-2xl p-5 ring-glow sm:inset-x-auto sm:left-1/2 sm:right-auto sm:-translate-x-1/2"
+            className="glass fixed inset-x-3 bottom-3 z-[160] mx-auto max-w-md rounded-2xl p-5 ring-glow sm:inset-x-auto sm:left-4 sm:mx-0 sm:max-w-sm"
           >
             <div className="flex items-start gap-3">
               <Cookie size={18} className="mt-0.5 shrink-0 text-[var(--color-amber)]" />

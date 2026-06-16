@@ -20,7 +20,7 @@ import type { ImgKey } from "@/lib/media";
 const ptImg: ImgKey[] = ["bio0", "bio1", "bio2", "bio3"];
 
 export const metadata: Metadata = {
-  title: "Bio-Bitumen PMC",
+  title: "Pyrolysis Plant PMC",
   alternates: { canonical: "/bio-bitumen" },
   description:
     "Pyrolysis bio-bitumen, plastic-to-fuel and tyre-to-oil plant consultancy - CSIR-CRRI KrishiBind aligned, NHAI/MoRTH compliant, from DPR to commissioning.",
@@ -32,7 +32,7 @@ export default function BioBitumenPage() {
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical A · YUGA PMC"
-        title="Bio-Bitumen & Pyrolysis Plant Consultancy"
+        title="Pyrolysis & Bio-Bitumen Plant Consultancy"
         intro={<>Agro-waste becomes road. We design and plan bio-bitumen, plastic-to-fuel and tyre-to-oil plants end to end — CSIR-CRRI (KrishiBind) aligned and <Term id="nhai-morth">NHAI/MoRTH</Term> compliant.</>}
         accent="amber"
         image="bioHero"
@@ -57,7 +57,7 @@ export default function BioBitumenPage() {
         <div className="flex h-[60vh] items-center justify-center">
           <SectionHeading
             eyebrow="Agro-waste → Road"
-            title="Scroll into the bio-bitumen world."
+            title="Scroll into the pyrolysis world."
             align="center"
           />
         </div>

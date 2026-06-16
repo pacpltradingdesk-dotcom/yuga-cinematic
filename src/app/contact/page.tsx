@@ -39,7 +39,7 @@ export default function ContactPage() {
                       key={p}
                       href={`tel:${p.replace(/\s/g, "")}`}
                       data-cursor="hover"
-                      className="flex items-center gap-3 text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+                      className="flex items-center gap-3 py-1 text-[var(--color-muted)] hover:text-[var(--color-ink)]"
                     >
                       <Phone size={15} className="text-[var(--color-amber)]" /> {p}
                     </a>
@@ -58,7 +58,7 @@ export default function ContactPage() {
                       key={e}
                       href={`mailto:${e}`}
                       data-cursor="hover"
-                      className="flex items-center gap-3 text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+                      className="flex items-center gap-3 py-1 text-[var(--color-muted)] hover:text-[var(--color-ink)]"
                     >
                       <Mail size={15} className="text-[var(--color-amber)]" /> {e}
                     </a>
@@ -81,10 +81,10 @@ export default function ContactPage() {
                 <MonitorSmartphone size={18} className="text-[var(--color-cyan)]" />
                 <h4 className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--color-faint)]">Software Access</h4>
                 <div className="mt-3 flex flex-col gap-2 text-sm">
-                  <a href={`https://${company.apps.crm}`} target="_blank" rel="noopener noreferrer" data-cursor="hover" className="text-[var(--color-muted)] hover:text-[var(--color-ink)]">
+                  <a href={`https://${company.apps.crm}`} target="_blank" rel="noopener noreferrer" data-cursor="hover" className="inline-flex py-1 text-[var(--color-muted)] hover:text-[var(--color-ink)]">
                     CRM · {company.apps.crm}
                   </a>
-                  <a href={`https://${company.apps.whatsapp}`} target="_blank" rel="noopener noreferrer" data-cursor="hover" className="text-[var(--color-muted)] hover:text-[var(--color-ink)]">
+                  <a href={`https://${company.apps.whatsapp}`} target="_blank" rel="noopener noreferrer" data-cursor="hover" className="inline-flex py-1 text-[var(--color-muted)] hover:text-[var(--color-ink)]">
                     WhatsApp · {company.apps.whatsapp}
                   </a>
                 </div>

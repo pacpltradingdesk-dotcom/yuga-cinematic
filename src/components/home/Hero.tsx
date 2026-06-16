@@ -89,11 +89,11 @@ export function Hero() {
           animate="show"
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <MagneticButton href="/bio-bitumen" variant="glow">
-            Explore Services <ArrowRight size={16} />
-          </MagneticButton>
-          <MagneticButton href="/contact" variant="ghost">
+          <MagneticButton href="/contact" variant="glow">
             <PhoneCall size={15} /> Book Consultation
+          </MagneticButton>
+          <MagneticButton href="/explore" variant="ghost">
+            Explore Services <ArrowRight size={16} />
           </MagneticButton>
         </motion.div>
       </motion.div>

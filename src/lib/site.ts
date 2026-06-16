@@ -154,7 +154,7 @@ export const verticals = [
   {
     id: "A",
     key: "plant-pmc",
-    title: "Plant PMC / EPC",
+    title: "Pyrolysis Plant PMC / EPC",
     sub: "YUGA",
     href: "/bio-bitumen",
     accent: "amber",
