@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Lenis smooth scroll wired into GSAP's ticker so ScrollTrigger
@@ -13,8 +14,7 @@ import { useEffect } from "react";
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (prefersReducedMotion()) return;
 
     let cancelled = false;
     let cleanup: (() => void) | undefined;

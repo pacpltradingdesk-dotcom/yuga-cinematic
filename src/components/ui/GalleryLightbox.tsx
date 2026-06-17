@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { usePrefersReducedMotion } from "@/lib/motion";
 import type { GalleryImage } from "@/lib/gallery";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -28,7 +29,7 @@ export function GalleryLightbox({
   onClose: () => void;
   onNavigate: (next: number) => void;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 

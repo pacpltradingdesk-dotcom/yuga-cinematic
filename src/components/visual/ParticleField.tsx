@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Canvas particle network - reads as a bitumen molecular lattice and a
@@ -23,7 +24,7 @@ export function ParticleField({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     let w = 0;
     let h = 0;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { company } from "@/lib/site";
+import { prefersReducedMotion } from "@/lib/motion";
 import { YugaMark } from "@/components/ui/YugaMark";
 
 /**
@@ -14,7 +15,7 @@ export function Preloader() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     // Show the cinematic intro once per browser session — skip it on repeat
     // loads / new tabs so returning visitors go straight to content.
     let seen = false;

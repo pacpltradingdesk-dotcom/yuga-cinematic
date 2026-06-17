@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Magnetic custom cursor: a small dot that tracks instantly plus a
@@ -14,8 +15,7 @@ export function Cursor() {
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduce) return;
+    if (!fine || prefersReducedMotion()) return;
     setEnabled(true);
 
     let mx = window.innerWidth / 2;

@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { useScroll, useTransform, motion, useReducedMotion, type MotionValue } from "framer-motion";
+import { useScroll, useTransform, motion, type MotionValue } from "framer-motion";
 import { Media } from "@/components/visual/Media";
+import { usePrefersReducedMotion } from "@/lib/motion";
 import type { ImgKey } from "@/lib/media";
 
 /**
@@ -20,7 +21,7 @@ import type { ImgKey } from "@/lib/media";
 const DEFAULT_IMAGES: readonly ImgKey[] = ["bioHero", "bio1", "bio0", "bio2", "prod1", "bio3", "prod3"];
 
 export function ZoomParallax({ images = DEFAULT_IMAGES }: { images?: readonly ImgKey[] }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: container, offset: ["start start", "end end"] });
 

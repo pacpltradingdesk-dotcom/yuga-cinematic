@@ -171,7 +171,14 @@ html.lenis, html.lenis body { height: auto; }
   50%      { transform: scale(1.18); opacity: 0.7; }
 }
 
-/* Reduced motion */
+/* Reduced motion.
+   Per brand decision the full visual experience is shown to ALL visitors
+   regardless of the OS "reduce motion" setting (see FORCE_MOTION in
+   src/lib/motion.ts — the JS effects mirror this same policy). The global
+   animation/transition kill-switch below is therefore intentionally disabled.
+   To restore OS-driven reduced motion, set FORCE_MOTION = false AND re-enable
+   this block. */
+/*
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -180,3 +187,4 @@ html.lenis, html.lenis body { height: auto; }
     scroll-behavior: auto !important;
   }
 }
+*/

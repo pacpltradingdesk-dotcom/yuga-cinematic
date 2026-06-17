@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Media } from "@/components/visual/Media";
 import { GalleryLightbox } from "@/components/ui/GalleryLightbox";
+import { usePrefersReducedMotion } from "@/lib/motion";
 import type { WeaveImage } from "@/lib/pageImagery";
 
 /**
@@ -14,7 +15,7 @@ import type { WeaveImage } from "@/lib/pageImagery";
 
 /** Hover-expand strip: each image grows to dominate the row on hover. */
 export function QuadStrip({ imgs, id }: { imgs: WeaveImage[]; id?: string }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [hovered, setHovered] = useState<number | null>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
   if (!imgs.length) return null;
@@ -52,7 +53,7 @@ export function QuadStrip({ imgs, id }: { imgs: WeaveImage[]; id?: string }) {
 
 /** Full-width parallax banner between sections — slow drift + scrim. */
 export function AmbientBanner({ img, caption }: { img: WeaveImage; caption?: string }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
@@ -72,7 +73,7 @@ export function AmbientBanner({ img, caption }: { img: WeaveImage; caption?: str
 
 /** 4-angle sheet shown as a "blueprint" panel that settles into place on scroll. */
 export function BlueprintPanel({ img }: { img: WeaveImage }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center center"] });
   const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
