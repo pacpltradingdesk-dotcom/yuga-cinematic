@@ -17,9 +17,9 @@ export const company = {
   cin: "U46632GJ2019PTC110676",
   gst: "24AAHCV1611L2ZD",
   din: "06680837",
-  web: "www.princeshah.com",
+  web: "yuga-pmc.in",
   linkedin: "linkedin.com/in/prince-shah-b781921b/",
-  phones: ["+91 77952 42424", "+91 94482 81224", "+91 75069 41655"],
+  phones: ["+91 77952 42424"],
   emails: ["Princeshah@yuga-pmc.in"],
   /**
    * Offices. Per project decision, the full street address is NOT published
