@@ -12,7 +12,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Term } from "@/components/ui/Term";
 import { FinanceTools } from "@/components/tools/FinanceTools";
 import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
-import { ZoomParallax } from "@/components/visual/ZoomParallax";
+import { ParallaxGallery } from "@/components/visual/ParallaxGallery";
 import { plantTypes, bioProcess, capacities, marketOpportunity } from "@/lib/site";
 import { Media } from "@/components/visual/Media";
 import type { ImgKey } from "@/lib/media";
@@ -52,16 +52,18 @@ export default function BioBitumenPage() {
         </Reveal>
       </PageHero>
 
-      {/* Immersive zoom-parallax — scroll to step into the bio-bitumen world */}
-      <section className="relative bg-[var(--color-void)]">
-        <div className="flex h-[60vh] items-center justify-center">
+      {/* Parallax image grid — all plant images stay visible, each drifts on scroll */}
+      <section className="relative bg-[var(--color-void)] pt-[var(--space-section)]">
+        <div className="maxw container-x">
           <SectionHeading
             eyebrow="Agro-waste → Road"
-            title="Scroll into the pyrolysis world."
+            title="Inside the pyrolysis world."
             align="center"
           />
         </div>
-        <ZoomParallax />
+        <div className="mt-12">
+          <ParallaxGallery />
+        </div>
       </section>
 
       {/* What we build */}
