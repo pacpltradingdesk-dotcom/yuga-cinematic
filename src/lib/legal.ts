@@ -15,7 +15,7 @@ export const EFFECTIVE_DATE = "1 June 2026";
  * every page) so the disclaimer is "clear & conspicuous", not just linked.
  */
 export const FOOTER_DISCLAIMER = `Information on this site is indicative and for general guidance only — not investment, legal, tax or financial advice, and not a solicitation of securities. Regulated or certified work is carried out through duly authorised, licensed or certified professionals as required by law.`;
-const LEGAL_EMAIL = "sales.ppsanatams@gmail.com";
+const LEGAL_EMAIL = "Princeshah@yuga-pmc.in";
 const LEGAL_PHONE = company.phones[0];
 
 export interface LegalSection {

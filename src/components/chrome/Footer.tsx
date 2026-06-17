@@ -117,7 +117,7 @@ export function Footer() {
         </nav>
         <p className="mt-3 text-xs leading-relaxed text-[var(--color-faint)]">
           Grievance Officer: {GRIEVANCE_OFFICER} ·{" "}
-          <a href={`mailto:${company.emails[1]}`} className="hover:text-[var(--color-ink)]">{company.emails[1]}</a>
+          <a href={`mailto:${company.emails[0]}`} className="hover:text-[var(--color-ink)]">{company.emails[0]}</a>
         </p>
         <p className="mt-3 max-w-4xl text-xs leading-relaxed text-[var(--color-faint)]">
           {FOOTER_DISCLAIMER} © {new Date().getFullYear()} {company.legal} (YUGA) · CIN {company.cin}.
