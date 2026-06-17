@@ -152,7 +152,7 @@ export function Navbar() {
               data-cursor="hover"
               className="hidden rounded-full bg-[var(--color-ink)] px-5 py-2.5 text-sm font-medium text-[var(--color-void)] transition-transform hover:scale-[1.03] sm:inline-flex"
             >
-              Free Consultation
+              Book Consultation
             </Link>
             <button
               onClick={() => setOpen((v) => !v)}
@@ -227,7 +227,7 @@ export function Navbar() {
                 href="/contact"
                 className="mt-6 inline-flex w-fit rounded-full bg-[var(--color-amber)] px-6 py-3 font-medium text-[var(--color-void)]"
               >
-                Free Consultation
+                Book Consultation
               </Link>
             </nav>
           </motion.div>
