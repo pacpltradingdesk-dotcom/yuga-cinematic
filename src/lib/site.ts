@@ -20,7 +20,7 @@ export const company = {
   web: "yuga-pmc.in",
   linkedin: "linkedin.com/in/prince-shah-b781921b/",
   phones: ["+91 77952 42424"],
-  emails: ["Princeshah@yuga-pmc.in"],
+  emails: ["princeshah@yuga-pmc.in"],
   /**
    * Offices. Per project decision, the full street address is NOT published
    * anywhere on the site — only city/region. The street/pincode is deliberately
