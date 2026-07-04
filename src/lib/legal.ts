@@ -1,9 +1,9 @@
 /**
  * Legal & DPDP page content (India — DPDP Act 2023, IT Act 2000, Contract Act
- * 1872). Drafted from the package's finalised legal pack, with office addresses
- * omitted per project decision — the data fiduciary is identified by entity
- * name, CIN, GST, email and phone instead. Confirm with a company secretary
- * and set the effective date before public launch.
+ * 1872). Drafted from the package's finalised legal pack — the data fiduciary is
+ * identified by entity name, CIN, GST, email and phone. (The full registered
+ * address now lives in `site.ts` and can be added here too if legal prefers.)
+ * Confirm with a company secretary and set the effective date before public launch.
  */
 import { company } from "@/lib/site";
 

@@ -107,7 +107,7 @@ export default function ContactPage() {
                       {company.offices.map((o) => (
                         <div key={o.label}>
                           <div className="font-medium text-[var(--color-ink)]">{o.label}</div>
-                          <div className="mt-1 text-[var(--color-muted)]">{o.city}</div>
+                          <div className="mt-1 leading-relaxed text-[var(--color-muted)]">{o.address}</div>
                         </div>
                       ))}
                     </div>

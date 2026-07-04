@@ -22,13 +22,17 @@ export const company = {
   phones: ["+91 77952 42424"],
   emails: ["princeshah@yuga-pmc.in"],
   /**
-   * Offices. Per project decision, the full street address is NOT published
-   * anywhere on the site — only city/region. The street/pincode is deliberately
-   * kept OUT of these data files so it never ships in the JS bundle either.
+   * Offices. `city` is the short locality (used for the map heading + schema
+   * locality); `address` is the full postal address shown in the contact block.
+   * Edit one line here to change what ships everywhere on the site.
    */
   offices: [
-    { label: "Registered Office", city: "Vadodara, Gujarat" },
-    { label: "Mumbai Operations", city: "Mumbai, Maharashtra" },
+    {
+      label: "Registered Office",
+      city: "Vadodara, Gujarat",
+      address: "Shop No. 239, Samanvay Westbreeze Commercial, Opp. Sepal Residency, Gotri, Vadodara – 390021, Gujarat",
+    },
+    { label: "Mumbai Operations", city: "Mumbai, Maharashtra", address: "Mumbai, Maharashtra" },
   ],
   apps: {
     crm: "crm.ppsanatams.online",
@@ -43,13 +47,14 @@ export const company = {
 } as const;
 
 /**
- * City/region for the LocalBusiness / PostalAddress JSON-LD and the contact map.
- * Per project decision, the exact street address & pincode are intentionally
- * NOT included here (or anywhere on the site / in the bundle) — city-level only.
+ * Full registered address for the LocalBusiness / PostalAddress JSON-LD and the
+ * contact map. Street-level (Google building pin) — edit these lines to move.
  */
 export const registeredAddress = {
+  street: "Shop No. 239, Samanvay Westbreeze Commercial, Opp. Sepal Residency, Gotri",
   locality: "Vadodara",
   region: "Gujarat",
+  postalCode: "390021",
   country: "IN",
 } as const;
 
@@ -65,12 +70,11 @@ export const businessHours = [
 ] as const;
 
 /**
- * Google Maps embed — CITY-LEVEL only (per project decision: no exact street
- * address / building pin anywhere on the site). Uses the keyless `output=embed`
- * form so it works on the static export with no API key.
+ * Google Maps embed — building-level pin at the full registered address. Uses
+ * the keyless `output=embed` form so it works on the static export (no API key).
  */
 export const mapsEmbedUrl: string = `https://www.google.com/maps?q=${encodeURIComponent(
-  `${registeredAddress.locality}, ${registeredAddress.region}, India`,
+  `${registeredAddress.street}, ${registeredAddress.locality}, ${registeredAddress.region} ${registeredAddress.postalCode}, India`,
 )}&output=embed`;
 
 /**

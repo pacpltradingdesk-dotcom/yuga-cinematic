@@ -80,12 +80,13 @@ const orgLd = {
       telephone: company.phones[0],
       areaServed: "IN",
       priceRange: "₹₹₹",
-      // City + region only — per project decision, no exact street address is
-      // published anywhere on the site (incl. machine-readable schema).
+      // Full registered address — feeds local-SEO (Google Business / maps).
       address: {
         "@type": "PostalAddress",
+        streetAddress: registeredAddress.street,
         addressLocality: registeredAddress.locality,
         addressRegion: registeredAddress.region,
+        postalCode: registeredAddress.postalCode,
         addressCountry: registeredAddress.country,
       },
       ...(sameAs.length > 0 && { sameAs }),
