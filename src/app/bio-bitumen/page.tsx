@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Leaf, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
+import { serviceLd, breadcrumbLd, jsonLd } from "@/lib/seo";
 import { CTASection } from "@/components/page/CTASection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlowCard } from "@/components/ui/GlowCard";
@@ -29,6 +30,20 @@ export const metadata: Metadata = {
 export default function BioBitumenPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            serviceLd({
+              name: "Pyrolysis Plant PMC",
+              description:
+                "End-to-end consultancy for pyrolysis bio-bitumen, plastic-to-fuel and tyre-to-oil plants — CSIR-CRRI KrishiBind aligned, NHAI/MoRTH compliant, from DPR to commissioning.",
+              path: "/bio-bitumen",
+            }),
+            breadcrumbLd([{ name: "Pyrolysis Plants", path: "/bio-bitumen" }]),
+          ),
+        }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical A · YUGA PMC"

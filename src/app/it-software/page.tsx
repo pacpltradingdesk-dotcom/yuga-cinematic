@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Check, ArrowUpRight, Code2, Users, Boxes, Workflow, Sparkles, Globe, Smartphone, Plug, ArrowRight, type LucideIcon } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
+import { serviceLd, breadcrumbLd, jsonLd } from "@/lib/seo";
 import { CTASection } from "@/components/page/CTASection";
 import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -39,6 +40,20 @@ export const metadata: Metadata = {
 export default function ITSoftwarePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            serviceLd({
+              name: "AI Software Services",
+              description:
+                "AI software suite for the bitumen and plant industry — pricing intelligence, CRM, WhatsApp automation, call analytics and market signals, offered to clients on subscription.",
+              path: "/it-software",
+            }),
+            breadcrumbLd([{ name: "Software", path: "/it-software" }]),
+          ),
+        }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical B · Technology"

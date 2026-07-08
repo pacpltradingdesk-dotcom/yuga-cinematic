@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/page/PageHero";
+import { serviceLd, breadcrumbLd, jsonLd } from "@/lib/seo";
 import { CTASection } from "@/components/page/CTASection";
 import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -27,6 +28,20 @@ export const metadata: Metadata = {
 export default function CapitalMarketPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            serviceLd({
+              name: "Capital Markets & Fundraising Advisory",
+              description:
+                "Capital-markets advisory for plant projects — bank loans, government subsidies (CGTMSE/MSME), equity and seed-to-IPO fundraising, with investor-ready DPRs and valuation.",
+              path: "/capital-market",
+            }),
+            breadcrumbLd([{ name: "Capital", path: "/capital-market" }]),
+          ),
+        }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical C · Capital Markets"

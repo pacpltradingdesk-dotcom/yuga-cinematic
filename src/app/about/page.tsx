@@ -13,6 +13,7 @@ import { SectionBackdrop } from "@/components/visual/SectionBackdrop";
 import { Services } from "@/components/page/Services";
 import { trust } from "@/lib/catalog";
 import { company, career, partnerships, keyFacts } from "@/lib/site";
+import { founderPersonLd, breadcrumbLd, jsonLd } from "@/lib/seo";
 
 /** Address mentions are filtered out site-wide per project decision. */
 const trustBlocks = Object.values(trust).map((b) => ({
@@ -21,7 +22,7 @@ const trustBlocks = Object.values(trust).map((b) => ({
 }));
 
 export const metadata: Metadata = {
-  title: "About YUGA",
+  title: "About",
   alternates: { canonical: "/about" },
   description:
     "PPS Anantams Corporation (PACPL) - India's full-service pyrolysis & bitumen plant PMC, founded by 25-year industry veteran and BSE-listed entrepreneur Prince Pratap Shah.",
@@ -30,6 +31,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(founderPersonLd(), breadcrumbLd([{ name: "About", path: "/about" }])),
+        }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="About · PACPL"

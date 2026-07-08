@@ -119,8 +119,10 @@ export function ParticleField({
     const io = new IntersectionObserver(
       ([entry]) => {
         running = entry.isIntersecting;
+        // Always cancel any pending frame before (re)starting, so scrolling the
+        // canvas in and out can never stack multiple concurrent draw loops.
+        cancelAnimationFrame(raf);
         if (running) raf = requestAnimationFrame(draw);
-        else cancelAnimationFrame(raf);
       },
       { threshold: 0 },
     );

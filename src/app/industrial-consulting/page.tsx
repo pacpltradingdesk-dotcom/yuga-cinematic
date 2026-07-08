@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/page/PageHero";
+import { serviceLd, breadcrumbLd, jsonLd } from "@/lib/seo";
 import { CTASection } from "@/components/page/CTASection";
 import { PlantGallery } from "@/components/page/PlantGallery";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -27,6 +28,20 @@ export const metadata: Metadata = {
 export default function IndustrialConsultingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLd(
+            serviceLd({
+              name: "Industrial Consulting — 7-phase Plant PMC",
+              description:
+                "Project Management Consultancy for pyrolysis and bitumen-product plants — a 7-phase model from feasibility, DPR and licences through machinery, commissioning and first buyers.",
+              path: "/industrial-consulting",
+            }),
+            breadcrumbLd([{ name: "Industrial Consulting", path: "/industrial-consulting" }]),
+          ),
+        }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="Vertical A · PMC / EPC"

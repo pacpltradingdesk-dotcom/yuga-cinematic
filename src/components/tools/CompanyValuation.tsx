@@ -21,10 +21,15 @@ export function CompanyValuation() {
   const [revenue, setRevenue] = useState(20);
   const [ebitda, setEbitda] = useState(4);
 
+  // EBITDA can never exceed revenue — clamp so the valuation stays realistic even
+  // if revenue is dragged below the current EBITDA (which would otherwise show an
+  // impossible EBITDA-basis range far above the revenue basis).
+  const eb = Math.min(ebitda, revenue);
+
   const revLow = revenue * REV_MULT[0];
   const revHigh = revenue * REV_MULT[1];
-  const ebLow = ebitda * EBITDA_MULT[0];
-  const ebHigh = ebitda * EBITDA_MULT[1];
+  const ebLow = eb * EBITDA_MULT[0];
+  const ebHigh = eb * EBITDA_MULT[1];
   const blendLow = Math.min(revLow, ebLow);
   const blendHigh = Math.max(revHigh, ebHigh);
 
@@ -44,14 +49,14 @@ export function CompanyValuation() {
             <span className="text-xs uppercase tracking-wider text-[var(--color-faint)]">Annual revenue</span>
             <span className="font-display font-semibold text-gradient-warm">₹{revenue} Cr</span>
           </div>
-          <input type="range" min={1} max={200} step={1} value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} aria-label="Annual revenue in crore" className={slider} />
+          <input type="range" min={1} max={200} step={1} value={revenue} onChange={(e) => { const v = Number(e.target.value); setRevenue(v); if (ebitda > v) setEbitda(v); }} aria-label="Annual revenue in crore" className={slider} />
         </div>
         <div>
           <div className="flex items-baseline justify-between">
             <span className="text-xs uppercase tracking-wider text-[var(--color-faint)]">EBITDA</span>
-            <span className="font-display font-semibold text-gradient-cool">₹{ebitda} Cr</span>
+            <span className="font-display font-semibold text-gradient-cool">₹{eb} Cr</span>
           </div>
-          <input type="range" min={0} max={Math.max(60, revenue)} step={0.5} value={ebitda} onChange={(e) => setEbitda(Number(e.target.value))} aria-label="EBITDA in crore" className={slider} />
+          <input type="range" min={0} max={revenue} step={0.5} value={eb} onChange={(e) => setEbitda(Number(e.target.value))} aria-label="EBITDA in crore" className={slider} />
         </div>
       </div>
 
