@@ -52,6 +52,7 @@ export const metadata: Metadata = {
     images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
+  verification: { google: "86zCHGayDOo5K3jpFi5tJSun2qQ97__H0RKyXa2Yy-c" },
 };
 
 export const viewport: Viewport = {
