@@ -85,6 +85,13 @@ const orgLd = {
       logo: `${siteUrl}/yuga-logo.jpg`,
       image: `${siteUrl}/yuga-logo.jpg`,
       description: company.oneLiner,
+      slogan: company.tagline,
+      founder: { "@type": "Person", name: company.founder },
+      knowsAbout: [
+        "Pyrolysis plants", "Bio-bitumen", "Plastic-to-fuel", "Tyre-to-oil",
+        "Bitumen production (PMB, CRMB, emulsion)", "Waste-to-energy",
+        "Capital markets", "IPO advisory",
+      ],
       email: company.emails[0],
       telephone: company.phones[0],
       areaServed: "IN",
