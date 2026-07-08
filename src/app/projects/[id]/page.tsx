@@ -10,7 +10,8 @@ import { Badge } from "@/components/ui/Badge";
 import { NoiseOverlay } from "@/components/visual/Backdrop";
 import { LeadGate } from "@/components/page/LeadGate";
 import { getFeaturedProject, projectIds } from "@/lib/projects";
-import { siteUrl } from "@/lib/site";
+import { company, siteUrl } from "@/lib/site";
+import { OG_IMAGE } from "@/lib/seo";
 
 type Params = { id: string };
 
@@ -27,7 +28,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     description: p.metaDesc,
     keywords: [...p.keywords],
     alternates: { canonical: `/projects/${id}` },
-    openGraph: { title: p.title, description: p.metaDesc, type: "article" },
+    openGraph: {
+      title: p.title,
+      description: p.metaDesc,
+      type: "article",
+      siteName: company.brand,
+      images: [OG_IMAGE],
+    },
   };
 }
 

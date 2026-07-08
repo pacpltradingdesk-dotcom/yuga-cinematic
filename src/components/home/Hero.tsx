@@ -49,7 +49,8 @@ export function Hero() {
           {company.legal} · {company.short}
         </motion.div>
 
-        {/* Wordmark */}
+        {/* Wordmark — the visible "YUGA" stays the design; an sr-only tail gives the
+            single <h1> a keyword-rich accessible/SEO text without altering the visual. */}
         <h1 className="mt-8 font-display font-bold leading-[0.82] tracking-[-0.03em]">
           <span className="block overflow-hidden">
             <motion.span
@@ -61,6 +62,7 @@ export function Hero() {
               YUGA
             </motion.span>
           </span>
+          <span className="sr-only"> — Pyrolysis Plant PMC, AI Software &amp; Capital Markets in India</span>
         </h1>
 
         <motion.p

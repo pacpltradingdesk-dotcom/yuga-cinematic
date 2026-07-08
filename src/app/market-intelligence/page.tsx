@@ -22,9 +22,24 @@ export const metadata: Metadata = {
     "Bio-bitumen market opportunity for 2026 - India's ~40% bitumen import gap, CSIR-CRRI technology, environmental impact and the pan-India network behind YUGA.",
 };
 
+/** FAQPage structured data — makes the FAQ eligible for rich results in Google. */
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function MarketIntelligencePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
       <NoiseOverlay />
       <PageHero
         eyebrow="Market Intelligence"

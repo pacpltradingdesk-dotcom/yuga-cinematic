@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { company, siteUrl, registeredAddress, socials, businessHours } from "@/lib/site";
+import { OG_IMAGE } from "@/lib/seo";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Preloader } from "@/components/chrome/Preloader";
 import { ScrollProgress } from "@/components/chrome/ScrollProgress";
@@ -41,7 +42,14 @@ export const metadata: Metadata = {
     description: company.oneLiner,
     type: "website",
     siteName: company.brand,
-    images: [`${siteUrl}/yuga-logo.jpg`],
+    locale: "en_IN",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${company.brand} - ${company.tagline}`,
+    description: company.oneLiner,
+    images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
 };

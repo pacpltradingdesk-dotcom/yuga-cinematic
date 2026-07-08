@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { company } from "@/lib/site";
+import { OG_IMAGE } from "@/lib/seo";
 import { Hero } from "@/components/home/Hero";
 import { Reveal } from "@/components/ui/Reveal";
 import { HorizontalStory } from "@/components/home/HorizontalStory";
@@ -30,6 +32,9 @@ export const metadata: Metadata = {
     description:
       "End-to-end PMC for pyrolysis plants — plastic-to-fuel, tyre/rubber-to-oil and bio-bitumen — plus bitumen-product plants, engineered with AI software and funded by real BSE-IPO capital-markets expertise.",
     url: "/",
+    type: "website",
+    siteName: company.brand,
+    images: [OG_IMAGE],
   },
 };
 
