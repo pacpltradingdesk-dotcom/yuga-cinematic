@@ -9,7 +9,7 @@ import { config, hasWeb3Forms } from "@/lib/config";
 
 type Field = "name" | "email" | "phone" | "interest" | "message";
 
-const interests = ["Bio-Bitumen Plant", "Industrial Consulting", "AI Software", "Capital / Fundraising", "Other"];
+const interests = ["Pyrolysis Plant", "Industrial Consulting", "AI Software", "Capital / Fundraising", "Other"];
 
 /**
  * Lead-capture form with DPDP-compliant consent.
